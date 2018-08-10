@@ -30,9 +30,9 @@ public class DBCategoria {
     private Connection conexion = new ConexionDB().getConexion();
     
     
-     public Map<Integer, Categoria> cargarCategorias(){
+     public Map<String, Categoria> cargarCategorias(){
         try {
-            Map<Integer, Categoria> lista=new HashMap<Integer, Categoria>();
+            Map<String, Categoria> lista=new HashMap<String, Categoria>();
             PreparedStatement st = conexion.prepareStatement("SELECT * FROM categorias");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){

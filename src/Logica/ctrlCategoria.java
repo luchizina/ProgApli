@@ -22,7 +22,7 @@ import Logica.Categoria;
  */
 public class ctrlCategoria implements ICategoria {
          private static ctrlCategoria instancia;
-      private Map<Integer, Categoria> categorias;
+      private Map<String, Categoria> categorias;
     private DBCategoria dbCategoria=null;
    
 public static ctrlCategoria getInstance(){
@@ -37,12 +37,20 @@ public void cargarCategorias(){
     
 }
 
-public Map<Integer, Categoria> listarCategorias(){
-    Map<Integer,Categoria> mapita= new HashMap<Integer,Categoria>();
-    List<Categoria> otra = new ArrayList<Categoria>();
-    
-    
+ @Override
+public Map<String, Categoria> listarCategorias(){
+    Map<String,Categoria> mapita= new HashMap<String,Categoria>();
+  
     return mapita;
+}
+
+ @Override
+public void ingresarCat(DtCategoria datos){
+        if(this.categorias.get(datos.getNombre())==null){
+        Categoria nueva= new Categoria(datos.getNombre(),datos.getPadre());
+        categorias.put(datos.getNombre(), nueva);
+    }
+  
 }
 
 }

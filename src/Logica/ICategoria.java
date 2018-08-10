@@ -12,5 +12,6 @@ import java.util.Map;
  * @author Luchi
  */
 public interface ICategoria {
-    public abstract Map<Integer,Categoria> listarCategorias();
+    public abstract Map<String,Categoria> listarCategorias();
+public abstract void ingresarCat(DtCategoria datos);
 }
