@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author Luchi
@@ -56,8 +59,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bt1 = new javax.swing.JButton();
+        bt2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -118,6 +121,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         );
 
         jLabel12.setText("jLabel12");
+        jLabel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton1.setText("Subir imagen");
 
@@ -169,9 +173,9 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel11.setText("Imagen:");
         jLabel11.setToolTipText("");
 
-        jButton2.setText("Cancelar");
+        bt1.setText("Cancelar");
 
-        jButton3.setText("Guardar");
+        bt2.setText("Guardar");
 
         opc.add(jRadioButton2);
         jRadioButton2.setLabel("No");
@@ -244,9 +248,9 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addGap(48, 146, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bt1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(bt2)
                 .addGap(7, 7, 7))
         );
         panel2Layout.setVerticalGroup(
@@ -282,8 +286,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)))
+                    .addComponent(bt1)
+                    .addComponent(bt2)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,15 +329,18 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         if(Jp1.isVisible() == false){
             Jp1.setVisible(true);
-        }        // TODO add your handling code here:
+        }   
+        bt1.setAlignmentX(360);
+
+// TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jp1;
+    private javax.swing.JButton bt1;
+    private javax.swing.JButton bt2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
