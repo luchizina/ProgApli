@@ -4,19 +4,23 @@
  * and open the template in the editor.
  */
 package Presentacion;
-
+import Logica.ICategoria;
+import Logica.Fabrica;
 /**
  *
  * @author Luchi
  */
 public class Principal extends javax.swing.JFrame {
 
+  private ICategoria icat;
     /**
      * Creates new form Principal
      */
     public Principal() {
         
         initComponents();
+        Fabrica fabrica=Fabrica.getInstance();
+        icat =fabrica.getICtrlCategoria();
     }
 
     /**
@@ -262,7 +266,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-Alta_Categoria cat = new Alta_Categoria();
+Alta_Categoria cat = new Alta_Categoria(icat);
 jp.add(cat);
 cat.setVisible(true);
         

@@ -32,6 +32,14 @@ public static ctrlCategoria getInstance(){
         }
         return instancia;
 }
+private ctrlCategoria(){
+        //Colección genérica común
+        //this.personas=new ArrayList<Persona>();
+        this.categorias=new HashMap<String, Categoria>();
+        this.dbCategoria=new DBCategoria();
+    }
+
+ @Override
 public void cargarCategorias(){
     
     this.categorias=this.dbCategoria.cargarCategorias();

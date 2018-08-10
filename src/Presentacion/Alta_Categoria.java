@@ -20,12 +20,17 @@ import java.util.Set;
  */
 public class Alta_Categoria extends javax.swing.JInternalFrame {
 
-    private ctrlCategoria ctrlCat;
+    private ICategoria iCat;
     /**
      * Creates new form Alta_Categoria
      */
     public Alta_Categoria() {
         initComponents();
+    }
+    
+    public Alta_Categoria(ICategoria icat){
+        initComponents();
+        this.iCat=icat;
     }
 
     /**
@@ -120,9 +125,9 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        List<DtCategoria> catego = ctrlCat.listarCategorias();
-        catego = ctrlCat.listarCategorias();
-      
+      //  List<DtCategoria>
+        List<DtCategoria> catego = this.iCat.listarCategorias();
+            
         for(int i=0; i<catego.size(); i++){
             DtCategoria c=(DtCategoria) catego.get(i);
              combito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { c.getNombre() }));
