@@ -5,10 +5,12 @@
  */
 package Logica;
 
+import java.util.Map;
+
 /**
  *
  * @author Luchi
  */
 public interface ICategoria {
-    
+    public abstract Map<Integer,Categoria> listarCategorias();
 }
