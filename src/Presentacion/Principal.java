@@ -6,6 +6,7 @@
 package Presentacion;
 import Logica.ICategoria;
 import Logica.Fabrica;
+import Logica.IPropuesta;
 /**
  *
  * @author Luchi
@@ -16,11 +17,14 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    
+    private IPropuesta IP;
     public Principal() {
         
         initComponents();
         Fabrica fabrica=Fabrica.getInstance();
         icat =fabrica.getICtrlCategoria();
+        IP=fabrica.getICtrlPropuesta();
     }
 
     /**
@@ -36,7 +40,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        Propuesta_alta = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -54,6 +58,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jp.setAutoscrolls(true);
 
         javax.swing.GroupLayout jpLayout = new javax.swing.GroupLayout(jp);
         jp.setLayout(jpLayout);
@@ -76,14 +82,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem4.setText("Dar de alta");
-        jMenuItem4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        Propuesta_alta.setText("Dar de alta");
+        Propuesta_alta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Propuesta_alta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                Propuesta_altaActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem4);
+        jMenu5.add(Propuesta_alta);
 
         jMenuItem5.setText("Modificar");
         jMenuItem5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -205,14 +211,14 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -235,9 +241,12 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed
+         Alta_propuesta ap=new Alta_propuesta(IP);
+        // Se crea una instancia del JinternalFrame
+        jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
+        ap.setVisible(true);                 // TODO add your handling code here:
+    }//GEN-LAST:event_Propuesta_altaActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
@@ -310,6 +319,7 @@ cat.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Propuesta_alta;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
@@ -323,7 +333,6 @@ cat.setVisible(true);
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
