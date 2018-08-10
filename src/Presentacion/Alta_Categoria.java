@@ -126,6 +126,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
       //  List<DtCategoria>
+   this.iCat.cargarCategorias();
         List<DtCategoria> catego = this.iCat.listarCategorias();
             
         for(int i=0; i<catego.size(); i++){
