@@ -5,11 +5,15 @@
  */
 package Presentacion;
 
+import Logica.Categoria;
 import Logica.ICategoria;
 import Logica.ctrlCategoria;
 import java.util.List;
 import java.util.ArrayList;
 import Logica.DtCategoria;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 /**
  *
  * @author nambr
@@ -36,13 +40,18 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        combito = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jTree1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combito.setName("combito"); // NOI18N
+        combito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combitoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +70,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                 .addGap(177, 177, 177)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combito, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -73,11 +82,13 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(combito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(54, 54, 54)
                 .addComponent(jButton1)
                 .addContainerGap(207, Short.MAX_VALUE))
         );
+
+        combito.getAccessibleContext().setAccessibleName("");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Ingrese los siguientes datos");
@@ -109,15 +120,30 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        List<DtCategoria> catego = new ArrayList<>();
+        List<DtCategoria> catego = ctrlCat.listarCategorias();
         catego = ctrlCat.listarCategorias();
+      
+        for(int i=0; i<catego.size(); i++){
+            DtCategoria c=(DtCategoria) catego.get(i);
+             combito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { c.getNombre() }));
+        }
+        
+        
+       
+    
+       
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void combitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combitoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combitoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combito;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
