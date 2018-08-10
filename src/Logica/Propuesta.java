@@ -15,18 +15,23 @@ public class Propuesta {
     private 
             String titulo;
             String desc;
-            DtFecha fecha;
+           String fecha;
             int precioE;
             int montoActual;
-            DtFecha fechaPub;
+            String fechaPub;
             Tretorno tipoRetorno;
             int montoTotal;
             Categoria cat;
+            String cate;
             Estado estActual;
             ListEstado listaEstados;
             
+            
              private Map<Integer, ListEstado> listaDeEstados;
-    public Propuesta(String titulo, String desc, DtFecha fecha, int precioE, int montoActual, DtFecha fechaPub, Tretorno tipoRetorno, int montoTotal) {
+public Propuesta(){
+
+}
+    /*public Propuesta(String titulo, String desc, DtFecha fecha, int precioE, int montoActual, DtFecha fechaPub, Tretorno tipoRetorno, int montoTotal, Categoria cat, Estado estActual, ListEstado listaEstados, Map<Integer, ListEstado> listaDeEstados) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -35,8 +40,25 @@ public class Propuesta {
         this.fechaPub = fechaPub;
         this.tipoRetorno = tipoRetorno;
         this.montoTotal = montoTotal;
+        this.cat = cat;
+        this.estActual = estActual;
+        this.listaEstados = listaEstados;
+        this.listaDeEstados = listaDeEstados;
     }
-
+*/
+   
+ 
+        
+    public Propuesta(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate) {
+        this.titulo = titulo;
+        this.desc = desc;
+        this.fecha = fecha;
+        this.precioE = precioE;
+        this.fechaPub = fechaPub;
+        this.montoTotal = montoTotal;
+        this.cate = cate;
+    }
+        
     public String getTitulo() {
         return titulo;
     }
@@ -53,13 +75,7 @@ public class Propuesta {
         this.desc = desc;
     }
 
-    public DtFecha getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(DtFecha fecha) {
-        this.fecha = fecha;
-    }
+   
 
     public int getPrecioE() {
         return precioE;
@@ -77,13 +93,7 @@ public class Propuesta {
         this.montoActual = montoActual;
     }
 
-    public DtFecha getFechaPub() {
-        return fechaPub;
-    }
-
-    public void setFechaPub(DtFecha fechaPub) {
-        this.fechaPub = fechaPub;
-    }
+   
 
     public Tretorno getTipoRetorno() {
         return tipoRetorno;
@@ -116,7 +126,16 @@ public class Propuesta {
     }
 
     public void setListaDeEstados(Map<Integer, ListEstado> listaDeEstados) {
+        
         this.listaDeEstados = listaDeEstados;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
     
 }
