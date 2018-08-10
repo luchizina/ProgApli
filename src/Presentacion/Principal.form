@@ -231,6 +231,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jp">
+      <Properties>
+        <Property name="autoscrolls" type="boolean" value="true"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">

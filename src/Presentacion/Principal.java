@@ -51,6 +51,8 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jp.setAutoscrolls(true);
+
         javax.swing.GroupLayout jpLayout = new javax.swing.GroupLayout(jp);
         jp.setLayout(jpLayout);
         jpLayout.setHorizontalGroup(
@@ -232,7 +234,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+    Alta_propuesta prop = new Alta_propuesta(); // Se crea una instancia del JinternalFrame
+        jp.add(prop); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
+        prop.setVisible(true);                 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
