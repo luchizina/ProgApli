@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +13,6 @@ import java.util.Map;
  * @author Luchi
  */
 public interface ICategoria {
-    public abstract Map<String,Categoria> listarCategorias();
+    public abstract List<DtCategoria> listarCategorias();
 public abstract void ingresarCat(DtCategoria datos);
 }

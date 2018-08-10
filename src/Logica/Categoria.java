@@ -49,6 +49,10 @@ public class Categoria {
     public void setHijos(Map<String,Categoria> hijos) {
         this.hijos = hijos;
     }
+    
+    public DtCategoria obtenerInfo(){
+        return new DtCategoria(nombre,padre);
+    }
             
             
             

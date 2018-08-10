@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import Persistencia.DBCategoria;
 import Logica.Categoria;
+import java.util.Iterator;
 
 
 /**
@@ -38,11 +39,20 @@ public void cargarCategorias(){
 }
 
  @Override
-public Map<String, Categoria> listarCategorias(){
-    Map<String,Categoria> mapita= new HashMap<String,Categoria>();
-  
-    return mapita;
-}
+public List<DtCategoria> listarCategorias(){
+        List<DtCategoria> retorna=new ArrayList<DtCategoria>();
+   // DtCategoria nuevo=null;
+          Set set = categorias.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            Categoria aux=(Categoria) mentry.getValue();    
+            retorna.add(aux.obtenerInfo());
+            }       
+        return retorna;
+    }
+ 
+
 
  @Override
 public void ingresarCat(DtCategoria datos){
