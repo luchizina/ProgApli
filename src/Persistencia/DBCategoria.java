@@ -33,12 +33,12 @@ public class DBCategoria {
      public Map<String, Categoria> cargarCategorias(){
         try {
             Map<String, Categoria> lista=new HashMap<String, Categoria>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM categorias");          
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM categoria");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){
-                int codigo=rs.getInt("codigo");
-                //Categoria p=new Categoria(codigo,rs.getString("nombre"),rs.getInt("edad"));
-              //  lista.put(codigo, p);
+               
+                Categoria p=new Categoria(rs.getString("NombreH"),rs.getString("NombreP"));
+             lista.put(rs.getString("NombreH"), p);
             }
         rs.close();
             st.close();
