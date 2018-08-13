@@ -66,6 +66,7 @@ public List<DtCategoria> listarCategorias(){
 public void ingresarCat(DtCategoria datos){
         if(this.categorias.get(datos.getNombre())==null){
         Categoria nueva= new Categoria(datos.getNombre(),datos.getPadre());
+                    
         categorias.put(datos.getNombre(), nueva);
     }
   

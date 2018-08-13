@@ -32,12 +32,26 @@ public class DBCategoria {
     
      public Map<String, Categoria> cargarCategorias(){
         try {
+            
             Map<String, Categoria> lista=new HashMap<String, Categoria>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM categoria");          
+            Map<String,Categoria> hijos=new HashMap<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM categoria");  
+            PreparedStatement st2 = conexion.prepareStatement("SELECT * FROM categoria where NombreP !='No'");    
             ResultSet rs=st.executeQuery();
+            ResultSet rs2= st2.executeQuery();
             while (rs.next()){
-               
-                Categoria p=new Categoria(rs.getString("NombreH"),rs.getString("NombreP"));
+                
+                //nuevo
+               while(rs2.next()){
+                   if(rs.getString("NombreH").compareTo(rs2.getString("NombreP"))==0 ) {
+                 Categoria hijo = new Categoria(rs2.getString("NombreH"), rs2.getString("NombreP"));
+                 hijos.put(rs2.getString("NombreH"), hijo);
+                   }
+               }
+               rs2.beforeFirst();
+//               //nuevo
+             
+                Categoria p=new Categoria(rs.getString("NombreH"),rs.getString("NombreP"), hijos);
              lista.put(rs.getString("NombreH"), p);
             }
         rs.close();
@@ -47,5 +61,13 @@ public class DBCategoria {
             ex.printStackTrace();
             return null;
         }        
-    } 
+    }
+     
+     
+     
+
+     
+     
 }
+
+
