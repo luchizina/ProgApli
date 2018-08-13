@@ -5,18 +5,24 @@
  */
 package Presentacion;
 
+import Logica.Fabrica;
+import Logica.IUsuario;
+
 /**
  *
  * @author Luchi
  */
 public class Principal extends javax.swing.JFrame {
-
+    
+    private IUsuario IU;
     /**
      * Creates new form Principal
      */
     public Principal() {
-        
         initComponents();
+        
+        Fabrica fabrica = Fabrica.getInstance();
+        IU = fabrica.getICtrlUsuario();
     }
 
     /**
@@ -55,11 +61,11 @@ public class Principal extends javax.swing.JFrame {
         jp.setLayout(jpLayout);
         jpLayout.setHorizontalGroup(
             jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 638, Short.MAX_VALUE)
         );
         jpLayout.setVerticalGroup(
             jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 418, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Sistema");
@@ -201,15 +207,15 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -245,7 +251,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-       Registrar_usuario us = new Registrar_usuario(); // Se crea una instancia del JinternalFrame
+       Registrar_usuario us = new Registrar_usuario(IU); // Se crea una instancia del JinternalFrame
         jp.add(us); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
         us.setVisible(true); // Esto pa ponerlo visible
         

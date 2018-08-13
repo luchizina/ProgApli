@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -17,7 +18,7 @@ public class Proponente extends Usuario {
             String biografia;
             String linkWeb;
 
-    public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, DtFecha fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
+    public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav);
         this.direccion = direccion;
         this.biografia = biografia;
