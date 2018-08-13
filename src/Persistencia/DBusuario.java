@@ -5,13 +5,18 @@
  */
 package Persistencia;
 
+import Logica.Proponente;
+import Logica.Propuesta;
 import Logica.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import Presentacion.*;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -66,4 +71,23 @@ public class DBusuario {
             return false;
         } 
     }
+     
+      public Map<String,Proponente> cargarProponentes(){
+        try {
+            Map<String, Proponente> lista = new HashMap<String, Proponente>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM proponente");          
+            ResultSet rs=st.executeQuery();
+            while (rs.next()){
+                String nick = rs.getString("nickP");
+                Proponente p=new Proponente(nick);
+                lista.put(nick, p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }        
+    }    
 }

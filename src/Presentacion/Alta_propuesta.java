@@ -4,10 +4,15 @@
  * and open the template in the editor.
  */
 package Presentacion;
+import Logica.DtCategoria;
 import Logica.IPropuesta;
 import Logica.DtFecha;
+import Logica.DtProponente;
+import Logica.ICategoria;
+import Logica.IUsuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JInternalFrame;
 
 /**
@@ -20,17 +25,21 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
      * Creates new form Alta_propuesta
      */
      private IPropuesta IP;
-     
+     private IUsuario iUsu;
+     private ICategoria iCat;
     public Alta_propuesta() {
         initComponents();
         Jp1.setVisible(false);
         
     }
-    public Alta_propuesta(IPropuesta IP)
+    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUsu)
     {
         initComponents();
         this.IP = IP;
         Jp1.setVisible(false);
+        this.iCat = cat;
+        this.iUsu = iUsu;
+        cargar();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +54,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         opc = new javax.swing.ButtonGroup();
         panel1 = new java.awt.Panel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jProp = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jCateg = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -82,11 +91,16 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Ingrese los siguientes datos:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Buscar proponente:");
 
         jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCateg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCategActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Categoría");
 
@@ -109,7 +123,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCateg, 0, 110, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jProp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,7 +136,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(7, 7, 7)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -384,6 +398,10 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
      // TODO add your handling code here:
     }//GEN-LAST:event_bt1ActionPerformed
 
+    private void jCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCategActionPerformed
+     
+    }//GEN-LAST:event_jCategActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jp1;
@@ -391,7 +409,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JButton bt2;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCateg;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDate;
     private javax.swing.JTextArea jDesc;
@@ -411,6 +428,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jPrecioE;
     private javax.swing.JTextField jPrecioT;
+    private javax.swing.JComboBox<String> jProp;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -420,4 +438,24 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
     // End of variables declaration//GEN-END:variables
+
+    private void cargar(){
+    this.iCat.cargarCategorias();
+        List<DtCategoria> catego = this.iCat.listarCategorias();
+            
+        for(int i=0; i<catego.size(); i++){
+            DtCategoria c=(DtCategoria) catego.get(i);
+           jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { c.getNombre() }));
+        }
+           this.iUsu.cargarProponentes();
+        List<DtProponente> propo = this.iUsu.listarUsuario();
+            
+        for(int k=0; k<propo.size(); k++){
+            DtProponente prop=(DtProponente) propo.get(k);
+            jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { prop.getNick() }));
+            this.iUsu.cargarProponentes();
+     
+        }
+    }
+    
 }

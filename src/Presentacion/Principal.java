@@ -7,6 +7,7 @@ package Presentacion;
 import Logica.ICategoria;
 import Logica.Fabrica;
 import Logica.IPropuesta;
+import Logica.IUsuario;
 /**
  *
  * @author Luchi
@@ -17,7 +18,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    
+    private IUsuario iUsu;
     private IPropuesta IP;
     public Principal() {
         
@@ -25,6 +26,8 @@ public class Principal extends javax.swing.JFrame {
         Fabrica fabrica=Fabrica.getInstance();
         icat =fabrica.getICtrlCategoria();
         IP=fabrica.getICtrlPropuesta();
+        iUsu=fabrica.getICtrlUsuario();
+        
     }
 
     /**
@@ -243,7 +246,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed
-         Alta_propuesta ap=new Alta_propuesta(IP);
+         Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
         // Se crea una instancia del JinternalFrame
         jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
         ap.setVisible(true);                 // TODO add your handling code here:

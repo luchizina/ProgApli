@@ -14,7 +14,6 @@ import java.util.Map;
  */
 public class Usuario {
     
-    private 
     String nick;
     String nombre;
     String Apellido;
@@ -26,6 +25,10 @@ public class Usuario {
     String link;
     private Map<String, Usuario> usuSeguidos;
     private Map<String, Propuesta> propuFav;
+
+    public Usuario(String nick) {
+        this.nick = nick;
+    }
 
     public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         this.nick = nick;

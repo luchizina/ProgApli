@@ -80,7 +80,7 @@ public class DBPropuesta {
     public Map<String, Propuesta> cargarPersonas(){
         try {
             Map<String, Propuesta> lista = new HashMap<String, Propuesta>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM personas");          
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){
                 String titulo = rs.getString("titulo");

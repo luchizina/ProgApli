@@ -10,9 +10,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,6 +29,7 @@ public class ctrlUsuario implements IUsuario {
     
      private static ctrlUsuario instancia;
      private Map<String, Usuario> usuarios;
+     private Map<String, Proponente> Proponentes;
      private DBusuario usu=null;
    
 public static ctrlUsuario getInstance(){
@@ -37,7 +42,8 @@ public static ctrlUsuario getInstance(){
 
 private ctrlUsuario(){
     this.usuarios=new HashMap<String, Usuario>();
-    this.usu=new DBusuario();
+   
+     this.usu=new DBusuario();
 }
 
     @Override
@@ -130,6 +136,26 @@ private ctrlUsuario(){
             return false;
         }
     }
+    
+    public void cargarProponentes(){
+    this.Proponentes=this.usu.cargarProponentes();
+    }
+    
+    
+     @Override
+    public List<DtProponente> listarUsuario()
+      {
+           List<DtProponente> retorna=new ArrayList<>();
+   // DtCategoria nuevo=null;
+          Set se = Proponentes.entrySet();
+        Iterator iterator = se.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            Proponente aux=(Proponente) mentry.getValue();    
+            retorna.add(aux.obtenerInfo());
+            }       
+        return retorna;
+      }
 //    long ini = System.currentTimeMillis();
 //    InputStream fuente = null;
 }
