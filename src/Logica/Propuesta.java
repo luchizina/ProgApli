@@ -137,5 +137,37 @@ public Propuesta(){
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    public String getFechaPub() {
+        return fechaPub;
+    }
+
+    public void setFechaPub(String fechaPub) {
+        this.fechaPub = fechaPub;
+    }
+
+    public String getCate() {
+        return cate;
+    }
+
+    public void setCate(String cate) {
+        this.cate = cate;
+    }
+
+    public Estado getEstActual() {
+        return estActual;
+    }
+
+    public void setEstActual(Estado estActual) {
+        this.estActual = estActual;
+    }
+
+    public ListEstado getListaEstados() {
+        return listaEstados;
+    }
+
+    public void setListaEstados(ListEstado listaEstados) {
+        this.listaEstados = listaEstados;
+    }
     
 }

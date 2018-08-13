@@ -12,27 +12,49 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  *
  * @author apias
  */
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DBPropuesta {    
+    java.util.Date fec;
+     java.sql.Date sqlDate;
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
     public boolean agregarPropuesta(Propuesta p){
         try {
+            
+            SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
+             try {
+        fec = da.parse(p.getFecha());
+         sqlDate = new java.sql.Date(fec.getTime());
+        System.out.println(sqlDate);
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha) values(?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            statement.setString(3, p.getFecha());
+            statement.setDate(3, sqlDate);
+         //   statement.setInt(3, p.get);
+       //    statement.setString(5, "1999-12-12");
+            statement.setInt(4, 23);
+            statement.setInt(5, 456);
+            statement.setInt(6, 569);
+            statement.setString(7, "kpop");
+            statement.setString(8, "lola");
             statement.executeUpdate();
             statement.close();
             return true;

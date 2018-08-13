@@ -10,6 +10,7 @@ import Persistencia.DBPropuesta;
 import java.util.HashMap;
 //import Persistencia.DBPersona;
 import java.util.Map;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Luchi
@@ -41,6 +42,7 @@ public static ctrlPropuesta getInstance(){
     }
 
 @Override
+
     public boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate) {
         if (this.propuestas.get(titulo)!=null){
             return false;
@@ -52,6 +54,8 @@ public static ctrlPropuesta getInstance(){
                 //Colección genérica común
                 //this.personas.add(p);
                 this.propuestas.put(titulo, pe);
+                pe.setCate(cate);
+             
                 }   
             return res;
         }

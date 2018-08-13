@@ -6,6 +6,9 @@
 package Presentacion;
 import Logica.IPropuesta;
 import Logica.DtFecha;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -72,6 +75,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jDate = new com.toedter.calendar.JDateChooser();
 
+        setClosable(true);
+        setAutoscrolls(true);
         setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -362,10 +367,11 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
 
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
         
-       
+       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
         // public Propuesta(String titulo, String desc, DtFecha fecha, int precioE, DtFecha fechaPub, int montoTotal, String cate) {
-   
-        boolean ok=IP.AgregarPropuesta(jTitulo.getText(), "ssfs", jDate.getDateFormatString(), 112,jDate.getDateFormatString(),100,"hola");
+    
+       
+        boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), da.format(jDate.getDate()), Integer.parseInt(jPrecioE.getText()),jDate.getDate().toString(),Integer.parseInt(jPrecioT.getText()),jCateg.getToolTipText());
        if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
 
@@ -375,7 +381,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
-        // TODO add your handling code here:
+     // TODO add your handling code here:
     }//GEN-LAST:event_bt1ActionPerformed
 
 
