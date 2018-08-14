@@ -25,6 +25,10 @@ public class Colaborador extends Usuario {
         this.colHechas = colHechas;
     }
 
+    Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
+       super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
+    }
+
    
    
 

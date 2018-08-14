@@ -7,7 +7,7 @@ package Logica;
  */
 
 import Logica.*;
-
+import java.util.Map;
 /**
  *
  * @author Luchi
@@ -16,4 +16,18 @@ public class DtCategoria {
     private
             String nombre;
             String padre;
+             Map<String,Categoria> hijos;
+            
+            public DtCategoria(String nombre, String padre){
+                this.nombre=nombre;
+                this.padre=padre;
+            }
+            
+            public String getNombre(){
+                return this.nombre;
+                           }
+            
+            public String getPadre(){
+                return this.padre;
+            }
 }

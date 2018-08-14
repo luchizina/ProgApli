@@ -31,5 +31,14 @@ public class Fabrica {
     public ICategoria getICtrlCategoria() {
         ICategoria ICC = ctrlCategoria.getInstance();
         return ICC;
-    }   
+    }
+    
+      private Fabrica(){
+        this.cargarDatosPrueba();
+    };
+      
+       private void cargarDatosPrueba(){
+        ICategoria ic=this.getICtrlCategoria();
+        ic.cargarCategorias();
+    }
 }

@@ -431,7 +431,8 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
 
         if (jRadioButton1.isSelected() == true) {
             if (this.vacios() == false) {
-                boolean ok = usuario.altaColaborador(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText());
+                if(this.escorreo(email.getText())==true){
+                boolean ok = usuario.altaColaborador(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText(), jRadioButton1.getText());
                 if (ok) {
                     JOptionPane.showMessageDialog(null, "Colaborador agregado");
                     this.limpiar();
@@ -440,12 +441,16 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                     this.limpiar();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+                    JOptionPane.showMessageDialog(null, "El correo ingresado no es valido", "Correo", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             if (jRadioButton2.isSelected() == true) {
                 if (this.vacios() == false && direccion.getText().equals("") == false) {
-                    boolean oki = usuario.altaProponente(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText());
+                    if(this.escorreo(email.getText())==true){
+                    boolean oki = usuario.altaProponente(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
                     if (oki) {
                         JOptionPane.showMessageDialog(null, "Proponente agregado");
                         this.limpiar();
@@ -453,8 +458,11 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "El proponente no ha podido ser agregado");
                         this.limpiar();
                     }
+                    } else {
+                         JOptionPane.showMessageDialog(null, "El correo ingresado no es valido", "Correo", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+                    JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -527,6 +535,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         } else {
             nombreAviso.setText("");
         }
+//        nombreAviso.setText("");
     }//GEN-LAST:event_nombreKeyTyped
 
     private void apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoKeyTyped
@@ -537,6 +546,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         } else {
             apellidoValido.setText("");
         }
+//        apellidoValido.setText("");
     }//GEN-LAST:event_apellidoKeyTyped
 
     public boolean escorreo(String correo) {
@@ -557,8 +567,8 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             correoValido.setText("");
         } else {
             correoValido.setText("El correo es invalido");
-            email.requestFocus();
         }
+//        correoValido.setText("");
     }//GEN-LAST:event_emailFocusLost
 
     private void linkFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_linkFocusLost
@@ -568,9 +578,9 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             }
             else {
                 webValido.setText("Pagina web invalida");
-                link.requestFocus();
             }
         }
+
     }//GEN-LAST:event_linkFocusLost
 
     

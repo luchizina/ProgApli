@@ -5,13 +5,23 @@
  */
 package Persistencia;
 
-import Logica.Usuario;
+import Logica.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import Presentacion.*;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author Nuevo
+ */
+
+
 
 /**
  *
@@ -20,7 +30,7 @@ import java.util.Date;
 public class DBusuario {
     private Connection conexion = new ConexionDB().getConexion();
     
-    public boolean agregarColaborador(Usuario u){
+    public boolean agregarColaborador(Colaborador u){
          try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
                     + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC) values(?,?,?,?,?,?)");
@@ -42,7 +52,7 @@ public class DBusuario {
         } 
     }
     
-     public boolean agregarProponente(Usuario u){
+     public boolean agregarProponente(Proponente u){
          try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
                     + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb) values(?,?,?,?,?,?,?,?,?)");
@@ -57,7 +67,7 @@ public class DBusuario {
             statement.setString(6, u.getImg());
             statement.setString(7, u.getDireccion());
             statement.setString(8, u.getBiografia());
-            statement.setString(9, u.getLink());
+            statement.setString(9, u.getLinkWeb());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -66,4 +76,23 @@ public class DBusuario {
             return false;
         } 
     }
+     
+      public Map<String,Proponente> cargarProponentes(){
+        try {
+            Map<String, Proponente> lista = new HashMap<String, Proponente>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM proponente");          
+            ResultSet rs=st.executeQuery();
+            while (rs.next()){
+                String nick = rs.getString("nickP");
+                Proponente p=new Proponente(nick);
+                lista.put(nick, p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }        
+    }    
 }

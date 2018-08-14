@@ -5,10 +5,17 @@
  */
 package Logica;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author Luchi
  */
 public interface IPropuesta {
     
+    
+    
+ public abstract boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cat);
+        
 }

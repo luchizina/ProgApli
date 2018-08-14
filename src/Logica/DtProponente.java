@@ -24,7 +24,7 @@ public class DtProponente  extends DtUsuario  {
             String correo;
             DtFecha fecha;
 
-    public DtProponente(String nick, String img, String biografia, String linkWeb, String direccion, String nombre, String apellido, String correo, DtFecha fecha) {
+    public DtProponente(String nick, String img, String biografia, String linkWeb, String direccion, String nombre, String apellido, String correo) {
         this.nick = nick;
         this.img = img;
         this.biografia = biografia;
@@ -33,7 +33,7 @@ public class DtProponente  extends DtUsuario  {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.fecha = fecha;
+
     }
 
     public String getNick() {

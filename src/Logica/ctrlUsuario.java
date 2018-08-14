@@ -5,14 +5,24 @@
  */
 package Logica;
 
-import Persistencia.DBusuario;
+import Persistencia.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,6 +35,9 @@ public class ctrlUsuario implements IUsuario {
     
      private static ctrlUsuario instancia;
      private Map<String, Usuario> usuarios;
+
+     private Map<String, Proponente> Proponentes;
+
      private DBusuario usu=null;
    
 public static ctrlUsuario getInstance(){
@@ -37,11 +50,12 @@ public static ctrlUsuario getInstance(){
 
 private ctrlUsuario(){
     this.usuarios=new HashMap<String, Usuario>();
+
     this.usu=new DBusuario();
 }
 
     @Override
-    public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen) {
+    public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo) {
         if(this.existe(Nick, Correo)==false){
             return false;
         }
@@ -62,7 +76,7 @@ private ctrlUsuario(){
                 
             } 
  
-            Usuario c = new Usuario(Nick, Nombre, Apellido, Correo, fecha, Imagen);
+            Colaborador c = new Colaborador(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
             boolean res = this.usu.agregarColaborador(c);
             if(res){
                 this.usuarios.put(Nick, c);
@@ -72,7 +86,7 @@ private ctrlUsuario(){
     
 
     @Override
-    public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web) {
+    public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
         if(this.existe(Nick, Correo)==false){
             return false;
         } else {
@@ -91,7 +105,7 @@ private ctrlUsuario(){
                 }
                 
             } 
-        Usuario p = new Usuario(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web);
+        Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo);
         boolean res = this.usu.agregarProponente(p);
         if(res){
             this.usuarios.put(Nick, p);
@@ -100,10 +114,6 @@ private ctrlUsuario(){
         }
     }
 
-    @Override
-    public void cancelar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public boolean existe(String nick, String correo){
         for(Usuario usu : this.usuarios.values()){
@@ -130,6 +140,29 @@ private ctrlUsuario(){
             return false;
         }
     }
+
+
+    
+    public void cargarProponentes(){
+    this.Proponentes=this.usu.cargarProponentes();
+    }
+    
+    
+     @Override
+    public List<DtProponente> listarUsuario()
+      {
+           List<DtProponente> retorna=new ArrayList<>();
+   // DtCategoria nuevo=null;
+          Set se = Proponentes.entrySet();
+        Iterator iterator = se.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            Proponente aux=(Proponente) mentry.getValue();    
+            retorna.add(aux.obtenerInfo());
+            }       
+        return retorna;
+      }
+
 //    long ini = System.currentTimeMillis();
 //    InputStream fuente = null;
 }

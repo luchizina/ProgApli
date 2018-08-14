@@ -14,18 +14,21 @@ import java.util.Map;
  */
 public class Usuario {
     
-    private 
     String nick;
     String nombre;
     String Apellido;
     String Correo;
     Date fecha;
     String img;
-    String direccion;
-    String biografia;
-    String link;
+    String tipo;
     private Map<String, Usuario> usuSeguidos;
     private Map<String, Propuesta> propuFav;
+
+
+    public Usuario(String nick) {
+        this.nick = nick;
+    }
+
 
     public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         this.nick = nick;
@@ -38,54 +41,34 @@ public class Usuario {
         this.propuFav = propuFav;
     }
     
-    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img){
+    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
         this.nick = nick;
         this.nombre = nombre;
         this.Apellido = Apellido;
         this.Correo = Correo;
         this.fecha = fecha;
         this.img = img;
+        this.tipo = tipo;
     }
     
-    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link){
-        this.nick = nick;
-        this.nombre = nombre;
-        this.Apellido = Apellido;
-        this.Correo = Correo;
-        this.fecha = fecha;
-        this.img = img;
-        this.direccion=dir;
-        this.biografia=bio;
-        this.link=link;
-    }
+//    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo){
+//        this.nick = nick;
+//        this.nombre = nombre;
+//        this.Apellido = Apellido;
+//        this.Correo = Correo;
+//        this.fecha = fecha;
+//        this.img = img;
+//        this.direccion=dir;
+//        this.biografia=bio;
+//        this.link=link;
+//        this.tipo=tipo;
+//    }
 
     public Map<String, Usuario> getUsuSeguidos() {
         return usuSeguidos;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
+  
 
     public void setUsuSeguidos(Map<String, Usuario> usuSeguidos) {
         this.usuSeguidos = usuSeguidos;

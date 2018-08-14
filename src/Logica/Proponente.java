@@ -25,7 +25,33 @@ public class Proponente extends Usuario {
         this.linkWeb = linkWeb;
     }
 
+    public Proponente(String nick) {
+        super(nick);
+        
+    }
+
+    
+
+    
+
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String Tipo) {
+        super(nick, nombre, Apellido, Correo, fecha, img, Tipo);
+    }
+
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo) {
+        super(nick, nombre, Apellido, Correo, fecha, img, tipo);
+        this.direccion=dir;
+        this.biografia=bio;
+        this.linkWeb=link;
+    }
+
+
+
    
+
+    public String getLinkWeb() {
+        return linkWeb;
+    }
 
     public String getDireccion() {
         return direccion;
@@ -43,14 +69,12 @@ public class Proponente extends Usuario {
         this.biografia = biografia;
     }
 
-    public String getLinkWeb() {
-        return linkWeb;
-    }
-
     public void setLinkWeb(String linkWeb) {
         this.linkWeb = linkWeb;
     }
             
-            
+    public DtProponente obtenerInfo(){
+        return new DtProponente(nick, img, biografia, linkWeb, direccion, nombre, Apellido, Correo);
+    }         
          
 }
