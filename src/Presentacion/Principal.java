@@ -7,6 +7,9 @@ package Presentacion;
 
 import Logica.Fabrica;
 import Logica.IUsuario;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -251,7 +254,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-       Registrar_usuario us = new Registrar_usuario(IU); // Se crea una instancia del JinternalFrame
+       Registrar_usuario us = null;
+        try {
+            us = new Registrar_usuario(IU); // Se crea una instancia del JinternalFrame
+        } catch (ParseException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jp.add(us); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
         us.setVisible(true); // Esto pa ponerlo visible
         
