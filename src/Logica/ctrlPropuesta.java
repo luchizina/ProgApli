@@ -57,7 +57,6 @@ public static ctrlPropuesta getInstance(){
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
-         @Override
     public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
         if (this.propuestas.get(titulo)!=null){
             return false;
@@ -155,6 +154,11 @@ public static ctrlPropuesta getInstance(){
             return false;
         }
     }
-      
+          
+    public void cargarPropuestas()
+    {
+        this.propuestas = this.dbPropuesta.cargarPropuestas();
     }
     
+    }
+

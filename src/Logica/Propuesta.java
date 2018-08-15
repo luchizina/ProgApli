@@ -56,10 +56,18 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public String getProp() {
         return Prop;
     }
-   
- 
+     public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate) {
+        this.titulo = titulo;
+        this.desc = desc;
+        this.fecha = fecha;
+        this.precioE = precioE;
+        this.fechaPub = fechaPub;
+        this.montoTotal = montoTotal;
+        this.cate = cate;
         
-    public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String img) {
+    }
+
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate, String img) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -68,7 +76,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoTotal = montoTotal;
         this.cate = cate;
         this.img = img;
-        
     }
 
     public String getImg() {
