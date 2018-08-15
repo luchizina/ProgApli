@@ -432,7 +432,6 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         if (jRadioButton1.isSelected() == true) {
             if (this.vacios() == false) {
                 if(this.escorreo(email.getText())==true){
-                    JOptionPane.showMessageDialog(null, fecha.getCalendar().getTime().getHours() + ":" + fecha.getCalendar().getTime().getMinutes() + ":" + fecha.getCalendar().getTime().getSeconds());
                 boolean ok = usuario.altaColaborador(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText(), jRadioButton1.getText());
                 if (ok) {
                     JOptionPane.showMessageDialog(null, "Colaborador agregado");
