@@ -64,7 +64,7 @@ public static ctrlPropuesta getInstance(){
     
     public void cargarPropuestas()
     {
-        this.propuestas = this.dbPropuesta.cargarPersonas();
+        this.propuestas = this.dbPropuesta.cargarPropuestas();
     }
     
     }
