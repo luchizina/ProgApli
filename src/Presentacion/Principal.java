@@ -556,4 +556,3 @@ cat.setVisible(true);
     // End of variables declaration//GEN-END:variables
 }
 
-            .addGap(0, 416, Short.MAX_VALUE)

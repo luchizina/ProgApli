@@ -40,51 +40,6 @@ public class Usuario {
         this.usuSeguidos = usuSeguidos;
         this.propuFav = propuFav;
     }
-    
-
-    public Map<String, Usuario> getUsuSeguidos() {
-        return usuSeguidos;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-  
-
-    public void setUsuSeguidos(Map<String, Usuario> usuSeguidos) {
-        this.usuSeguidos = usuSeguidos;
-    }
-
-    public Map<String, Propuesta> getPropuFav() {
-        return propuFav;
-    }
-
-    public void setPropuFav(Map<String, Propuesta> propuFav) {
-        this.propuFav = propuFav;
-    }
-    
-   
 
     public String getNick() {
         return nick;
@@ -133,12 +88,34 @@ public class Usuario {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
-    
 
+    public Map<String, Usuario> getUsuSeguidos() {
+        return usuSeguidos;
+    }
 
+   
 
-}
+    public void setUsuSeguidos(Map<String, Usuario> usuSeguidos) {
+        this.usuSeguidos = usuSeguidos;
+    }
+
+    public Map<String, Propuesta> getPropuFav() {
+        return propuFav;
+    }
+
+    public void setPropuFav(Map<String, Propuesta> propuFav) {
+        this.propuFav = propuFav;
+    }
+
     public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
         this.nick = nick;
         this.nombre = nombre;
@@ -146,18 +123,7 @@ public class Usuario {
         this.Correo = Correo;
         this.fecha = fecha;
         this.img = img;
-        this.tipo = tipo;
+      
+        this.tipo=tipo;
     }
-    
-//    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo){
-//        this.nick = nick;
-//        this.nombre = nombre;
-//        this.Apellido = Apellido;
-//        this.Correo = Correo;
-//        this.fecha = fecha;
-//        this.img = img;
-//        this.direccion=dir;
-//        this.biografia=bio;
-//        this.link=link;
-//        this.tipo=tipo;
-//    }
+}
