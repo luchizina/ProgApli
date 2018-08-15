@@ -63,12 +63,19 @@ public List<DtCategoria> listarCategorias(){
 
 
  @Override
-public void ingresarCat(DtCategoria datos){
-        if(this.categorias.get(datos.getNombre())==null){
-        Categoria nueva= new Categoria(datos.getNombre(),datos.getPadre());
-                    
-        categorias.put(datos.getNombre(), nueva);
-    }
+public boolean ingresarCat(DtCategoria datos){
+      if (this.categorias.get(datos.getNombre())!=null){
+            return false;
+        }else{
+            Categoria c=new Categoria(datos.getNombre(), datos.getPadre());
+            boolean res =this.dbCategoria.agregarPersona(c);
+            if (res){
+                //Colección genérica común
+                //this.personas.add(p);
+                this.categorias.put(datos.getNombre(), c);
+            }
+            return res;
+        }
   
 }
 

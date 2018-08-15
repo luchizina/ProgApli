@@ -62,6 +62,21 @@ public class DBCategoria {
             return null;
         }        
     }
+       public boolean agregarPersona(Categoria c){
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO categoria "
+                    + "(NombreH, NombreP) values(?,?)");
+            statement.setString(1, c.getNombre());
+            statement.setString(2, c.getPadre());
+                  statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }        
+    }
+     
      
      
      
