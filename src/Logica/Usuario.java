@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -13,17 +14,23 @@ import java.util.Map;
  */
 public class Usuario {
     
-    private 
     String nick;
     String nombre;
     String Apellido;
     String Correo;
-    DtFecha fecha;
+    Date fecha;
     String img;
+    String tipo;
     private Map<String, Usuario> usuSeguidos;
     private Map<String, Propuesta> propuFav;
 
-    public Usuario(String nick, String nombre, String Apellido, String Correo, DtFecha fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
+
+    public Usuario(String nick) {
+        this.nick = nick;
+    }
+
+
+    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         this.nick = nick;
         this.nombre = nombre;
         this.Apellido = Apellido;
@@ -33,24 +40,6 @@ public class Usuario {
         this.usuSeguidos = usuSeguidos;
         this.propuFav = propuFav;
     }
-
-    public Map<String, Usuario> getUsuSeguidos() {
-        return usuSeguidos;
-    }
-
-    public void setUsuSeguidos(Map<String, Usuario> usuSeguidos) {
-        this.usuSeguidos = usuSeguidos;
-    }
-
-    public Map<String, Propuesta> getPropuFav() {
-        return propuFav;
-    }
-
-    public void setPropuFav(Map<String, Propuesta> propuFav) {
-        this.propuFav = propuFav;
-    }
-    
-   
 
     public String getNick() {
         return nick;
@@ -84,11 +73,11 @@ public class Usuario {
         this.Correo = Correo;
     }
 
-    public DtFecha getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(DtFecha fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -99,9 +88,42 @@ public class Usuario {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
-    
 
+    public Map<String, Usuario> getUsuSeguidos() {
+        return usuSeguidos;
+    }
 
+   
 
+    public void setUsuSeguidos(Map<String, Usuario> usuSeguidos) {
+        this.usuSeguidos = usuSeguidos;
+    }
+
+    public Map<String, Propuesta> getPropuFav() {
+        return propuFav;
+    }
+
+    public void setPropuFav(Map<String, Propuesta> propuFav) {
+        this.propuFav = propuFav;
+    }
+
+    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
+        this.nick = nick;
+        this.nombre = nombre;
+        this.Apellido = Apellido;
+        this.Correo = Correo;
+        this.fecha = fecha;
+        this.img = img;
+      
+        this.tipo=tipo;
+    }
 }

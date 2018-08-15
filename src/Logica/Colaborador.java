@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,9 +20,13 @@ public class Colaborador extends Usuario {
         private
                 Map<Integer, Colaboracion> colHechas;
 
-    public Colaborador(Map<Integer, Colaboracion> colHechas, String nick, String nombre, String Apellido, String Correo, DtFecha fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
+    public Colaborador(Map<Integer, Colaboracion> colHechas, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav);
         this.colHechas = colHechas;
+    }
+
+    Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
+       super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
     }
 
    

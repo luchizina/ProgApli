@@ -7,6 +7,8 @@ package Logica;
  */
 
 import Logica.*;
+import java.sql.Time;
+import java.util.Date;
 
 /**
  *
@@ -14,31 +16,34 @@ import Logica.*;
  */
 public class ListEstado {
     private
-            DtFecha fecha;
-            int hora;
+            
+            Date fecha;
+            Time hora;
             Estado est;
 
-    public ListEstado(DtFecha fecha, int hora, Estado est) {
+    public ListEstado(Date fecha, Time hora, Estado est) {
         this.fecha = fecha;
         this.hora = hora;
         this.est = est;
     }
 
-    public DtFecha getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(DtFecha fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public int getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(int hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
+
+
 
     public Estado getEst() {
         return est;

@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -17,14 +18,40 @@ public class Proponente extends Usuario {
             String biografia;
             String linkWeb;
 
-    public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, DtFecha fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
+    public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav);
         this.direccion = direccion;
         this.biografia = biografia;
         this.linkWeb = linkWeb;
     }
 
+    public Proponente(String nick) {
+        super(nick);
+        
+    }
+
+    
+
+    
+
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String Tipo) {
+        super(nick, nombre, Apellido, Correo, fecha, img, Tipo);
+    }
+
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo) {
+        super(nick, nombre, Apellido, Correo, fecha, img, tipo);
+        this.direccion=dir;
+        this.biografia=bio;
+        this.linkWeb=link;
+    }
+
+
+
    
+
+    public String getLinkWeb() {
+        return linkWeb;
+    }
 
     public String getDireccion() {
         return direccion;
@@ -42,14 +69,12 @@ public class Proponente extends Usuario {
         this.biografia = biografia;
     }
 
-    public String getLinkWeb() {
-        return linkWeb;
-    }
-
     public void setLinkWeb(String linkWeb) {
         this.linkWeb = linkWeb;
     }
             
-            
+    public DtProponente obtenerInfo(){
+        return new DtProponente(nick, img, biografia, linkWeb, direccion, nombre, Apellido, Correo);
+    }         
          
 }

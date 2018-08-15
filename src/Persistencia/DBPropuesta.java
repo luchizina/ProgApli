@@ -12,34 +12,51 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import Logica.DtFecha;
+
 /**
  *
  * @author apias
  */
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DBPropuesta {    
+    java.util.Date fec;
+     java.sql.Date sqlDate;
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarPropuesta(Propuesta p){
-        try {
+    public boolean agregarPropuesta(Propuesta p) throws SQLException{
+   
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha) values(?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            statement.setString(3, p.getFecha());
+            Date fechaC = p.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sdf.format(fechaC);
+            statement.setString(3, fecha);
+         //   statement.setInt(3, p.get);
+       //    statement.setString(5, "1999-12-12");
+            statement.setInt(4, p.getPrecioE());
+            statement.setInt(5, 0);
+            statement.setDate(6, sqlDate);
+            statement.setString(7, p.getImg()); 
+             statement.setString(8, String.valueOf(p.getTipoRetorno()));
+            statement.setInt(9, p.getMontoTotal());
+            statement.setString(10, p.getCate());
+            statement.setString(11, p.getProp());
             statement.executeUpdate();
             statement.close();
             return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }        
+            
     }
     
 //    public boolean borrarPersona(Persona p){
@@ -55,14 +72,26 @@ public class DBPropuesta {
 //        }        
 //    }    
 //    
-    public Map<String, Propuesta> cargarPersonas(){
+    public Map<String, Propuesta> cargarPropuestas(){
         try {
             Map<String, Propuesta> lista = new HashMap<String, Propuesta>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM personas");          
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){
                 String titulo = rs.getString("titulo");
-                Propuesta p=new Propuesta();
+                String descripcion = rs.getString("descripcion");
+                Date fechita = rs.getDate("Fecha");
+                int precio = rs.getInt("precio");
+                int montoActual = rs.getInt("montoactual");
+                Date fechaPub = rs.getDate("fechapub");
+                String url = rs.getString("imagenurl");
+                String tipoRetorno = rs.getString("tiporetorno");
+                int montoTotal = rs.getInt("montototal");
+                String categoria = rs.getString("Categoria");
+                String nickProp = rs.getString("nickprop");
+                SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
+                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio, da2.format(fechaPub), montoTotal, categoria);
                 lista.put(titulo, p);
             }
             rs.close();
