@@ -33,36 +33,30 @@ public class DBPropuesta {
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarPropuesta(Propuesta p){
-        try {
-            
-            SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-             try {
-        fec = da.parse(p.getFecha());
-         sqlDate = new java.sql.Date(fec.getTime());
-        System.out.println(sqlDate);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
+    public boolean agregarPropuesta(Propuesta p) throws SQLException{
+   
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            statement.setDate(3, sqlDate);
+            Date fechaC = p.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sdf.format(fechaC);
+            statement.setString(3, fecha);
          //   statement.setInt(3, p.get);
        //    statement.setString(5, "1999-12-12");
-            statement.setInt(4, 23);
-            statement.setInt(5, 456);
-            statement.setInt(6, 569);
-            statement.setString(7, "kpop");
-            statement.setString(8, "lola");
+            statement.setInt(4, p.getPrecioE());
+            statement.setInt(5, 0);
+            statement.setDate(6, sqlDate);
+            statement.setString(7, p.getImg()); 
+             statement.setString(8, String.valueOf(p.getTipoRetorno()));
+            statement.setInt(9, p.getMontoTotal());
+            statement.setString(10, p.getCate());
+            statement.setString(11, p.getProp());
             statement.executeUpdate();
             statement.close();
             return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }        
+            
     }
     
 //    public boolean borrarPersona(Persona p){
@@ -97,7 +91,7 @@ public class DBPropuesta {
                 String nickProp = rs.getString("nickprop");
                 SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
-                Propuesta p=new Propuesta(titulo, descripcion, da.format(fechita), precio, da2.format(fechaPub), montoTotal, categoria);
+                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio, da2.format(fechaPub), montoTotal, categoria);
                 lista.put(titulo, p);
             }
             rs.close();
