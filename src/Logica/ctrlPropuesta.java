@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -20,6 +22,7 @@ import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -55,47 +58,70 @@ public static ctrlPropuesta getInstance(){
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
          @Override
-    public boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
+    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
         if (this.propuestas.get(titulo)!=null){
             return false;
         }else{
            
-             if(img.equals("")==false){
-                String[] aux = img.split("\\.");
-                String termina = aux[1];
-                String destino = "Imagenes/Propusta/" + nickP + "." + termina;
-                try {
-                    if(this.copy(img, destino)==true){
-                        img=destino;
-                    } else {
-                        img = null;
+            try {
+                if(img.equals("")==false){
+                    String[] aux = img.split("\\.");
+                    String termina = aux[1];
+                    String destino = "Imagenes/Propusta/" + nickP + "." + termina;
+                    try {
+                        if(this.copy(img, destino)==true){
+                            img=destino;
+                        } else {
+                            img = null;
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
+                //String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, Tretorno tipoRetorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img)
+                Propuesta pe = new Propuesta(titulo,desc,fecha,  precioE,montoActual, fechaPub,Retorno, montoTotal, cate,estActual,img);
+                pe.setProp(nickP);
+                pe.setEstActual(estActual);
                 
-            } 
-            //String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, Tretorno tipoRetorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img) 
-             Propuesta pe = new Propuesta(titulo,desc,fecha,  precioE,montoActual, fechaPub,Retorno, montoTotal, cate,estActual,img);
-            pe.setProp(nickP);
-            pe.setEstActual(estActual);
-            
-               boolean res= this.dbPropuesta.agregarPropuesta(pe);  
+                boolean res= this.dbPropuesta.agregarPropuesta(pe);  
                 if (res){
-                //Colección genérica común
-                //this.personas.add(p);
-                this.propuestas.put(titulo, pe);
-                pe.setCate(cate);
-                
-                ListEstado est = new ListEstado(fechaPub,hora, estActual);
-                // pe.getListaDeEstados().put(estActual.getEstado(), est);
-                 this.dbE.agregarEstado(est, titulo);
-                         }
-                  return res;
+                    
+                    //Colección genérica común
+                    //this.personas.add(p);
+                    this.propuestas.put(titulo, pe);
+                    pe.setCate(cate);
+                    
+                    java.sql.Time fecFormatoTime = null;
+                    try {
+                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+                        fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
+                        System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
+                    } catch (ParseException ex) {
+                        System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+                    }
+                    Date fec = fecha(fechaPub);
+                    ListEstado est = new ListEstado(fec,fecFormatoTime, estActual);
+                    // pe.getListaDeEstados().put(estActual.getEstado(), est);
+                   boolean Est =  this.dbE.agregarEstado(est, titulo);
+                    if(Est){
+                    }
+                    else{
+                        System.out.println("Lo hace mal!!!");
+                    }
+                    return res;
+                }   } catch (SQLException ex) {  
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-          
-        }
+             return false;
+    }
         
+       private String getCurrentTime() {    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmss");
+    String currentTime = dateFormat.format(System.currentTimeMillis());
+    return currentTime;
+}
     public Date fecha(String fecha){
     java.util.Date fec;
     java.sql.Date sqlDate = null;

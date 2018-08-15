@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ public class Propuesta {
     private 
             String titulo;
             String desc;
-           String fecha;
+           Date fecha;
             int precioE;
             int montoActual;
             String fechaPub;
@@ -32,7 +33,7 @@ public Propuesta(){
 
 }
 
-public Propuesta(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img) {
+public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -58,7 +59,7 @@ public Propuesta(String titulo, String desc, String fecha, int precioE, int mont
    
  
         
-    public Propuesta(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img) {
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String img) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -163,14 +164,16 @@ public Propuesta(String titulo, String desc, String fecha, int precioE, int mont
         this.listaDeEstados = listaDeEstados;
     }
 
-   
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+   
+   
 
     public String getFechaPub() {
         return fechaPub;

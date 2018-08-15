@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,5 +17,5 @@ public interface IPropuesta {
     
     
     
- public abstract boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) ;
+ public abstract boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) ;
 }

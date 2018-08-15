@@ -69,8 +69,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        jR1 = new javax.swing.JRadioButton();
+        jR2 = new javax.swing.JRadioButton();
         Jpanel1 = new javax.swing.JPanel();
         img = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -118,9 +118,9 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Retornos");
 
-        jRadioButton3.setText("Porcentaje entradas");
+        jR1.setText("Porcentaje entradas");
 
-        jRadioButton4.setText("Entradas gratis");
+        jR2.setText("Entradas gratis");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -129,17 +129,17 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jR2)
+                    .addComponent(jR1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton3)
+                .addComponent(jR1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton4))
+                .addComponent(jR2))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -435,8 +435,8 @@ public static String getHoraActual() {
          javax.swing.JOptionPane.showMessageDialog(null, hora + (String) jProp.getSelectedItem());
 //(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img,String nickP)
         Estado estA = new Estado(Testado.ingresada);
-      
-boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), da.format(jDate.getDate()), Integer.parseInt(jPrecioE.getText()),0,da.format(jDate.getDate()),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
+        String TRetorno= jR1.getText() + " " + jR2.getText();
+boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,da.format(jDate.getDate()),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
        if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
 
@@ -496,10 +496,10 @@ boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), da.format(jDa
     private javax.swing.JTextField jPrecioE;
     private javax.swing.JTextField jPrecioT;
     private javax.swing.JComboBox<String> jProp;
+    private javax.swing.JRadioButton jR1;
+    private javax.swing.JRadioButton jR2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTitulo;

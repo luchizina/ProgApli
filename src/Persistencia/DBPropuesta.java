@@ -32,22 +32,16 @@ public class DBPropuesta {
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarPropuesta(Propuesta p){
-        try {
-            
-            SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-             try {
-        fec = da.parse(p.getFecha());
-         sqlDate = new java.sql.Date(fec.getTime());
-        System.out.println(sqlDate);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
+    public boolean agregarPropuesta(Propuesta p) throws SQLException{
+   
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
                     + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            statement.setDate(3, sqlDate);
+            Date fechaC = p.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sdf.format(fechaC);
+            statement.setString(3, fecha);
          //   statement.setInt(3, p.get);
        //    statement.setString(5, "1999-12-12");
             statement.setInt(4, p.getPrecioE());
@@ -61,10 +55,7 @@ public class DBPropuesta {
             statement.executeUpdate();
             statement.close();
             return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }        
+            
     }
     
 //    public boolean borrarPersona(Persona p){

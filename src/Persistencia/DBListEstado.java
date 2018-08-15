@@ -6,27 +6,17 @@
 package Persistencia;
 import Logica.ListEstado;
 import Logica.Propuesta;
-import Persistencia.ConexionDB;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  *
  * @author apias
  */
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 public class DBListEstado {    
     java.util.Date fec;
      java.sql.Date sqlDate;
@@ -39,7 +29,7 @@ public class DBListEstado {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO ListEstado "
                     + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
             statement.setDate(1, (java.sql.Date) p.getFecha());
-            statement.setDate(2, (java.sql.Date) p.getHora());
+            statement.setTime(2, p.getHora());
             statement.setString(3, t);
             statement.setString(4,  p.getEst().toString());
             statement.executeUpdate();
