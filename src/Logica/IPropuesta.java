@@ -17,5 +17,5 @@ public interface IPropuesta {
     
     
  public abstract boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cat);
-        
+  public abstract void cargarPropuestas();      
 }
