@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Persistencia;
+import Logica.ListEstado;
 import Logica.Propuesta;
 import Persistencia.ConexionDB;
 import java.sql.CallableStatement;
@@ -26,38 +27,21 @@ import java.util.Map;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public class DBPropuesta {    
+public class DBListEstado {    
     java.util.Date fec;
      java.sql.Date sqlDate;
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarPropuesta(Propuesta p){
+    public boolean agregarEstado(ListEstado p, String t){
         try {
             
-            SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-             try {
-        fec = da.parse(p.getFecha());
-         sqlDate = new java.sql.Date(fec.getTime());
-        System.out.println(sqlDate);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
-            statement.setString(1, p.getTitulo());
-            statement.setString(2, p.getDesc());
-            statement.setDate(3, sqlDate);
-         //   statement.setInt(3, p.get);
-       //    statement.setString(5, "1999-12-12");
-            statement.setInt(4, p.getPrecioE());
-            statement.setInt(5, 0);
-            statement.setDate(6, sqlDate);
-            statement.setString(7, p.getImg()); 
-             statement.setString(8, String.valueOf(p.getTipoRetorno()));
-            statement.setInt(9, p.getMontoTotal());
-            statement.setString(10, p.getCate());
-            statement.setString(11, p.getProp());
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO ListEstado "
+                    + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
+            statement.setDate(1, (java.sql.Date) p.getFecha());
+            statement.setDate(2, (java.sql.Date) p.getHora());
+            statement.setString(3, t);
+            statement.setString(4,  p.getEst().toString());
             statement.executeUpdate();
             statement.close();
             return true;
