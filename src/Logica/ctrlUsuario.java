@@ -35,9 +35,7 @@ public class ctrlUsuario implements IUsuario {
     
      private static ctrlUsuario instancia;
      private Map<String, Usuario> usuarios;
-
      private Map<String, Proponente> Proponentes;
-
      private DBusuario usu=null;
    
 public static ctrlUsuario getInstance(){

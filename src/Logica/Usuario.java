@@ -41,31 +41,33 @@ public class Usuario {
         this.propuFav = propuFav;
     }
     
-    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
-        this.nick = nick;
-        this.nombre = nombre;
-        this.Apellido = Apellido;
-        this.Correo = Correo;
-        this.fecha = fecha;
-        this.img = img;
-        this.tipo = tipo;
-    }
-    
-//    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo){
-//        this.nick = nick;
-//        this.nombre = nombre;
-//        this.Apellido = Apellido;
-//        this.Correo = Correo;
-//        this.fecha = fecha;
-//        this.img = img;
-//        this.direccion=dir;
-//        this.biografia=bio;
-//        this.link=link;
-//        this.tipo=tipo;
-//    }
 
     public Map<String, Usuario> getUsuSeguidos() {
         return usuSeguidos;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
   
@@ -137,3 +139,25 @@ public class Usuario {
 
 
 }
+    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
+        this.nick = nick;
+        this.nombre = nombre;
+        this.Apellido = Apellido;
+        this.Correo = Correo;
+        this.fecha = fecha;
+        this.img = img;
+        this.tipo = tipo;
+    }
+    
+//    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo){
+//        this.nick = nick;
+//        this.nombre = nombre;
+//        this.Apellido = Apellido;
+//        this.Correo = Correo;
+//        this.fecha = fecha;
+//        this.img = img;
+//        this.direccion=dir;
+//        this.biografia=bio;
+//        this.link=link;
+//        this.tipo=tipo;
+//    }

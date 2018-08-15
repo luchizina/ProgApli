@@ -77,7 +77,6 @@ public class Principal extends javax.swing.JFrame {
         );
         jpLayout.setVerticalGroup(
             jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Sistema");
@@ -220,14 +219,14 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 570, Short.MAX_VALUE)
         );
 
         pack();
@@ -557,3 +556,4 @@ cat.setVisible(true);
     // End of variables declaration//GEN-END:variables
 }
 
+            .addGap(0, 416, Short.MAX_VALUE)
