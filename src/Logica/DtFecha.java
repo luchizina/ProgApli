@@ -13,21 +13,17 @@ import Logica.*;
  * @author Luchi
  */
 public class DtFecha {
-    private
+    private 
             int anio;
             int mes;
             int dia;
-            int hora;
-            int min;
-            int seg;
 
-    public DtFecha(int anio, int mes, int dia, int hora, int min, int seg) {
+
+    public DtFecha(int anio, int mes, int dia) {
         this.anio = anio;
         this.mes = mes;
         this.dia = dia;
-        this.hora = hora;
-        this.min = min;
-        this.seg = seg;
+
     }
 
     public int getAnio() {
@@ -52,30 +48,6 @@ public class DtFecha {
 
     public void setDia(int dia) {
         this.dia = dia;
-    }
-
-    public int getHora() {
-        return hora;
-    }
-
-    public void setHora(int hora) {
-        this.hora = hora;
-    }
-
-    public int getMin() {
-        return min;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public int getSeg() {
-        return seg;
-    }
-
-    public void setSeg(int seg) {
-        this.seg = seg;
     }
             
             

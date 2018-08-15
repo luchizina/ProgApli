@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import Logica.DtFecha;
 
 /**
  *
@@ -71,14 +72,26 @@ public class DBPropuesta {
 //        }        
 //    }    
 //    
-    public Map<String, Propuesta> cargarPersonas(){
+    public Map<String, Propuesta> cargarPropuestas(){
         try {
             Map<String, Propuesta> lista = new HashMap<String, Propuesta>();
             PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){
                 String titulo = rs.getString("titulo");
-                Propuesta p=new Propuesta();
+                String descripcion = rs.getString("descripcion");
+                Date fechita = rs.getDate("Fecha");
+                int precio = rs.getInt("precio");
+                int montoActual = rs.getInt("montoactual");
+                Date fechaPub = rs.getDate("fechapub");
+                String url = rs.getString("imagenurl");
+                String tipoRetorno = rs.getString("tiporetorno");
+                int montoTotal = rs.getInt("montototal");
+                String categoria = rs.getString("Categoria");
+                String nickProp = rs.getString("nickprop");
+                SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
+                Propuesta p=new Propuesta(titulo, descripcion, da.format(fechita), precio, da2.format(fechaPub), montoTotal, categoria);
                 lista.put(titulo, p);
             }
             rs.close();

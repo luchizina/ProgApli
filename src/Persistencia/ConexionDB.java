@@ -21,8 +21,8 @@ public class ConexionDB {
     private final String port="3306";
     private final String db="culturarte";
     private final String user="root";
-    private final String pass="1234";
-    
+    private final String pass="hola";
+
     //Para hacer ConexionDB singleton descomentar
     //private static Connection conexion=null;
     private Connection conexion=null;

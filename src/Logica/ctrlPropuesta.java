@@ -158,4 +158,3 @@ public static ctrlPropuesta getInstance(){
       
     }
     
-

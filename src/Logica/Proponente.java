@@ -34,12 +34,15 @@ public class Proponente extends Usuario {
 
     
 
-    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img) {
-        super(nick, nombre, Apellido, Correo, fecha, img);
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String Tipo) {
+        super(nick, nombre, Apellido, Correo, fecha, img, Tipo);
     }
 
-    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link) {
-        super(nick, nombre, Apellido, Correo, fecha, img, dir, bio, link);
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo) {
+        super(nick, nombre, Apellido, Correo, fecha, img, tipo);
+        this.direccion=dir;
+        this.biografia=bio;
+        this.linkWeb=link;
     }
 
 
@@ -48,6 +51,22 @@ public class Proponente extends Usuario {
 
     public String getLinkWeb() {
         return linkWeb;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
     }
 
     public void setLinkWeb(String linkWeb) {

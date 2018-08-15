@@ -32,6 +32,15 @@ public class DtColaborador extends DtUsuario {
         this.img = img;
         this.colaboraciones = colaboraciones;
     }
+    
+    public DtColaborador(String nick, String nombre, String apellido, String correo, DtFecha fecha, String img){
+        this.nick = nick;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.fecha = fecha;
+        this.img = img;
+    }
 
     public String getNick() {
         return nick;
