@@ -469,7 +469,8 @@ boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate
             this.pack();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-  
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel1;
     private javax.swing.JButton bt1;
