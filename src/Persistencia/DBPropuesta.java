@@ -91,7 +91,7 @@ public class DBPropuesta {
                 String nickProp = rs.getString("nickprop");
                 SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
-                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio, fechaPub, montoTotal, categoria);
+                Propuesta p=new Propuesta(titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp);
                 lista.put(titulo, p);
             }
             rs.close();
