@@ -36,23 +36,21 @@ public class DBPropuesta {
     public boolean agregarPropuesta(Propuesta p) throws SQLException{
    
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,ImagenUrl,TipoRetorno,MontoTotal,categoria,nickprop, lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            Date fechaC = p.getFecha();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fecha = sdf.format(fechaC);
-            statement.setString(3, fecha);
+            statement.setString(3, p.getFecha());
          //   statement.setInt(3, p.get);
        //    statement.setString(5, "1999-12-12");
             statement.setInt(4, p.getPrecioE());
             statement.setInt(5, 0);
-            statement.setDate(6, sqlDate);
+            statement.setString(6, p.getFechaPub());
             statement.setString(7, p.getImg()); 
              statement.setString(8, String.valueOf(p.getTipoRetorno()));
             statement.setInt(9, p.getMontoTotal());
             statement.setString(10, p.getCate());
             statement.setString(11, p.getProp());
+            statement.setString(12, p.getLugar());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -72,35 +70,36 @@ public class DBPropuesta {
 //        }        
 //    }    
 //    
-    public Map<String, Propuesta> cargarPropuestas(){
-        try {
-            Map<String, Propuesta> lista = new HashMap<String, Propuesta>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");          
-            ResultSet rs=st.executeQuery();
-            while (rs.next()){
-                String titulo = rs.getString("titulo");
-                String descripcion = rs.getString("descripcion");
-                Date fechita = rs.getDate("Fecha");
-                int precio = rs.getInt("precio");
-                int montoActual = rs.getInt("montoactual");
-                Date fechaPub = rs.getDate("fechapub");
-                String url = rs.getString("imagenurl");
-                String tipoRetorno = rs.getString("tiporetorno");
-                int montoTotal = rs.getInt("montototal");
-                String categoria = rs.getString("Categoria");
-                String nickProp = rs.getString("nickprop");
-                SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
-                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio, da2.format(fechaPub), montoTotal, categoria);
-                lista.put(titulo, p);
-            }
-            rs.close();
-            st.close();
-            return lista;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }        
-    }    
+//    public Map<String, Propuesta> cargarPropuestas(){
+//        try {
+//            Map<String, Propuesta> lista = new HashMap<String, Propuesta>();
+//            PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");          
+//            ResultSet rs=st.executeQuery();
+//            while (rs.next()){
+//                String titulo = rs.getString("titulo");
+//                String descripcion = rs.getString("descripcion");
+//                Date fechita = rs.getDate("Fecha");
+//                int precio = rs.getInt("precio");
+//                int montoActual = rs.getInt("montoactual");
+//                Date fechaPub = rs.getDate("fechapub");
+//                String url = rs.getString("imagenurl");
+//                String tipoRetorno = rs.getString("tiporetorno");
+//                int montoTotal = rs.getInt("montototal");
+//                String categoria = rs.getString("Categoria");
+//                String nickProp = rs.getString("nickprop");
+//                String lugar=rs.getString("lugar");
+//                SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
+//                SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
+//                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio, fechaPub, montoTotal, categoria, lugar);
+//                lista.put(titulo, p);
+//            }
+//            rs.close();
+//            st.close();
+//            return lista;
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }        
+//    }    
     
 }

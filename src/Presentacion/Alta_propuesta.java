@@ -22,6 +22,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -295,6 +296,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jDate.setDateFormatString("yyyy/MM/dd");
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -429,14 +432,19 @@ public static String getHoraActual() {
 }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
         
-       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
+       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd hh:mm");
        SimpleDateFormat das = new SimpleDateFormat("yyyy-MM-dd");
        String hora = getHoraActual();
+       String fecha = da.format(jDate.getDate());
+       String [] aux = fecha.split(" ");
+       String fechita = aux[0];
          javax.swing.JOptionPane.showMessageDialog(null, hora + (String) jProp.getSelectedItem());
 //(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img,String nickP)
         Estado estA = new Estado(Testado.ingresada);
+        String estado = estA.toString();
         String TRetorno= jR1.getText() + " " + jR2.getText();
-boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,da.format(jDate.getDate()),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
+boolean ok;
+         ok = IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), fecha, Integer.parseInt(jPrecioE.getText()),0,fecha,"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estado,urlimagen.getText(),(String) jProp.getSelectedItem(), jLugar.getText());
        if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
 

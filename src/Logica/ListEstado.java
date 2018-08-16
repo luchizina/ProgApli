@@ -17,39 +17,39 @@ import java.util.Date;
 public class ListEstado {
     private
             
-            Date fecha;
-            Time hora;
-            Estado est;
+            String fecha;
+            String hora;
+            String est;
 
-    public ListEstado(Date fecha, Time hora, Estado est) {
+    public ListEstado(String fecha, String hora, String est) {
         this.fecha = fecha;
         this.hora = hora;
         this.est = est;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Time getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
 
 
-    public Estado getEst() {
+    public String getEst() {
         return est;
     }
 
-    public void setEst(Estado est) {
+    public void setEst(String est) {
         this.est = est;
     }
             

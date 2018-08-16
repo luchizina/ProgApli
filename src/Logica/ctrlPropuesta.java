@@ -57,7 +57,7 @@ public static ctrlPropuesta getInstance(){
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
-    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
+    public boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, String estActual, String img,String nickP, String lugar) {
         if (this.propuestas.get(titulo)!=null){
             return false;
         }else{
@@ -79,9 +79,12 @@ public static ctrlPropuesta getInstance(){
 
                 }
                 //String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, Tretorno tipoRetorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img)
-                Propuesta pe = new Propuesta(titulo,desc,fecha,  precioE,montoActual, fechaPub,Retorno, montoTotal, cate,estActual,img);
-                pe.setProp(nickP);
-                pe.setEstActual(estActual);
+                String [] lala = fechaPub.split(" ");
+                String fechita = lala[0];
+                String hora = lala[1];
+                Propuesta pe = new Propuesta(titulo,desc,fechita,  precioE,montoActual, fechita,Retorno, montoTotal, cate,img, lugar);
+//                pe.setProp(nickP);
+//                pe.setEstActual(estActual);
                 
                 boolean res= this.dbPropuesta.agregarPropuesta(pe);  
                 if (res){
@@ -91,19 +94,21 @@ public static ctrlPropuesta getInstance(){
                     this.propuestas.put(titulo, pe);
                     pe.setCate(cate);
                     
-                    java.sql.Time fecFormatoTime = null;
-                    try {
-                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
-                        fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
-                        System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
-                    } catch (ParseException ex) {
-                        System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
-                    }
-                    Date fec = fecha(fechaPub);
-                    ListEstado est = new ListEstado(fec,fecFormatoTime, estActual);
+//                    java.sql.Time fecFormatoTime = null;
+//                    try {
+//                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+//                        fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
+//                        System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
+//                    } catch (ParseException ex) {
+//                        System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+//                    }
+//                    Date fec = fecha(fechaPub);
+                    String estado = estActual.toString();
+                    ListEstado est = new ListEstado(fechita, hora, estado);
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
-                   boolean Est =  this.dbE.agregarEstado(est, titulo);
+                   boolean Est = this.dbE.agregarEstado(est, titulo);
                     if(Est){
+//                        pe.getListaDeEstados().put(est, est);
                     }
                     else{
                         System.out.println("Lo hace mal!!!");
@@ -154,10 +159,15 @@ public static ctrlPropuesta getInstance(){
             return false;
         }
     }
-          
-    public void cargarPropuestas()
-    {
-        this.propuestas = this.dbPropuesta.cargarPropuestas();
+//          
+//    public void cargarPropuestas()
+//    {
+//        this.propuestas = this.dbPropuesta.cargarPropuestas();
+//    }
+
+    @Override
+    public void cargarPropuestas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     }
