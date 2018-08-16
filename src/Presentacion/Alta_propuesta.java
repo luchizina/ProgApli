@@ -454,20 +454,22 @@ boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate
     }//GEN-LAST:event_jCategActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-              if(evt.getSource()==jButton1){
-        JFileChooser j = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
-        j.setFileFilter(filtro);
-        int ap = j.showOpenDialog(this);
-        if(ap == JFileChooser.APPROVE_OPTION){
-            File file = j.getSelectedFile();
-            String ruta = file.getPath();
-            this.urlimagen.setText(ruta);
-            ImageIcon imagen3 = new ImageIcon(ruta);
-            Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.img.getWidth(), this.img.getHeight(), Image.SCALE_DEFAULT));
-            this.img.setIcon(icono);
-            this.pack();
-        }
+        if (evt.getSource() == jButton1) {
+            JFileChooser j = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
+            j.setFileFilter(filtro);
+            int ap = j.showOpenDialog(this);
+            if (ap == JFileChooser.APPROVE_OPTION) {
+                File file = j.getSelectedFile();
+                String ruta = file.getPath();
+                this.urlimagen.setText(ruta);
+                ImageIcon imagen3 = new ImageIcon(ruta);
+                Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.img.getWidth(), this.img.getHeight(), Image.SCALE_DEFAULT));
+                this.img.setIcon(icono);
+                this.pack();
+
+            }
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
