@@ -18,16 +18,29 @@ public class DtCategoria {
             String padre;
              Map<String,Categoria> hijos;
             
-            public DtCategoria(String nombre, String padre){
+            public DtCategoria(String nombre, String padre, Map<String,Categoria> hijos){
                 this.nombre=nombre;
                 this.padre=padre;
+                this.hijos=hijos;
             }
             
+            public DtCategoria(String nombre, String padre){
+                this.nombre= nombre;
+                this.padre=padre;
+            }
+
+    public DtCategoria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
             public String getNombre(){
                 return this.nombre;
                            }
             
             public String getPadre(){
                 return this.padre;
+            }
+            
+            public Map<String,Categoria> getHijos(){
+                return this.hijos;
             }
 }

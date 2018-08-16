@@ -19,12 +19,14 @@ import java.text.ParseException;
 import java.util.HashMap;
 //import Persistencia.DBPersona;
 import java.util.Map;
+import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Iterator;
 /**
  *
  * @author Luchi
@@ -57,7 +59,7 @@ public static ctrlPropuesta getInstance(){
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
-    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
+    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
         if (this.propuestas.get(titulo)!=null){
             return false;
         }else{
@@ -99,8 +101,8 @@ public static ctrlPropuesta getInstance(){
                     } catch (ParseException ex) {
                         System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
                     }
-                    Date fec = fecha(fechaPub);
-                    ListEstado est = new ListEstado(fec,fecFormatoTime, estActual);
+//                    Date fec = fecha(fechaPub);
+                    ListEstado est = new ListEstado(fechaPub,fecFormatoTime, estActual);
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
                    boolean Est =  this.dbE.agregarEstado(est, titulo);
                     if(Est){
@@ -158,6 +160,20 @@ public static ctrlPropuesta getInstance(){
     public void cargarPropuestas()
     {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+    }
+    
+    public Map<String, DtPropuesta> listarPropuestas()
+    {
+        Map<String, DtPropuesta> listita = new HashMap<>();
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while(iteradorsito.hasNext())
+        {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            listita.put(aux.getTitulo(), aux.obtenerInfo());
+        }
+        return listita;
     }
     
     }

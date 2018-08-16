@@ -26,6 +26,12 @@ public class Categoria {
         this.nombre=nombre;
         this.padre=padre;
     }
+    
+    public Categoria(String nombre, String padre, Map<String, Categoria> hijos){
+        this.nombre=nombre;
+        this.padre=padre;
+        this.hijos=hijos;
+    }
 
     public String getNombre() {
         return nombre;
@@ -51,7 +57,7 @@ public class Categoria {
     }
     
     public DtCategoria obtenerInfo(){
-        return new DtCategoria(nombre,padre);
+        return new DtCategoria(nombre,padre, hijos);
     }
             
             

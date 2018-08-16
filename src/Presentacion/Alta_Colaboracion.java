@@ -13,6 +13,11 @@ import Logica.IUsuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import Logica.DtPropuesta;
 import javax.swing.JInternalFrame;
 
 /**
@@ -33,7 +38,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
        initComponents();
        this.IP = Ip;
        this.iUsu = iUsu;
-       cargar();
+       cargarColab();
     }
 
     /**
@@ -393,8 +398,9 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tRetornos;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
-public void cargar(){
+public void cargarColab(){
     this.IP.cargarPropuestas();
+    Map<String, DtPropuesta> listita = this.IP.listarPropuestas();
 }
     
     
