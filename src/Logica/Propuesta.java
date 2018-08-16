@@ -7,6 +7,7 @@ package Logica;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Propuesta {
            Date fecha;
             int precioE;
             int montoActual;
-            String fechaPub;
+            Date fechaPub;
             String tipoRetorno;
             int montoTotal;
             Categoria cat;
@@ -27,13 +28,16 @@ public class Propuesta {
             Estado estActual;
             ListEstado listaEstados;
             String img;
+            String lugar;
             String Prop;
+            List<Colaboracion> colaboraciones;
             private Map<Testado, ListEstado> listaDeEstados;
+            
 public Propuesta(){
 
 }
 
-public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img) {
+public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -56,7 +60,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public String getProp() {
         return Prop;
     }
-     public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate) {
+     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -67,7 +71,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         
     }
 
-    public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate, String img) {
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -155,6 +159,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     
     public DtPropuesta obtenerInfo() 
     {
+//        DtPropuesta retorno = new DtPropuesta(Dt);
         return null;
     }
     
@@ -182,11 +187,11 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
    
    
 
-    public String getFechaPub() {
+    public Date getFechaPub() {
         return fechaPub;
     }
 
-    public void setFechaPub(String fechaPub) {
+    public void setFechaPub(Date fechaPub) {
         this.fechaPub = fechaPub;
     }
 
@@ -214,4 +219,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.listaEstados = listaEstados;
     }
     
+    public String getLugar()
+    {
+        return lugar;
+    }
 }

@@ -436,7 +436,7 @@ public static String getHoraActual() {
 //(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img,String nickP)
         Estado estA = new Estado(Testado.ingresada);
         String TRetorno= jR1.getText() + " " + jR2.getText();
-boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,da.format(jDate.getDate()),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
+boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
        if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
 
