@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,12 +29,19 @@ public class DBListEstado {
     public boolean agregarEstado(ListEstado p, String t){
         try {
             
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO ListEstado "
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
                     + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
-            statement.setDate(1, (java.sql.Date) p.getFecha());
-            statement.setTime(2, p.getHora());
+            Date fechaC= p.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String fechaSt=sdf.format(fechaC);
+            String [] aux = fechaSt.split(" ");
+            String dia = aux[0];
+            String hora = aux[1];
+            statement.setString(1, dia);
+//            Time horita = new Time(p.getHora().getHours(), p.getHora().getMinutes(), p.getHora().getSeconds());
+            statement.setString(2, hora);
             statement.setString(3, t);
-            statement.setString(4,  p.getEst().toString());
+            statement.setString(4,  String.valueOf(p.getEst()));
             statement.executeUpdate();
             statement.close();
             return true;
