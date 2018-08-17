@@ -36,6 +36,7 @@ public class ctrlUsuario implements IUsuario {
      private static ctrlUsuario instancia;
      private Map<String, Usuario> usuarios;
      private Map<String, Proponente> Proponentes;
+     private Map<String, Colaborador> colaboradores;
      private DBusuario usu=null;
    
 public static ctrlUsuario getInstance(){
@@ -145,7 +146,10 @@ private ctrlUsuario(){
     this.Proponentes=this.usu.cargarProponentes();
     }
     
-    
+    public void cargarColaboradores()
+    {
+        this.colaboradores = this.usu.cargarColaboradores();
+    }
      @Override
     public List<DtProponente> listarUsuario()
       {
@@ -160,6 +164,20 @@ private ctrlUsuario(){
             }       
         return retorna;
       }
+    
+    public List<DtColaborador> listarColaboradores()
+    {
+        List<DtColaborador> listita = new ArrayList<>();
+        Set se = colaboradores.entrySet();
+        Iterator iterator = se.iterator();
+        while(iterator.hasNext())
+        {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Colaborador aux = (Colaborador) mentry.getValue();
+            listita.add(aux.obtenerInfo());
+        }
+        return listita;
+    }
 
 //    long ini = System.currentTimeMillis();
 //    InputStream fuente = null;
