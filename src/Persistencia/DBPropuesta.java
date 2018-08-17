@@ -36,25 +36,23 @@ public class DBPropuesta {
     public boolean agregarPropuesta(Propuesta p) throws SQLException{
    
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,ImagenUrl,TipoRetorno,MontoTotal,categoria,nickprop, lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            Date fechaC= p.getFecha();
+            Date fechaC = p.getFecha();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSt=sdf.format(fechaC);
-            statement.setString(3, fechaSt);
+            String fecha = sdf.format(fechaC);
+            statement.setString(3, fecha);
          //   statement.setInt(3, p.get);
        //    statement.setString(5, "1999-12-12");
-            String fechapub = sdf.format(p.getFechaPub());
             statement.setInt(4, p.getPrecioE());
             statement.setInt(5, 0);
-            statement.setString(6, fechapub);
+            statement.setDate(6, sqlDate);
             statement.setString(7, p.getImg()); 
              statement.setString(8, String.valueOf(p.getTipoRetorno()));
             statement.setInt(9, p.getMontoTotal());
             statement.setString(10, p.getCate());
             statement.setString(11, p.getProp());
-            statement.setString(12, p.getLugar());
             statement.executeUpdate();
             statement.close();
             return true;

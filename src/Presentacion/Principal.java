@@ -31,8 +31,7 @@ public class Principal extends javax.swing.JFrame {
         icat =fabrica.getICtrlCategoria();
         IP=fabrica.getICtrlPropuesta();
         iUsu=fabrica.getICtrlUsuario();
-//        fabrica.cargarDatosPrueba();
-//        fabrica.pruebas();
+
     }
 
     /**
