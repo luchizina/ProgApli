@@ -20,7 +20,11 @@ public interface IUsuario {
     public abstract boolean existeCorreo(String correo);
     public abstract void cargarProponentes();
     public abstract void cargarColaboradores();
+    public abstract void limpiarUsuarios();
     public abstract boolean existe(String nick, String correo);
      public abstract List<DtProponente> listarUsuario();
+     public abstract void cargarUsuarios();
+     public abstract void cargarPropPrueba();
+     public abstract boolean copia(String origen, String destino);
 
 }
