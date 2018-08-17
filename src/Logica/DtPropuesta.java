@@ -8,6 +8,7 @@ package Logica;
 
 import Logica.*;
 import java.util.Map;
+import java.util.Date;
 
 /**
  *
@@ -18,17 +19,29 @@ public class DtPropuesta{
             String titulo;
             String desc;
             String img;
-            DtFecha fecha;
+            Date fecha;
             String lugar;
             int precio;
             int montoActual;
             int montoTotal;
-            DtFecha fechaPub;
+            Date fechaPub;
              Map<String, DtColaborador> colaboradores;
              DtProponente propoACargo;
              String estActual;
+       
 
-   
-             
-          
+public DtPropuesta(Propuesta p)
+{
+    this.titulo = p.getTitulo();
+    this.desc = p.getDesc();
+    this.img = p.getImg();
+    this.fecha = p.getFecha();
+    this.lugar = p.getLugar();
+    this.precio = p.getPrecioE();
+    this.montoActual = p.getMontoActual();
+    this.montoTotal = p.getMontoTotal();
+    this.fechaPub = p.getFechaPub();
+    
+}
+
 }

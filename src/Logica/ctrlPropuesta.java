@@ -15,16 +15,20 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.HashMap;
 //import Persistencia.DBPersona;
 import java.util.Map;
+import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Iterator;
 /**
  *
  * @author Luchi
@@ -57,7 +61,7 @@ public static ctrlPropuesta getInstance(){
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
-    public boolean AgregarPropuesta(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, String estActual, String img,String nickP, String lugar) {
+    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
         if (this.propuestas.get(titulo)!=null){
             return false;
         }else{
@@ -79,12 +83,9 @@ public static ctrlPropuesta getInstance(){
 
                 }
                 //String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, Tretorno tipoRetorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img)
-                String [] lala = fechaPub.split(" ");
-                String fechita = lala[0];
-                String hora = lala[1];
-                Propuesta pe = new Propuesta(titulo,desc,fechita,  precioE,montoActual, fechita,Retorno, montoTotal, cate,img, lugar);
-//                pe.setProp(nickP);
-//                pe.setEstActual(estActual);
+                Propuesta pe = new Propuesta(titulo,desc,fecha,  precioE,montoActual, fechaPub,Retorno, montoTotal, cate,estActual,img);
+                pe.setProp(nickP);
+                pe.setEstActual(estActual);
                 
                 boolean res= this.dbPropuesta.agregarPropuesta(pe);  
                 if (res){
@@ -94,21 +95,19 @@ public static ctrlPropuesta getInstance(){
                     this.propuestas.put(titulo, pe);
                     pe.setCate(cate);
                     
-//                    java.sql.Time fecFormatoTime = null;
-//                    try {
-//                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
-//                        fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
-//                        System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
-//                    } catch (ParseException ex) {
-//                        System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
-//                    }
+                    java.sql.Time fecFormatoTime = null;
+                    try {
+                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+                        fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
+                        System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
+                    } catch (ParseException ex) {
+                        System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+                    }
 //                    Date fec = fecha(fechaPub);
-                    String estado = estActual.toString();
-                    ListEstado est = new ListEstado(fechita, hora, estado);
+                    ListEstado est = new ListEstado(fechaPub,fecFormatoTime, estActual);
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
-                   boolean Est = this.dbE.agregarEstado(est, titulo);
+                   boolean Est =  this.dbE.agregarEstado(est, titulo);
                     if(Est){
-//                        pe.getListaDeEstados().put(est, est);
                     }
                     else{
                         System.out.println("Lo hace mal!!!");
@@ -159,16 +158,32 @@ public static ctrlPropuesta getInstance(){
             return false;
         }
     }
-//          
-//    public void cargarPropuestas()
-//    {
-//        this.propuestas = this.dbPropuesta.cargarPropuestas();
-//    }
-
-    @Override
-    public void cargarPropuestas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          
+    public void cargarPropuestas()
+    {
+        this.propuestas = this.dbPropuesta.cargarPropuestas();
     }
     
+         @Override
+    public List<DtPropuesta> listarPropuestas()
+    {
+        List<DtPropuesta> listita = new ArrayList<>();
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while(iteradorsito.hasNext())
+        {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            listita.add(aux.obtenerInfo());
+        }
+        return listita;
     }
-
+    
+    
+    public DtPropuesta traerPropuesta(String titulo)
+    {
+        Propuesta p = (Propuesta) this.propuestas.get(titulo);
+        DtPropuesta q = new DtPropuesta(p);
+        return q;
+    }
+}

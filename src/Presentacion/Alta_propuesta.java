@@ -432,25 +432,21 @@ public static String getHoraActual() {
 }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
         
-       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+       
+       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
        SimpleDateFormat das = new SimpleDateFormat("yyyy-MM-dd");
        String hora = getHoraActual();
-       String fecha = da.format(jDate.getDate());
-       String [] aux = fecha.split(" ");
-       String fechita = aux[0];
          javax.swing.JOptionPane.showMessageDialog(null, hora + (String) jProp.getSelectedItem());
 //(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img,String nickP)
         Estado estA = new Estado(Testado.ingresada);
-        String estado = estA.toString();
         String TRetorno= jR1.getText() + " " + jR2.getText();
-boolean ok;
-         ok = IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), fecha, Integer.parseInt(jPrecioE.getText()),0,fecha,"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estado,urlimagen.getText(),(String) jProp.getSelectedItem(), jLugar.getText());
+boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
        if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
 
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la persona o la persona ya existe");
-        }
+}
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed

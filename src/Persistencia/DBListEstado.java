@@ -31,12 +31,17 @@ public class DBListEstado {
             
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
                     + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
-
-            statement.setString(1, p.getFecha());
+            Date fechaC= p.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String fechaSt=sdf.format(fechaC);
+            String [] aux = fechaSt.split(" ");
+            String dia = aux[0];
+            String hora = aux[1];
+            statement.setString(1, dia);
 //            Time horita = new Time(p.getHora().getHours(), p.getHora().getMinutes(), p.getHora().getSeconds());
-            statement.setString(2, p.getHora());
+            statement.setString(2, hora);
             statement.setString(3, t);
-            statement.setString(4,  p.getEst());
+            statement.setString(4,  String.valueOf(p.getEst()));
             statement.executeUpdate();
             statement.close();
             return true;
