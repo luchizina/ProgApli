@@ -25,9 +25,10 @@ public class DtPropuesta{
             int montoActual;
             int montoTotal;
             Date fechaPub;
+            String tRetornos;
              Map<String, DtColaborador> colaboradores;
-             DtProponente propoACargo;
-             String estActual;
+             String propoACargo;
+             Estado estActual;
        
 
 public DtPropuesta(Propuesta p)
@@ -41,7 +42,70 @@ public DtPropuesta(Propuesta p)
     this.montoActual = p.getMontoActual();
     this.montoTotal = p.getMontoTotal();
     this.fechaPub = p.getFechaPub();
-    
+    this.tRetornos = p.getTipoRetorno();
+    this.colaboradores = p.listarColaboradores();
+    this.propoACargo = p.getProp();
+    this.estActual = p.getEstActual();
+}
+
+public String getTitulo()
+{
+    return titulo;
+}
+
+public String getDescripcion()
+{
+    return desc;
+}
+
+public String getImg()
+{
+    return img;
+}
+
+public Date getFecha()
+{
+    return fecha;
+}
+
+public String getLugar()
+{
+    return lugar;
+}
+
+public int getPrecio()
+{
+    return precio;
+}
+
+public int getMontoActual()
+{
+    return montoActual;
+}
+
+public int getMontototal()
+{
+    return montoTotal;
+}
+
+public Date getFechaPub()
+{
+    return fechaPub;
+}
+
+public String getPropo()
+{
+    return propoACargo;
+}
+
+public Estado getEstActual()
+{
+    return estActual;
+}
+
+public String getTRetornos()
+{
+    return tRetornos;
 }
 
 }

@@ -25,6 +25,8 @@ import java.util.Set;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,6 +38,7 @@ public class ctrlUsuario implements IUsuario {
      private static ctrlUsuario instancia;
      private Map<String, Usuario> usuarios;
      private Map<String, Proponente> Proponentes;
+     private Map<String, Colaborador> Colaboradores;
      private DBusuario usu=null;
    
 public static ctrlUsuario getInstance(){
@@ -48,7 +51,8 @@ public static ctrlUsuario getInstance(){
 
 private ctrlUsuario(){
     this.usuarios=new HashMap<String, Usuario>();
-
+    this.Proponentes=new HashMap<String, Proponente>();
+    this.Colaboradores=new HashMap<String, Colaborador>();
     this.usu=new DBusuario();
 }
 
@@ -112,7 +116,7 @@ private ctrlUsuario(){
         }
     }
 
-    
+    @Override
     public boolean existe(String nick, String correo){
         for(Usuario usu : this.usuarios.values()){
             if(usu.getNick().equals(nick)){
@@ -140,10 +144,15 @@ private ctrlUsuario(){
     }
 
 
-    
+     @Override
     public void cargarProponentes(){
     this.Proponentes=this.usu.cargarProponentes();
     }
+    
+     @Override
+     public void cargarColaboradores(){
+         this.Colaboradores=this.usu.cargarColaboradores();
+     }
     
     
      @Override
@@ -160,6 +169,52 @@ private ctrlUsuario(){
             }       
         return retorna;
       }
+    
+    @Override
+    public boolean escorreo(String correo) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+        if (mat.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean existeNick(String nick){
+        for(Colaborador usu : this.Colaboradores.values()){
+            if(usu.getNick().equals(nick)){
+                return false;
+            }
+        }
+        
+        for(Proponente p : this.Proponentes.values()){
+            if(p.getNick().equals(nick)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
+     @Override
+    public boolean existeCorreo(String correo){
+        for(Colaborador usu : this.Colaboradores.values()){
+            if(usu.getCorreo().equals(correo)){
+                return false;
+            }
+        }
+        
+        for(Proponente p : this.Proponentes.values()){
+            if(p.getCorreo().equals(correo)){
+                return false;
+            }
+        }
+        return true;
+    }
 
 //    long ini = System.currentTimeMillis();
 //    InputStream fuente = null;

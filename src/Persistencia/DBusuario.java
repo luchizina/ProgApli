@@ -84,8 +84,8 @@ public class DBusuario {
             PreparedStatement st = conexion.prepareStatement("SELECT * FROM proponente");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){
-                String nick = rs.getString("nickP");
-                Proponente p=new Proponente(nick);
+                String nick = rs.getString("NickP");
+                Proponente p=new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente");
                 lista.put(nick, p);
             }
             rs.close();
@@ -95,5 +95,23 @@ public class DBusuario {
             ex.printStackTrace();
             return null;
         }        
-    }    
+    } 
+        public Map<String,Colaborador> cargarColaboradores(){
+        try {
+            Map<String, Colaborador> lista = new HashMap<String, Colaborador>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador");          
+            ResultSet rs=st.executeQuery();
+            while (rs.next()){
+                String nick = rs.getString("NickC");
+                Colaborador p=new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador");
+                lista.put(nick, p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }        
+    }
 }

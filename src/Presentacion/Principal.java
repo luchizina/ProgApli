@@ -31,7 +31,8 @@ public class Principal extends javax.swing.JFrame {
         icat =fabrica.getICtrlCategoria();
         IP=fabrica.getICtrlPropuesta();
         iUsu=fabrica.getICtrlUsuario();
-
+//        fabrica.cargarDatosPrueba();
+//        fabrica.pruebas();
     }
 
     /**
@@ -462,7 +463,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:
+       Alta_Colaboracion cola = new Alta_Colaboracion(IP, iUsu);
+       jp.add(cola);
+       cola.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed

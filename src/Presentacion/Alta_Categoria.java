@@ -32,6 +32,9 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     public Alta_Categoria() {
         initComponents();
     }
+
+    
+    
     
     public boolean tieneEsteHijo(DefaultMutableTreeNode nodo, String padre) {
         // cmbCategorias.addItem(nodo.toString());
@@ -252,6 +255,24 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
 
         cmbCategorias.setEnabled(false);
 
+        jLabel4.setText("tiene padre?");
+
+        rBtnSi.setText("Si");
+        rBtnSi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBtnSiActionPerformed(evt);
+            }
+        });
+
+        rBtnNo.setText("No");
+        rBtnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBtnNoActionPerformed(evt);
+            }
+        });
+
+        cmbCategorias.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -321,7 +342,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(231, 231, 231)
+                .addGap(111, 111, 111)
                 .addComponent(jLabel1)
                 .addContainerGap(209, Short.MAX_VALUE))
         );
@@ -331,7 +352,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(209, 209, 209))
         );
 
         pack();
@@ -406,7 +427,6 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rBtnNo;
     private javax.swing.JRadioButton rBtnSi;
     private javax.swing.JTextField txtNombre;
