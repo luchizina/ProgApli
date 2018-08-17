@@ -74,7 +74,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         
     }
      
-     public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp)
+     public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
      {
          this.titulo = titulo;
          this.desc = descripcion;
@@ -86,6 +86,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          this.montoTotal = montoTotal;
          this.cate = categoria;
          this.Prop = nickProp;
+         this.precioE = precioE;
          this.colaboraciones = new ArrayList<>();
          this.listaDeEstados = new HashMap<>();
          
