@@ -18,5 +18,6 @@ public interface IUsuario {
 
     public abstract void cargarProponentes();
      public abstract List<DtProponente> listarUsuario();
-
+     public abstract void cargarColaboradores();
+     public abstract List<DtColaborador> listarColaboradores();
 }
