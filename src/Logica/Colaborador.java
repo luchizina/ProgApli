@@ -25,7 +25,7 @@ public class Colaborador extends Usuario {
         this.colHechas = colHechas;
     }
 
-    Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
+    public Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
        super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
     }
 
@@ -40,6 +40,10 @@ public class Colaborador extends Usuario {
         this.colHechas = colHechas;
     }
     
+    public DtColaborador obtenerInfo()
+    {
+        return new DtColaborador(this.nick, this.nombre, this.Apellido, this.Correo, this.fecha, this.img);
+    }
     
     
 }
