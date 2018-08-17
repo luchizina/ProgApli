@@ -46,6 +46,7 @@ public static ctrlPropuesta getInstance(){
         //this.personas=new ArrayList<Persona>();
         this.propuestas=new HashMap<String, Propuesta>();
          this.dbPropuesta=new DBPropuesta();
+         this.dbE= new DBListEstado();
         //this.dbPersona=new DBPersona();
     }
     public Map<String, Propuesta> getPropuestas() {
@@ -57,11 +58,11 @@ public static ctrlPropuesta getInstance(){
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
-    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora) {
+         @Override
+    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora,String Lugar) {
         if (this.propuestas.get(titulo)!=null){
             return false;
         }else{
-           
             try {
                 if(img.equals("")==false){
                     String[] aux = img.split("\\.");
@@ -78,12 +79,15 @@ public static ctrlPropuesta getInstance(){
                     }
 
                 }
-                //String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, Tretorno tipoRetorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img)
-                Propuesta pe = new Propuesta(titulo,desc,fecha,  precioE,montoActual, fechaPub,Retorno, montoTotal, cate,estActual,img);
+                //  public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String Lugar) {
+    
+                Propuesta pe;
+                pe = new Propuesta(titulo,desc,fecha,  precioE,montoActual, fechaPub,Retorno, montoTotal, cate,estActual,img,Lugar);
                 pe.setProp(nickP);
                 pe.setEstActual(estActual);
                 
-                boolean res= this.dbPropuesta.agregarPropuesta(pe);  
+                boolean res;
+                res = this.dbPropuesta.agregarPropuesta(pe);
                 if (res){
                     
                     //Colección genérica común
@@ -99,22 +103,29 @@ public static ctrlPropuesta getInstance(){
                     } catch (ParseException ex) {
                         System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
                     }
-                    Date fec = fecha(fechaPub);
-                    ListEstado est = new ListEstado(fec,fecFormatoTime, estActual);
+                    ListEstado est = new ListEstado(fechaPub,fecFormatoTime, Testado.ingresada) ;
+                    System.out.println(est.getEst().toString() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
-                   boolean Est =  this.dbE.agregarEstado(est, titulo);
+                  
+                    boolean Est =  this.dbE.agregarEstado(est, titulo);
                     if(Est){
+                        System.out.println("Lo hace bien!!!");
                     }
                     else{
                         System.out.println("Lo hace mal!!!");
                     }
                     return res;
-                }   } catch (SQLException ex) {  
+                    
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
                 Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-             return false;
-    }
+    }        return false;
+}
+        
         
        private String getCurrentTime() {    
     SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmss");

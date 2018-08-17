@@ -221,6 +221,8 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         cmbCategorias = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jScrollPane1.setViewportView(arbolito);
 
         jLabel2.setText("Ingresar nueva categoría");

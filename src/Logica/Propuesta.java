@@ -19,7 +19,7 @@ public class Propuesta {
            Date fecha;
             int precioE;
             int montoActual;
-            String fechaPub;
+            Date fechaPub;
             String tipoRetorno;
             int montoTotal;
             Categoria cat;
@@ -29,11 +29,12 @@ public class Propuesta {
             String img;
             String Prop;
             private Map<Testado, ListEstado> listaDeEstados;
+            String lugar;
 public Propuesta(){
 
 }
 
-public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, String fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img) {
+public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img,String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -45,18 +46,17 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.cat = cat;
         this.cate = cate;
         this.estActual = estActual;
-        
         this.img = img;
         this.Prop = Prop;
         this.listaDeEstados = listaDeEstados;
-        
+        this.lugar = lugar;
     }
 
 
     public String getProp() {
         return Prop;
     }
-     public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate) {
+     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate,String Lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -64,10 +64,10 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.fechaPub = fechaPub;
         this.montoTotal = montoTotal;
         this.cate = cate;
-        
+        this.lugar = Lugar;
     }
 
-    public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate, String img) {
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img,String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -76,6 +76,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoTotal = montoTotal;
         this.cate = cate;
         this.img = img;
+        this.lugar = lugar;
     }
 
     public String getImg() {
@@ -125,6 +126,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoActual = montoActual;
     }
 
+    
     public String getTipoRetorno() {
         return tipoRetorno;
     }
@@ -179,16 +181,15 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.fecha = fecha;
     }
 
-   
-   
-
-    public String getFechaPub() {
+    public Date getFechaPub() {
         return fechaPub;
     }
 
-    public void setFechaPub(String fechaPub) {
+    public void setFechaPub(Date fechaPub) {
         this.fechaPub = fechaPub;
     }
+
+
 
     public String getCate() {
         return cate;
@@ -212,6 +213,14 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
 
     public void setListaEstados(ListEstado listaEstados) {
         this.listaEstados = listaEstados;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
     
 }

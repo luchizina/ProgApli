@@ -19,14 +19,15 @@ public class ListEstado {
             
             Date fecha;
             Time hora;
-            Estado est;
+            Testado est;
 
-    public ListEstado(Date fecha, Time hora, Estado est) {
+    public ListEstado(Date fecha, Time hora, Testado est) {
         this.fecha = fecha;
         this.hora = hora;
         this.est = est;
     }
 
+            
     public Date getFecha() {
         return fecha;
     }
@@ -43,15 +44,12 @@ public class ListEstado {
         this.hora = hora;
     }
 
-
-
-    public Estado getEst() {
+    public Testado getEst() {
         return est;
     }
 
-    public void setEst(Estado est) {
+    public void setEst(Testado est) {
         this.est = est;
     }
-            
-            
+
 }

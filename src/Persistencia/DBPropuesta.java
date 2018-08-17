@@ -33,10 +33,10 @@ public class DBPropuesta {
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarPropuesta(Propuesta p) throws SQLException{
+    public boolean agregarPropuesta(Propuesta p) throws SQLException, ParseException{
    
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop) values(?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop,lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
             Date fechaC = p.getFecha();
@@ -47,12 +47,14 @@ public class DBPropuesta {
        //    statement.setString(5, "1999-12-12");
             statement.setInt(4, p.getPrecioE());
             statement.setInt(5, 0);
-            statement.setDate(6, sqlDate);
+            
+            statement.setString(6,"2018-08-15" );
             statement.setString(7, p.getImg()); 
              statement.setString(8, String.valueOf(p.getTipoRetorno()));
             statement.setInt(9, p.getMontoTotal());
             statement.setString(10, p.getCate());
             statement.setString(11, p.getProp());
+            statement.setString(12, p.getLugar());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -89,9 +91,8 @@ public class DBPropuesta {
                 int montoTotal = rs.getInt("montototal");
                 String categoria = rs.getString("Categoria");
                 String nickProp = rs.getString("nickprop");
-                SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
-                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio, da2.format(fechaPub), montoTotal, categoria);
+                 String lugar = rs.getString("lugar");
+                Propuesta p=new Propuesta(titulo, descripcion, fechita, precio,fechaPub, montoTotal, categoria, lugar);
                 lista.put(titulo, p);
             }
             rs.close();
