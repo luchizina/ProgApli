@@ -164,7 +164,6 @@ public static ctrlPropuesta getInstance(){
         this.propuestas = this.dbPropuesta.cargarPropuestas();
     }
     
-         @Override
     public List<DtPropuesta> listarPropuestas()
     {
         List<DtPropuesta> listita = new ArrayList<>();
@@ -186,4 +185,5 @@ public static ctrlPropuesta getInstance(){
         DtPropuesta q = new DtPropuesta(p);
         return q;
     }
-}
+    }
+

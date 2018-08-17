@@ -18,7 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import Logica.DtPropuesta;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JInternalFrame;
+import javax.swing.table.TableModel;
+import java.text.DateFormat;
 
 /**
  *
@@ -109,6 +112,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        listaProps.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaPropsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaProps);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -136,15 +144,17 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Monto Actual");
 
-        titulo.setText("jTextField1");
+        fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaActionPerformed(evt);
+            }
+        });
 
-        descripcion.setText("jTextField2");
-
-        fecha.setText("jTextField3");
-
-        precioE.setText("jTextField4");
-
-        montoA.setText("jTextField5");
+        precioE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioEActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Fecha de Publicación");
@@ -154,12 +164,6 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Monto a recaudar");
-
-        montoT.setText("jTextField6");
-
-        tRetornos.setText("jTextField7");
-
-        fechaP.setText("jTextField8");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Nick");
@@ -172,14 +176,6 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Correo");
-
-        nick.setText("jTextField9");
-
-        nombre.setText("jTextField10");
-
-        apellido.setText("jTextField11");
-
-        correo.setText("jTextField12");
 
         imagenProp.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -227,7 +223,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                             .addComponent(nombre)
                             .addComponent(apellido)
                             .addComponent(correo))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -237,22 +233,22 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7))
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(montoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(precioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                            .addComponent(titulo)
+                            .addComponent(descripcion)
+                            .addComponent(fecha)
+                            .addComponent(precioE)
+                            .addComponent(montoA))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(montoT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tRetornos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(85, 85, 85))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(montoT, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(tRetornos)
+                            .addComponent(fechaP))))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,7 +271,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jRadioButton2)))
                             .addComponent(jLabel15))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +290,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(tRetornos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -359,6 +355,31 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void precioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioEActionPerformed
+
+    private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechaActionPerformed
+
+    private void listaPropsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPropsMouseClicked
+        // TODO add your handling code here:
+        int index = listaProps.getSelectedRow();
+        TableModel model = listaProps.getModel();
+        String f = (String) model.getValueAt(index, 0);
+        DtPropuesta p = IP.traerPropuesta(f);
+        titulo.setText(p.getTitulo());
+        descripcion.setText(p.getDescripcion());
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        fecha.setText(df.format(p.getFecha()));
+        precioE.setText(Integer.toString(p.getPrecio()));
+        montoA.setText(Integer.toString(p.getMontoActual()));
+        montoT.setText(Integer.toString(p.getMontototal()));
+        tRetornos.setText(p.getTRetornos());
+        fechaP.setText(df.format(p.getFechaPub()));
+    }//GEN-LAST:event_listaPropsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
@@ -400,7 +421,15 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 public void cargarColab(){
     this.IP.cargarPropuestas();
-    Map<String, DtPropuesta> listita = this.IP.listarPropuestas();
+    List<DtPropuesta> listita = this.IP.listarPropuestas();
+    DefaultTableModel model = (DefaultTableModel) listaProps.getModel();
+    model.setRowCount(0);
+    for(int i = 0; i < listita.size(); i++)
+    {
+        DtPropuesta p = (DtPropuesta) listita.get(i);
+        Object[] dat={p.getTitulo(), p.getPropo()};
+        model.addRow(dat);
+    }
 }
     
     
