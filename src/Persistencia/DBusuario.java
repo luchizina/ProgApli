@@ -117,6 +117,7 @@ public class DBusuario {
         }
       }
       
+      /*
       public void cargarProponentesPrueba(){
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
@@ -176,7 +177,7 @@ public class DBusuario {
         }
           
       }
-      
+      */
       
         public Map<String,Usuario> cargarColaboradores(){
         try {

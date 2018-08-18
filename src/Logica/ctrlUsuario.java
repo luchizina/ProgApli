@@ -158,7 +158,7 @@ private ctrlUsuario(){
     
      @Override
     public void cargarPropPrueba(){
-        this.usu.cargarProponentesPrueba();
+//        this.usu.cargarProponentesPrueba();
     }
     
      @Override
@@ -248,25 +248,46 @@ private ctrlUsuario(){
              //Proponentes
              SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
              Date hrubino = sd.parse("1962-02-25");
-             this.altaProponente("hrubino", "horacio.rubino@guambia.com.uy", "Horacio", "Rubino", hrubino, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hr.JPG", "18 de Julio 1234", " ", "https://twitter.com/horaciorubino", "Proponente");
+             this.altaProponente("hrubino", "horacio.rubino@guambia.com.uy", "Horacio", "Rubino", hrubino, "Prueba\\Proponente\\hr.JPG", "18 de Julio 1234", " ", "https://twitter.com/horaciorubino", "Proponente");
              Date mb = sd.parse("1972-06-14");
-             this.altaProponente("mbusca", "Martin.bus@agadu.org.uy", "Martín", "Buscaglia", mb, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\mb.jpg", "Colonia 4321", " ", "http://www.martinbuscaglia.com/", "Proponente");
+             this.altaProponente("mbusca", "Martin.bus@agadu.org.uy", "Martín", "Buscaglia", mb, "Prueba\\Proponente\\mb.jpg", "Colonia 4321", " ", "http://www.martinbuscaglia.com/", "Proponente");
              Date hg = sd.parse("1954-01-07");
-             this.altaProponente("hectorg", "hector.gui@elgalpon.org.uy", "Héctor", "Guido", hg, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hg.jpg", "Gral. Flores 5645", "", "", "Proponente");
+             this.altaProponente("hectorg", "hector.gui@elgalpon.org.uy", "Héctor", "Guido", hg, "Prueba\\Proponente\\hg.jpg", "Gral. Flores 5645", "", "", "Proponente");
              Date tc = sd.parse("1971-07-24");
-             this.altaProponente("tabarec", "tabare.car@agadu.org.uy", "Tabaré", "Cardozo", tc, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\tc.jpg", "Santiago Rivas 1212", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "Proponente");
+             this.altaProponente("tabarec", "tabare.car@agadu.org.uy", "Tabaré", "Cardozo", tc, "Prueba\\Proponente\\tc.jpg", "Santiago Rivas 1212", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "Proponente");
              Date cs = sd.parse("1947-01-01");
-             this.altaProponente("cachilas", "Cachila.sil@c1080.org.uy", "Waldemar “Cachila” ", "Silva", cs, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\cs.jpg", "Br. Artigas 4567", "", "https://www.facebook.com/C1080?ref=br_rs", "Proponente");
+             this.altaProponente("cachilas", "Cachila.sil@c1080.org.uy", "Waldemar “Cachila” ", "Silva", cs, "Prueba\\Proponente\\cs.jpg", "Br. Artigas 4567", "", "https://www.facebook.com/C1080?ref=br_rs", "Proponente");
              Date jb = sd.parse("1967-03-16");
              this.altaProponente("juliob", "juliobocca@sodre.com.uy", "Julio", "Bocca", jb, "", "Benito Blanco 4321", "", "", "Proponente");
              Date dp = sd.parse("1975-01-01");
              this.altaProponente("diegop", "diego@efectocine.com", "Diego", "Parodi", dp, "", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com/", "Proponente");
              Date kh = sd.parse("1840-04-25");
-             this.altaProponente("kairoh", "kairoher@pilsenrock.com.uy", "Kairo", "Herrera", kh, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\kh.jpg", "Paraguay 1423", "", "", "Proponente");
+             this.altaProponente("kairoh", "kairoher@pilsenrock.com.uy", "Kairo", "Herrera", kh, "Prueba\\Proponente\\kh.jpg", "Paraguay 1423", "", "", "Proponente");
              Date lb = sd.parse("1980-10-31");
-             this.altaProponente("durazno", "comunicacion@durazno.gub.uy", "Itendencia", "Durazno", lb, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\lb.png", "8 de Octubre 1429", "", "http://durazno.gub.uy/portal/index.php", "Proponente");
+             this.altaProponente("durazno", "comunicacion@durazno.gub.uy", "Itendencia", "Durazno", lb, "Prueba\\Proponente\\lb.png", "8 de Octubre 1429", "", "http://durazno.gub.uy/portal/index.php", "Proponente");
             //Colaboradores
-            
+            Date rh = sd.parse("1940-08-03");
+            this.altaColaborador("robinh", "Robin.h@tinglesa.com.uy", "Robin", "Henderson", rh, "", "Colaborador");
+            Date mt = sd.parse("1960-04-01");
+            this.altaColaborador("marcelot", "marcelot@ideasdelsur.com.ar", "Marcelo", "Tinelli", mt, "Prueba\\Colaborador\\mt.jpg", "Colaborador");
+            Date en = sd.parse("1952-07-17");
+            this.altaColaborador("novick", "edgardo@novick.com.uy", "Edgardo", "Novick", en, "Prueba\\Colaborador\\en.jpg", "Colaborador");
+            Date sp = sd.parse("1950-01-28");
+            this.altaColaborador("sergiop", "puglia@alpanpan.com.uy", "Sergio", "Puglia", sp, "Prueba\\Colaborador\\sp.jpg", "Colaborador");
+            Date ar = sd.parse("1976-03-17");
+            this.altaColaborador("chino", "chino@trico.org.uy", "Alvaro", "Recoba", ar, "", "Colaborador");
+            Date ap = sd.parse("1955-02-14");
+            this.altaColaborador("tonyp", "eltony@manya.org.uy", "Antonio", "Pacheco", ap, "Prueba\\Colaborador\\ap.jpg", "Colaborador");
+            Date nj = sd.parse("1960-08-09");
+            this.altaColaborador("nicoJ", "jodal@artech.com.uy", "Nicolás", "Jodal", nj, "Prueba\\Colaborador\\nj.jpg", "Colaborador");
+            Date jp = sd.parse("1970-01-01");
+            this.altaColaborador("juanP", "juanp@elpueblo.com", "Juan", "Perez", jp, "", "Colaborador");
+            Date mg = sd.parse("1982-02-02");
+            this.altaColaborador("Mengano", "menganog@elpueblo.com", "Mengano", "Gómez", mg, "", "Colaborador");
+            Date pl = sd.parse("1985-03-03");
+            this.altaColaborador("Perengano", "pere@elpueblo.com", "Perengano", "López", pl, "", "Colaborador");
+            Date tj = sd.parse("1990-04-04");
+            this.altaColaborador("Tiajaci", "jacinta@elpueblo.com", "Tía", "Jacinta", tj, "", "Colaborador");
          } catch (ParseException ex) {
              Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
          }
