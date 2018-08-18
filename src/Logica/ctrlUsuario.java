@@ -41,7 +41,7 @@ public class ctrlUsuario implements IUsuario {
      private static ctrlUsuario instancia;
      private Map<String, Usuario> usuarios;
      private Map<String, Proponente> Proponentes;
-     private Map<String, Colaborador> Colaboradores;
+     private Map<String, Colaborador> colaboradores;
      private DBusuario usu=null;
    
 public static ctrlUsuario getInstance(){
@@ -54,8 +54,7 @@ public static ctrlUsuario getInstance(){
 
 private ctrlUsuario(){
     this.usuarios=new HashMap<String, Usuario>();
-    this.Proponentes=new HashMap<String, Proponente>();
-    this.Colaboradores=new HashMap<String, Colaborador>();
+
     this.usu=new DBusuario();
 }
 
@@ -112,7 +111,7 @@ private ctrlUsuario(){
     }
     }
 
-    @Override
+    
     public boolean existe(String nick, String correo){
         for(Usuario usu : this.usuarios.values()){
             if(usu.getNick().equals(nick)){
@@ -141,7 +140,7 @@ private ctrlUsuario(){
     }
 
 
-     @Override
+    
     public void cargarProponentes(){
     this.usuarios=this.usu.cargarProponentes();
     }
@@ -182,7 +181,21 @@ private ctrlUsuario(){
         return retorna;
       }
     
-    @Override
+    public List<DtColaborador> listarColaboradores()
+    {
+        List<DtColaborador> listita = new ArrayList<>();
+        Set se = colaboradores.entrySet();
+        Iterator iterator = se.iterator();
+        while(iterator.hasNext())
+        {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Colaborador aux = (Colaborador) mentry.getValue();
+            listita.add(aux.obtenerInfo());
+        }
+        return listita;
+    }
+    
+
     public boolean escorreo(String correo) {
         Pattern pat = null;
         Matcher mat = null;
@@ -195,20 +208,7 @@ private ctrlUsuario(){
         }
     }
     
-    @Override
     public boolean existeNick(String nick){
-
-        for(Colaborador u : this.Colaboradores.values()){
-            if(u.getNick().equals(nick)){
-                return false;
-            }
-        }
-        
-        for(Proponente u : this.Proponentes.values()){
-            if(u.getNick().equals(nick)){
-                return false;
-            }
-        }
         
         for(Usuario u : this.usuarios.values()){
             if(u.getNick().equals(nick)){
@@ -222,17 +222,6 @@ private ctrlUsuario(){
     
      @Override
     public boolean existeCorreo(String correo){
-        for(Proponente u : this.Proponentes.values()){
-            if(u.getCorreo().equals(correo)){
-                return false;
-            }
-        }
-        
-        for(Colaborador u : this.Colaboradores.values()){
-            if(u.getCorreo().equals(correo)){
-                return false;
-            }
-        }
         
          for(Usuario u : this.usuarios.values()){
             if(u.getCorreo().equals(correo)){

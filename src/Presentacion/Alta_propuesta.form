@@ -502,9 +502,6 @@
           </SubComponents>
         </Container>
         <Component class="com.toedter.calendar.JDateChooser" name="jDate">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

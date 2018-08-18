@@ -65,4 +65,5 @@ public class Fabrica {
           IUsuario iu = this.getICtrlUsuario();
           iu.cargarUsuarios();
        }
+       
 }

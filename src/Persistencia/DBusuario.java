@@ -39,7 +39,7 @@ public class DBusuario {
     private Connection conexion = new ConexionDB().getConexion();
     
     public boolean agregarColaborador(Colaborador u){
-         try {
+          try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
                     + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC) values(?,?,?,?,?,?)");
             statement.setString(1, u.getNick());

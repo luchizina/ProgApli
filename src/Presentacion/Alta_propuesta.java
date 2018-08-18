@@ -22,7 +22,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -296,8 +295,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jDate.setDateFormatString("yyyy/MM/dd");
-
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -432,21 +429,28 @@ public static String getHoraActual() {
 }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
         
-       
-       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-       SimpleDateFormat das = new SimpleDateFormat("yyyy-MM-dd");
        String hora = getHoraActual();
-         javax.swing.JOptionPane.showMessageDialog(null, hora + (String) jProp.getSelectedItem());
-//(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img,String nickP)
-        Estado estA = new Estado(Testado.ingresada);
-        String TRetorno= jR1.getText() + " " + jR2.getText();
-boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
+      Estado estA = new Estado(Testado.ingresada);
+      String TRetorno;
+        if(jR1.isSelected() && jR2.isSelected()){
+            TRetorno= jR1.getText() + "," + jR2.getText();
+        }
+        else if(jR1.isSelected() && !(jR2.isSelected())){
+            TRetorno=jR1.getText();
+            
+        }
+        else
+        {
+            TRetorno=jR2.getText();
+        }
+   //     String TRetorno= jR1.getText() + " " + jR2.getText();
+boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
        if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
 
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la persona o la persona ya existe");
-}
+        }
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed

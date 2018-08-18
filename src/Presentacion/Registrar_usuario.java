@@ -535,11 +535,11 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if (Character.isLetter(car)) {
-            nombreAviso.setText("");
-        } else {
+        if (Character.isDigit(car)) {
             evt.consume();
             nombreAviso.setText("Solo se admite texto");
+        } else {
+            nombreAviso.setText("");
         }
 //        nombreAviso.setText("");
     }//GEN-LAST:event_nombreKeyTyped
@@ -552,7 +552,6 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             evt.consume();
             apellidoValido.setText("Solo se admite texto");
         }
-//        apellidoValido.setText("");
     }//GEN-LAST:event_apellidoKeyTyped
 
 

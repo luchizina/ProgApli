@@ -40,7 +40,7 @@ public Propuesta(){
 
 }
 
-public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img) {
+public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img,String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -56,14 +56,14 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.img = img;
         this.Prop = Prop;
         this.listaDeEstados = listaDeEstados;
-        
+        this.lugar = lugar;
     }
 
 
     public String getProp() {
         return Prop;
     }
-     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate) {
+     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate,String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -71,10 +71,10 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.fechaPub = fechaPub;
         this.montoTotal = montoTotal;
         this.cate = cate;
-        
+        this.lugar = lugar;
     }
      
-     public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp)
+     public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
      {
          this.titulo = titulo;
          this.desc = descripcion;
@@ -86,11 +86,12 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          this.montoTotal = montoTotal;
          this.cate = categoria;
          this.Prop = nickProp;
+         this.precioE = precioE;
          this.colaboraciones = new ArrayList<>();
          this.listaDeEstados = new HashMap<>();
          
      }
-    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img) {
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img, String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -99,8 +100,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoTotal = montoTotal;
         this.cate = cate;
         this.img = img;
-        this.colaboraciones = new ArrayList<>();
-        this.listaDeEstados = new HashMap<>();
+        this.lugar = lugar;
     }
 
     public String getImg() {
@@ -150,6 +150,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoActual = montoActual;
     }
 
+    
     public String getTipoRetorno() {
         return tipoRetorno;
     }
@@ -205,9 +206,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.fecha = fecha;
     }
 
-   
-   
-
     public Date getFechaPub() {
         return fechaPub;
     }
@@ -215,6 +213,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setFechaPub(Date fechaPub) {
         this.fechaPub = fechaPub;
     }
+
+
 
     public String getCate() {
         return cate;
@@ -239,11 +239,16 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setListaEstados(ListEstado listaEstados) {
         this.listaEstados = listaEstados;
     }
-    
-    public String getLugar()
-    {
+
+    public String getLugar() {
         return lugar;
     }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+    
+    
     
     public Map<String, DtColaborador> listarColaboradores()
     {
