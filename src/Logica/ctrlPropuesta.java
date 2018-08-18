@@ -15,16 +15,20 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.HashMap;
 //import Persistencia.DBPersona;
 import java.util.Map;
+import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Iterator;
 /**
  *
  * @author Luchi
@@ -58,8 +62,9 @@ public static ctrlPropuesta getInstance(){
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
+    
          @Override
-    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora,String Lugar) {
+    public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img,String nickP,String hora, String Lugar) {
         if (this.propuestas.get(titulo)!=null){
             return false;
         }else{
@@ -171,5 +176,26 @@ public static ctrlPropuesta getInstance(){
         this.propuestas = this.dbPropuesta.cargarPropuestas();
     }
     
+    public List<DtPropuesta> listarPropuestas()
+    {
+        List<DtPropuesta> listita = new ArrayList<>();
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while(iteradorsito.hasNext())
+        {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            listita.add(aux.obtenerInfo());
+        }
+        return listita;
+    }
+    
+    
+    public DtPropuesta traerPropuesta(String titulo)
+    {
+        Propuesta p = (Propuesta) this.propuestas.get(titulo);
+        DtPropuesta q = new DtPropuesta(p);
+        return q;
+    }
     }
 

@@ -7,6 +7,10 @@ package Logica;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -27,9 +31,11 @@ public class Propuesta {
             Estado estActual;
             ListEstado listaEstados;
             String img;
-            String Prop;
-            private Map<Testado, ListEstado> listaDeEstados;
             String lugar;
+            String Prop;
+            List<Colaboracion> colaboraciones;
+            private Map<Testado, ListEstado> listaDeEstados;
+            
 public Propuesta(){
 
 }
@@ -46,6 +52,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.cat = cat;
         this.cate = cate;
         this.estActual = estActual;
+        this.colaboraciones = new ArrayList();
         this.img = img;
         this.Prop = Prop;
         this.listaDeEstados = listaDeEstados;
@@ -56,7 +63,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public String getProp() {
         return Prop;
     }
-     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate,String Lugar) {
+     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate,String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -64,10 +71,27 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.fechaPub = fechaPub;
         this.montoTotal = montoTotal;
         this.cate = cate;
-        this.lugar = Lugar;
+        this.lugar = lugar;
     }
-
-    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img,String lugar) {
+     
+     public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
+     {
+         this.titulo = titulo;
+         this.desc = descripcion;
+         this.fecha = fechita;
+         this.montoActual = montoActual;
+         this.fechaPub = fechaPub;
+         this.img = url;
+         this.tipoRetorno = tipoRetorno;
+         this.montoTotal = montoTotal;
+         this.cate = categoria;
+         this.Prop = nickProp;
+         this.precioE = precioE;
+         this.colaboraciones = new ArrayList<>();
+         this.listaDeEstados = new HashMap<>();
+         
+     }
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img, String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -157,7 +181,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     
     public DtPropuesta obtenerInfo() 
     {
-        return null;
+        DtPropuesta retorno = new DtPropuesta(this);
+        return retorno;
     }
     
     public void IngresarValores(DtPropuesta valor) 
@@ -221,6 +246,25 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }
+    
+    
+    
+    public Map<String, DtColaborador> listarColaboradores()
+    {
+        if(this.colaboraciones != null)
+        {
+        Map<String, DtColaborador> listita = new HashMap<>();
+        for(int i = 0; i<this.colaboraciones.size(); i++)
+        {
+            DtColaborador aux;
+            Colaboracion col = this.colaboraciones.get(i);
+            aux = new DtColaborador(col.getColab().getNick(),col.getColab().getNombre(),col.getColab().getApellido(),col.getColab().getCorreo(),col.getColab().getFecha(),col.getColab().getImg());
+            listita.put(col.getColab().getNick(),aux);
+        }
+        return listita;
+    }
+        return  null;
     }
     
 }

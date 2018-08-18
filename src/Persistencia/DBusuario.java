@@ -95,5 +95,32 @@ public class DBusuario {
             ex.printStackTrace();
             return null;
         }        
-    }    
+    }
+      
+      public Map<String, Colaborador> cargarColaboradores()
+      {
+          try
+          {
+              Map<String, Colaborador> listita = new HashMap<>();
+              PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador");
+              ResultSet rs = st.executeQuery();
+              while(rs.next())
+              {
+                  String nick = rs.getString("NickC");
+                  String correo = rs.getString("CorreoC");
+                  String nombre = rs.getString("NombreC");
+                  String apellido = rs.getString("ApellidoC");
+                  Date fechaN = rs.getDate("FechaNacC");
+                  String url = rs.getString("ImagenUrlC");
+                  Colaborador c = new Colaborador(nick, correo, nombre, apellido, fechaN, url, "Colaborador");
+                  listita.put(c.getNick(), c);
+              }
+              rs.close();
+              st.close();
+              return listita;
+          } catch(SQLException ex){
+              ex.printStackTrace();
+              return null;
+          }
+      }
 }
