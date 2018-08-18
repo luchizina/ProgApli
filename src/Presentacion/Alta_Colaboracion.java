@@ -27,6 +27,9 @@ import javax.swing.table.TableModel;
 import javax.swing.DefaultListModel;
 import java.text.DateFormat;
 import Logica.Colaborador;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import java.util.regex.Pattern;
 
 /**
@@ -419,7 +422,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         nombre.setText(c.getNombre());
         apellido.setText(c.getApellido());
         correo.setText(c.getCorreo());
-        
+        c.getImg();
+        ImageIcon imagen = new ImageIcon(c.getImg());
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+        imagenProp.setIcon(icono);
+        this.pack();
     }//GEN-LAST:event_listaColabsMouseClicked
 
 
