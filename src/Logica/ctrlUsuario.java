@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -25,6 +28,8 @@ import java.util.Set;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,21 +63,16 @@ private ctrlUsuario(){
         if(this.existe(Nick, Correo)==false){
             return false;
         }
-//        } else {
+         else {
             if(Imagen.equals("")==false){
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
                 String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
-                try {
                     if(this.copia(Imagen, destino)==true){
                         Imagen=destino;
                     } else {
                         Imagen = null;
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
             } 
  
             Colaborador c = new Colaborador(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
@@ -82,27 +82,25 @@ private ctrlUsuario(){
             }
             return res;
         }
+    }
     
 
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
         if(this.existe(Nick, Correo)==false){
             return false;
-        } else {
+        } 
+        else {
          if(Imagen.equals("")==false){
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
                 String destino = "Imagenes/Proponente/" + Nick + "." + termina;
-                try {
                     if(this.copia(Imagen, destino)==true){
                         Imagen=destino;
                     } else {
                         Imagen = null;
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+ 
             } 
         Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo);
         boolean res = this.usu.agregarProponente(p);
@@ -110,7 +108,7 @@ private ctrlUsuario(){
             this.usuarios.put(Nick, p);
         }
             return res;
-        }
+    }
     }
 
     
@@ -126,7 +124,8 @@ private ctrlUsuario(){
         return true;
     }
     
-    public boolean copia(String origen, String destino) throws IOException{
+    @Override
+    public boolean copia(String origen, String destino) {
         try{
             File aor = new File(origen);
             File ade = new File(destino);
@@ -177,6 +176,102 @@ private ctrlUsuario(){
             listita.add(aux.obtenerInfo());
         }
         return listita;
+    }
+    
+    public void limpiarUsuarios(){
+         try {
+             this.usu.limpiarBase();
+         } catch (SQLException ex) {
+             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
+    
+    public void cargarPropPrueba(){
+        this.usu.cargarProponentesPrueba();
+    }
+    
+    public boolean escorreo(String correo) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+        if (mat.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean existeNick(String nick){
+
+        for(Colaborador u : this.colaboradores.values()){
+            if(u.getNick().equals(nick)){
+                return false;
+            }
+        }
+        
+        for(Proponente u : this.Proponentes.values()){
+            if(u.getNick().equals(nick)){
+                return false;
+            }
+        }
+        
+        for(Usuario u : this.usuarios.values()){
+            if(u.getNick().equals(nick)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean existeCorreo(String correo){
+        for(Proponente u : this.Proponentes.values()){
+            if(u.getCorreo().equals(correo)){
+                return false;
+            }
+        }
+        
+        for(Colaborador u : this.colaboradores.values()){
+            if(u.getCorreo().equals(correo)){
+                return false;
+            }
+        }
+        
+         for(Usuario u : this.usuarios.values()){
+            if(u.getCorreo().equals(correo)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void cargarUsuarios(){
+         try {
+             //Proponentes
+             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+             Date hrubino = sd.parse("1962-02-25");
+             this.altaProponente("hrubino", "horacio.rubino@guambia.com.uy", "Horacio", "Rubino", hrubino, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hr.JPG", "18 de Julio 1234", " ", "https://twitter.com/horaciorubino", "Proponente");
+             Date mb = sd.parse("1972-06-14");
+             this.altaProponente("mbusca", "Martin.bus@agadu.org.uy", "Martín", "Buscaglia", mb, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\mb.jpg", "Colonia 4321", " ", "http://www.martinbuscaglia.com/", "Proponente");
+             Date hg = sd.parse("1954-01-07");
+             this.altaProponente("hectorg", "hector.gui@elgalpon.org.uy", "Héctor", "Guido", hg, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hg.jpg", "Gral. Flores 5645", "", "", "Proponente");
+             Date tc = sd.parse("1971-07-24");
+             this.altaProponente("tabarec", "tabare.car@agadu.org.uy", "Tabaré", "Cardozo", tc, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\tc.jpg", "Santiago Rivas 1212", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "Proponente");
+             Date cs = sd.parse("1947-01-01");
+             this.altaProponente("cachilas", "Cachila.sil@c1080.org.uy", "Waldemar “Cachila” ", "Silva", cs, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\cs.jpg", "Br. Artigas 4567", "", "https://www.facebook.com/C1080?ref=br_rs", "Proponente");
+             Date jb = sd.parse("1967-03-16");
+             this.altaProponente("juliob", "juliobocca@sodre.com.uy", "Julio", "Bocca", jb, "", "Benito Blanco 4321", "", "", "Proponente");
+             Date dp = sd.parse("1975-01-01");
+             this.altaProponente("diegop", "diego@efectocine.com", "Diego", "Parodi", dp, "", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com/", "Proponente");
+             Date kh = sd.parse("1840-04-25");
+             this.altaProponente("kairoh", "kairoher@pilsenrock.com.uy", "Kairo", "Herrera", kh, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\kh.jpg", "Paraguay 1423", "", "", "Proponente");
+             Date lb = sd.parse("1980-10-31");
+             this.altaProponente("durazno", "comunicacion@durazno.gub.uy", "Itendencia", "Durazno", lb, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\lb.png", "8 de Octubre 1429", "", "http://durazno.gub.uy/portal/index.php", "Proponente");
+            //Colaboradores
+            
+         } catch (ParseException ex) {
+             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
 //    long ini = System.currentTimeMillis();

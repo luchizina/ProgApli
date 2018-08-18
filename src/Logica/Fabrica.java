@@ -5,6 +5,12 @@
  */
 package Logica;
 
+import Persistencia.DBusuario;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Luchi
@@ -33,12 +39,30 @@ public class Fabrica {
         return ICC;
     }
     
-      private Fabrica(){
-        this.cargarDatosPrueba();
-    };
+//      private Fabrica(){
+//        this.cargarDatosPrueba();
+//    };
       
-       private void cargarDatosPrueba(){
+       public void cargarDatosPrueba(){
         ICategoria ic=this.getICtrlCategoria();
+        IUsuario iu = this.getICtrlUsuario();
         ic.cargarCategorias();
+        iu.cargarColaboradores();
+        iu.cargarProponentes();
     }
+       
+       public void limpiar(){
+           IUsuario iu = this.getICtrlUsuario();
+           iu.limpiarUsuarios();
+       }
+       
+       public void cargaProp(){
+           IUsuario iu = this.getICtrlUsuario();
+           iu.cargarPropPrueba();
+       }
+       
+       public void pruebas(){
+          IUsuario iu = this.getICtrlUsuario();
+          iu.cargarUsuarios();
+       }
 }
