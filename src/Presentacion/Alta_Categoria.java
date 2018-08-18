@@ -32,139 +32,15 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     public Alta_Categoria() {
         initComponents();
     }
-    
-    public boolean tieneEsteHijo(DefaultMutableTreeNode nodo, String padre) {
-        // cmbCategorias.addItem(nodo.toString());
-        Enumeration<DefaultMutableTreeNode> hijos = nodo.children();
-        Enumeration<DefaultMutableTreeNode> otroshijos = nodo.children();
-        DefaultMutableTreeNode n = new DefaultMutableTreeNode();
-        DefaultMutableTreeNode p = new DefaultMutableTreeNode();
-        DefaultMutableTreeNode q = new DefaultMutableTreeNode();
-        if (nodo.getChildCount() == 0) {
-            return false;
-        }
-
-        while (hijos.hasMoreElements()) {
-            n = (DefaultMutableTreeNode) (hijos.nextElement());
-            String hijito = n.getUserObject().toString();
-            Enumeration<DefaultMutableTreeNode> hijitos = n.children();
-            if (padre.equals(hijito)) {
-                return true;
-            }
-
-            while (hijitos.hasMoreElements()) {
-                p = (DefaultMutableTreeNode) (hijitos.nextElement());
-                String hijote = p.getUserObject().toString();
-                if (padre.equals(hijote)) {
-                    return true;
-                }
-
-            }
-        }
-        while (otroshijos.hasMoreElements()) {
-            q = (DefaultMutableTreeNode) (otroshijos.nextElement());
-            return tieneEsteHijo(q, padre);
-        }
-
-        return false;
-
-    }
-    
-    
-    public DefaultMutableTreeNode devolverNodo(DefaultMutableTreeNode nodo, String padre){
-         Enumeration<DefaultMutableTreeNode> hijos = nodo.children();
-         Enumeration<DefaultMutableTreeNode> otroshijos = nodo.children();
- DefaultMutableTreeNode n=new DefaultMutableTreeNode();
-             DefaultMutableTreeNode p=new DefaultMutableTreeNode();
-             DefaultMutableTreeNode q=new DefaultMutableTreeNode();
-       if(nodo.getChildCount()==0){
-           return null;
-       }
-       
-             // if(nodo.getChildCount()>0){
-           
-                    while(hijos.hasMoreElements()){
-                        n=(DefaultMutableTreeNode) (hijos.nextElement());
-                      String hijito = n.getUserObject().toString();
-                        Enumeration<DefaultMutableTreeNode> hijitos =n.children();
-                      if(padre.equals(hijito)){
-                          return n;
-                      }
-                         while(hijitos.hasMoreElements()){
-                          p=(DefaultMutableTreeNode) (hijitos.nextElement());
-                          String hijote = p.getUserObject().toString();
-                         if(padre.equals(hijote)){
-                          return p;
-                      }
-                        
-                      }
-//                     
-                    }
-                    while(otroshijos.hasMoreElements()){
-                        q=(DefaultMutableTreeNode) (otroshijos.nextElement());
-                        return devolverNodo(q, padre);
-                    }
-                      return null;
-                    }
-        
-    public void agregarNodos(DefaultMutableTreeNode hijo, DefaultTreeModel tModel, DefaultMutableTreeNode papi) {
-    if (hijo != null) {
-        DefaultMutableTreeNode newParent = new DefaultMutableTreeNode(hijo);
-        tModel.insertNodeInto(newParent, papi, papi.getChildCount());
-        for (int index = 0; index < hijo.getChildCount(); index++) {
-            DefaultMutableTreeNode child = (DefaultMutableTreeNode) hijo.getChildAt(index);
-            agregarNodos(child, tModel, newParent);
-        }
-    }
-}
-    
-    public DefaultTreeModel imprimirArbol(DefaultMutableTreeNode raiz, List<DtCategoria> catego, DefaultTreeModel modeloArbol){
-      
-
-        for (int i = 0; i < catego.size(); i++) {
-
-            DtCategoria c = (DtCategoria) catego.get(i);
-            if (c.getPadre().compareTo("No") == 0 && tieneEsteHijo(raiz, c.getNombre()) == false) {
-                modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
-            }
-        }
-
-        for (int k = 0; k < catego.size(); k++) {
-            DtCategoria ca = (DtCategoria) catego.get(k);
-            int otro = modeloArbol.getChildCount(raiz);
-            for (int m = 0; m < otro; m++) {
-                DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
-                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) {
-                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
-                } else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false) {
-                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
-                }
-
-            }
-        }
-
-        return modeloArbol;
-
-    }
 
     
     public Alta_Categoria(ICategoria icat){
         initComponents();
+        
         this.iCat=icat;
-          int bcount=0;
-    int count = 0;
-    int aux = 1;
+        this.iCat.cargarCategorias();
+       
         
-         DefaultTreeModel modeloArbol =null;
-        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoría");
-        DefaultMutableTreeNode hijo = null;
-        DefaultMutableTreeNode padre = null;
-        DefaultMutableTreeNode childnode = null;
-        
-        
-                             //   this.arbolito.setModel(modeloArbol);
-       raiz = new DefaultMutableTreeNode("Categoría");
-       modeloArbol = new DefaultTreeModel(raiz);
              
         List<DtCategoria> catego = this.iCat.listarCategorias();
         
@@ -173,29 +49,8 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         List<DtCategoria> combo = this.iCat.listarCategorias();
         for(int i=0; i< combo.size(); i++){
             DtCategoria combito=(DtCategoria) combo.get(i);
-         
-            
-//            Map<String,Categoria> nueb=combito.getHijos();
-//             Set set = nueb.entrySet();
-//        Iterator iterator = set.iterator();
-//        while(iterator.hasNext()){
-//            Map.Entry mentry = (Map.Entry)iterator.next();
-//            Categoria aux1=(Categoria) mentry.getValue();   
-//            cmbCategorias.addItem(aux1.getNombre());
-//            
-//        }
-            cmbCategorias.addItem(combito.getNombre());
+                       cmbCategorias.addItem(combito.getNombre());
         }
-       // padre= (DefaultMutable;TreeNode) e1.nextElement();
-        
-       //a partir de aca seria la recursiva?
-        
-        //hasta aca la recursiva?
-      
-        
-        this.arbolito.setModel(imprimirArbol(raiz,catego,modeloArbol));
-    
-
             }
 
     /**
@@ -204,13 +59,20 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
+    
+  
+    
+    
+    
+    
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        arbolito = new javax.swing.JTree();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -222,8 +84,6 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
-
-        jScrollPane1.setViewportView(arbolito);
 
         jLabel2.setText("Ingresar nueva categoría");
 
@@ -259,11 +119,9 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(264, 264, 264)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButton1)
@@ -282,33 +140,30 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rBtnNo))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(342, 342, 342)
                         .addComponent(cmbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel3))
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(rBtnSi)
-                            .addComponent(rBtnNo))
-                        .addGap(25, 25, 25)
-                        .addComponent(cmbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(124, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel3))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(rBtnSi)
+                    .addComponent(rBtnNo))
+                .addGap(25, 25, 25)
+                .addComponent(cmbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -376,15 +231,18 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
           }
                
           boolean ok=iCat.ingresarCat(ing);
-              DefaultTreeModel modeloArbol =null;
-        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoría");
-        List<DtCategoria> catego = this.iCat.listarCategorias();
-       
-       this.arbolito.setModel((DefaultTreeModel) this.arbolito.getModel());
+           List<DtCategoria> catego = this.iCat.listarCategorias();
+         List<DtCategoria> combo = this.iCat.listarCategorias();
        
        
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+            cmbCategorias.removeAllItems();
+            for(int i=0; i< combo.size(); i++){
+            DtCategoria combito=(DtCategoria) combo.get(i);
+                       cmbCategorias.addItem(combito.getNombre());
+        }
+            
 
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la categoria o la persona ya existe");
@@ -395,11 +253,12 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         
         
         
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTree arbolito;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbCategorias;
     private javax.swing.JButton jButton1;
@@ -408,7 +267,6 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rBtnNo;
     private javax.swing.JRadioButton rBtnSi;
     private javax.swing.JTextField txtNombre;
