@@ -53,7 +53,8 @@ public class ctrlUsuario implements IUsuario {
 
     private ctrlUsuario() {
         this.usuarios = new HashMap<String, Usuario>();
-
+        this.colaboradores = new HashMap<String, Colaborador>();
+        this.Proponentes = new HashMap<String, Proponente>();
         this.usu = new DBusuario();
     }
 
