@@ -20,11 +20,14 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.ListModel;
 import Logica.DtPropuesta;
+import java.lang.String;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JInternalFrame;
 import javax.swing.table.TableModel;
 import javax.swing.DefaultListModel;
 import java.text.DateFormat;
+import Logica.Colaborador;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -204,6 +207,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaColabs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaColabsMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(listaColabs);
 
         jScrollPane3.setViewportView(jScrollPane4);
@@ -253,17 +261,14 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                                     .addComponent(fecha)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel14)
-                                            .addComponent(imagenProp, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addComponent(imagenProp, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -283,6 +288,10 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(fechaP, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,9 +302,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGap(40, 40, 40))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -318,11 +325,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(precioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(montoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 47, Short.MAX_VALUE)))
+                        .addGap(0, 49, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(84, 84, 84)
@@ -354,7 +361,10 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                                     .addComponent(jButton1)
                                     .addComponent(jButton2)))
                             .addComponent(imagenProp, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
@@ -393,6 +403,24 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         tRetornos.setText(p.getTRetornos());
         fechaP.setText(df.format(p.getFechaPub()));
     }//GEN-LAST:event_listaPropsMouseClicked
+
+    private void listaColabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaColabsMouseClicked
+        // TODO add your handling code here:
+        int index = listaColabs.getSelectedIndex();
+        ListModel  model= listaColabs.getModel();
+        String f = (String) model.getElementAt(index);
+        String[] partes = f.split(Pattern.quote("("));
+        String parte1 = partes[0];
+        String parte2 = partes[1];
+        String[] partes3 = parte2.split(Pattern.quote(")"));
+        String parte4 = partes3[0];
+        Colaborador c = iUsu.traerColaborador(parte4);
+        nick.setText(c.getNick());
+        nombre.setText(c.getNombre());
+        apellido.setText(c.getApellido());
+        correo.setText(c.getCorreo());
+        
+    }//GEN-LAST:event_listaColabsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

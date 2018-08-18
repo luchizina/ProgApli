@@ -179,9 +179,9 @@ public class DBusuario {
       }
       */
       
-        public Map<String,Usuario> cargarColaboradores(){
+        public Map<String, Colaborador> cargarColaboradores(){
         try {
-            Map<String, Usuario> lista = new HashMap<String, Usuario>();
+            Map<String, Colaborador> lista = new HashMap<String, Colaborador>();
             PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador");          
             ResultSet rs=st.executeQuery();
             while (rs.next()){

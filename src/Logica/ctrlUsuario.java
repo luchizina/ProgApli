@@ -82,6 +82,11 @@ public class ctrlUsuario implements IUsuario {
             return res;
         }
     }
+    
+    public Colaborador traerColaborador(String f)
+    {
+        return this.colaboradores.get(f);
+    }
 
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
@@ -155,7 +160,7 @@ public class ctrlUsuario implements IUsuario {
 
     @Override
     public void cargarColaboradores() {
-        this.usuarios = this.usu.cargarColaboradores();
+        this.colaboradores = this.usu.cargarColaboradores();
     }
 
     @Override
