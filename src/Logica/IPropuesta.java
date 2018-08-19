@@ -21,4 +21,5 @@ public interface IPropuesta {
     public abstract DtPropuesta traerPropuesta(String titulo);
     public abstract boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img, String nickP, String hora, String Lugar);
     public abstract void CargaPropuestasPrueba();
+    public abstract boolean existeColaboracion(String nick, String titulo);
 }

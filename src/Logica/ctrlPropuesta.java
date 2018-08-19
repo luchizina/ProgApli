@@ -15,6 +15,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
+import Logica.Colaboracion;
 import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -133,7 +134,19 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return false;
     }
-
+    
+    public boolean existeColaboracion(String nick, String titulo)
+    {
+        Propuesta p = (Propuesta) this.propuestas.get(titulo);
+        Iterator iteradorsito = p.colaboraciones.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Colaboracion aux = (Colaboracion) mentry.getValue();
+            if(aux.getColab().nick == nick)
+                return true;
+    }
+        return false;
+    }
     private String getCurrentTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmss");
         String currentTime = dateFormat.format(System.currentTimeMillis());

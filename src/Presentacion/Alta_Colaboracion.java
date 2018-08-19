@@ -31,6 +31,7 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +46,9 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private IPropuesta IP;
      private IUsuario iUsu;
      private ICategoria iCat;
+     private String titulo1 = "";
+     private String nick1 = "";
+     private String tipoR1 = "";
      
     public Alta_Colaboracion(IPropuesta Ip, IUsuario iUsu) {
        initComponents();
@@ -192,6 +196,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("Porcentaje de Ganancias");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +210,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         });
 
         jRadioButton2.setText("Entradas Gratis");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setText("Elegir un tipo de Retorno");
@@ -376,10 +390,31 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(titulo1 == "")
+        {
+            JOptionPane.showMessageDialog(null, "Debe elegir una propuesta antes de continuar", "Propuestas", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+            if(nick1 == "")
+        {
+            JOptionPane.showMessageDialog(null, "Debe elegir un colaborador antes de continuar", "Colaboradores", JOptionPane.WARNING_MESSAGE);
+        }
+            else
+        if(!jRadioButton1.isSelected() && !jRadioButton2.isSelected())
+        {
+            JOptionPane.showMessageDialog(null, "Debe elegir un tipo de retorno antes de continuar", "Retorno", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(IP.existeColaboracion(nick1, titulo1))
+        {
+            JOptionPane.showMessageDialog(null, "El colaborador seleccionado ya ha colaborado en esta propuesta", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+        jRadioButton2.setSelected(false);
+        this.tipoR1 = "Porcentaje";
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void precioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioEActionPerformed
@@ -405,6 +440,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         montoT.setText(Integer.toString(p.getMontototal()));
         tRetornos.setText(p.getTRetornos());
         fechaP.setText(df.format(p.getFechaPub()));
+        this.titulo1 = p.getTitulo();
     }//GEN-LAST:event_listaPropsMouseClicked
 
     private void listaColabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaColabsMouseClicked
@@ -426,8 +462,21 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         ImageIcon imagen = new ImageIcon(c.getImg());
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
         imagenProp.setIcon(icono);
+        this.nick1 = c.getNick();
         this.pack();
     }//GEN-LAST:event_listaColabsMouseClicked
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        jRadioButton1.setSelected(false);
+        this.tipoR1 = "Entradas";
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.limpiar();
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -491,6 +540,25 @@ public void cargarColab(){
         dlm.addElement(lul);
     }
     listaColabs.setModel(dlm);
+}
+
+public void limpiar()
+{
+    titulo.setText("");
+    descripcion.setText("");
+    fecha.setText("");
+    precioE.setText("");
+    montoA.setText("");
+    montoT.setText("");
+    tRetornos.setText("");
+    fechaP.setText("");
+    nick.setText("");
+    nombre.setText("");
+    apellido.setText("");
+    correo.setText("");
+    imagenProp.setText("");
+    jRadioButton1.setSelected(false);
+    jRadioButton2.setSelected(false);
 }
     
     
