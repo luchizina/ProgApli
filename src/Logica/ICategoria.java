@@ -16,4 +16,5 @@ public interface ICategoria {
     public abstract List<DtCategoria> listarCategorias();
 public abstract boolean ingresarCat(DtCategoria datos);
 public abstract void cargarCategorias();
+public abstract void categoriasPrueba();
 }

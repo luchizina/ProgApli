@@ -6,7 +6,6 @@
 package Presentacion;
 import Logica.DtCategoria;
 import Logica.IPropuesta;
-import Logica.DtFecha;
 import Logica.DtProponente;
 import Logica.Estado;
 import Logica.ICategoria;
@@ -14,15 +13,13 @@ import Logica.IUsuario;
 import Logica.Testado;
 import java.awt.Image;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -42,14 +39,19 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         Jpanel1.setVisible(false);
         
     }
-    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUsu)
+    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUsu) throws ParseException
     {
         initComponents();
+       
         this.IP = IP;
         Jpanel1.setVisible(false);
         this.iCat = cat;
         this.iUsu = iUsu;
         cargar();
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        Date desde = new Date();
+        Date hasta = sd.parse("2030-01-01");
+        this.jDate.setSelectableDateRange(desde, hasta);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -295,8 +297,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jDate.setDateFormatString("yyyy/MM/dd");
-
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -331,7 +331,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -429,27 +429,58 @@ public static String getHoraActual() {
     SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
     return formateador.format(ahora);
 }
+ private boolean vacios() {
+        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("")) {
+            return true;
+        }
+        return false;
+    }
+ private void limpiar() {
+        jTitulo.setText("");
+        jDesc.setText("");
+        jLugar.setText("");
+        jPrecioE.setText("");
+        jDate.setDate(null);
+        jPrecioT.setText("");
+        jR1.setSelected(false);
+        jR2.setSelected(false);
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        urlimagen.setText("");
+        img.setIcon(null);
+    }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
-        
-       
-       SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
-       SimpleDateFormat das = new SimpleDateFormat("yyyy-MM-dd");
-       String hora = getHoraActual();
-         javax.swing.JOptionPane.showMessageDialog(null, hora + (String) jProp.getSelectedItem());
-//(String titulo, String desc, String fecha, int precioE, int montoActual, String fechaPub, String Retorno, int montoTotal, Categoria cat, String cate, Estado estActual, String img,String nickP)
-        Estado estA = new Estado(Testado.ingresada);
-        String TRetorno= jR1.getText() + " " + jR2.getText();
-boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),"sdf",Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora);
-       if (ok){
-            javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
+     String hora = getHoraActual();
+      Estado estA = new Estado(Testado.ingresada);
+      String TRetorno;
+        if(jR1.isSelected() && jR2.isSelected()){
+            TRetorno= jR1.getText() + "," + jR2.getText();
+        }
+        else if(jR1.isSelected() && !(jR2.isSelected())){
+            TRetorno=jR1.getText();
+        }
+        else
+        {
+            TRetorno=jR2.getText();
+        }
+        if(vacios() == false){
+        boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
+             if (ok){
+            javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
 
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la persona o la persona ya existe");
-}
+             }else{
+            javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
+             }
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
+            
+        }
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
-     // TODO add your handling code here:
+        this.limpiar();
+        this.dispose();     // TODO add your handling code here:
     }//GEN-LAST:event_bt1ActionPerformed
 
     private void jCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCategActionPerformed

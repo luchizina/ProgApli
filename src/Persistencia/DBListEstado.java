@@ -5,82 +5,35 @@
  */
 package Persistencia;
 import Logica.ListEstado;
-import Logica.Propuesta;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
  * @author apias
  */
 public class DBListEstado {    
-    java.util.Date fec;
-     java.sql.Date sqlDate;
+   
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
-    private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarEstado(ListEstado p, String t){
-        try {
-            
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
-                    + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
-            Date fechaC= p.getFecha();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            String fechaSt=sdf.format(fechaC);
-            String [] aux = fechaSt.split(" ");
-            String dia = aux[0];
-            String hora = aux[1];
-            statement.setString(1, dia);
-//            Time horita = new Time(p.getHora().getHours(), p.getHora().getMinutes(), p.getHora().getSeconds());
-            statement.setString(2, hora);
-            statement.setString(3, t);
-            statement.setString(4,  String.valueOf(p.getEst()));
-            statement.executeUpdate();
-            statement.close();
+    private final Connection conexion = new ConexionDB().getConexion();
+    
+    public boolean agregarEstado(ListEstado p, String t)throws SQLException, ParseException{
+        
+    PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
+                    + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)"); 
+                     SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+                    java.sql.Date sqlDate = new java.sql.Date(p.getFecha().getTime());
+                statement.setDate(1,sqlDate);
+                statement.setTime(2, (java.sql.Time) p.getHora());
+                statement.setString(3, t);
+                statement.setString(4,  p.getEst().toString());
+                statement.executeUpdate();
+                statement.close();
             return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
         }        
-    }
-    
-//    public boolean borrarPersona(Persona p){
-//        try {
-//            PreparedStatement statement = conexion.prepareStatement("DELETE FROM personas WHERE codigo=?");
-//            statement.setInt(1, p.getCodigo());
-//            statement.executeUpdate();
-//            statement.close();
-//            return true;
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//            return false;
-//        }        
-//    }    
-//    
-    public Map<String, Propuesta> cargarPersonas(){
-        try {
-            Map<String, Propuesta> lista = new HashMap<String, Propuesta>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");          
-            ResultSet rs=st.executeQuery();
-            while (rs.next()){
-                String titulo = rs.getString("titulo");
-                Propuesta p=new Propuesta();
-                lista.put(titulo, p);
-            }
-            rs.close();
-            st.close();
-            return lista;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }        
-    }    
-    
 }

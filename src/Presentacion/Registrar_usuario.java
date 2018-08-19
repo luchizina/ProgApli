@@ -7,13 +7,10 @@ package Presentacion;
 
 import Logica.*;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -374,7 +371,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                         .addComponent(jButton3)
                         .addComponent(jButton2))
                     .addComponent(Jp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -394,7 +391,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -430,62 +427,61 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if (jRadioButton1.isSelected() == true) {
-            if(usuario.existeNick(nickname.getText())==true){
-            if (this.vacios() == false) {
-                if(usuario.escorreo(email.getText())==true || usuario.existeCorreo(email.getText())==true){
-                boolean ok = usuario.altaColaborador(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText(), jRadioButton1.getText());
-                if (ok) {
-                    JOptionPane.showMessageDialog(null, "Colaborador agregado");
-                    this.limpiar();
+            if (usuario.existeNick(nickname.getText()) == true) {
+                if (this.vacios() == false) {
+                    if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
+                        boolean ok = usuario.altaColaborador(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), jRadioButton1.getText());
+                        if (ok) {
+                            JOptionPane.showMessageDialog(null, "Colaborador agregado");
+                            this.limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No ha podido ser agregado");
+                            this.limpiar();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya fue utilizado", "Correo", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "No ha podido ser agregado");
-                    this.limpiar();
-                }
-            } else {
-                    JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya fue utilizado", "Correo", JOptionPane.WARNING_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
-            }
-        }else{
-               JOptionPane.showMessageDialog(null, "El nick elegido ya esta en uso", "Nick", JOptionPane.WARNING_MESSAGE); 
-            }
-        } else {
-            if (jRadioButton2.isSelected() == true) {
-                if(usuario.existeNick(nickname.getText())==true){
-                if (this.vacios() == false && direccion.getText().equals("") == false) {
-                    if(usuario.escorreo(email.getText())==true || usuario.existeCorreo(email.getText())==true){
-                    boolean oki = usuario.altaProponente(nickname.getText(), nombre.getText(), apellido.getText(), email.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
-                    if (oki) {
-                        JOptionPane.showMessageDialog(null, "Proponente agregado");
-                        this.limpiar();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El proponente no ha podido ser agregado");
-                        this.limpiar();
-                    }
-                    } else {
-                         JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya esta en uso", "Correo", JOptionPane.WARNING_MESSAGE);
-                    }
-                } 
-                 else {
                     JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
+                JOptionPane.showMessageDialog(null, "El nick elegido ya esta en uso", "Nick", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            if (jRadioButton2.isSelected() == true) {
+                if (usuario.existeNick(nickname.getText()) == true) {
+                    if (this.vacios() == false && direccion.getText().equals("") == false) {
+                        if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
+                            boolean oki = usuario.altaProponente(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
+                            if (oki) {
+                                JOptionPane.showMessageDialog(null, "Proponente agregado");
+                                this.limpiar();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "El proponente no ha podido ser agregado");
+                                this.limpiar();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya esta en uso", "Correo", JOptionPane.WARNING_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
+                    }
+                } else {
                     JOptionPane.showMessageDialog(null, "El nick elegido ya esta en uso", "Nick", JOptionPane.WARNING_MESSAGE);
-                      }
-        }
-        
-        if(jRadioButton1.isSelected() == false && jRadioButton2.isSelected() == false){
-            JOptionPane.showMessageDialog(null, "No eligio un tipo de usuario");
-        }
-        
+                }
+            }
+
+            if (jRadioButton1.isSelected() == false && jRadioButton2.isSelected() == false) {
+                JOptionPane.showMessageDialog(null, "No eligio un tipo de usuario");
+            }
+
 //        if(this.vacios() == false && direccion.getText().equals("") == false){
 //            JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado");
 //        }
 
-        
     }//GEN-LAST:event_jButton2ActionPerformed
     }
+
     private boolean vacios() {
         if (nickname.getText().equals("") || nombre.getText().equals("") || apellido.getText().equals("")
                 || email.getText().equals("") || fecha.getDate().equals(null)) {
@@ -493,9 +489,8 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    
 
-    private void limpiar(){
+    private void limpiar() {
         nickname.setText("");
         nombre.setText("");
         apellido.setText("");
@@ -511,20 +506,20 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(evt.getSource()==jButton1){
-        JFileChooser j = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
-        j.setFileFilter(filtro);
-        int ap = j.showOpenDialog(this);
-        if(ap == JFileChooser.APPROVE_OPTION){
-            File file = j.getSelectedFile();
-            String ruta = file.getPath();
-            this.urlimagen.setText(ruta);
-            ImageIcon imagen3 = new ImageIcon(ruta);
-            Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.imagen.getWidth(), this.imagen.getHeight(), Image.SCALE_DEFAULT));
-            this.imagen.setIcon(icono);
-            this.pack();
-        }
+        if (evt.getSource() == jButton1) {
+            JFileChooser j = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
+            j.setFileFilter(filtro);
+            int ap = j.showOpenDialog(this);
+            if (ap == JFileChooser.APPROVE_OPTION) {
+                File file = j.getSelectedFile();
+                String ruta = file.getPath();
+                this.urlimagen.setText(ruta);
+                ImageIcon imagen3 = new ImageIcon(ruta);
+                Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.imagen.getWidth(), this.imagen.getHeight(), Image.SCALE_DEFAULT));
+                this.imagen.setIcon(icono);
+                this.pack();
+            }
 //            
 ////            String ruta = j.getSelectedFile().getAbsolutePath();
 ////            this.imagen.setIcon(new ImageIcon(ruta));
@@ -532,16 +527,16 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
 //        
     }//GEN-LAST:event_jButton1ActionPerformed
     }
-    
-    
+
+
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if (Character.isLetter(car)) {
-            nombreAviso.setText("");
-        } else {
+        if (Character.isDigit(car)) {
             evt.consume();
             nombreAviso.setText("Solo se admite texto");
+        } else {
+            nombreAviso.setText("");
         }
 //        nombreAviso.setText("");
     }//GEN-LAST:event_nombreKeyTyped
@@ -554,10 +549,8 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             evt.consume();
             apellidoValido.setText("Solo se admite texto");
         }
-//        apellidoValido.setText("");
     }//GEN-LAST:event_apellidoKeyTyped
 
-    
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
         if (usuario.escorreo(email.getText())) {
@@ -569,18 +562,16 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_emailFocusLost
 
     private void linkFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_linkFocusLost
-        if(this.link.getText().equals("")==false){
-            if(link.getText().matches("(www\\.)(.+)(\\.)(.+)")){
+        if (this.link.getText().equals("") == false) {
+            if (link.getText().matches("(www\\.)(.+)(\\.)(.+)")) {
                 webValido.setText("");
-            }
-            else {
+            } else {
                 webValido.setText("Pagina web invalida");
             }
         }
 
     }//GEN-LAST:event_linkFocusLost
 
-    
 //    private boolean controlFecha(Date elegida) throws ParseException{
 //        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 //        Date hasta = new Date();

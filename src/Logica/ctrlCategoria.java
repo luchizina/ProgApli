@@ -79,4 +79,17 @@ public boolean ingresarCat(DtCategoria datos){
   
 }
 
+@Override
+public void categoriasPrueba(){
+    String [] categoria = {"Teatro", "Teatro Dramático", "Teatro Musical", "Comedia", "Stand-up", "Literatura", "Música", "Festival", "Concierto", "Cine", "Cine al Aire Libre", "Cine a Pedal", "Danza", "Ballet", "Flamenco", "Carnaval","Murga","Humoristas","Parodistas","Lubolos", "Revista"};
+    String [] padre = {"Categoria", "Teatro", "Teatro", "Teatro", "Comedia", "Categoria", "Categoria", "Música", "Música", "Categoria", "Cine", "Cine", "Categoria", "Danza", "Danza", "Categoria", "Carnaval", "Carnaval", "Carnaval","Carnaval","Carnaval"};
+    for(int i =0; i<21; i++){
+        DtCategoria a = new DtCategoria(categoria[i], padre[i]);
+        this.ingresarCat(a);
+    }
+//    DtCategoria a = new DtCategoria("Teatro", "Categoria");
+//    this.ingresarCat(a);
+//    DtCategoria b = new DtCategoria("Teatro Dramático","Teatro");
+}
+
 }

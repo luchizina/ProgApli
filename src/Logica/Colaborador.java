@@ -40,6 +40,10 @@ public class Colaborador extends Usuario {
         this.colHechas = colHechas;
     }
     
+    public DtColaborador obtenerInfo()
+    {
+        return new DtColaborador(this.nick, this.nombre, this.Apellido, this.Correo, this.fecha, this.img);
+    }
     
     
 }

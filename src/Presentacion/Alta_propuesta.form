@@ -306,7 +306,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTitulo" min="-2" pref="111" max="-2" attributes="0"/>
                               <Component id="jPrecioE" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="jDate" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDate" min="-2" pref="112" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLugar" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
@@ -501,9 +501,6 @@
           </SubComponents>
         </Container>
         <Component class="com.toedter.calendar.JDateChooser" name="jDate">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -33,22 +33,23 @@ public class DBPropuesta {
     //Si ConexionDB fuera singleton
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
-    public boolean agregarPropuesta(Propuesta p) throws SQLException{
+    public boolean agregarPropuesta(Propuesta p) throws SQLException, ParseException{
    
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,ImagenUrl,TipoRetorno,MontoTotal,categoria,nickprop, lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop,lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
-            Date fechaC= p.getFecha();
+            Date fechaC = p.getFecha();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSt=sdf.format(fechaC);
-            statement.setString(3, fechaSt);
+            String fecha = sdf.format(fechaC);
+            statement.setString(3, fecha);
          //   statement.setInt(3, p.get);
        //    statement.setString(5, "1999-12-12");
-            String fechapub = sdf.format(p.getFechaPub());
             statement.setInt(4, p.getPrecioE());
             statement.setInt(5, 0);
-            statement.setString(6, fechapub);
+            Date fechaP = p.getFechaPub();
+            String fec = sdf.format(fechaP);
+            statement.setString(6, fec);
             statement.setString(7, p.getImg()); 
              statement.setString(8, String.valueOf(p.getTipoRetorno()));
             statement.setInt(9, p.getMontoTotal());
@@ -93,7 +94,7 @@ public class DBPropuesta {
                 String nickProp = rs.getString("nickprop");
                 SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
-                Propuesta p=new Propuesta(titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp);
+                Propuesta p=new Propuesta(titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp, precio);
                 lista.put(titulo, p);
             }
             rs.close();
