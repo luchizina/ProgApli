@@ -446,10 +446,10 @@ public static String getHoraActual() {
    //     String TRetorno= jR1.getText() + " " + jR2.getText();
 boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
        if (ok){
-            javax.swing.JOptionPane.showMessageDialog(null,"Persona Dada de alta");
+            javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
 
         }else{
-            javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la persona o la persona ya existe");
+            javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
         }
     }//GEN-LAST:event_bt2MouseClicked
 

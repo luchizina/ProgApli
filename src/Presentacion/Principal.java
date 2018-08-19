@@ -514,6 +514,8 @@ cat.setVisible(true);
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         iUsu.limpiarUsuarios();
         iUsu.cargarUsuarios();
+        icat.categoriasPrueba();
+        IP.CargaPropuestasPrueba();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**

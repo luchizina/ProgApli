@@ -47,8 +47,9 @@ public class DBPropuesta {
        //    statement.setString(5, "1999-12-12");
             statement.setInt(4, p.getPrecioE());
             statement.setInt(5, 0);
-            
-            statement.setString(6,"2018-08-15" );
+            Date fechaP = p.getFechaPub();
+            String fec = sdf.format(fechaP);
+            statement.setString(6, fec);
             statement.setString(7, p.getImg()); 
              statement.setString(8, String.valueOf(p.getTipoRetorno()));
             statement.setInt(9, p.getMontoTotal());

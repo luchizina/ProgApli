@@ -221,7 +221,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         DtCategoria ing = new DtCategoria("algo", "algo");
          
      if(rBtnNo.isSelected()==true){
-          DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "No");
+          DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria");
           ing=nuevo;
      }
      else

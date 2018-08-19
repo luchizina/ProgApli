@@ -112,6 +112,12 @@ public class DBusuario {
           PreparedStatement stt = conexion.prepareStatement("Delete FROM proponente"); 
           stt.executeUpdate();
           stt.close();
+          PreparedStatement s = conexion.prepareStatement("Delete FROM categoria"); 
+          s.executeUpdate();
+          s.close();
+          PreparedStatement a = conexion.prepareStatement("Delete FROM propuesta"); 
+          a.executeUpdate();
+          a.close();
           } catch (SQLException ex) {
             ex.printStackTrace();
         }
