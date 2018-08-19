@@ -39,6 +39,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     private Map<String, Propuesta> propuestas;
     private static ctrlPropuesta instancia;
+    private List<Colaboracion> colaboraciones;
     DBPropuesta dbPropuesta = null;
     DBListEstado dbE = null;
 
@@ -64,6 +65,11 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void setPropuestas(Map<String, Propuesta> propuestas) {
         this.propuestas = propuestas;
+    }
+    
+    public Propuesta getPropPorNick(String nick)
+    {
+        return this.propuestas.get(nick);
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
@@ -140,8 +146,8 @@ public class ctrlPropuesta implements IPropuesta {
         Propuesta p = (Propuesta) this.propuestas.get(titulo);
         Iterator iteradorsito = p.colaboraciones.iterator();
         while (iteradorsito.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iteradorsito.next();
-            Colaboracion aux = (Colaboracion) mentry.getValue();
+            
+            Colaboracion aux = (Colaboracion) iteradorsito.next();
             if(aux.getColab().nick == nick)
                 return true;
     }
@@ -187,6 +193,11 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+    }
+    
+    public void cargarColaboraciones()
+    {
+        this.colaboraciones = this.dbPropuesta.cargarColaboraciones();
     }
 
     public List<DtPropuesta> listarPropuestas() {

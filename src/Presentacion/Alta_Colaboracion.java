@@ -539,7 +539,10 @@ public void cargarColab(){
         String lul = q.getNombre()+"("+q.getNick()+(")");
         dlm.addElement(lul);
     }
+    
+    Colaborador xD = this.iUsu.traerColaborador("chino");
     listaColabs.setModel(dlm);
+    this.IP.cargarColaboraciones();
 }
 
 public void limpiar()

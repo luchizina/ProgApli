@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Logica.Colaboracion;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import Logica.DtFecha;
+import Logica.Colaborador;
+import Logica.Fabrica;
+import Logica.IUsuario;
+import Logica.IPropuesta;
 
 /**
  *
@@ -28,6 +33,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DBPropuesta {    
+    Fabrica fab = Fabrica.getInstance();
+
     java.util.Date fec;
      java.sql.Date sqlDate;
     //Si ConexionDB fuera singleton
@@ -104,6 +111,36 @@ public class DBPropuesta {
             ex.printStackTrace();
             return null;
         }        
-    }    
-    
+    }
+
+    public List<Colaboracion> cargarColaboraciones()
+    {
+        try{
+                 IUsuario iUsu = fab.getICtrlUsuario();
+                 IPropuesta iProp = fab.getICtrlPropuesta();
+        List<Colaboracion> listita = new ArrayList<>();
+        PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaboracion");
+        ResultSet rs = st.executeQuery();
+        while(rs.next())
+        {
+            Date fechita = rs.getDate("Fecha");
+            String retorno = rs.getString("Retorno");
+            int monto = rs.getInt("Monto");
+            String nick = rs.getString("NickCol");
+            Colaborador co = iUsu.traerColaborador(nick);
+            String titulo = rs.getString("TituloP");
+            Propuesta pr = iProp.getPropPorNick(titulo);
+            Colaboracion c = new Colaboracion(fechita,retorno ,monto ,co ,pr);
+            listita.add(c);
+            co.AddColab(c);
+            pr.addColab(c);
+        }
+        rs.close();
+        st.close();
+        return listita;
+    } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+    }
+}
 }
