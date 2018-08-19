@@ -68,7 +68,7 @@ public boolean ingresarCat(DtCategoria datos){
             return false;
         }else{
             Categoria c=new Categoria(datos.getNombre(), datos.getPadre());
-            boolean res =this.dbCategoria.agregarPersona(c);
+            boolean res =this.dbCategoria.agregarCategoria(c);
             if (res){
                 //Colección genérica común
                 //this.personas.add(p);
