@@ -42,6 +42,9 @@ public class ctrlUsuario implements IUsuario {
     private Map<String, Usuario> usuarios;
     private Map<String, Proponente> Proponentes;
     private Map<String, Colaborador> colaboradores;
+    private String usuRec;
+    private String usuAseguir;
+
     private DBusuario usu = null;
 
     public static ctrlUsuario getInstance() {
@@ -82,11 +85,53 @@ public class ctrlUsuario implements IUsuario {
             return res;
         }
     }
-    
+     @Override
     public Colaborador traerColaborador(String f)
     {
         return this.colaboradores.get(f);
     }
+    
+    
+    
+    
+    
+    
+     @Override
+    public void seguirUsuario(){
+        
+        
+        
+    }
+    @Override
+     public void seleccionarUsuario(String nick){
+         this.usuRec=nick;
+     }
+     @Override
+     public void seleccionarUsuSeg(String nick){
+         this.usuAseguir=nick;
+     }
+    
+    @Override
+    public List<DtProponente> listarProponentes(){
+      List<DtProponente> listita = new ArrayList<>();
+        Set se = usuarios.entrySet();
+        Iterator iterator = se.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Proponente aux = (Proponente) mentry.getValue();
+            listita.add(aux.obtenerInfo());
+        }
+        return listita;
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
@@ -177,6 +222,7 @@ public class ctrlUsuario implements IUsuario {
         return retorna;
     }
 
+    @Override
     public List<DtColaborador> listarColaboradores() {
         List<DtColaborador> listita = new ArrayList<>();
         Set se = colaboradores.entrySet();
@@ -188,7 +234,12 @@ public class ctrlUsuario implements IUsuario {
         }
         return listita;
     }
+    
+    
+    
 
+
+    @Override
     public boolean escorreo(String correo) {
         Pattern pat = null;
         Matcher mat = null;
@@ -201,6 +252,7 @@ public class ctrlUsuario implements IUsuario {
         }
     }
 
+    @Override
     public boolean existeNick(String nick) {
 
         for (Usuario u : this.usuarios.values()) {
