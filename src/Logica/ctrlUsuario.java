@@ -88,7 +88,8 @@ public class ctrlUsuario implements IUsuario {
      @Override
     public Colaborador traerColaborador(String f)
     {
-        return this.colaboradores.get(f);
+        Colaborador fa = (Colaborador) this.colaboradores.get(f);
+        return fa;
     }
     
     
@@ -133,6 +134,10 @@ public class ctrlUsuario implements IUsuario {
     
     
 
+    public Map<String, Colaborador> getColaboradores()
+    {
+        return colaboradores;
+    }
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
         if (this.existe(Nick, Correo) == false) {

@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.List;
 
 /**
@@ -35,4 +36,5 @@ public abstract boolean escorreo(String correo);
      public abstract void seleccionarUsuario(String nick);
      public abstract void seleccionarUsuSeg(String nick);
      
+     public abstract Map<String, Colaborador> getColaboradores();
 }

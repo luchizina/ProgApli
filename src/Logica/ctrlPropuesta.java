@@ -15,6 +15,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
+import Logica.Colaboracion;
 import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     private Map<String, Propuesta> propuestas;
     private static ctrlPropuesta instancia;
+    private List<Colaboracion> colaboraciones;
     DBPropuesta dbPropuesta = null;
     DBListEstado dbE = null;
 
@@ -63,6 +65,11 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void setPropuestas(Map<String, Propuesta> propuestas) {
         this.propuestas = propuestas;
+    }
+    
+    public Propuesta getPropPorNick(String nick)
+    {
+        return this.propuestas.get(nick);
     }
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
@@ -133,7 +140,34 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return false;
     }
-
+    
+    public boolean existeColaboracion(String nick, String titulo)
+    {
+        Propuesta p = (Propuesta) this.propuestas.get(titulo);
+        Iterator iteradorsito = p.colaboraciones.iterator();
+        while (iteradorsito.hasNext()) {
+            
+            Colaboracion aux = (Colaboracion) iteradorsito.next();
+            if(aux.getColab().nick == nick)
+                return true;
+    }
+        return false;
+    }
+    
+    public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR)
+    {
+        Date lul = new Date();
+        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop);
+      
+        if (dbPropuesta.agregarColaboracion(c))
+        {
+            this.colaboraciones.add(c);
+            prop.addColab(c);
+            colab.AddColab(c);
+            return true;
+        }
+        return false;
+    }
     private String getCurrentTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmss");
         String currentTime = dateFormat.format(System.currentTimeMillis());
@@ -174,6 +208,11 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+    }
+    
+    public void cargarColaboraciones()
+    {
+        this.colaboraciones = this.dbPropuesta.cargarColaboraciones();
     }
 
     public List<DtPropuesta> listarPropuestas() {

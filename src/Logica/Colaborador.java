@@ -27,9 +27,13 @@ public class Colaborador extends Usuario {
 
     public Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
        super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
+       this.colHechas = new HashMap<>(); 
     }
 
-   
+   public void AddColab(Colaboracion c)
+   {
+       this.colHechas.put(1, c);
+   }
    
 
     public Map<Integer, Colaboracion> getColHechas() {
