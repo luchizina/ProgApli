@@ -7,6 +7,7 @@ package Logica;
  */
 
 import Logica.*;
+import java.util.Date;
 
 /**
  *
@@ -14,13 +15,16 @@ import Logica.*;
  */
 public class Colaboracion {
     private
-            DtFecha fecha;
-            Tretorno retorno;
+            Date fecha;
+            String retorno;
             int monto;
             Colaborador colab;
             Propuesta prop;
 
-    public Colaboracion(DtFecha fecha, Tretorno retorno, int monto, Colaborador colab, Propuesta prop) {
+            Fabrica fab = Fabrica.getInstance();
+            private IPropuesta IP = fab.getICtrlPropuesta();
+            private IUsuario iUsu = fab.getICtrlUsuario();
+    public Colaboracion(Date fecha, String retorno, int monto, Colaborador colab, Propuesta prop) {
         this.fecha = fecha;
         this.retorno = retorno;
         this.monto = monto;
@@ -28,19 +32,19 @@ public class Colaboracion {
         this.prop = prop;
     }
 
-    public DtFecha getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(DtFecha fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public Tretorno getRetorno() {
+    public String getRetorno() {
         return retorno;
     }
 
-    public void setRetorno(Tretorno retorno) {
+    public void setRetorno(String retorno) {
         this.retorno = retorno;
     }
 

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Logica.Colaboracion;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import Logica.DtFecha;
+import Logica.Colaborador;
+import Logica.Fabrica;
+import Logica.IUsuario;
+import Logica.IPropuesta;
+import java.text.DateFormat;
 
 /**
  *
@@ -28,6 +34,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DBPropuesta {    
+    Fabrica fab = Fabrica.getInstance();
+
     java.util.Date fec;
      java.sql.Date sqlDate;
     //Si ConexionDB fuera singleton
@@ -104,6 +112,61 @@ public class DBPropuesta {
             ex.printStackTrace();
             return null;
         }        
-    }    
+    }
     
+    public Boolean agregarColaboracion(Colaboracion c)
+    {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
+            Date fechaC= c.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String fechaSt=sdf.format(fechaC);
+            String[] lul = fechaSt.split(" ");
+            String parte1 = lul[0];
+            String parte2 = lul[1];
+            statement.setString(1, parte1);
+            statement.setString(2, c.getRetorno());
+            statement.setInt(3, c.getMonto());
+            statement.setString(4, c.getColab().getNick());
+            statement.setString(5, c.getProp().getTitulo());
+            statement.setString(6, parte2);
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+    }
+
+    public List<Colaboracion> cargarColaboraciones()
+    {
+        try{
+                 IUsuario iUsu = fab.getICtrlUsuario();
+                 IPropuesta iProp = fab.getICtrlPropuesta();
+        List<Colaboracion> listita = new ArrayList<>();
+        PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaboracion");
+        ResultSet rs = st.executeQuery();
+        while(rs.next())
+        {
+            Date fechita = rs.getDate("Fecha");
+            String retorno = rs.getString("Retorno");
+            int monto = rs.getInt("Monto");
+            String nick = rs.getString("NickCol");
+            Colaborador co = iUsu.traerColaborador(nick);
+            String titulo = rs.getString("TituloP");
+            Propuesta pr = iProp.getPropPorNick(titulo);
+            Colaboracion c = new Colaboracion(fechita,retorno ,monto ,co ,pr);
+            listita.add(c);
+            co.AddColab(c);
+            pr.addColab(c);
+        }
+        rs.close();
+        st.close();
+        return listita;
+    } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+    }
+}
 }

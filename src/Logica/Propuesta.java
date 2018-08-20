@@ -72,7 +72,9 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoTotal = montoTotal;
         this.cate = cate;
         this.lugar = lugar;
-    }
+        this.colaboraciones = new ArrayList<>();
+         this.listaDeEstados = new HashMap<>();
+     }
      
      public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
      {
@@ -101,6 +103,13 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.cate = cate;
         this.img = img;
         this.lugar = lugar;
+        this.colaboraciones = new ArrayList<>();
+        this.listaDeEstados = new HashMap<>();
+    }
+    
+    public void addColab(Colaboracion c)
+    {
+        this.colaboraciones.add(c);
     }
 
     public String getImg() {
