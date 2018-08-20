@@ -115,6 +115,17 @@ public class Usuario {
     public void setPropuFav(Map<String, Propuesta> propuFav) {
         this.propuFav = propuFav;
     }
+    
+    public void seguirUsuario(Usuario aSeguir){
+        this.usuSeguidos.put(aSeguir.getNick(), aSeguir);
+          }
+    
+    
+    public void dejarDeSeguir(Usuario aSeguir){
+                this.usuSeguidos.remove(aSeguir.getNick());
+    }
+    
+    
 
     public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
         this.nick = nick;

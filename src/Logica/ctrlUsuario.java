@@ -99,10 +99,18 @@ public class ctrlUsuario implements IUsuario {
     
      @Override
     public void seguirUsuario(){
-        
-        
-        
+        Usuario u=this.usuarios.get(this.usuRec);
+        Usuario aSeguir=this.usuarios.get(this.usuAseguir);
+        u.seguirUsuario(aSeguir);
+                
     }
+    
+   
+    
+    
+    
+    
+    
     @Override
      public void seleccionarUsuario(String nick){
          this.usuRec=nick;

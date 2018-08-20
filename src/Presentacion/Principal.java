@@ -551,6 +551,7 @@ cat.setVisible(true);
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
+                 
 Seguir_usuario su = new Seguir_usuario(iUsu);
 jp.add(su);
 su.setVisible(true);
