@@ -103,6 +103,7 @@ public class ctrlUsuario implements IUsuario {
     
      @Override
     public boolean seguirUsuario(){
+ 
         Usuario u=this.usuarios.get(this.usuRec);
         Usuario aSeguir=this.usuarios.get(this.usuAseguir);
           

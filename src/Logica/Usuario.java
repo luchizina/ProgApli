@@ -118,7 +118,7 @@ public class Usuario {
     
     public boolean seguirUsuario(Usuario aSeguir){
         Usuario nuevo= new Usuario(aSeguir.getNick(), aSeguir.getNombre(), aSeguir.getApellido(), aSeguir.getCorreo(), aSeguir.getFecha(), aSeguir.getImg(), aSeguir.getTipo());
-        this.usuSeguidos.put(aSeguir.getNick(), nuevo);
+        this.usuSeguidos.put(nuevo.getNick(), nuevo);
         return true;
           }
     
