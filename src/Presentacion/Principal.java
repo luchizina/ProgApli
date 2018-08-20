@@ -516,10 +516,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed
-         Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
-        // Se crea una instancia del JinternalFrame
-        jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
-        ap.setVisible(true);                 // TODO add your handling code here:
+      try {
+          Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
+          // Se crea una instancia del JinternalFrame
+          jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
+          ap.setVisible(true);                 // TODO add your handling code here:
+      } catch (ParseException ex) {
+          Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }//GEN-LAST:event_Propuesta_altaActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -620,10 +624,8 @@ su.setVisible(true);
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Principal().setVisible(true);
         });
     }
 

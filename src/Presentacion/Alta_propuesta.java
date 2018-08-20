@@ -42,7 +42,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUsu) throws ParseException
     {
         initComponents();
-       
         this.IP = IP;
         Jpanel1.setVisible(false);
         this.iCat = cat;
