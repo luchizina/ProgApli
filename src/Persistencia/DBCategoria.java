@@ -62,7 +62,7 @@ public class DBCategoria {
             return null;
         }        
     }
-       public boolean agregarPersona(Categoria c){
+       public boolean agregarCategoria(Categoria c){
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO categoria "
                     + "(NombreH, NombreP) values(?,?)");
