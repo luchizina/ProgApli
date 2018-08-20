@@ -36,6 +36,11 @@ public class Principal extends javax.swing.JFrame {
 ////        fabrica.cargaProp();
 ////        fabrica.cargarDatosPrueba();
 //          fabrica.pruebas();
+                
+                iUsu.cargarColaboradores();
+                iUsu.cargarProponentes();
+                IP.cargarPropuestas();
+                this.IP.cargarColaboraciones();
     }
 
     /**
@@ -565,7 +570,7 @@ cat.setVisible(true);
         iUsu.limpiarUsuarios();
         iUsu.cargarUsuarios();
         icat.categoriasPrueba();
-        IP.CargaPropuestasPrueba();
+        //IP.CargaPropuestasPrueba();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed

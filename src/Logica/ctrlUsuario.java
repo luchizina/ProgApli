@@ -187,7 +187,7 @@ public class ctrlUsuario implements IUsuario {
 
             }
             Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo);
-            boolean res = this.usu.agregarProponente(p);
+                boolean res = this.usu.agregarProponente(p);
             if (res) {
                 this.usuarios.put(Nick, p);
             }
