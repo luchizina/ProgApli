@@ -35,6 +35,7 @@ public abstract boolean escorreo(String correo);
       public abstract List<DtProponente> listarProponentes();
      public abstract void seleccionarUsuario(String nick);
      public abstract void seleccionarUsuSeg(String nick);
+     public abstract void dejarDeSeguir();
      
      public abstract Map<String, Colaborador> getColaboradores();
 }

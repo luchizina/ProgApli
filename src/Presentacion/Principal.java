@@ -230,6 +230,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem10.setText("Dejar de seguir usuario");
         jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
@@ -446,12 +451,26 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu2.add(jMenu4);
 
+        
+        
         jMenuItem9.setText("Seguir usuario");
         jMenuItem9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jMenu2.add(jMenuItem9);
+         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+                jMenu2.add(jMenuItem9);
 
+                
+                
         jMenuItem10.setText("Dejar de seguir usuario");
         jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
@@ -558,6 +577,15 @@ su.setVisible(true);
 
 
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        
+        Dejar_de_seguir_usuario dej = new Dejar_de_seguir_usuario();
+        jp.add(dej);
+        dej.setVisible(true);
+                
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments

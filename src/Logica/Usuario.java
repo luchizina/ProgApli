@@ -122,7 +122,7 @@ public class Usuario {
     
     
     public void dejarDeSeguir(Usuario aSeguir){
-                this.usuSeguidos.remove(aSeguir.getNick());
+   this.usuSeguidos.remove(aSeguir.getNick());
     }
     
     
