@@ -78,7 +78,6 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccionar usuario:");
 
-        cmbProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbProp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPropActionPerformed(evt);
@@ -87,7 +86,6 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Seleccionar usuario a seguir:");
 
-        cmbPropSeg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbPropSeg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPropSegActionPerformed(evt);
@@ -105,13 +103,9 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Colaboradores");
 
-        cmbColab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Proponentes");
 
         jLabel7.setText("Colaboradores");
-
-        cmbColabSeg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
