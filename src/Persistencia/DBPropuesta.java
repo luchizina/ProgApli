@@ -24,6 +24,7 @@ import Logica.Colaborador;
 import Logica.Fabrica;
 import Logica.IUsuario;
 import Logica.IPropuesta;
+import java.text.DateFormat;
 
 /**
  *
@@ -111,6 +112,31 @@ public class DBPropuesta {
             ex.printStackTrace();
             return null;
         }        
+    }
+    
+    public Boolean agregarColaboracion(Colaboracion c)
+    {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
+            Date fechaC= c.getFecha();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String fechaSt=sdf.format(fechaC);
+            String[] lul = fechaSt.split(" ");
+            String parte1 = lul[0];
+            String parte2 = lul[1];
+            statement.setString(1, parte1);
+            statement.setString(2, c.getRetorno());
+            statement.setInt(3, c.getMonto());
+            statement.setString(4, c.getColab().getNick());
+            statement.setString(5, c.getProp().getTitulo());
+            statement.setString(6, parte2);
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
     }
 
     public List<Colaboracion> cargarColaboraciones()

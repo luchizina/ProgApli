@@ -153,6 +153,21 @@ public class ctrlPropuesta implements IPropuesta {
     }
         return false;
     }
+    
+    public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR)
+    {
+        Date lul = new Date();
+        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop);
+      
+        if (dbPropuesta.agregarColaboracion(c))
+        {
+            this.colaboraciones.add(c);
+            prop.addColab(c);
+            colab.AddColab(c);
+            return true;
+        }
+        return false;
+    }
     private String getCurrentTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmss");
         String currentTime = dateFormat.format(System.currentTimeMillis());
