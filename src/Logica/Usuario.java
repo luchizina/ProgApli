@@ -116,13 +116,15 @@ public class Usuario {
         this.propuFav = propuFav;
     }
     
-    public void seguirUsuario(Usuario aSeguir){
+    public boolean seguirUsuario(Usuario aSeguir){
         this.usuSeguidos.put(aSeguir.getNick(), aSeguir);
+        return true;
           }
     
     
-    public void dejarDeSeguir(Usuario aSeguir){
+    public boolean dejarDeSeguir(Usuario aSeguir){
    this.usuSeguidos.remove(aSeguir.getNick());
+   return true;
     }
     
     

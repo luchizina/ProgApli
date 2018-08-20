@@ -100,20 +100,20 @@ public class ctrlUsuario implements IUsuario {
     
     
      @Override
-    public void seguirUsuario(){
+    public boolean seguirUsuario(){
         Usuario u=this.usuarios.get(this.usuRec);
         Usuario aSeguir=this.usuarios.get(this.usuAseguir);
       
-        u.seguirUsuario(aSeguir);
+       return u.seguirUsuario(aSeguir);
                 
     }
     
     @Override
-    public void dejarDeSeguir(){
+    public boolean dejarDeSeguir(){
         Usuario u=this.usuarios.get(this.usuRec);
         Usuario aDejar=this.usuarios.get(this.usuAseguir);
         
-        u.dejarDeSeguir(aDejar);
+        return u.dejarDeSeguir(aDejar);
     }
     
     
