@@ -128,7 +128,7 @@ public class DBusuario {
        public boolean seguirPP(String nickProp, String nickProp2){
          
            try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguirpp "
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguepp "
                     + "(Seguidor, Seguido) values(?,?)");
             statement.setString(1,nickProp);
             statement.setString(2,nickProp2);
@@ -146,7 +146,7 @@ public class DBusuario {
       public boolean seguirCC(String nickColab, String nickColab2){
          
            try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguircc "
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguecc "
                     + "(Seguidor, Seguido) values(?,?)");
             statement.setString(1,nickColab);
             statement.setString(2,nickColab2);

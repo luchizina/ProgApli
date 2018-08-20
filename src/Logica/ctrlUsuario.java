@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import Logica.Colaborador;
+import Logica.Proponente;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,9 +105,22 @@ public class ctrlUsuario implements IUsuario {
     public boolean seguirUsuario(){
         Usuario u=this.usuarios.get(this.usuRec);
         Usuario aSeguir=this.usuarios.get(this.usuAseguir);
-      
-       return u.seguirUsuario(aSeguir);
-                
+          
+          if(u instanceof Colaborador){
+              
+          }
+          
+          if(u instanceof Proponente){
+            if(aSeguir instanceof Proponente){
+                this.usu.seguirPP(u.getNick(), aSeguir.getNick());
+                return u.seguirUsuario(aSeguir);
+            }
+              
+          }
+
+ 
+    
+         return false;       
     }
     
     @Override
