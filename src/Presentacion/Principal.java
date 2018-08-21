@@ -603,7 +603,7 @@ su.setVisible(true);
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
         
-        Dejar_de_seguir_usuario dej = new Dejar_de_seguir_usuario();
+        Dejar_de_seguir_usuario dej = new Dejar_de_seguir_usuario(iUsu);
         jp.add(dej);
         dej.setVisible(true);
                 
