@@ -108,6 +108,12 @@ public class ctrlUsuario implements IUsuario {
         Usuario aSeguir=this.usuarios.get(this.usuAseguir);
           
           if(u instanceof Colaborador){
+              if(aSeguir instanceof Colaborador){
+                  this.usu.seguirCC(u.getNick(), aSeguir.getNick());
+              }
+              else if(aSeguir instanceof Proponente){
+                  this.usu.seguirCP(u.getNick(), aSeguir.getNick());
+              }
               
           }
           
@@ -115,6 +121,9 @@ public class ctrlUsuario implements IUsuario {
             if(aSeguir instanceof Proponente){
                 this.usu.seguirPP(u.getNick(), aSeguir.getNick());
                 return u.seguirUsuario(aSeguir);
+            }
+            else if(aSeguir instanceof Colaborador){
+                this.usu.seguirPC(u.getNick(), aSeguir.getNick());
             }
               
           }
@@ -126,10 +135,33 @@ public class ctrlUsuario implements IUsuario {
     
     @Override
     public boolean dejarDeSeguir(){
-        Usuario u=this.usuarios.get(this.usuRec);
-        Usuario aDejar=this.usuarios.get(this.usuAseguir);
-        
-        return u.dejarDeSeguir(aDejar);
+         Usuario u=this.usuarios.get(this.usuRec);
+        Usuario aSeguir=this.usuarios.get(this.usuAseguir);
+          
+          if(u instanceof Colaborador){
+              if(aSeguir instanceof Colaborador){
+                  this.usu.dejarSeguirCC(u.getNick(), aSeguir.getNick());
+              }
+              else if(aSeguir instanceof Proponente){
+                  this.usu.dejarSeguirCP(u.getNick(), aSeguir.getNick());
+              }
+              
+          }
+          
+          if(u instanceof Proponente){
+            if(aSeguir instanceof Proponente){
+                this.usu.dejarSeguirPP(u.getNick(), aSeguir.getNick());
+                return u.dejarDeSeguir(aSeguir);
+            }
+            else if(aSeguir instanceof Colaborador){
+                this.usu.dejarSeguirPC(u.getNick(), aSeguir.getNick());
+            }
+              
+          }
+
+ 
+    
+         return false;  
     }
     
     
