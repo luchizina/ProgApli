@@ -515,7 +515,7 @@ cat.setVisible(true);
         iUsu.limpiarUsuarios();
         iUsu.cargarUsuarios();
         icat.categoriasPrueba();
-        IP.CargaPropuestasPrueba();
+//        IP.CargaPropuestasPrueba();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
