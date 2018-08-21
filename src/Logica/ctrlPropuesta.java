@@ -72,6 +72,7 @@ public class ctrlPropuesta implements IPropuesta {
     {
         return this.propuestas.get(nick);
     }
+ 
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
     @Override
@@ -316,5 +317,17 @@ public class ctrlPropuesta implements IPropuesta {
         }       
         return Nicks;
 };
-    
+ 
+    public List<String> ColaborantesDePro(){
+         List<String> Nicks = new ArrayList<String>();
+        Iterator iteradorsito = colaboraciones.iterator();
+        while (iteradorsito.hasNext()) {
+            Colaboracion aux = (Colaboracion) iteradorsito.next();
+            if(aux.getProp().getTitulo().equals(this.propuestaconsulta.getTitulo())){
+                String N = aux.getColab().getNombre() +"("+ aux.getColab().getNick()+")";
+                Nicks.add(N); 
+            }
+    }
+    return Nicks;
+    };
 }

@@ -287,8 +287,9 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
     private void jLPropuestasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jLPropuestasValueChanged
         // TODO add your handling code here:
         DtPropuesta x = propuesta.SeleccionarProp(jLPropuestas.getSelectedValue());
-        List<String> nombres = propuesta.NombrePropoConsulta(); // falta liberar la memoria
-        //List<String> nombres = IA.Colaboraste();
+        //List<String> nombres = propuesta.NombrePropoConsulta(); // falta liberar la memoria
+        List<String> nombres = propuesta.ColaborantesDePro();
+        // List<String> nombres = IA.Colaboraste();
         Date date = x.getFecha();
         DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
         String convertido = fecha.format(date);

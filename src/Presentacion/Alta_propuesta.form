@@ -124,12 +124,7 @@
         <Component class="javax.swing.JComboBox" name="jProp">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -144,11 +139,8 @@
         <Component class="javax.swing.JComboBox" name="jCateg">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -242,7 +234,6 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="img">
           <Properties>
-            <Property name="text" type="java.lang.String" value="img"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                 <BevelBorder/>
@@ -307,7 +298,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTitulo" min="-2" pref="111" max="-2" attributes="0"/>
                               <Component id="jPrecioE" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="jDate" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDate" min="-2" pref="112" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLugar" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>

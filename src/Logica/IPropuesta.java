@@ -26,7 +26,7 @@ public interface IPropuesta {
     public abstract void cargarColaboraciones();
     public abstract boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR);
     
-    
+    public abstract List<String> ColaborantesDePro();
     public abstract DtPropuesta SeleccionarProp(String xTitulo);
     public abstract List<String> NombrePropoConsulta(); 
     public abstract List<String> ListarProp(); 

@@ -6,7 +6,6 @@
 package Presentacion;
 import Logica.DtCategoria;
 import Logica.IPropuesta;
-import Logica.DtFecha;
 import Logica.DtProponente;
 import Logica.Estado;
 import Logica.ICategoria;
@@ -14,14 +13,13 @@ import Logica.IUsuario;
 import Logica.Testado;
 import java.awt.Image;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -41,14 +39,18 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         Jpanel1.setVisible(false);
         
     }
-    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUsu)
+    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUs) throws ParseException
     {
         initComponents();
         this.IP = IP;
         Jpanel1.setVisible(false);
         this.iCat = cat;
-        this.iUsu = iUsu;
+        this.iUsu = iUs;
         cargar();
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        Date desde = new Date();
+        Date hasta = sd.parse("2030-01-01");
+        this.jDate.setSelectableDateRange(desde, hasta);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,11 +105,9 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Ingrese los siguientes datos:");
 
-        jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Buscar proponente:");
 
-        jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jCateg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCategActionPerformed(evt);
@@ -181,7 +181,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        img.setText("img");
         img.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton1.setText("Subir imagen");
@@ -329,7 +328,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -427,9 +426,28 @@ public static String getHoraActual() {
     SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
     return formateador.format(ahora);
 }
+ private boolean vacios() {
+        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("")) {
+            return true;
+        }
+        return false;
+    }
+ private void limpiar() {
+        jTitulo.setText("");
+        jDesc.setText("");
+        jLugar.setText("");
+        jPrecioE.setText("");
+        jDate.setDate(null);
+        jPrecioT.setText("");
+        jR1.setSelected(false);
+        jR2.setSelected(false);
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        urlimagen.setText("");
+        img.setIcon(null);
+    }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
-        
-       String hora = getHoraActual();
+     String hora = getHoraActual();
       Estado estA = new Estado(Testado.ingresada);
       String TRetorno;
         if(jR1.isSelected() && jR2.isSelected()){
@@ -437,24 +455,29 @@ public static String getHoraActual() {
         }
         else if(jR1.isSelected() && !(jR2.isSelected())){
             TRetorno=jR1.getText();
-            
         }
         else
         {
             TRetorno=jR2.getText();
         }
-   //     String TRetorno= jR1.getText() + " " + jR2.getText();
-boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
-       if (ok){
+        if(vacios() == false){
+        boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
+             if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
 
-        }else{
+             }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
+             }
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
+            
         }
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
-     // TODO add your handling code here:
+        this.limpiar();
+        this.dispose();     // TODO add your handling code here:
     }//GEN-LAST:event_bt1ActionPerformed
 
     private void jCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCategActionPerformed
@@ -462,23 +485,23 @@ boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate
     }//GEN-LAST:event_jCategActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-              if(evt.getSource()==jButton1){
-        JFileChooser j = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
-        j.setFileFilter(filtro);
-        int ap = j.showOpenDialog(this);
-        if(ap == JFileChooser.APPROVE_OPTION){
-            File file = j.getSelectedFile();
-            String ruta = file.getPath();
-            this.urlimagen.setText(ruta);
-            ImageIcon imagen3 = new ImageIcon(ruta);
-            Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.img.getWidth(), this.img.getHeight(), Image.SCALE_DEFAULT));
-            this.img.setIcon(icono);
-            this.pack();
-        }
+        if (evt.getSource() == jButton1) {
+            JFileChooser j = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
+            j.setFileFilter(filtro);
+            int ap = j.showOpenDialog(this);
+            if (ap == JFileChooser.APPROVE_OPTION) {
+                File file = j.getSelectedFile();
+                String ruta = file.getPath();
+                this.urlimagen.setText(ruta);
+                ImageIcon imagen3 = new ImageIcon(ruta);
+                Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.img.getWidth(), this.img.getHeight(), Image.SCALE_DEFAULT));
+                this.img.setIcon(icono);
+                this.pack();
+            }
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel1;
     private javax.swing.JButton bt1;
@@ -519,21 +542,21 @@ boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate
     // End of variables declaration//GEN-END:variables
 
     private void cargar(){
-    this.iCat.cargarCategorias();
-        List<DtCategoria> catego = this.iCat.listarCategorias();
-            
-        for(int i=0; i<catego.size(); i++){
-            DtCategoria c=(DtCategoria) catego.get(i);
-           jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { c.getNombre() }));
+        this.iCat.cargarCategorias();
+      //  List<DtCategoria> catego = this.iCat.listarCategorias();
+        List<DtCategoria> combo = this.iCat.listarCategorias();
+        for(int i=0; i< combo.size(); i++){
+            DtCategoria combito=(DtCategoria) combo.get(i);
+                       jCateg.addItem(combito.getNombre());
         }
-           this.iUsu.cargarProponentes();
+        
+        this.iUsu.cargarProponentes();
         List<DtProponente> propo = this.iUsu.listarUsuario();
-            
         for(int k=0; k<propo.size(); k++){
             DtProponente prop=(DtProponente) propo.get(k);
-            jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { prop.getNick() }));
-            this.iUsu.cargarProponentes();
-     
+            jProp.addItem(prop.getNick());
+//            jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { prop.getNick() }));
+//            this.iUsu.cargarProponentes();
         }
     }
     
