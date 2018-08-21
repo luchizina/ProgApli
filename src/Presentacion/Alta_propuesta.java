@@ -39,13 +39,13 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         Jpanel1.setVisible(false);
         
     }
-    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUsu) throws ParseException
+    public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUs) throws ParseException
     {
         initComponents();
         this.IP = IP;
         Jpanel1.setVisible(false);
         this.iCat = cat;
-        this.iUsu = iUsu;
+        this.iUsu = iUs;
         cargar();
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         Date desde = new Date();
@@ -105,11 +105,9 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Ingrese los siguientes datos:");
 
-        jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Buscar proponente:");
 
-        jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jCateg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCategActionPerformed(evt);
@@ -544,21 +542,21 @@ public static String getHoraActual() {
     // End of variables declaration//GEN-END:variables
 
     private void cargar(){
-    this.iCat.cargarCategorias();
-        List<DtCategoria> catego = this.iCat.listarCategorias();
-            
-        for(int i=0; i<catego.size(); i++){
-            DtCategoria c=(DtCategoria) catego.get(i);
-           jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { c.getNombre() }));
+        this.iCat.cargarCategorias();
+      //  List<DtCategoria> catego = this.iCat.listarCategorias();
+        List<DtCategoria> combo = this.iCat.listarCategorias();
+        for(int i=0; i< combo.size(); i++){
+            DtCategoria combito=(DtCategoria) combo.get(i);
+                       jCateg.addItem(combito.getNombre());
         }
-           this.iUsu.cargarProponentes();
+        
+        this.iUsu.cargarProponentes();
         List<DtProponente> propo = this.iUsu.listarUsuario();
-            
         for(int k=0; k<propo.size(); k++){
             DtProponente prop=(DtProponente) propo.get(k);
-            jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { prop.getNick() }));
-            this.iUsu.cargarProponentes();
-     
+            jProp.addItem(prop.getNick());
+//            jProp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { prop.getNick() }));
+//            this.iUsu.cargarProponentes();
         }
     }
     

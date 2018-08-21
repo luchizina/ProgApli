@@ -8,9 +8,12 @@ import Logica.ICategoria;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Luchi
@@ -25,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
     private IPropuesta IP;
     public Principal() {
         initComponents();
-
+        this.setLocationRelativeTo(null);
         Fabrica fabrica = Fabrica.getInstance();
 
         icat =fabrica.getICtrlCategoria();
@@ -517,10 +520,16 @@ public class Principal extends javax.swing.JFrame {
 
     private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed
       try {
+         
           Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
+          System.out.println(ap.getHeight() + ap.getWidth());
+          
           // Se crea una instancia del JinternalFrame
           jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
-          ap.setVisible(true);                 // TODO add your handling code here:
+         this.setMinimumSize(new Dimension(ap.getWidth()+20,ap.getHeight()+80));
+          ap.setVisible(true);   
+         
+    // TODO add your handling code here:
       } catch (ParseException ex) {
           Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -528,12 +537,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         Consultar_Propuesta propu = new Consultar_Propuesta(IP);
+        this.setMinimumSize(new Dimension(propu.getWidth()+20,propu.getHeight()+80));
         jp.add(propu);
         propu.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
        Alta_Colaboracion cola = new Alta_Colaboracion(IP, iUsu);
+       this.setMinimumSize(new Dimension(cola.getWidth()+20,cola.getHeight()+80));
        jp.add(cola);
        cola.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
@@ -546,6 +557,7 @@ public class Principal extends javax.swing.JFrame {
       } catch (ParseException ex) {
           Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
       }
+      this.setMinimumSize(new Dimension(us.getWidth()+20,us.getHeight()+80));
         jp.add(us); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
         us.setVisible(true); // Esto pa ponerlo visible
         
@@ -563,6 +575,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 Alta_Categoria cat = new Alta_Categoria(icat);
+this.setMinimumSize(new Dimension(cat.getWidth()+20,cat.getHeight()+80));
 jp.add(cat);
 cat.setVisible(true);
         
