@@ -39,9 +39,8 @@ public class Principal extends javax.swing.JFrame {
 ////        fabrica.cargaProp();
 ////        fabrica.cargarDatosPrueba();
 //          fabrica.pruebas();
-                
-                iUsu.cargarColaboradores();
-                iUsu.cargarProponentes();
+                iUsu.cargarUsuarios2();
+                iUsu.cargarUsuarios();
                 IP.cargarPropuestas();
                 this.IP.cargarColaboraciones();
     }
