@@ -58,8 +58,15 @@ public class DBPropuesta {
             Date fechaP = p.getFechaPub();
             String fec = sdf.format(fechaP);
             statement.setString(6, fec);
-            statement.setString(7, p.getImg()); 
-             statement.setString(8, String.valueOf(p.getTipoRetorno()));
+            if(p.getImg()== null)
+            {
+                statement.setString(7, ""); 
+            }
+            else
+            {
+               statement.setString(7, p.getImg()); 
+            }
+            statement.setString(8, String.valueOf(p.getTipoRetorno()));
             statement.setInt(9, p.getMontoTotal());
             statement.setString(10, p.getCate());
             statement.setString(11, p.getProp());
