@@ -245,6 +245,7 @@ public class ctrlUsuario implements IUsuario {
         }
     }
 
+    @Override
     public void cargarProponentes() {
         this.usuarios = this.usu.cargarProponentes();
     }
@@ -260,7 +261,9 @@ public class ctrlUsuario implements IUsuario {
 
     @Override
     public void cargarPropPrueba() {
-//        this.usu.cargarProponentesPrueba();
+        this.usu.cargarProponentesPrueba();
+        this.usu.CargarColabPrueba();
+        this.cargarUsuarios2();
     }
 
     @Override
