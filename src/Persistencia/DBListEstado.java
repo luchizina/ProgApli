@@ -5,13 +5,22 @@
  */
 package Persistencia;
 import Logica.ListEstado;
+import Logica.Propuesta;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.HashMap;
+import java.util.Map;
+import Logica.Estado;
+import Logica.Testado;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Time;
 /**
  *
  * @author apias
@@ -35,5 +44,5 @@ public class DBListEstado {
                 statement.executeUpdate();
                 statement.close();
             return true;
-        }        
+        }  
 }

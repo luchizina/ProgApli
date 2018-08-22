@@ -20,7 +20,7 @@ public class Propuesta {
     private 
             String titulo;
             String desc;
-           Date fecha;
+            Date fecha;
             int precioE;
             int montoActual;
             Date fechaPub;
@@ -29,12 +29,12 @@ public class Propuesta {
             Categoria cat;
             String cate;
             Estado estActual;
-            ListEstado listaEstados;
+            ListEstado listaEstados; // ?
             String img;
             String lugar;
             String Prop;
             List<Colaboracion> colaboraciones;
-            private Map<Testado, ListEstado> listaDeEstados;
+            private Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
             
 public Propuesta(){
 
