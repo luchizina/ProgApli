@@ -107,6 +107,29 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.listaDeEstados = new HashMap<>();
     }
     
+    // AGREGE LUGAR 
+    public Propuesta(String xlugar,String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
+     {
+         this.titulo = titulo;
+         this.desc = descripcion;
+         this.fecha = fechita;
+         this.montoActual = montoActual;
+         this.fechaPub = fechaPub;
+         this.img = url;
+         this.tipoRetorno = tipoRetorno;
+         this.montoTotal = montoTotal;
+         this.cate = categoria;
+         this.Prop = nickProp;
+         this.precioE = precioE;
+         this.colaboraciones = new ArrayList<>();
+         this.listaDeEstados = new HashMap<>();
+         this.lugar = xlugar;
+         
+     }
+    
+    
+    
+    
     public void addColab(Colaboracion c)
     {
         this.colaboraciones.add(c);
@@ -275,5 +298,18 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     }
         return  null;
     }
+    
+    public List<String> NombreColaborantes(){
+       List x =  new ArrayList<String>();
+       if(this.colaboraciones == null)
+           return null;
+       //Set set = this.colaboraciones.entrySet();
+       for(int i=0; i<this.colaboraciones.size(); i++){
+           Colaboracion aux= (Colaboracion)this.colaboraciones.get(i);
+           String N = aux.getColab().getNombre() +"("+ aux.getColab().getNick()+")";
+            x.add(N); 
+       }
+       return x;
+   };
     
 }

@@ -40,6 +40,7 @@ public class ctrlPropuesta implements IPropuesta {
     private Map<String, Propuesta> propuestas;
     private static ctrlPropuesta instancia;
     private List<Colaboracion> colaboraciones;
+    private Propuesta propuestaconsulta = null;
     DBPropuesta dbPropuesta = null;
     DBListEstado dbE = null;
 
@@ -285,4 +286,48 @@ public class ctrlPropuesta implements IPropuesta {
             
         }
     }
+    
+    
+    public DtPropuesta SeleccionarProp(String xTitulo) // error 
+    {
+    Propuesta pro = this.propuestas.get(xTitulo);
+    DtPropuesta X = new DtPropuesta(pro,pro.getCate());
+    this.propuestaconsulta = pro;
+    return X; 
+    }
+    
+    
+    public List<String> NombrePropoConsulta(){
+        
+        return this.propuestaconsulta.NombreColaborantes();
+        
+    };
+    
+    
+    public List<String> ListarProp(){
+    List<String> Nicks = new ArrayList<String>();
+    Set set = propuestas.entrySet();
+    Iterator iterator = set.iterator();
+    while(iterator.hasNext()) {
+        Map.Entry mentry = (Map.Entry)iterator.next();
+            Propuesta aux=(Propuesta) mentry.getValue();
+            if (aux != null){
+            Nicks.add(aux.getTitulo()); 
+            }
+        }       
+        return Nicks;
+};
+ 
+    public List<String> ColaborantesDePro(){
+         List<String> Nicks = new ArrayList<String>();
+        Iterator iteradorsito = colaboraciones.iterator();
+        while (iteradorsito.hasNext()) {
+            Colaboracion aux = (Colaboracion) iteradorsito.next();
+            if(aux.getProp().getTitulo().equals(this.propuestaconsulta.getTitulo())){
+                String N = aux.getColab().getNombre() +"("+ aux.getColab().getNick()+")";
+                Nicks.add(N); 
+            }
+    }
+    return Nicks;
+    };
 }

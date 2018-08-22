@@ -91,6 +91,7 @@ public class DBPropuesta {
             while (rs.next()){
                 String titulo = rs.getString("titulo");
                 String descripcion = rs.getString("descripcion");
+                String lugar = rs.getString("lugar"); // agrege lugar y falta estado
                 Date fechita = rs.getDate("Fecha");
                 int precio = rs.getInt("precio");
                 int montoActual = rs.getInt("montoactual");
@@ -102,7 +103,7 @@ public class DBPropuesta {
                 String nickProp = rs.getString("nickprop");
                 SimpleDateFormat da = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
-                Propuesta p=new Propuesta(titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp, precio);
+                Propuesta p=new Propuesta(lugar,titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp, precio);
                 lista.put(titulo, p);
             }
             rs.close();
