@@ -12,6 +12,7 @@ import Logica.ICategoria;
 import Logica.IUsuario;
 import Logica.Testado;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -97,8 +98,13 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jDate = new com.toedter.calendar.JDateChooser();
+        label1 = new java.awt.Label();
+        adv = new java.awt.Label();
+        adv1 = new java.awt.Label();
 
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
+        setResizable(true);
         setAutoscrolls(true);
         setVisible(true);
 
@@ -238,8 +244,25 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel9.setText("Precio entrada:");
         jLabel9.setToolTipText("");
 
+        jPrecioE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPrecioEActionPerformed(evt);
+            }
+        });
+        jPrecioE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPrecioEKeyTyped(evt);
+            }
+        });
+
         jLabel10.setText("Monto necesario:");
         jLabel10.setToolTipText("");
+
+        jPrecioT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPrecioTKeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("Imagen:");
         jLabel11.setToolTipText("");
@@ -300,6 +323,14 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jDate.getDateEditor().setEnabled(false);
+
+        label1.setText("label1");
+
+        adv.setForeground(new java.awt.Color(255, 0, 0));
+
+        adv1.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -317,7 +348,10 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                                 .addComponent(bt1)
                                 .addGap(18, 18, 18)
                                 .addComponent(bt2))
-                            .addComponent(jPrecioT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addComponent(jPrecioT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(adv1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel2Layout.createSequentialGroup()
@@ -333,11 +367,14 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(adv, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +386,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,24 +396,29 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPrecioT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
+                    .addComponent(adv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(adv1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPrecioT)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt2)
-                    .addComponent(bt1))
-                .addContainerGap())
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 26, Short.MAX_VALUE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bt2)
+                            .addComponent(bt1))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -391,7 +433,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                         .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Jpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,7 +475,7 @@ public static String getHoraActual() {
     return formateador.format(ahora);
 }
  private boolean vacios() {
-        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("")) {
+        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("") || (!jR1.isSelected() && !jR2.isSelected())) {
             return true;
         }
         return false;
@@ -462,11 +504,12 @@ public static String getHoraActual() {
         else if(jR1.isSelected() && !(jR2.isSelected())){
             TRetorno=jR1.getText();
         }
-        else
+        else 
         {
             TRetorno=jR2.getText();
         }
         if(vacios() == false){
+           
         boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
              if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
@@ -479,6 +522,7 @@ public static String getHoraActual() {
             javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
             
         }
+    
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
@@ -511,9 +555,35 @@ public static String getHoraActual() {
     private void jPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPropActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPropActionPerformed
+ 
+    private void jPrecioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrecioEActionPerformed
+        
+    }//GEN-LAST:event_jPrecioEActionPerformed
+
+    private void jPrecioEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPrecioEKeyTyped
+        char car = evt.getKeyChar();
+        if (Character.isDigit(car)) {
+            adv.setText("");
+        } else {
+             adv.setText("Solo se admiten numeros");
+             evt.consume();
+        }
+    }//GEN-LAST:event_jPrecioEKeyTyped
+
+    private void jPrecioTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPrecioTKeyTyped
+        char car = evt.getKeyChar();
+        if (Character.isDigit(car)) {
+            adv1.setText("");
+        } else {
+             adv1.setText("Solo se admiten numeros");
+             evt.consume();
+        }      
+    }//GEN-LAST:event_jPrecioTKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel1;
+    private java.awt.Label adv;
+    private java.awt.Label adv1;
     private javax.swing.JButton bt1;
     private javax.swing.JButton bt2;
     private javax.swing.JLabel img;
@@ -545,6 +615,7 @@ public static String getHoraActual() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTitulo;
+    private java.awt.Label label1;
     private javax.swing.ButtonGroup opc;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;

@@ -150,6 +150,11 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                 emailFocusLost(evt);
             }
         });
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Fecha de nacimiento:");
 
@@ -571,6 +576,10 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_linkFocusLost
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
 
 //    private boolean controlFecha(Date elegida) throws ParseException{
 //        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
