@@ -30,4 +30,5 @@ public interface IPropuesta {
     public abstract DtPropuesta SeleccionarProp(String xTitulo);
     public abstract List<String> NombrePropoConsulta(); 
     public abstract List<String> ListarProp(); 
+    public abstract void EstadosPropuestas();
 }
