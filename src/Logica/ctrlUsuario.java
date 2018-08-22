@@ -106,9 +106,11 @@ public class ctrlUsuario implements IUsuario {
           if(u instanceof Colaborador){
               if(aSeguir instanceof Colaborador){
                   this.usu.seguirCC(u.getNick(), aSeguir.getNick());
+                   return u.seguirUsuario(aSeguir);
               }
               else if(aSeguir instanceof Proponente){
                   this.usu.seguirCP(u.getNick(), aSeguir.getNick());
+                   return u.seguirUsuario(aSeguir);
               }
               
           }
@@ -120,6 +122,7 @@ public class ctrlUsuario implements IUsuario {
             }
             else if(aSeguir instanceof Colaborador){
                 this.usu.seguirPC(u.getNick(), aSeguir.getNick());
+                 return u.seguirUsuario(aSeguir);
             }
               
           }
@@ -137,9 +140,11 @@ public class ctrlUsuario implements IUsuario {
           if(u instanceof Colaborador){
               if(aSeguir instanceof Colaborador){
                   this.usu.dejarSeguirCC(u.getNick(), aSeguir.getNick());
+                   return u.dejarDeSeguir(aSeguir);
               }
               else if(aSeguir instanceof Proponente){
                   this.usu.dejarSeguirCP(u.getNick(), aSeguir.getNick());
+                   return u.dejarDeSeguir(aSeguir);
               }
               
           }
@@ -151,6 +156,7 @@ public class ctrlUsuario implements IUsuario {
             }
             else if(aSeguir instanceof Colaborador){
                 this.usu.dejarSeguirPC(u.getNick(), aSeguir.getNick());
+                 return u.dejarDeSeguir(aSeguir);
             }
               
           }
