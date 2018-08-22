@@ -105,6 +105,12 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Ingrese los siguientes datos:");
 
+        jProp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPropActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Buscar proponente:");
 
         jCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -502,6 +508,10 @@ public static String getHoraActual() {
       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPropActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPropActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel1;
     private javax.swing.JButton bt1;
@@ -551,7 +561,7 @@ public static String getHoraActual() {
         }
         
         this.iUsu.cargarProponentes();
-        List<DtProponente> propo = this.iUsu.listarUsuario();
+        List<DtProponente> propo = this.iUsu.listarProponentes();
         for(int k=0; k<propo.size(); k++){
             DtProponente prop=(DtProponente) propo.get(k);
             jProp.addItem(prop.getNick());

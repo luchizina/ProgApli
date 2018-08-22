@@ -39,7 +39,6 @@ public class ctrlUsuario implements IUsuario {
     private static ctrlUsuario instancia;
     private Map<String, Usuario> usuarios;
     private Map<String, Proponente> Proponentes;
-    private Map<String, Colaborador> colaboradores;
     private String usuRec;
     private String usuAseguir;
 
@@ -54,7 +53,6 @@ public class ctrlUsuario implements IUsuario {
 
     private ctrlUsuario() {
         this.usuarios = new HashMap<String, Usuario>();
-        this.colaboradores = new HashMap<String, Colaborador>();
         this.Proponentes = new HashMap<String, Proponente>();
         this.usu = new DBusuario();
     }
@@ -86,7 +84,7 @@ public class ctrlUsuario implements IUsuario {
      @Override
     public Colaborador traerColaborador(String f)
     {
-        Colaborador fa = (Colaborador) this.colaboradores.get(f);
+        Colaborador fa = (Colaborador) this.usuarios.get(f);
         return fa;
     }
     
@@ -200,10 +198,7 @@ public class ctrlUsuario implements IUsuario {
     
     
 
-    public Map<String, Colaborador> getColaboradores()
-    {
-        return colaboradores;
-    }
+
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
         if (this.existe(Nick, Correo) == false) {
@@ -276,7 +271,7 @@ public class ctrlUsuario implements IUsuario {
 
     @Override
     public void cargarColaboradores() {
-        this.colaboradores = this.usu.cargarColaboradores();
+//        this.colaboradores = this.usu.cargarColaboradores();
     }
 
     @Override
@@ -296,12 +291,15 @@ public class ctrlUsuario implements IUsuario {
     @Override
     public List<DtColaborador> listarColaboradores() {
         List<DtColaborador> listita = new ArrayList<>();
-        Set se = colaboradores.entrySet();
+        Set se = usuarios.entrySet();
         Iterator iterator = se.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-            Colaborador aux = (Colaborador) mentry.getValue();
+            if(mentry.getValue() instanceof Colaborador)
+            {
+            Colaborador aux = (Colaborador) mentry.getValue();               
             listita.add(aux.obtenerInfo());
+            }
         }
         return listita;
     }
@@ -343,6 +341,14 @@ public class ctrlUsuario implements IUsuario {
             }
         }
         return true;
+    }
+    
+    public void cargarUsuarios2()
+    {
+        Map<String,  Usuario> listita = new HashMap<>();
+        listita.putAll(this.usu.cargarColaboradores());
+        listita.putAll(this.usu.cargarProponentes());
+        this.usuarios = listita;
     }
 
     @Override

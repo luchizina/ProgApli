@@ -450,12 +450,12 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                  boolean ok = IP.altaColaboracion(IP.getPropPorNick(titulo1), iUsu.traerColaborador(nick1), monto.getText(), tipoR1);
                  if(ok)
                  {
-                     JOptionPane.showMessageDialog(null, "Proponente agregado");
+                     JOptionPane.showMessageDialog(null, "La colaboración se ha registrado con éxito");
                      this.limpiar();
                  }
                  else
                  {
-                 JOptionPane.showMessageDialog(null, "El proponente no ha podido ser agregado");
+                 JOptionPane.showMessageDialog(null, "No se ha podido registrar la colaboración");
                  this.limpiar();
                  }
             
@@ -588,7 +588,6 @@ public void cargarColab(){
         model.addRow(dat);
     }
     
-    this.iUsu.cargarColaboradores();
     List<DtColaborador> listita2 = this.iUsu.listarColaboradores();
     DefaultListModel dlm = new DefaultListModel();
     for(int b = 0; b<listita2.size(); b++)
@@ -598,7 +597,6 @@ public void cargarColab(){
         dlm.addElement(lul);
     }
     
-    Colaborador xD = this.iUsu.traerColaborador("chino");
     listaColabs.setModel(dlm);
 
 }

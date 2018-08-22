@@ -44,7 +44,7 @@ public class DBPropuesta {
     public boolean agregarPropuesta(Propuesta p) throws SQLException, ParseException{
    
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
-                    + "(Titulo, Descripcion,Fecha, Precio,montoActual,fechaPub,imagenUrl,tipoRetorno,MontoTotal,categoria,nickprop,lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(Titulo, Descripcion, Fecha, Precio, montoActual, fechaPub, ImagenUrl, TipoRetorno, MontoTotal, categoria, nickprop, lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, p.getTitulo());
             statement.setString(2, p.getDesc());
             Date fechaC = p.getFecha();
