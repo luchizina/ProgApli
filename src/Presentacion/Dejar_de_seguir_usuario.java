@@ -80,6 +80,8 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
 
+        setClosable(true);
+
         jLabel1.setText("Dejar de seguir usuario");
 
         jLabel2.setText("Seleccionar usuario");
