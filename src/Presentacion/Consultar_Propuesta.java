@@ -318,19 +318,19 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         jLImagen.setIcon(icono); 
         if (x.getEstActual() != null){
             if (x.getEstActual().getEstado() == Testado.valueOf("ingresada")){
-                TxtEstado.setText("ingresada");
+                TxtEstado.setText("Ingresada");
             }
             else if(x.getEstActual().getEstado() == Testado.valueOf("publicada") ) {
-                TxtEstado.setText("publicada");
+                TxtEstado.setText("Publicada");
             }
             else if(x.getEstActual().getEstado() == Testado.valueOf("en_financiacion") ) {
-                TxtEstado.setText("en financiacion");
+                TxtEstado.setText("En Financiacion");
             }
             else if(x.getEstActual().getEstado() == Testado.valueOf("financiada") ) {
-                TxtEstado.setText("financiada");
+                TxtEstado.setText("Financiada");
             }
             else if(x.getEstActual().getEstado() == Testado.valueOf("no_financiada") ) {
-                TxtEstado.setText("no financiada");
+                TxtEstado.setText("No Financiada");
             }
             else {
                 TxtEstado.setText("cancelada");

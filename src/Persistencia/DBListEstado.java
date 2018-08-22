@@ -64,22 +64,20 @@ public class DBListEstado {
                 java.sql.Time xhora = rs.getTime("Hora");
                 java.util.Date xfecha = rs.getDate("Fecha");
                 String e = rs.getString("Estado");
-                // si xfecha paso antes  que el estaco actual lo agrega 
-               
                 Testado d;
-                if (e.equals("ingresada")){
+                if (e.equals("Ingresada")){
+                d = Testado.ingresada;
+                }
+                else if (e.equals("Publicada")){
                 d = Testado.publicada;
                 }
-                else if (e.equals("publicada")){
-                d = Testado.publicada;
-                }
-                 else if (e.equals("en_financiacion")){
+                 else if (e.equals("En_Financiacion")){
                 d = Testado.en_financiacion;
                 }
-                 else if (e.equals("financiada")){
+                 else if (e.equals("Financiada")){
                 d = Testado.financiada;
                 }
-                 else if (e.equals("no_financiada")){
+                 else if (e.equals("No_Financiada")){
                 d = Testado.no_financiada;
                 }
                  else{ // cancelada
@@ -100,7 +98,7 @@ public class DBListEstado {
                 java.util.Date Actualfecha = rsx.getDate("Fecha");
                 Testado dx;
                 if (ex.equals("Ingresada")){
-                dx = Testado.publicada;
+                dx = Testado.ingresada;
                 }
                 else if (ex.equals("Publicada")){
                 dx = Testado.publicada;
