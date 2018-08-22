@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -37,8 +38,8 @@ public class Usuario {
         this.Correo = Correo;
         this.fecha = fecha;
         this.img = img;
-        this.usuSeguidos = usuSeguidos;
-        this.propuFav = propuFav;
+        this.usuSeguidos = new HashMap<>();
+        this.propuFav =new HashMap<>();
     }
 
     public String getNick() {
@@ -118,7 +119,7 @@ public class Usuario {
     
     public boolean seguirUsuario(Usuario aSeguir){
        
-    
+        
         this.usuSeguidos.put(aSeguir.getNick(), aSeguir);
         return true;
           }
@@ -138,7 +139,8 @@ public class Usuario {
         this.Correo = Correo;
         this.fecha = fecha;
         this.img = img;
-      
         this.tipo=tipo;
+        this.propuFav = new HashMap<>();
+        this.usuSeguidos = new HashMap<>();
     }
 }
