@@ -183,8 +183,12 @@ public class ctrlUsuario implements IUsuario {
         Iterator iterator = se.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
+            if(mentry.getValue() instanceof Proponente){
+                
+            
             Proponente aux = (Proponente) mentry.getValue();
             listita.add(aux.obtenerInfo());
+            }
         }
         return listita;
         

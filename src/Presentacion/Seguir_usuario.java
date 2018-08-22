@@ -28,8 +28,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     public Seguir_usuario(IUsuario iusu) {
         initComponents();
         this.iUsu=iusu;
-        this.iUsu.cargarColaboradores();
-        this.iUsu.cargarProponentes();
+     
         cmbColab.setVisible(false);
         cmbColabSeg.setVisible(false);
         cmbProp.setVisible(false);
