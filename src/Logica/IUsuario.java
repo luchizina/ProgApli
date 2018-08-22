@@ -25,9 +25,19 @@ public abstract boolean escorreo(String correo);
     public abstract boolean existe(String nick, String correo);
      public abstract List<DtProponente> listarUsuario();
      public abstract List<DtColaborador> listarColaboradores();
+    
       public abstract void cargarUsuarios();
      public abstract void cargarPropPrueba();
      public abstract boolean copia(String origen, String destino);
      public abstract Colaborador traerColaborador(String lul);
+     
+     
+     
+     public abstract boolean seguirUsuario();
+      public abstract List<DtProponente> listarProponentes();
+     public abstract void seleccionarUsuario(String nick);
+     public abstract void seleccionarUsuSeg(String nick);
+     public abstract boolean dejarDeSeguir();
+     
      public abstract Map<String, Colaborador> getColaboradores();
 }

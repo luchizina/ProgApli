@@ -85,6 +85,166 @@ public class DBusuario {
         } 
     }
      
+     
+     
+     
+     public boolean seguirCP(String nickcolab, String nickProp){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguircp "
+                    + "(SeguidorC, SeguidoP) values(?,?)");
+            statement.setString(1,nickcolab);
+            statement.setString(2,nickProp);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+     
+         public boolean dejarSeguirCP(String nickcolab, String nickProp){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM seguircp WHERE SeguidorC=? and SeguidoP=?");
+            statement.setString(1,nickcolab);
+            statement.setString(2,nickProp);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+     
+     
+     
+     
+       public boolean seguirPC(String nickProp, String nickColab){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguirpc "
+                    + "(SeguidorP, SeguidoC) values(?,?)");
+            statement.setString(1,nickProp);
+            statement.setString(2,nickColab);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+       
+       
+       
+          public boolean dejarSeguirPC(String nickProp, String nickColab){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM seguirpc WHERE SeguidorP=? and SeguidoC=?");
+            statement.setString(1,nickProp);
+            statement.setString(2,nickColab);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+       
+       
+                          
+     
+       public boolean seguirPP(String nickProp, String nickProp2){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguepp "
+                    + "(Seguidor, Seguido) values(?,?)");
+            statement.setString(1,nickProp);
+            statement.setString(2,nickProp2);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+       
+        public boolean dejarSeguirPP(String nickProp, String nickProp2){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM siguepp WHERE Seguidor=? and Seguido=?");
+            statement.setString(1,nickProp);
+            statement.setString(2,nickProp2);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+     
+      public boolean seguirCC(String nickColab, String nickColab2){
+         
+           try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguecc "
+                    + "(Seguidor, Seguido) values(?,?)");
+            statement.setString(1,nickColab);
+            statement.setString(2,nickColab2);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+      
+      
+            public boolean dejarSeguirCC(String nickColab, String nickColab2){
+         
+           try {
+        PreparedStatement statement = conexion.prepareStatement("DELETE FROM siguecc WHERE Seguidor=? and Seguido=?");
+            statement.setString(1,nickColab);
+            statement.setString(2,nickColab2);
+            
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+
+     }
+   
+     
+     
+     
+     
+     
+     
+     
+     
       public Map<String,Usuario> cargarProponentes(){
         try {
             Map<String, Usuario> lista = new HashMap<String, Usuario>();
@@ -99,10 +259,13 @@ public class DBusuario {
             st.close();
             return lista;
         } catch (SQLException ex) {
-            ex.printStackTrace();
             return null;
         }        
     }
+      
+      
+      
+      
       
       public void limpiarBase() throws SQLException{
           try{

@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import Logica.Colaborador;
+import Logica.Proponente;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +44,9 @@ public class ctrlUsuario implements IUsuario {
     private Map<String, Usuario> usuarios;
     private Map<String, Proponente> Proponentes;
     private Map<String, Colaborador> colaboradores;
+    private String usuRec;
+    private String usuAseguir;
+
     private DBusuario usu = null;
 
     public static ctrlUsuario getInstance() {
@@ -82,13 +87,116 @@ public class ctrlUsuario implements IUsuario {
             return res;
         }
     }
-    
-    @Override
+     @Override
     public Colaborador traerColaborador(String f)
     {
         Colaborador fa = (Colaborador) this.colaboradores.get(f);
         return fa;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+     @Override
+    public boolean seguirUsuario(){
+ 
+        Usuario u=this.usuarios.get(this.usuRec);
+        Usuario aSeguir=this.usuarios.get(this.usuAseguir);
+          
+          if(u instanceof Colaborador){
+              if(aSeguir instanceof Colaborador){
+                  this.usu.seguirCC(u.getNick(), aSeguir.getNick());
+              }
+              else if(aSeguir instanceof Proponente){
+                  this.usu.seguirCP(u.getNick(), aSeguir.getNick());
+              }
+              
+          }
+          
+          if(u instanceof Proponente){
+            if(aSeguir instanceof Proponente){
+                this.usu.seguirPP(u.getNick(), aSeguir.getNick());
+                return u.seguirUsuario(aSeguir);
+            }
+            else if(aSeguir instanceof Colaborador){
+                this.usu.seguirPC(u.getNick(), aSeguir.getNick());
+            }
+              
+          }
+
+ 
+    
+         return false;       
+    }
+    
+    @Override
+    public boolean dejarDeSeguir(){
+         Usuario u=this.usuarios.get(this.usuRec);
+        Usuario aSeguir=this.usuarios.get(this.usuAseguir);
+          
+          if(u instanceof Colaborador){
+              if(aSeguir instanceof Colaborador){
+                  this.usu.dejarSeguirCC(u.getNick(), aSeguir.getNick());
+              }
+              else if(aSeguir instanceof Proponente){
+                  this.usu.dejarSeguirCP(u.getNick(), aSeguir.getNick());
+              }
+              
+          }
+          
+          if(u instanceof Proponente){
+            if(aSeguir instanceof Proponente){
+                this.usu.dejarSeguirPP(u.getNick(), aSeguir.getNick());
+                return u.dejarDeSeguir(aSeguir);
+            }
+            else if(aSeguir instanceof Colaborador){
+                this.usu.dejarSeguirPC(u.getNick(), aSeguir.getNick());
+            }
+              
+          }
+
+ 
+    
+         return false;  
+    }
+    
+    
+    
+
+    @Override
+     public void seleccionarUsuario(String nick){
+         this.usuRec=nick;
+     }
+     @Override
+     public void seleccionarUsuSeg(String nick){
+         this.usuAseguir=nick;
+     }
+    
+    @Override
+    public List<DtProponente> listarProponentes(){
+      List<DtProponente> listita = new ArrayList<>();
+        Set se = usuarios.entrySet();
+        Iterator iterator = se.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Proponente aux = (Proponente) mentry.getValue();
+            listita.add(aux.obtenerInfo());
+        }
+        return listita;
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 
     public Map<String, Colaborador> getColaboradores()
     {
@@ -111,7 +219,7 @@ public class ctrlUsuario implements IUsuario {
 
             }
             Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo);
-            boolean res = this.usu.agregarProponente(p);
+                boolean res = this.usu.agregarProponente(p);
             if (res) {
                 this.usuarios.put(Nick, p);
             }
@@ -183,6 +291,7 @@ public class ctrlUsuario implements IUsuario {
         return retorna;
     }
 
+    @Override
     public List<DtColaborador> listarColaboradores() {
         List<DtColaborador> listita = new ArrayList<>();
         Set se = colaboradores.entrySet();
@@ -194,7 +303,12 @@ public class ctrlUsuario implements IUsuario {
         }
         return listita;
     }
+    
+    
+    
 
+
+    @Override
     public boolean escorreo(String correo) {
         Pattern pat = null;
         Matcher mat = null;
@@ -207,6 +321,7 @@ public class ctrlUsuario implements IUsuario {
         }
     }
 
+    @Override
     public boolean existeNick(String nick) {
 
         for (Usuario u : this.usuarios.values()) {

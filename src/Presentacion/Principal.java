@@ -8,9 +8,12 @@ import Logica.ICategoria;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Luchi
@@ -25,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
     private IPropuesta IP;
     public Principal() {
         initComponents();
-
+        this.setLocationRelativeTo(null);
         Fabrica fabrica = Fabrica.getInstance();
 
         icat =fabrica.getICtrlCategoria();
@@ -36,6 +39,11 @@ public class Principal extends javax.swing.JFrame {
 ////        fabrica.cargaProp();
 ////        fabrica.cargarDatosPrueba();
 //          fabrica.pruebas();
+                
+                iUsu.cargarColaboradores();
+                iUsu.cargarProponentes();
+                IP.cargarPropuestas();
+                this.IP.cargarColaboraciones();
     }
 
     /**
@@ -69,6 +77,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -217,13 +229,45 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem9.setText("Seguir usuario");
         jMenuItem9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenuItem10.setText("Dejar de seguir usuario");
         jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu7.setText("Colaboraciones");
+        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jMenuItem14.setText("Registrar");
+        jMenuItem14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem14);
+
+        jMenuItem15.setText("Consultar");
+        jMenuItem15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenu7.add(jMenuItem15);
+
+        jMenuItem16.setText("Cancelar colaboracion");
+        jMenuItem16.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenu7.add(jMenuItem16);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -415,12 +459,26 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu2.add(jMenu4);
 
+        
+        
         jMenuItem9.setText("Seguir usuario");
         jMenuItem9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jMenu2.add(jMenuItem9);
+         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+                jMenu2.add(jMenuItem9);
 
+                
+                
         jMenuItem10.setText("Dejar de seguir usuario");
         jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
@@ -461,20 +519,32 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed
-         Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
-        // Se crea una instancia del JinternalFrame
-        jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
-        ap.setVisible(true);                 // TODO add your handling code here:
+      try {
+         
+          Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
+          System.out.println(ap.getHeight() + ap.getWidth());
+          
+          // Se crea una instancia del JinternalFrame
+          jp.add(ap); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
+         this.setMinimumSize(new Dimension(ap.getWidth()+20,ap.getHeight()+80));
+          ap.setVisible(true);   
+         
+    // TODO add your handling code here:
+      } catch (ParseException ex) {
+          Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }//GEN-LAST:event_Propuesta_altaActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         Consultar_Propuesta propu = new Consultar_Propuesta(IP);
+        this.setMinimumSize(new Dimension(propu.getWidth()+20,propu.getHeight()+80));
         jp.add(propu);
         propu.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
        Alta_Colaboracion cola = new Alta_Colaboracion(IP, iUsu);
+       this.setMinimumSize(new Dimension(cola.getWidth()+20,cola.getHeight()+80));
        jp.add(cola);
        cola.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
@@ -487,6 +557,7 @@ public class Principal extends javax.swing.JFrame {
       } catch (ParseException ex) {
           Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
       }
+      this.setMinimumSize(new Dimension(us.getWidth()+20,us.getHeight()+80));
         jp.add(us); //Tenemos que poner un panel en donde se abra el coso este sino no aparece
         us.setVisible(true); // Esto pa ponerlo visible
         
@@ -504,6 +575,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 Alta_Categoria cat = new Alta_Categoria(icat);
+this.setMinimumSize(new Dimension(cat.getWidth()+20,cat.getHeight()+80));
 jp.add(cat);
 cat.setVisible(true);
         
@@ -515,8 +587,27 @@ cat.setVisible(true);
         iUsu.limpiarUsuarios();
         iUsu.cargarUsuarios();
         icat.categoriasPrueba();
-//        IP.CargaPropuestasPrueba();
+        //IP.CargaPropuestasPrueba();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+                 
+Seguir_usuario su = new Seguir_usuario(iUsu);
+jp.add(su);
+su.setVisible(true);
+
+
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        
+        Dejar_de_seguir_usuario dej = new Dejar_de_seguir_usuario(iUsu);
+        jp.add(dej);
+        dej.setVisible(true);
+                
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -546,10 +637,8 @@ cat.setVisible(true);
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Principal().setVisible(true);
         });
     }
 
@@ -560,12 +649,16 @@ cat.setVisible(true);
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

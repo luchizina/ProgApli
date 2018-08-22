@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 /**
@@ -32,20 +33,13 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     public Alta_Categoria() {
         initComponents();
     }
-
-    
     public Alta_Categoria(ICategoria icat){
         initComponents();
         
         this.iCat=icat;
         this.iCat.cargarCategorias();
-       
-        
-             
         List<DtCategoria> catego = this.iCat.listarCategorias();
-        
-        
-        
+
         List<DtCategoria> combo = this.iCat.listarCategorias();
         for(int i=0; i< combo.size(); i++){
             DtCategoria combito=(DtCategoria) combo.get(i);

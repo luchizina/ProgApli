@@ -26,9 +26,10 @@ public class DtPropuesta{
             int montoTotal;
             Date fechaPub;
             String tRetornos;
-             Map<String, DtColaborador> colaboradores;
-             String propoACargo;
-             Estado estActual;
+            Map<String, DtColaborador> colaboradores;
+            String propoACargo;
+            Estado estActual;
+            String categoria="";
        
 
 public DtPropuesta(Propuesta p)
@@ -47,6 +48,25 @@ public DtPropuesta(Propuesta p)
     this.propoACargo = p.getProp();
     this.estActual = p.getEstActual();
 }
+
+// AGREGE CATEGORIA 
+public DtPropuesta(Propuesta p, String x){
+    this.titulo = p.getTitulo();
+    this.desc = p.getDesc();
+    this.img = p.getImg();
+    this.fecha = p.getFecha();
+    this.lugar = p.getLugar();
+    this.precio = p.getPrecioE();
+    this.montoActual = p.getMontoActual();
+    this.montoTotal = p.getMontoTotal();
+    this.fechaPub = p.getFechaPub();
+    this.tRetornos = p.getTipoRetorno();
+    this.colaboradores = p.listarColaboradores();
+    this.propoACargo = p.getProp();
+    this.estActual = p.getEstActual();
+    this.categoria = x;
+
+};
 
 public String getTitulo()
 {
@@ -108,4 +128,8 @@ public String getTRetornos()
     return tRetornos;
 }
 
+public String getNombreCate()
+{
+    return categoria;
+}
 }
