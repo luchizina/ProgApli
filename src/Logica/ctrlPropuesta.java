@@ -120,7 +120,7 @@ public class ctrlPropuesta implements IPropuesta {
                     } catch (ParseException ex) {
                         System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
                     }
-                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, Testado.ingresada);
+                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, Testado.Ingresada);
                     System.out.println(est.getEst().toString() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
 
@@ -237,7 +237,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     @Override
     public void CargaPropuestasPrueba() {
-        Estado estA = new Estado(Testado.ingresada);
+        Estado estA = new Estado(Testado.Ingresada);
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         String[] fechas = {"2018-09-16", "2018-10-07", "2018-10-19", "2018-10-21", "2018-11-18", "2018-11-16", "2018-12-03", "2018-10-12"};
         String[] fechitap = {"2018-05-15", "2018-06-18", "2017-07-17", "2018-07-30", "2018-08-04", "2018-08-06", "2018-08-18", "2018-08-23"};
