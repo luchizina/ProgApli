@@ -28,8 +28,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     public Seguir_usuario(IUsuario iusu) {
         initComponents();
         this.iUsu=iusu;
-        this.iUsu.cargarColaboradores();
-        this.iUsu.cargarProponentes();
+     
         cmbColab.setVisible(false);
         cmbColabSeg.setVisible(false);
         cmbProp.setVisible(false);
@@ -64,7 +63,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         SeguidorGrup = new javax.swing.ButtonGroup();
-        SeguidoGrupo = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -108,6 +107,12 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbColab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbColabActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -148,7 +153,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Elige usuario a seguir");
 
-        SeguidorGrup.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Proponente");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +161,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
-        SeguidorGrup.add(jRadioButton4);
+        buttonGroup1.add(jRadioButton4);
         jRadioButton4.setText("Colaborador");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +172,12 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
         cmbPropSeg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPropSegActionPerformed(evt);
+            }
+        });
+
+        cmbColabSeg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbColabSegActionPerformed(evt);
             }
         });
 
@@ -252,7 +263,11 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPropActionPerformed
-      this.iUsu.seleccionarUsuario(cmbProp.getSelectedItem().toString());
+   
+       
+        
+        this.iUsu.seleccionarUsuario(cmbProp.getSelectedItem().toString());
+        
     }//GEN-LAST:event_cmbPropActionPerformed
 
     private void btnSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguirActionPerformed
@@ -268,8 +283,13 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSeguirActionPerformed
 
     private void cmbPropSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPropSegActionPerformed
+      
+       
+           
+      
         this.iUsu.seleccionarUsuSeg(cmbPropSeg.getSelectedItem().toString());
-        // TODO add your handling code here:
+         
+// TODO add your handling code here:
     }//GEN-LAST:event_cmbPropSegActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -308,11 +328,27 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
        }        // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
+    private void cmbColabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbColabActionPerformed
+        // TODO add your handling code here:
+  
+            
+        
+        this.iUsu.seleccionarUsuario(cmbColab.getSelectedItem().toString());
+       
+    }//GEN-LAST:event_cmbColabActionPerformed
+
+    private void cmbColabSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbColabSegActionPerformed
+        // TODO add your handling code here:
+
+         this.iUsu.seleccionarUsuSeg(cmbColabSeg.getSelectedItem().toString());
+          
+    }//GEN-LAST:event_cmbColabSegActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup SeguidoGrupo;
     private javax.swing.ButtonGroup SeguidorGrup;
     private javax.swing.JButton btnSeguir;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbColab;
     private javax.swing.JComboBox<String> cmbColabSeg;
     private javax.swing.JComboBox<String> cmbProp;

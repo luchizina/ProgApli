@@ -328,7 +328,7 @@ public class ctrlPropuesta implements IPropuesta {
 };
  
     public List<String> ColaborantesDePro(){
-         List<String> Nicks = new ArrayList<String>();
+        List<String> Nicks = new ArrayList<String>();
         Iterator iteradorsito = colaboraciones.iterator();
         while (iteradorsito.hasNext()) {
             Colaboracion aux = (Colaboracion) iteradorsito.next();
@@ -339,4 +339,14 @@ public class ctrlPropuesta implements IPropuesta {
     }
     return Nicks;
     };
+    
+     public void EstadosPropuestas(){
+        Set set = propuestas.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+        Map.Entry mentry = (Map.Entry)iterator.next();
+            Propuesta aux=(Propuesta) mentry.getValue();
+            this.dbE.SetearEstadoPropuesta(aux);
+        }       
+     };
 }

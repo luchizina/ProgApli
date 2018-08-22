@@ -98,15 +98,17 @@ public class ctrlUsuario implements IUsuario {
      @Override
     public boolean seguirUsuario(){
  
-        Usuario u=this.usuarios.get(this.usuRec);
+        Usuario u= this.usuarios.get(this.usuRec);
         Usuario aSeguir=this.usuarios.get(this.usuAseguir);
           
           if(u instanceof Colaborador){
               if(aSeguir instanceof Colaborador){
                   this.usu.seguirCC(u.getNick(), aSeguir.getNick());
+                   return u.seguirUsuario(aSeguir);
               }
               else if(aSeguir instanceof Proponente){
                   this.usu.seguirCP(u.getNick(), aSeguir.getNick());
+                   return u.seguirUsuario(aSeguir);
               }
               
           }
@@ -118,6 +120,7 @@ public class ctrlUsuario implements IUsuario {
             }
             else if(aSeguir instanceof Colaborador){
                 this.usu.seguirPC(u.getNick(), aSeguir.getNick());
+                 return u.seguirUsuario(aSeguir);
             }
               
           }
@@ -135,9 +138,11 @@ public class ctrlUsuario implements IUsuario {
           if(u instanceof Colaborador){
               if(aSeguir instanceof Colaborador){
                   this.usu.dejarSeguirCC(u.getNick(), aSeguir.getNick());
+                   return u.dejarDeSeguir(aSeguir);
               }
               else if(aSeguir instanceof Proponente){
                   this.usu.dejarSeguirCP(u.getNick(), aSeguir.getNick());
+                   return u.dejarDeSeguir(aSeguir);
               }
               
           }
@@ -149,6 +154,7 @@ public class ctrlUsuario implements IUsuario {
             }
             else if(aSeguir instanceof Colaborador){
                 this.usu.dejarSeguirPC(u.getNick(), aSeguir.getNick());
+                 return u.dejarDeSeguir(aSeguir);
             }
               
           }
@@ -177,8 +183,12 @@ public class ctrlUsuario implements IUsuario {
         Iterator iterator = se.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
+            if(mentry.getValue() instanceof Proponente){
+                
+            
             Proponente aux = (Proponente) mentry.getValue();
             listita.add(aux.obtenerInfo());
+            }
         }
         return listita;
         
