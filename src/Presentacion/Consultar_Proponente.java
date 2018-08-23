@@ -519,34 +519,7 @@ this.prop = p;
 
     private void filtroPropFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroPropFocusGained
         // TODO add your handling code here:
-        listPropo.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
-          nombre.setText("");
-          apellido.setText("");
-          nick.setText("");
-          correo.setText("");
-          web.setText("");
-          biografia.setText("");
-          fechaNac.setText("");
-          direccion.setText("");
-          montito.setText("");
-          filtroProp.setText("");
-          listPropo.clearSelection();
-          ImageIcon imagen = new ImageIcon("");
-         DefaultListModel modelo = new DefaultListModel(); 
-         listProp.setModel(modelo);
-         listColabs.setModel(modelo);
-         List<DtProponente> listita = iUsu.listarProponentes();
-    DefaultListModel dlm2 = new DefaultListModel();
-    for(int b = 0; b<listita.size(); b++)
-    {
-        DtProponente q = (DtProponente) listita.get(b);
-        String lul = q.getNombre()+"("+q.getNick()+(")");
-        dlm2.addElement(lul);
-    }
-    
-    listPropo.setModel(dlm2); 
-          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
-          imagenP.setIcon(icono);
+        limpiar();
     }//GEN-LAST:event_filtroPropFocusGained
 
     private void filtroPropFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroPropFocusLost
@@ -580,6 +553,39 @@ this.prop = p;
         }
     }//GEN-LAST:event_filtroPropKeyReleased
 
+    private void limpiar()
+    {
+          listPropo.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
+          nombre.setText("");
+          apellido.setText("");
+          nick.setText("");
+          correo.setText("");
+          web.setText("");
+          biografia.setText("");
+          fechaNac.setText("");
+          direccion.setText("");
+          montito.setText("");
+          estaditos.setEnabled(false);
+          filtroProp.setText("");
+          listPropo.clearSelection();
+          ImageIcon imagen = new ImageIcon("");
+         DefaultListModel modelo = new DefaultListModel(); 
+         listProp.setModel(modelo);
+         listColabs.setModel(modelo);
+         List<DtProponente> listita = iUsu.listarProponentes();
+    DefaultListModel dlm2 = new DefaultListModel();
+    for(int b = 0; b<listita.size(); b++)
+    {
+        DtProponente q = (DtProponente) listita.get(b);
+        String lul = q.getNombre()+"("+q.getNick()+(")");
+        dlm2.addElement(lul);
+    }
+    
+    listPropo.setModel(dlm2); 
+          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
+          imagenP.setIcon(icono);
+            }
+    
     private void filtroColabsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroColabsFocusGained
         // TODO add your handling code here:
 //        filtroColabs.setText("");
