@@ -70,6 +70,7 @@ public class ctrlPropuesta implements IPropuesta {
     
     public Propuesta getPropPorNick(String nick)
     {
+        Propuesta pr = this.propuestas.get("Un día de Julio");
         return this.propuestas.get(nick);
     }
  
@@ -161,8 +162,9 @@ public class ctrlPropuesta implements IPropuesta {
     public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR)
     {
         Date lul = new Date();
-        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop);
-      
+        String horita = java.time.LocalTime.now().toString();
+        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop, horita);
+        
         if (dbPropuesta.agregarColaboracion(c))
         {
             this.colaboraciones.add(c);
@@ -212,6 +214,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+        Propuesta p = propuestas.get("Un dia de Julio");
     }
     
     @Override

@@ -49,6 +49,10 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         estaditos.addItem("Financiada");
         estaditos.addItem("No financiada");
         estaditos.addItem("Cancelada");
+        estaditos.setEnabled(false);
+        listProp.setEnabled(false);
+        listColabs.setEnabled(false);
+        
         this.IP = Ip;
         this.iUsu = iUsu;
         this.iCat = iCat;
@@ -132,9 +136,25 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         jLabel2.setText("Filtrar por nombre o nick");
         jLabel2.setFocusable(false);
 
+        filtroProp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                filtroPropFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                filtroPropFocusLost(evt);
+            }
+        });
         filtroProp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroPropActionPerformed(evt);
+            }
+        });
+        filtroProp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                filtroPropKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filtroPropKeyReleased(evt);
             }
         });
 
@@ -189,7 +209,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
         web.setFocusable(false);
 
-        estaditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        estaditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         estaditos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 estaditosMouseClicked(evt);
@@ -205,11 +225,6 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         jLabel11.setText("Filtrar propuestas por estado");
         jLabel11.setFocusable(false);
 
-        listProp.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listProp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listPropMouseClicked(evt);
@@ -229,11 +244,17 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
         jLabel14.setText("Lista de Colaboradores");
 
-        listColabs.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        filtroColabs.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                filtroColabsFocusGained(evt);
+            }
         });
+        filtroColabs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filtroColabsKeyReleased(evt);
+            }
+        });
+
         jScrollPane5.setViewportView(listColabs);
 
         imagenP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -419,35 +440,48 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         if(listProp.getModel().getSize() == 0)
         {
             dlm.addElement("No hay propuestas disponibles");
+            listProp.setEnabled(false);
+            listProp.setFocusable(false);
         }
+        else
+        {
+           listProp.setEnabled(true); 
+        listProp.setFocusable(true);
+        }
+        montito.setText("");
+        DefaultListModel dlm2 = new DefaultListModel();
+        listColabs.setModel(dlm2);
     }//GEN-LAST:event_estaditosActionPerformed
 
     private void listPropoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPropoMouseClicked
-        int index = listPropo.getSelectedIndex();
-        ListModel  model= listPropo.getModel();
-        String f = (String) model.getElementAt(index);
-        String[] partes = f.split(Pattern.quote("("));
-        String parte1 = partes[0];
-        String parte2 = partes[1];
-        String[] partes3 = parte2.split(Pattern.quote(")"));
-        String parte4 = partes3[0];
-        Proponente p = iUsu.traerProponente(parte4);
-        nick.setText(p.getNick());
-        nombre.setText(p.getNombre());
-        apellido.setText(p.getApellido());
-        correo.setText(p.getCorreo());
-        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha = sd.format(p.getFecha());
-        fechaNac.setText(fecha);
-        direccion.setText(p.getDireccion());
-        biografia.setText(p.getBiografia());
-        web.setText(p.getLinkWeb());
-        p.getImg();
-        ImageIcon imagen = new ImageIcon(p.getImg());
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
-        imagenP.setIcon(icono);
+        
+            int index = listPropo.getSelectedIndex();
+            
+            ListModel  model= listPropo.getModel();
+            String f = (String) model.getElementAt(index);
+            String[] partes = f.split(Pattern.quote("("));
+            String parte1 = partes[0];
+            String parte2 = partes[1];
+            String[] partes3 = parte2.split(Pattern.quote(")"));
+            String parte4 = partes3[0];
+            Proponente p = iUsu.traerProponente(parte4);
+            nick.setText(p.getNick());
+            nombre.setText(p.getNombre());
+            apellido.setText(p.getApellido());
+            correo.setText(p.getCorreo());
+            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sd.format(p.getFecha());
+            fechaNac.setText(fecha);
+            direccion.setText(p.getDireccion());
+            biografia.setText(p.getBiografia());
+            web.setText(p.getLinkWeb());
+            p.getImg();
+            ImageIcon imagen = new ImageIcon(p.getImg());
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
+            imagenP.setIcon(icono);
 //        this.nick1 = c.getNick();
-        this.prop = p;
+this.prop = p;
+        estaditos.setEnabled(true);
     }//GEN-LAST:event_listPropoMouseClicked
 
     private void estaditosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estaditosMouseClicked
@@ -456,6 +490,8 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
     private void listPropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPropMouseClicked
         // TODO add your handling code here:
+        if(listProp.isEnabled())
+        {
         int index = listProp.getSelectedIndex();
         ListModel  model= listProp.getModel();
         String f = (String) model.getElementAt(index);
@@ -475,8 +511,103 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         listColabs.setModel(dlm);
         montito.setText(Integer.toString(p.getMontoActual())+"/"+Integer.toString(p.getMontototal()));
     }//GEN-LAST:event_listPropMouseClicked
+    }
+    
+    private void filtroPropKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroPropKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtroPropKeyPressed
 
+    private void filtroPropFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroPropFocusGained
+        // TODO add your handling code here:
+        listPropo.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
+          nombre.setText("");
+          apellido.setText("");
+          nick.setText("");
+          correo.setText("");
+          web.setText("");
+          biografia.setText("");
+          fechaNac.setText("");
+          direccion.setText("");
+          montito.setText("");
+          filtroProp.setText("");
+          listPropo.clearSelection();
+          ImageIcon imagen = new ImageIcon("");
+         DefaultListModel modelo = new DefaultListModel(); 
+         listProp.setModel(modelo);
+         listColabs.setModel(modelo);
+         List<DtProponente> listita = iUsu.listarProponentes();
+    DefaultListModel dlm2 = new DefaultListModel();
+    for(int b = 0; b<listita.size(); b++)
+    {
+        DtProponente q = (DtProponente) listita.get(b);
+        String lul = q.getNombre()+"("+q.getNick()+(")");
+        dlm2.addElement(lul);
+    }
+    
+    listPropo.setModel(dlm2); 
+          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
+          imagenP.setIcon(icono);
+    }//GEN-LAST:event_filtroPropFocusGained
 
+    private void filtroPropFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroPropFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_filtroPropFocusLost
+
+    private void filtroPropKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroPropKeyReleased
+        // TODO add your handling code here:
+        List<DtProponente> pro = iUsu.listarProponentes();
+        if (filtroProp.getText().equals("")) { // SI NO BUSCA
+            if (!pro.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < pro.size(); i++) {
+                    DtProponente p = (DtProponente) pro.get(i);
+                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                }
+                listPropo.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!pro.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < pro.size(); i++) {
+                    DtProponente p = (DtProponente) pro.get(i);
+                    if (p.getNombre().contains(filtroProp.getText()) || p.getNick().contains(filtroProp.getText())) {
+                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    }
+                }
+                listPropo.setModel(modelo);
+            }
+        }
+    }//GEN-LAST:event_filtroPropKeyReleased
+
+    private void filtroColabsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroColabsFocusGained
+        // TODO add your handling code here:
+//        filtroColabs.setText("");
+//        int index = listProp.getSelectedIndex();
+//        ListModel  model= listProp.getModel();
+//        String f = (String) model.getElementAt(index);
+//        DtPropuesta p= IP.traerPropuesta(f);
+//        List<String> nicks = new ArrayList<>(p.getColabs().keySet());
+//        DefaultListModel dlm = new DefaultListModel();
+//        for(int b = 0; b<nicks.size(); b++)
+//    {
+//        String lul = (String) nicks.get(b);
+//        String lul2 = iUsu.traerColaborador(lul).getNombre()+"("+lul+(")");
+//        dlm.addElement(lul2);
+//    }
+//        if(dlm.isEmpty())
+//        {
+//            dlm.addElement("Esta propuesta aún no tiene colaboradores");
+//        }
+//        listColabs.setModel(dlm);
+    }//GEN-LAST:event_filtroColabsFocusGained
+
+    private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_filtroColabsKeyReleased
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
     private javax.swing.JTextArea biografia;
