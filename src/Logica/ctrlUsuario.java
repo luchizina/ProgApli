@@ -280,6 +280,10 @@ public class ctrlUsuario implements IUsuario {
         this.usu.cargarProponentesPrueba();
         this.usu.CargarColabPrueba();
         this.cargarUsuarios2();
+        this.usu.seguirCPprueb();
+        this.usu.seguirCCPrueb();
+        this.usu.seguirPCPrueb();
+        this.usu.seguirPPprueb();
     }
 
     @Override
