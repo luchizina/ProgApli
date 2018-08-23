@@ -43,6 +43,8 @@ public class Principal extends javax.swing.JFrame {
                 iUsu.cargarUsuarios();
                 IP.cargarPropuestas();
                 this.IP.cargarColaboraciones();
+                this.IP.EstadosPropuestas(); // testear
+               
     }
 
     @SuppressWarnings("unchecked")
@@ -584,8 +586,10 @@ cat.setVisible(true);
     
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         iUsu.limpiarUsuarios();
-        iUsu.cargarUsuarios();
-        icat.categoriasPrueba();
+        iUsu.cargarPropPrueba();
+        icat.cargar();
+        IP.cargarProp();
+
         //IP.CargaPropuestasPrueba();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

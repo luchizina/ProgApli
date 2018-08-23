@@ -465,7 +465,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void bt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt2ActionPerformed
-       
+        
       //your handling code here:
     }//GEN-LAST:event_bt2ActionPerformed
 public static String getHoraActual() {
@@ -512,7 +512,7 @@ public static String getHoraActual() {
         boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()), (String) jCateg.getSelectedItem(),estA,urlimagen.getText(),(String) jProp.getSelectedItem(),hora,jLugar.getText());
              if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
-
+            limpiar();
              }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
              }

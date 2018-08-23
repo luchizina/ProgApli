@@ -20,7 +20,7 @@ public class Propuesta {
     private 
             String titulo;
             String desc;
-           Date fecha;
+            Date fecha;
             int precioE;
             int montoActual;
             Date fechaPub;
@@ -29,16 +29,23 @@ public class Propuesta {
             Categoria cat;
             String cate;
             Estado estActual;
-            ListEstado listaEstados;
+            ListEstado listaEstados; // ?
             String img;
             String lugar;
             String Prop;
             List<Colaboracion> colaboraciones;
-            private Map<Testado, ListEstado> listaDeEstados;
+            //private Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
+            private List<ListEstado> LE;
             
 public Propuesta(){
 
 }
+
+public void setLE(List<ListEstado>  ELX) {
+        this.LE = ELX;
+    }
+
+
 
 public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img,String lugar) {
         this.titulo = titulo;
@@ -55,7 +62,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.colaboraciones = new ArrayList();
         this.img = img;
         this.Prop = Prop;
-        this.listaDeEstados = listaDeEstados;
+        //this.listaDeEstados = listaDeEstados;
+        this.LE = new ArrayList();
         this.lugar = lugar;
     }
 
@@ -73,7 +81,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.cate = cate;
         this.lugar = lugar;
         this.colaboraciones = new ArrayList<>();
-         this.listaDeEstados = new HashMap<>();
+        //this.listaDeEstados = new HashMap<>();
+        this.LE  = new ArrayList();
      }
      
      public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
@@ -90,7 +99,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          this.Prop = nickProp;
          this.precioE = precioE;
          this.colaboraciones = new ArrayList<>();
-         this.listaDeEstados = new HashMap<>();
+         //this.listaDeEstados = new HashMap<>();
+          this.LE = new ArrayList();
          
      }
     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img, String lugar) {
@@ -104,7 +114,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.img = img;
         this.lugar = lugar;
         this.colaboraciones = new ArrayList<>();
-        this.listaDeEstados = new HashMap<>();
+        //this.listaDeEstados = new HashMap<>();
+        this.LE = new ArrayList();
     }
     
     // AGREGE LUGAR 
@@ -122,7 +133,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          this.Prop = nickProp;
          this.precioE = precioE;
          this.colaboraciones = new ArrayList<>();
-         this.listaDeEstados = new HashMap<>();
+         //this.listaDeEstados = new HashMap<>();
+         this.LE = new ArrayList();
          this.lugar = xlugar;
          
      }
@@ -222,13 +234,13 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     
     }
 
-    public Map<Testado, ListEstado> getListaDeEstados() {
-        return listaDeEstados;
-    }
-
-    public void setListaDeEstados(Map<Testado, ListEstado> listaDeEstados) {
-        this.listaDeEstados = listaDeEstados;
-    }
+//    public Map<Testado, ListEstado> getListaDeEstados() {
+//        return listaDeEstados;
+//    }
+//
+//    public void setListaDeEstados(Map<Testado, ListEstado> listaDeEstados) {
+//        this.listaDeEstados = listaDeEstados;
+//    }
 
     public Date getFecha() {
         return fecha;

@@ -120,7 +120,7 @@ public class ctrlPropuesta implements IPropuesta {
                     } catch (ParseException ex) {
                         System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
                     }
-                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, Testado.Ingresada);
+                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
                     System.out.println(est.getEst().toString() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
 
@@ -143,6 +143,7 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
     
+    @Override
     public boolean existeColaboracion(String nick, String titulo)
     {
         Propuesta p = (Propuesta) this.propuestas.get(titulo);
@@ -156,6 +157,7 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
     
+    @Override
     public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR)
     {
         Date lul = new Date();
@@ -210,6 +212,13 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+    }
+    
+    @Override
+    public void cargarProp(){
+        this.dbPropuesta.cargarPropuestasPrueba();
+        this.dbE.agregarListPrueb();
+        this.cargarPropuestas();
     }
     
     public void cargarColaboraciones()
@@ -304,6 +313,7 @@ public class ctrlPropuesta implements IPropuesta {
     };
     
     
+    @Override
     public List<String> ListarProp(){
     List<String> Nicks = new ArrayList<String>();
     Set set = propuestas.entrySet();
@@ -318,8 +328,9 @@ public class ctrlPropuesta implements IPropuesta {
         return Nicks;
 };
  
+    @Override
     public List<String> ColaborantesDePro(){
-         List<String> Nicks = new ArrayList<String>();
+        List<String> Nicks = new ArrayList<String>();
         Iterator iteradorsito = colaboraciones.iterator();
         while (iteradorsito.hasNext()) {
             Colaboracion aux = (Colaboracion) iteradorsito.next();
@@ -330,4 +341,15 @@ public class ctrlPropuesta implements IPropuesta {
     }
     return Nicks;
     };
+    
+    @Override
+     public void EstadosPropuestas(){
+        Set set = propuestas.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+        Map.Entry mentry = (Map.Entry)iterator.next();
+            Propuesta aux=(Propuesta) mentry.getValue();
+            this.dbE.SetearEstadoPropuesta(aux);
+        }       
+     };
 }

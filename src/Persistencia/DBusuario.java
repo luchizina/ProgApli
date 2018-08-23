@@ -28,27 +28,25 @@ import java.util.logging.Logger;
  *
  * @author Nuevo
  */
-
-
-
 /**
  *
  * @author Nuevo
  */
 public class DBusuario {
+
     private Connection conexion = new ConexionDB().getConexion();
-    
-    public boolean agregarColaborador(Colaborador u){
-          try {
+
+    public boolean agregarColaborador(Colaborador u) {
+        try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
                     + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC) values(?,?,?,?,?,?)");
             statement.setString(1, u.getNick());
             statement.setString(2, u.getCorreo());
             statement.setString(3, u.getNombre());
             statement.setString(4, u.getApellido());
-            Date fechaC= u.getFecha();
+            Date fechaC = u.getFecha();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSt=sdf.format(fechaC);
+            String fechaSt = sdf.format(fechaC);
             statement.setString(5, fechaSt);
             statement.setString(6, u.getImg());
             statement.executeUpdate();
@@ -57,20 +55,20 @@ public class DBusuario {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
     }
-    
-     public boolean agregarProponente(Proponente u){
-         try {
+
+    public boolean agregarProponente(Proponente u) {
+        try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
                     + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb) values(?,?,?,?,?,?,?,?,?)");
             statement.setString(1, u.getNick());
             statement.setString(2, u.getCorreo());
             statement.setString(3, u.getNombre());
             statement.setString(4, u.getApellido());
-            Date fechaC= u.getFecha();
+            Date fechaC = u.getFecha();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSt=sdf.format(fechaC);
+            String fechaSt = sdf.format(fechaC);
             statement.setString(5, fechaSt);
             statement.setString(6, u.getImg());
             statement.setString(7, u.getDireccion());
@@ -82,179 +80,157 @@ public class DBusuario {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
     }
-     
-     
-     
-     
-     public boolean seguirCP(String nickcolab, String nickProp){
-         
-           try {
+
+    public boolean seguirCP(String nickcolab, String nickProp) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguircp "
                     + "(SeguidorC, SeguidoP) values(?,?)");
-            statement.setString(1,nickcolab);
-            statement.setString(2,nickProp);
-            
+            statement.setString(1, nickcolab);
+            statement.setString(2, nickProp);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-     
-         public boolean dejarSeguirCP(String nickcolab, String nickProp){
-         
-           try {
+    }
+
+    public boolean dejarSeguirCP(String nickcolab, String nickProp) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("DELETE FROM seguircp WHERE SeguidorC=? and SeguidoP=?");
-            statement.setString(1,nickcolab);
-            statement.setString(2,nickProp);
-            
+            statement.setString(1, nickcolab);
+            statement.setString(2, nickProp);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-         
+    }
 
-     
-     
-     
-     
-       public boolean seguirPC(String nickProp, String nickColab){
-         
-           try {
+    public boolean seguirPC(String nickProp, String nickColab) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguirpc "
                     + "(SeguidorP, SeguidoC) values(?,?)");
-            statement.setString(1,nickProp);
-            statement.setString(2,nickColab);
-            
+            statement.setString(1, nickProp);
+            statement.setString(2, nickColab);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-       
-       
-       
-          public boolean dejarSeguirPC(String nickProp, String nickColab){
-         
-           try {
+    }
+
+    public boolean dejarSeguirPC(String nickProp, String nickColab) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("DELETE FROM seguirpc WHERE SeguidorP=? and SeguidoC=?");
-            statement.setString(1,nickProp);
-            statement.setString(2,nickColab);
-            
+            statement.setString(1, nickProp);
+            statement.setString(2, nickColab);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-       
-       
-                          
-     
-       public boolean seguirPP(String nickProp, String nickProp2){
-         
-           try {
+    }
+
+    public boolean seguirPP(String nickProp, String nickProp2) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguepp "
                     + "(Seguidor, Seguido) values(?,?)");
-            statement.setString(1,nickProp);
-            statement.setString(2,nickProp2);
-            
+            statement.setString(1, nickProp);
+            statement.setString(2, nickProp2);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-       
-        public boolean dejarSeguirPP(String nickProp, String nickProp2){
-         
-           try {
+    }
+
+    public boolean dejarSeguirPP(String nickProp, String nickProp2) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("DELETE FROM siguepp WHERE Seguidor=? and Seguido=?");
-            statement.setString(1,nickProp);
-            statement.setString(2,nickProp2);
-            
+            statement.setString(1, nickProp);
+            statement.setString(2, nickProp2);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-     
-      public boolean seguirCC(String nickColab, String nickColab2){
-         
-           try {
+    }
+
+    public boolean seguirCC(String nickColab, String nickColab2) {
+
+        try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguecc "
                     + "(Seguidor, Seguido) values(?,?)");
-            statement.setString(1,nickColab);
-            statement.setString(2,nickColab2);
-            
+            statement.setString(1, nickColab);
+            statement.setString(2, nickColab2);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-      
-      
-            public boolean dejarSeguirCC(String nickColab, String nickColab2){
-         
-           try {
-        PreparedStatement statement = conexion.prepareStatement("DELETE FROM siguecc WHERE Seguidor=? and Seguido=?");
-            statement.setString(1,nickColab);
-            statement.setString(2,nickColab2);
-            
+    }
+
+    public boolean dejarSeguirCC(String nickColab, String nickColab2) {
+
+        try {
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM siguecc WHERE Seguidor=? and Seguido=?");
+            statement.setString(1, nickColab);
+            statement.setString(2, nickColab2);
+
             statement.executeUpdate();
             statement.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
 
-     }
-   
-     
-     
-     
-     
-     
-     
-     
-     
-      public Map<String,Usuario> cargarProponentes(){
+    }
+
+    public Map<String, Usuario> cargarProponentes() {
         try {
             Map<String, Usuario> lista = new HashMap<String, Usuario>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM proponente");          
-            ResultSet rs=st.executeQuery();
-            while (rs.next()){
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM proponente");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
                 String nick = rs.getString("NickP");
-                Proponente p=new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente");
+                Proponente p = new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente");
                 lista.put(nick, p);
             }
             rs.close();
@@ -262,34 +238,29 @@ public class DBusuario {
             return lista;
         } catch (SQLException ex) {
             return null;
-        }        
+        }
     }
-      
-      
-      
-      
-      
-      public void limpiarBase() throws SQLException{
-          try{
-          PreparedStatement st = conexion.prepareStatement("Delete FROM colaborador"); 
-          st.executeUpdate();
-          st.close();
-          PreparedStatement stt = conexion.prepareStatement("Delete FROM proponente"); 
-          stt.executeUpdate();
-          stt.close();
-          PreparedStatement s = conexion.prepareStatement("Delete FROM categoria"); 
-          s.executeUpdate();
-          s.close();
-          PreparedStatement a = conexion.prepareStatement("Delete FROM propuesta"); 
-          a.executeUpdate();
-          a.close();
-          } catch (SQLException ex) {
+
+    public void limpiarBase() throws SQLException {
+        try {
+            PreparedStatement st = conexion.prepareStatement("Delete FROM colaborador");
+            st.executeUpdate();
+            st.close();
+            PreparedStatement stt = conexion.prepareStatement("Delete FROM proponente");
+            stt.executeUpdate();
+            stt.close();
+            PreparedStatement s = conexion.prepareStatement("Delete FROM categoria");
+            s.executeUpdate();
+            s.close();
+            PreparedStatement a = conexion.prepareStatement("Delete FROM propuesta");
+            a.executeUpdate();
+            a.close();
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
-      }
-      
-      /*
-      public void cargarProponentesPrueba(){
+    }
+
+    public void cargarProponentesPrueba() {
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
             Date hrubino = sd.parse("1962-02-25");
@@ -301,63 +272,150 @@ public class DBusuario {
             Date dp = sd.parse("1975-01-01");
             Date kh = sd.parse("1840-04-25");
             Date lb = sd.parse("1980-10-31");
-            String [] nick = {"hrubino", "mbusca", "hectorg", "tabarec", "cachilas", "juliob", "diegop", "kairoh", "durazno"};
-            String [] correo = {"horacio.rubino@guambia.com.uy", "Martin.bus@agadu.org.uy", "hector.gui@elgalpon.org.uy", "tabare.car@agadu.org.uy", "Cachila.sil@c1080.org.uy", "juliobocca@sodre.com.uy", "diego@efectocine.com", "kairoher@pilsenrock.com.uy", "comunicacion@durazno.gub.uy"};
-            String [] nombre = {"Horacio", "Martín", "Héctor", "Tabaré", "Waldemar “Cachila” ", "Julio", "Diego", "Kairo", "Itendencia"};
-            String [] apellido = {"Rubino", "Buscaglia", "Guido", "Cardozo", "Silva", "Bocca", "Parodi", "Herrera", "Durazno"};
-            Date [] fechasN = {hrubino, mb, hg, tc, cs, jb, dp, kh, lb};
-            String [] urlImg = {"C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hr.JPG", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\mb.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hg.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\tc.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\cs.jpg", null, null, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\kh.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\lb.png"};
-            String [] direccion = {"18 de Julio 1234", "Colonia 4321", "Gral. Flores 5645", "Santiago Rivas 1212", "Br. Artigas 4567", "Benito Blanco 4321", "Emilio Frugoni 1138 Ap. 02", "Paraguay 1423", "8 de Octubre 1429"};
-            String [] link = {"https://twitter.com/horaciorubino", "http://www.martinbuscaglia.com/", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "https://www.facebook.com/C1080?ref=br_rs", "", "http://www.efectocine.com/", "", "http://durazno.gub.uy/portal/index.php"};
-            for(int i=0; i<9; i++){
+            String[] nick = {"hrubino", "mbusca", "hectorg", "tabarec", "cachilas", "juliob", "diegop", "kairoh", "durazno"};
+            String[] correo = {"horacio.rubino@guambia.com.uy", "Martin.bus@agadu.org.uy", "hector.gui@elgalpon.org.uy", "tabare.car@agadu.org.uy", "Cachila.sil@c1080.org.uy", "juliobocca@sodre.com.uy", "diego@efectocine.com", "kairoher@pilsenrock.com.uy", "comunicacion@durazno.gub.uy"};
+            String[] nombre = {"Horacio", "Martín", "Héctor", "Tabaré", "Waldemar “Cachila” ", "Julio", "Diego", "Kairo", "Itendencia"};
+            String[] apellido = {"Rubino", "Buscaglia", "Guido", "Cardozo", "Silva", "Bocca", "Parodi", "Herrera", "Durazno"};
+            Date[] fechasN = {hrubino, mb, hg, tc, cs, jb, dp, kh, lb};
+            String[] urlImg = {"C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hr.JPG", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\mb.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hg.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\tc.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\cs.jpg", null, null, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\kh.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\lb.png"};
+            String[] direccion = {"18 de Julio 1234", "Colonia 4321", "Gral. Flores 5645", "Santiago Rivas 1212", "Br. Artigas 4567", "Benito Blanco 4321", "Emilio Frugoni 1138 Ap. 02", "Paraguay 1423", "8 de Octubre 1429"};
+            String[] link = {"https://twitter.com/horaciorubino", "http://www.martinbuscaglia.com/", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "https://www.facebook.com/C1080?ref=br_rs", "", "http://www.efectocine.com/", "", "http://durazno.gub.uy/portal/index.php"};
+            String[] biografias = {"Horacio Rubino Torres nace el 25 de febrero de 1962, es conductor, actor y libretista.\n"
+                + "Debuta en 1982 en carnaval en Los \"Klaper´s\", donde estuvo cuatro años, actuando y\n"
+                + "libretando. Luego para \"Gaby´s\" (6 años), escribió en categoría revistas y humoristas y\n"
+                + "desde el comienzo y hasta el presente en su propio conjunto Momosapiens.", "Martín Buscaglia (Montevideo, 1972) es un artista, músico, compositor y\n"
+                + "productor uruguayo. Tanto con su banda (“Los Bochamakers”) como en su formato “Hombre\n"
+                + "orquesta”, o solo con su guitarra, ha recorrido el mundo tocando entre otros países en\n"
+                + "España, Estados Unidos, Inglaterra, Francia, Australia, Brasil, Colombia, Argentina, Chile,\n"
+                + "Paraguay, México y Uruguay. (Actualmente los Bochamakers son Matías Rada, Martín\n"
+                + "Ibarburu, Mateo Moreno, Herman Klang) Paralelamente, tiene proyectos a dúo con el\n"
+                + "español Kiko Veneno, la cubana Yusa, el argentino Lisandro Aristimuño, su compatriota\n"
+                + "Antolín, y a trío junto a los brasileros Os Mulheres Negras.", "En 1972 ingresó a la Escuela de Arte Dramático del teatro El Galpón. Participó en más de\n"
+                + "treinta obras teatrales y varios largometrajes. Integró el elenco estable de Radioteatro\n"
+                + "del Sodre, y en 2006 fue asesor de su Consejo Directivo. Como actor recibió múltiples\n"
+                + "reconocimientos: cuatro premios Florencio, premio al mejor actor extranjero del Festival de\n"
+                + "Miami y premio Mejor Actor de Cine 2008. Durante varios períodos fue directivo del teatro\n"
+                + "El Galpón y dirigente de la Sociedad Uruguaya de Actores (SUA); integró también la\n"
+                + "Federación Uruguaya de Teatros Independientes (FUTI). Formó parte del equipo de gestión\n"
+                + "de la refacción de los teatros La Máscara, Astral y El Galpón, y del equipo de gestión en la\n"
+                + "construcción del teatro De la Candela y de la sala Atahualpa de El Galpón.", "Tabaré Cardozo (Montevideo, 24 de julio de 1971) es\n"
+                + "un cantante, compositor y murguista uruguayo; conocido por su participación en\n"
+                + "la murga Agarrate Catalina, conjunto que fundó junto a su hermano Yamandú y Carlos\n"
+                + "Tanco en el año 2001Tabaré Cardozo (Montevideo, 24 de julio de 1971) es\n"
+                + "un cantante, compositor y murguista uruguayo; conocido por su participación en\n"
+                + "la murga Agarrate Catalina, conjunto que fundó junto a su hermano Yamandú y Carlos\n"
+                + "Tanco en el año 2001", "Nace en el año 1947 en el conventillo \"Medio Mundo\" ubicado en pleno Barrio Sur. Es\n"
+                + "heredero parcialmente-junto al resto de sus hermanos- de la Comparsa \"Morenada\"\n"
+                + "(inactiva desde el fallecimiento de Juan Ángel Silva), en 1999 forma su propia Comparsa de\n"
+                + "negros y lubolos \"Cuareim 1080\". Director responsable, compositor y cantante de la misma.", "", "", "", "Nuestros festivales que son orgullo del Uruguay, como cada enero con lo mejor del tango o\n"
+                + "el festival de la música tropical. La fiesta de los jóvenes, donde miles de ellos disfrutan de\n"
+                + "variados espectáculos al aire libre y se confunden para vivir tres días inolvidables,\n"
+                + "convocados por diversos géneros, como rock, tropical, murga y tango. "};
+            for (int i = 0; i < 9; i++) {
                 String Imagen = null;
-                if(urlImg[i] != null){
+                if (urlImg[i] != null) {
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = urlImg[i];
                     String destino = "Imagenes/Proponente/" + nick[i] + "." + termina;
-                    if(this.copia(origen, destino)==true){
-                        Imagen=destino;
+                    if (this.copia(origen, destino) == true) {
+                        Imagen = destino;
                     } else {
                         Imagen = null;
                     }
                 }
-                 try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
-                    + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb) values(?,?,?,?,?,?,?,?,?)");
-            statement.setString(1, nick[i]);
-            statement.setString(2, correo[i]);
-            statement.setString(3, nombre[i]);
-            statement.setString(4, apellido[i]);
-            Date fechaC= fechasN[i];
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSt=sdf.format(fechaC);
-            statement.setString(5, fechaSt);
-            statement.setString(6, Imagen);
-            statement.setString(7, direccion[i]);
-            statement.setString(8, "");
-            statement.setString(9, link[i]);
-            statement.executeUpdate();
-            statement.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } 
+                try {
+                    PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
+                            + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb) values(?,?,?,?,?,?,?,?,?)");
+                    statement.setString(1, nick[i]);
+                    statement.setString(2, correo[i]);
+                    statement.setString(3, nombre[i]);
+                    statement.setString(4, apellido[i]);
+                    Date fechaC = fechasN[i];
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String fechaSt = sdf.format(fechaC);
+                    statement.setString(5, fechaSt);
+                    statement.setString(6, Imagen);
+                    statement.setString(7, direccion[i]);
+                    statement.setString(8, biografias[i]);
+                    statement.setString(9, link[i]);
+                    statement.executeUpdate();
+                    statement.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         } catch (ParseException ex) {
             Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
-      }
-      */
-      
-        public Map<String, Colaborador> cargarColaboradores(){
+
+    } 
+    
+    public void CargarColabPrueba(){
+        try {
+            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+            Date rh = sd.parse("1940-08-03");
+            Date mt = sd.parse("1960-04-01");
+            Date en = sd.parse("1952-07-17");
+            Date sp = sd.parse("1950-01-28");
+            Date ar = sd.parse("1976-03-17");
+            Date ap = sd.parse("1955-02-14");
+            Date nj = sd.parse("1960-08-09");
+            Date jp = sd.parse("1970-01-01");
+            Date mg = sd.parse("1982-02-02");
+            Date pl = sd.parse("1985-03-03");
+            Date tj = sd.parse("1990-04-04");
+            String [] nick = {"robinh","marcelot","novick","sergiop","chino","tonyp","nicoJ","juanP","Mengano","Perengano", "Tiajaci"};
+            String [] correos = {"Robin.h@tinglesa.com.uy", "marcelot@ideasdelsur.com.ar", "edgardo@novick.com.uy", "puglia@alpanpan.com.uy", "chino@trico.org.uy", "eltony@manya.org.uy", "jodal@artech.com.uy", "juanp@elpueblo.com", "menganog@elpueblo.com", "pere@elpueblo.com","jacinta@elpueblo.com"};
+            String [] nombres = {"Robin", "Marcelo", "Edgardo", "Sergio", "Alvaro", "Antonio", "Nicolás", "Juan", "Mengano", "Perengano", "Tía"};
+            String [] apellidos = {"Henderson", "Tinelli", "Novick", "Puglia", "Recoba", "Pacheco", "Jodal", "Perez", "Gómez", "López", "Jacinta"};
+            Date [] fechasN ={rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
+            String [] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
+             for (int i = 0; i < 11; i++) {
+                String Imagen = null;
+                if (imagenes[i] != null) {
+                    String[] aux = imagenes[i].split("\\.");
+                    String termina = aux[1];
+                    String origen = imagenes[i];
+                    String destino = "Imagenes/Colaborador/" + nick[i] + "." + termina;
+                    if (this.copia(origen, destino) == true) {
+                        Imagen = destino;
+                    } else {
+                        Imagen = null;
+                    }
+                }
+                try {
+                    PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
+                            + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC) values(?,?,?,?,?,?)");
+                    statement.setString(1, nick[i]);
+                    statement.setString(2, correos[i]);
+                    statement.setString(3, nombres[i]);
+                    statement.setString(4, apellidos[i]);
+                    Date fechaC = fechasN[i];
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String fechaSt = sdf.format(fechaC);
+                    statement.setString(5, fechaSt);
+                    statement.setString(6, Imagen);
+                    statement.executeUpdate();
+                    statement.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public Map<String, Colaborador> cargarColaboradores() {
         try {
             Map<String, Colaborador> lista = new HashMap<String, Colaborador>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador");          
-            ResultSet rs=st.executeQuery();
-            while (rs.next()){
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
                 String nick = rs.getString("NickC");
-                Colaborador p=new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador");
+                Colaborador p = new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador");
                 lista.put(nick, p);
             }
             rs.close();
@@ -366,18 +424,18 @@ public class DBusuario {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        }        
+        }
     }
-        
-        public boolean copia(String origen, String destino) {
-        try{
+
+    public boolean copia(String origen, String destino) {
+        try {
             File aor = new File(origen);
             File ade = new File(destino);
             ade.getParentFile().mkdirs();
             ade.createNewFile();
             Files.copy(aor.toPath(), ade.toPath(), StandardCopyOption.REPLACE_EXISTING);
             return true;
-        } catch(IOException ex){
+        } catch (IOException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
