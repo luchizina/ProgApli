@@ -38,5 +38,6 @@ public abstract boolean escorreo(String correo);
      public abstract void seleccionarUsuario(String nick);
      public abstract void seleccionarUsuSeg(String nick);
      public abstract boolean dejarDeSeguir();
+     public abstract Proponente traerProponente(String lul);
      
 }

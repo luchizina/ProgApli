@@ -5,8 +5,10 @@
  */
 package Persistencia;
 
+import Logica.Estado;
 import Logica.ListEstado;
 import Logica.Propuesta;
+import Logica.Testado;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -93,4 +95,82 @@ public class DBListEstado {
         }
         return listita;
     }
+    
+    public void SetearEstadoPropuesta(Propuesta x){
+    try {
+            List<ListEstado> Lestados = new ArrayList<ListEstado>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM listestado WHERE TituloP=?"); 
+            st.setString(1, x.getTitulo());
+            ResultSet rs=st.executeQuery();
+            while (rs.next()){
+                // Setear lista 
+                java.sql.Time xhora = rs.getTime("Hora");
+                java.util.Date xfecha = rs.getDate("Fecha");
+                String e = rs.getString("Estado");
+                Testado d;
+                if (e.equals("Ingresada")){
+                d = Testado.ingresada;
+                }
+                else if (e.equals("Publicada")){
+                d = Testado.publicada;
+                }
+                 else if (e.equals("En_Financiacion")){
+                d = Testado.en_financiacion;
+                }
+                 else if (e.equals("Financiada")){
+                d = Testado.financiada;
+                }
+                 else if (e.equals("No_Financiada")){
+                d = Testado.no_financiada;
+                }
+                 else{ // cancelada
+                d = Testado.cancelada;
+                }
+                ListEstado ListaEstadopasado = new ListEstado(xfecha, xhora, d.toString());
+                Lestados.add(ListaEstadopasado);
+                }
+                x.setLE(Lestados);
+                
+                PreparedStatement stx = conexion.prepareStatement("SELECT * FROM listestado WHERE fecha=(SELECT MAX(fecha) FROM listestado WHERE TituloP =? ) AND TituloP =?"); 
+                stx.setString(1, x.getTitulo());
+                stx.setString(2, x.getTitulo());
+                ResultSet rsx=stx.executeQuery();
+                while (rsx.next()){
+                String ex = rsx.getString("Estado");
+                java.sql.Time Actualhora = rsx.getTime("Hora"); // falta comparar con la hora
+                java.util.Date Actualfecha = rsx.getDate("Fecha");
+                Testado dx;
+                if (ex.equals("Ingresada")){
+                dx = Testado.ingresada;
+                }
+                else if (ex.equals("Publicada")){
+                dx = Testado.publicada;
+                }
+                 else if (ex.equals("En_Financiacion")){
+                dx = Testado.en_financiacion;
+                }
+                 else if (ex.equals("Financiada")){
+                dx = Testado.financiada;
+                }
+                 else if (ex.equals("No_Financiada")){
+                dx = Testado.no_financiada;
+                }
+                 else{ // cancelada
+                dx = Testado.cancelada;
+                }
+                Estado es = new Estado(dx);
+                x.setEstActual(es);
+                
+                }
+            rsx.close();
+            stx.close();    
+            rs.close();
+            st.close();
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+           
+        }
+    
+    };
 }

@@ -132,4 +132,9 @@ public String getNombreCate()
 {
     return categoria;
 }
+
+public Map<String, DtColaborador> getColabs()
+        {
+            return this.colaboradores;
+        }
 }

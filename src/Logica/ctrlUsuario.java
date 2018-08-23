@@ -88,6 +88,12 @@ public class ctrlUsuario implements IUsuario {
         return fa;
     }
     
+    public Proponente traerProponente(String f)
+    {
+        Proponente p = (Proponente) this.usuarios.get(f);
+        return p;
+    }
+    
     
     
     
