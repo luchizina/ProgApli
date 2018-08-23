@@ -13,10 +13,10 @@ import Logica.*;
  * @author Luchi
  */
 public enum Testado {
-            ingresada,
-            publicada,
-            en_financiacion,
-            financiada,
-            no_financiada,
-            cancelada;
+            Ingresada,
+            Publicada,
+            En_Financiacion,
+            Financiada,
+            No_Financiada,
+            Cancelada;
 }

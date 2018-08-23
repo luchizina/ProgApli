@@ -76,6 +76,8 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         TxtFPublica = new javax.swing.JTextField();
         TxtEstado = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        TxtBuscador = new javax.swing.JTextField();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -115,6 +117,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Propuestas:");
 
+        jLColaboradores.setAutoscrolls(false);
         jScrollPane2.setViewportView(jLColaboradores);
 
         TxtLugar.setEditable(false);
@@ -169,6 +172,25 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel11.setText("Buscar Propuesta:");
+
+        TxtBuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TxtBuscadorFocusGained(evt);
+            }
+        });
+        TxtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtBuscadorKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtBuscadorKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtBuscadorKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,44 +200,41 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(TxtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel6)
-                                    .addComponent(TxtEstado)
-                                    .addComponent(TxtLugar)
-                                    .addComponent(TxtFecha)
-                                    .addComponent(TxtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(TxtPropuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(TxtFPublica, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel7)
-                                        .addComponent(TxtMontoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(TxtCategoria)))
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6)
+                            .addComponent(TxtLugar)
+                            .addComponent(TxtFecha)
+                            .addComponent(TxtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7)
+                            .addComponent(TxtMontoActual)
+                            .addComponent(TxtFPublica)
+                            .addComponent(TxtPrecio)
+                            .addComponent(TxtPropuesto)))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel12)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(TxtCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,30 +244,28 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addComponent(jLabel13))
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel14))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtPropuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtPropuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(TxtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -259,9 +276,12 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtFPublica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(TxtFPublica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 65, Short.MAX_VALUE))
+                            .addComponent(jScrollPane5)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
@@ -270,103 +290,88 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TxtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtMontoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)))
+                            .addComponent(TxtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                    .addComponent(jLImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jLImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                .addGap(2, 2, 2)
                 .addComponent(jButton1)
-                .addGap(11, 11, 11))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLPropuestasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jLPropuestasValueChanged
-        // TODO add your handling code here:
-        DtPropuesta x = propuesta.SeleccionarProp(jLPropuestas.getSelectedValue());
-        //List<String> nombres = propuesta.NombrePropoConsulta(); // falta liberar la memoria
-        List<String> nombres = propuesta.ColaborantesDePro();
-        // List<String> nombres = IA.Colaboraste();
-        Date date = x.getFecha();
-        DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
-        String convertido = fecha.format(date);
-        Date datep = x.getFechaPub();
-        DateFormat fechap = new SimpleDateFormat("yyyy/MM/dd");
-        String convertidop = fechap.format(datep);
-
-        TxtDescriopcion.setText(x.getDescripcion());
-        TxtLugar.setText(x.getLugar());
-        TxtMontoTotal.setText(Integer.toString(x.getMontototal()));
-        TxtMontoActual.setText(Integer.toString(x.getMontoActual()));
-        TxtPrecio.setText(Integer.toString(x.getPrecio()));
-        TxtFecha.setText(convertido);
-        TxtFPublica.setText(convertidop);
-        TxtPropuesto.setText(x.getPropo());
-        TxtCategoria.setText(x.getNombreCate());
-        ImageIcon imagen = new ImageIcon(x.getImg());
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
-        jLImagen.setIcon(icono); 
-        if (x.getEstActual() != null){
-            if (x.getEstActual().getEstado() == Testado.valueOf("ingresada")){
-                TxtEstado.setText("Ingresada");
-            }
-            else if(x.getEstActual().getEstado() == Testado.valueOf("publicada") ) {
-                TxtEstado.setText("Publicada");
-            }
-            else if(x.getEstActual().getEstado() == Testado.valueOf("en_financiacion") ) {
-                TxtEstado.setText("En Financiacion");
-            }
-            else if(x.getEstActual().getEstado() == Testado.valueOf("financiada") ) {
-                TxtEstado.setText("Financiada");
-            }
-            else if(x.getEstActual().getEstado() == Testado.valueOf("no_financiada") ) {
-                TxtEstado.setText("No Financiada");
-            }
-            else {
-                TxtEstado.setText("cancelada");
-            } 
         
-        }
-        else {
-        javax.swing.JOptionPane.showMessageDialog(null,"VASIO");
-        }
-        if(nombres != null){
-            DefaultListModel modelo=new DefaultListModel();
-            for(int i = 0; i<nombres.size(); i++){
-                String p=(String)nombres.get(i);
-                modelo.addElement(p);
+        if (jLPropuestas.getSelectedIndex() != -1) {
+            DtPropuesta x = propuesta.SeleccionarProp(jLPropuestas.getSelectedValue()); 
+            List<String> nombres = propuesta.ColaborantesDePro();
+            Date date = x.getFecha();
+            DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
+            String convertido = fecha.format(date);
+            Date datep = x.getFechaPub();
+            DateFormat fechap = new SimpleDateFormat("yyyy/MM/dd");
+            String convertidop = fechap.format(datep);
+
+            TxtDescriopcion.setText(x.getDescripcion());
+            TxtLugar.setText(x.getLugar());
+            TxtMontoTotal.setText(Integer.toString(x.getMontototal()));
+            TxtMontoActual.setText(Integer.toString(x.getMontoActual()));
+            TxtPrecio.setText(Integer.toString(x.getPrecio()));
+            TxtFecha.setText(convertido);
+            TxtFPublica.setText(convertidop);
+            TxtPropuesto.setText(x.getPropo());
+            TxtCategoria.setText(x.getNombreCate());
+            ImageIcon imagen = new ImageIcon(x.getImg());
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
+            jLImagen.setIcon(icono);
+            if (x.getEstActual() != null) {
+                if (x.getEstActual().getEstado() == Testado.valueOf("Ingresada")) {
+                    TxtEstado.setText("Ingresada");
+                } else if (x.getEstActual().getEstado() == Testado.valueOf("Publicada")) {
+                    TxtEstado.setText("Publicada");
+                } else if (x.getEstActual().getEstado() == Testado.valueOf("En_Financiacion")) {
+                    TxtEstado.setText("En Financiacion");
+                } else if (x.getEstActual().getEstado() == Testado.valueOf("Financiada")) {
+                    TxtEstado.setText("Financiada");
+                } else if (x.getEstActual().getEstado() == Testado.valueOf("No_Financiada")) {
+                    TxtEstado.setText("No Financiada");
+                } else {
+                    TxtEstado.setText("Cancelada");
+                }
             }
-            jLColaboradores.setModel(modelo);
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(null,"No posee Colaborantes");
+            if (nombres != null) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < nombres.size(); i++) {
+                    String p = (String) nombres.get(i);
+                    modelo.addElement(p);
+                }
+                jLColaboradores.setModel(modelo);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null, "No posee Colaborantes");
+            }
         }
     }//GEN-LAST:event_jLPropuestasValueChanged
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
-        
-        List<String> pro=propuesta.ListarProp();
-        //propuesta.EstadosPropuestas();
-        if(!pro.isEmpty()){
-        DefaultListModel modelo=new DefaultListModel();
-        for(int i = 0; i<pro.size(); i++){
-        String p=(String)pro.get(i);
-        modelo.addElement(p);
+        List<String> pro = propuesta.ListarProp();
+        if (!pro.isEmpty()) {                                                   // SI HAY PROPUESTAS
+            DefaultListModel modelo = new DefaultListModel();                   
+            for (int i = 0; i < pro.size(); i++) {
+                String p = (String) pro.get(i);
+                modelo.addElement(p);
+            }
+            jLPropuestas.setModel(modelo);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "No hay Propuestas");
         }
-        jLPropuestas.setModel(modelo);
-    }else{
-        javax.swing.JOptionPane.showMessageDialog(null,"No hay Propuestas");
-        } 
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -374,8 +379,65 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
          this.dispose(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void TxtBuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyTyped
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_TxtBuscadorKeyTyped
+
+    private void TxtBuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyPressed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_TxtBuscadorKeyPressed
+
+    private void TxtBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyReleased
+        // TODO add your handling code here:
+         List<String> pro = propuesta.ListarProp();
+        if (TxtBuscador.getText().equals("")) { // SI NO BUSCA
+            if (!pro.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < pro.size(); i++) {
+                    String p = (String) pro.get(i);
+                    modelo.addElement(p);
+                }
+                jLPropuestas.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!pro.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < pro.size(); i++) {
+                    String p = (String) pro.get(i);
+                    if (p.contains(TxtBuscador.getText())) {
+                        modelo.addElement(p);
+                    }
+                }
+                jLPropuestas.setModel(modelo);
+            }
+        }
+    }//GEN-LAST:event_TxtBuscadorKeyReleased
+
+    private void TxtBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtBuscadorFocusGained
+        // TODO add your handling code here:
+         jLPropuestas.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
+          TxtDescriopcion.setText("");
+          TxtLugar.setText("");
+          TxtMontoTotal.setText("");
+          TxtMontoActual.setText("");
+          TxtPrecio.setText("");
+          TxtFecha.setText("");
+          TxtFPublica.setText("");
+          TxtPropuesto.setText("");
+          TxtCategoria.setText("");
+          TxtEstado.setText("");
+          ImageIcon imagen = new ImageIcon("");
+          DefaultListModel modelo = new DefaultListModel(); 
+          jLColaboradores.setModel(modelo);
+          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
+          jLImagen.setIcon(icono);
+    }//GEN-LAST:event_TxtBuscadorFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TxtBuscador;
     private javax.swing.JTextField TxtCategoria;
     private javax.swing.JTextPane TxtDescriopcion;
     private javax.swing.JTextField TxtEstado;
@@ -392,6 +454,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JList<String> jLPropuestas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

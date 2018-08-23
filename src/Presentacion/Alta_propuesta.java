@@ -496,7 +496,7 @@ public static String getHoraActual() {
     }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
      String hora = getHoraActual();
-      Estado estA = new Estado(Testado.ingresada);
+      Estado estA = new Estado(Testado.Ingresada);
       String TRetorno;
         if(jR1.isSelected() && jR2.isSelected()){
             TRetorno= jR1.getText() + "," + jR2.getText();

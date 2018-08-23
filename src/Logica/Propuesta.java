@@ -311,7 +311,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         return  null;
     }
     
-    public List<String> NombreColaborantes(){
+    public List<String> NombreColaborantes(){ // aborrar
        List x =  new ArrayList<String>();
        if(this.colaboraciones == null)
            return null;

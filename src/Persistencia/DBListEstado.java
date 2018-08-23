@@ -53,81 +53,67 @@ public class DBListEstado {
     
     
     
-    public void SetearEstadoPropuesta(Propuesta x){
-    try {
+    public void SetearEstadoPropuesta(Propuesta x) {
+        try {
             List<ListEstado> Lestados = new ArrayList<ListEstado>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM listestado WHERE TituloP=?"); 
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM listestado WHERE TituloP=?");
             st.setString(1, x.getTitulo());
-            ResultSet rs=st.executeQuery();
-            while (rs.next()){
-                // Setear lista 
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                // SETEAR LISTA DE ESTADOS 
                 java.sql.Time xhora = rs.getTime("Hora");
                 java.util.Date xfecha = rs.getDate("Fecha");
                 String e = rs.getString("Estado");
                 Testado d;
-                if (e.equals("Ingresada")){
-                d = Testado.ingresada;
-                }
-                else if (e.equals("Publicada")){
-                d = Testado.publicada;
-                }
-                 else if (e.equals("En_Financiacion")){
-                d = Testado.en_financiacion;
-                }
-                 else if (e.equals("Financiada")){
-                d = Testado.financiada;
-                }
-                 else if (e.equals("No_Financiada")){
-                d = Testado.no_financiada;
-                }
-                 else{ // cancelada
-                d = Testado.cancelada;
+                if (e.equals("Ingresada")) {
+                    d = Testado.Ingresada;
+                } else if (e.equals("Publicada")) {
+                    d = Testado.Publicada;
+                } else if (e.equals("En_Financiacion")) {
+                    d = Testado.En_Financiacion;
+                } else if (e.equals("Financiada")) {
+                    d = Testado.Financiada;
+                } else if (e.equals("No_Financiada")) {
+                    d = Testado.No_Financiada;
+                } else { // cancelada
+                    d = Testado.Cancelada;
                 }
                 ListEstado ListaEstadopasado = new ListEstado(xfecha, xhora, d);
                 Lestados.add(ListaEstadopasado);
-                }
-                x.setLE(Lestados);
-                
-                PreparedStatement stx = conexion.prepareStatement("SELECT * FROM listestado WHERE fecha=(SELECT MAX(fecha) FROM listestado WHERE TituloP =? ) AND TituloP =?"); 
-                stx.setString(1, x.getTitulo());
-                stx.setString(2, x.getTitulo());
-                ResultSet rsx=stx.executeQuery();
-                while (rsx.next()){
+            }
+            x.setLE(Lestados);
+            // SETEAR ESTADO ACTUAL 
+            PreparedStatement stx = conexion.prepareStatement("SELECT * FROM listestado WHERE fecha=(SELECT MAX(fecha) FROM listestado WHERE TituloP =? ) AND TituloP =?");
+            stx.setString(1, x.getTitulo());
+            stx.setString(2, x.getTitulo());
+            ResultSet rsx = stx.executeQuery();
+            while (rsx.next()) {
                 String ex = rsx.getString("Estado");
                 java.sql.Time Actualhora = rsx.getTime("Hora"); // falta comparar con la hora
                 java.util.Date Actualfecha = rsx.getDate("Fecha");
                 Testado dx;
-                if (ex.equals("Ingresada")){
-                dx = Testado.ingresada;
-                }
-                else if (ex.equals("Publicada")){
-                dx = Testado.publicada;
-                }
-                 else if (ex.equals("En_Financiacion")){
-                dx = Testado.en_financiacion;
-                }
-                 else if (ex.equals("Financiada")){
-                dx = Testado.financiada;
-                }
-                 else if (ex.equals("No_Financiada")){
-                dx = Testado.no_financiada;
-                }
-                 else{ // cancelada
-                dx = Testado.cancelada;
+                if (ex.equals("Ingresada")) {
+                    dx = Testado.Ingresada;
+                } else if (ex.equals("Publicada")) {
+                    dx = Testado.Publicada;
+                } else if (ex.equals("En_Financiacion")) {
+                    dx = Testado.En_Financiacion;
+                } else if (ex.equals("Financiada")) {
+                    dx = Testado.Financiada;
+                } else if (ex.equals("No_Financiada")) {
+                    dx = Testado.No_Financiada;
+                } else { // cancelada
+                    dx = Testado.Cancelada;
                 }
                 Estado es = new Estado(dx);
                 x.setEstActual(es);
-                
-                }
+            }
             rsx.close();
-            stx.close();    
+            stx.close();
             rs.close();
             st.close();
-           
         } catch (SQLException ex) {
             ex.printStackTrace();
-           
         }
-    
     };
 }
