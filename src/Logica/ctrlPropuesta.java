@@ -219,6 +219,8 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.cargarPropuestasPrueba();
         this.dbE.agregarListPrueb();
         this.cargarPropuestas();
+        this.dbPropuesta.colaboracionesPrueba();
+        //this.cargarColaboraciones();
     }
     
     public void cargarColaboraciones()

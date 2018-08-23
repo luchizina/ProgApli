@@ -83,6 +83,75 @@ public class DBusuario {
         }
     }
 
+    public void seguirCPprueb() {
+        String[] seguidorC = {"robinh", "robinh", "robinh", "marcelot", "marcelot", "marcelot", "novick", "novick", "novick", "sergiop", "sergiop", "sergiop", "nicoJ", "nicoJ", "juanP", "juanP", "juanP", "Mengano", "Mengano", "Perengano", "Tiajaci", "Tiajaci"};
+        String[] seguidoP = {"hectorg", "juliob", "diegop", "cachilas", "juliob", "kairoh", "hrubino", "tabarec", "cachilas", "mbusca", "juliob", "diegop", "diegop", "durazno", "tabarec", "cachilas", "kairoh", "hectorg", "juliob", "diegop", "juliob", "kairoh"};
+        for (int i = 0; i < 22; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguircp "
+                        + "(SeguidorC, SeguidoP) values(?,?)");
+                statement.setString(1, seguidorC[i]);
+                statement.setString(2, seguidoP[i]);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void seguirCCPrueb() {
+        String[] seguidorC = {"chino", "tonyp", "Mengano", "Perengano", "Tiajaci"};
+        String[] seguidoC = {"tonyp", "chino", "chino", "tonyp", "sergiop"};
+        for (int i = 0; i < 5; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguecc "
+                        + "(Seguidor, Seguido) values(?,?)");
+                statement.setString(1, seguidorC[i]);
+                statement.setString(2, seguidoC[i]);
+
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void seguirPCPrueb(){
+        String [] seguidorP = {"kairoh","durazno"};
+        String [] seguidoC = {"sergiop","nicoJ"};
+        for(int i = 0; i<2; i++){
+            try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguirpc "
+                    + "(SeguidorP, SeguidoC) values(?,?)");
+            statement.setString(1, seguidorP[i]);
+            statement.setString(2, seguidoC[i]);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        }
+    }
+    
+    public void seguirPPprueb(){
+        String [] seguidorP = {"hrubino","hrubino","hrubino","mbusca","mbusca","mbusca","hectorg","hectorg","tabarec","tabarec","cachilas","juliob","juliob","diegop","diegop","durazno"};
+        String [] seguidoP = {"hectorg","diegop","durazno","tabarec","cachilas","kairoh","mbusca","juliob","hrubino","cachilas","hrubino","mbusca","diegop","hectorg","durazno","hrubino"};
+        for(int i=0;i<16;i++){
+             try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguepp "
+                    + "(Seguidor, Seguido) values(?,?)");
+            statement.setString(1, seguidorP[i]);
+            statement.setString(2, seguidoP[i]);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        }
+    }
+
     public boolean seguirCP(String nickcolab, String nickProp) {
 
         try {
@@ -90,7 +159,6 @@ public class DBusuario {
                     + "(SeguidorC, SeguidoP) values(?,?)");
             statement.setString(1, nickcolab);
             statement.setString(2, nickProp);
-
             statement.executeUpdate();
             statement.close();
             return true;
@@ -255,6 +323,9 @@ public class DBusuario {
             PreparedStatement a = conexion.prepareStatement("Delete FROM propuesta");
             a.executeUpdate();
             a.close();
+            PreparedStatement b = conexion.prepareStatement("Delete FROM colaboracion");
+            b.executeUpdate();
+            b.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -349,9 +420,9 @@ public class DBusuario {
             Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    } 
-    
-    public void CargarColabPrueba(){
+    }
+
+    public void CargarColabPrueba() {
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
             Date rh = sd.parse("1940-08-03");
@@ -365,13 +436,13 @@ public class DBusuario {
             Date mg = sd.parse("1982-02-02");
             Date pl = sd.parse("1985-03-03");
             Date tj = sd.parse("1990-04-04");
-            String [] nick = {"robinh","marcelot","novick","sergiop","chino","tonyp","nicoJ","juanP","Mengano","Perengano", "Tiajaci"};
-            String [] correos = {"Robin.h@tinglesa.com.uy", "marcelot@ideasdelsur.com.ar", "edgardo@novick.com.uy", "puglia@alpanpan.com.uy", "chino@trico.org.uy", "eltony@manya.org.uy", "jodal@artech.com.uy", "juanp@elpueblo.com", "menganog@elpueblo.com", "pere@elpueblo.com","jacinta@elpueblo.com"};
-            String [] nombres = {"Robin", "Marcelo", "Edgardo", "Sergio", "Alvaro", "Antonio", "Nicolás", "Juan", "Mengano", "Perengano", "Tía"};
-            String [] apellidos = {"Henderson", "Tinelli", "Novick", "Puglia", "Recoba", "Pacheco", "Jodal", "Perez", "Gómez", "López", "Jacinta"};
-            Date [] fechasN ={rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
-            String [] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
-             for (int i = 0; i < 11; i++) {
+            String[] nick = {"robinh", "marcelot", "novick", "sergiop", "chino", "tonyp", "nicoJ", "juanP", "Mengano", "Perengano", "Tiajaci"};
+            String[] correos = {"Robin.h@tinglesa.com.uy", "marcelot@ideasdelsur.com.ar", "edgardo@novick.com.uy", "puglia@alpanpan.com.uy", "chino@trico.org.uy", "eltony@manya.org.uy", "jodal@artech.com.uy", "juanp@elpueblo.com", "menganog@elpueblo.com", "pere@elpueblo.com", "jacinta@elpueblo.com"};
+            String[] nombres = {"Robin", "Marcelo", "Edgardo", "Sergio", "Alvaro", "Antonio", "Nicolás", "Juan", "Mengano", "Perengano", "Tía"};
+            String[] apellidos = {"Henderson", "Tinelli", "Novick", "Puglia", "Recoba", "Pacheco", "Jodal", "Perez", "Gómez", "López", "Jacinta"};
+            Date[] fechasN = {rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
+            String[] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
+            for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
                     String[] aux = imagenes[i].split("\\.");
@@ -405,7 +476,7 @@ public class DBusuario {
         } catch (ParseException ex) {
             Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public Map<String, Colaborador> cargarColaboradores() {
