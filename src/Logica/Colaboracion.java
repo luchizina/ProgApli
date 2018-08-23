@@ -20,6 +20,7 @@ public class Colaboracion {
             int monto;
             Colaborador colab;
             Propuesta prop;
+            String hora;
 
             Fabrica fab = Fabrica.getInstance();
             private IPropuesta IP = fab.getICtrlPropuesta();
