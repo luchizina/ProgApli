@@ -63,7 +63,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         SeguidorGrup = new javax.swing.ButtonGroup();
-        SeguidoGrupo = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -153,7 +153,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Elige usuario a seguir");
 
-        SeguidorGrup.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Proponente");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
-        SeguidorGrup.add(jRadioButton4);
+        buttonGroup1.add(jRadioButton4);
         jRadioButton4.setText("Colaborador");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,9 +346,9 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup SeguidoGrupo;
     private javax.swing.ButtonGroup SeguidorGrup;
     private javax.swing.JButton btnSeguir;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbColab;
     private javax.swing.JComboBox<String> cmbColabSeg;
     private javax.swing.JComboBox<String> cmbProp;

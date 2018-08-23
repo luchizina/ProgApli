@@ -19,9 +19,9 @@ public class ListEstado {
             
             Date fecha;
             Time hora;
-            Testado est;
+            String est;
 
-    public ListEstado(Date fecha, Time hora, Testado est) {
+    public ListEstado(Date fecha, Time hora, String est) {
         this.fecha = fecha;
         this.hora = hora;
         this.est = est;
@@ -44,11 +44,11 @@ public class ListEstado {
         this.hora = hora;
     }
 
-    public Testado getEst() {
+    public String getEst() {
         return est;
     }
 
-    public void setEst(Testado est) {
+    public void setEst(String est) {
         this.est = est;
     }
 

@@ -120,7 +120,7 @@ public class ctrlPropuesta implements IPropuesta {
                     } catch (ParseException ex) {
                         System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
                     }
-                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, Testado.Ingresada);
+                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
                     System.out.println(est.getEst().toString() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
 
@@ -143,6 +143,7 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
     
+    @Override
     public boolean existeColaboracion(String nick, String titulo)
     {
         Propuesta p = (Propuesta) this.propuestas.get(titulo);
@@ -156,6 +157,7 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
     
+    @Override
     public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR)
     {
         Date lul = new Date();
@@ -210,6 +212,13 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+    }
+    
+    @Override
+    public void cargarProp(){
+        this.dbPropuesta.cargarPropuestasPrueba();
+        this.dbE.agregarListPrueb();
+        this.cargarPropuestas();
     }
     
     public void cargarColaboraciones()

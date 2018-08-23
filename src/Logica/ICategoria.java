@@ -17,4 +17,6 @@ public interface ICategoria {
 public abstract boolean ingresarCat(DtCategoria datos);
 public abstract void cargarCategorias();
 public abstract void categoriasPrueba();
+public abstract void cargaCatPrueb();
+public abstract void cargar();
 }

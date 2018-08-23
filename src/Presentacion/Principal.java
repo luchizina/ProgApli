@@ -505,7 +505,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        Consultar_Proponente consultarProp = new Consultar_Proponente(IP, iUsu, icat);
+       this.setMinimumSize(new Dimension(consultarProp.getWidth()+20,consultarProp.getHeight()+80));
+       jp.add(consultarProp);
+       consultarProp.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -586,8 +589,10 @@ cat.setVisible(true);
     
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         iUsu.limpiarUsuarios();
-        iUsu.cargarUsuarios();
-        icat.categoriasPrueba();
+        iUsu.cargarPropPrueba();
+        icat.cargar();
+        IP.cargarProp();
+
         //IP.CargaPropuestasPrueba();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
