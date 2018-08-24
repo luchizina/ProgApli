@@ -332,15 +332,15 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
             jLImagen.setIcon(icono);
             if (x.getEstActual() != null) {
-                if (x.getEstActual().getEstado() == Testado.valueOf("Ingresada")) {
+                if (x.getEstActual().getEstado().equals("Ingresada")) {
                     TxtEstado.setText("Ingresada");
-                } else if (x.getEstActual().getEstado() == Testado.valueOf("Publicada")) {
+                } else if (x.getEstActual().getEstado().toString().equals("Publicada")) {
                     TxtEstado.setText("Publicada");
-                } else if (x.getEstActual().getEstado() == Testado.valueOf("En_Financiacion")) {
+                } else if (x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
                     TxtEstado.setText("En Financiacion");
-                } else if (x.getEstActual().getEstado() == Testado.valueOf("Financiada")) {
+                } else if (x.getEstActual().getEstado().toString().equals("Financiada")) {
                     TxtEstado.setText("Financiada");
-                } else if (x.getEstActual().getEstado() == Testado.valueOf("No_Financiada")) {
+                } else if (x.getEstActual().getEstado().toString().equals("No_Financiada")) {
                     TxtEstado.setText("No Financiada");
                 } else {
                     TxtEstado.setText("Cancelada");
@@ -361,6 +361,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
+        
         List<String> pro = propuesta.ListarProp();
         if (!pro.isEmpty()) {                                                   // SI HAY PROPUESTAS
             DefaultListModel modelo = new DefaultListModel();                   

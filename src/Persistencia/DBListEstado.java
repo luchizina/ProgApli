@@ -112,11 +112,11 @@ public class DBListEstado {
                     d = Testado.Ingresada;
                 } else if (e.equals("Publicada")) {
                     d = Testado.Publicada;
-                } else if (e.equals("En_Financiacion")) {
+                } else if (e.equals("En Financiacion")) {
                     d = Testado.En_Financiacion;
                 } else if (e.equals("Financiada")) {
                     d = Testado.Financiada;
-                } else if (e.equals("No_Financiada")) {
+                } else if (e.equals("No Financiada")) {
                     d = Testado.No_Financiada;
                 } else { // cancelada
                     d = Testado.Cancelada;
@@ -139,11 +139,11 @@ public class DBListEstado {
                     dx = Testado.Ingresada;
                 } else if (ex.equals("Publicada")) {
                     dx = Testado.Publicada;
-                } else if (ex.equals("En_Financiacion")) {
+                } else if (ex.equals("En Financiacion")) {
                     dx = Testado.En_Financiacion;
                 } else if (ex.equals("Financiada")) {
                     dx = Testado.Financiada;
-                } else if (ex.equals("No_Financiada")) {
+                } else if (ex.equals("No Financiada")) {
                     dx = Testado.No_Financiada;
                 } else { // cancelada
                     dx = Testado.Cancelada;
