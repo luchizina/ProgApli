@@ -99,7 +99,34 @@ public class ctrlUsuario implements IUsuario {
     
     
     
+    @Override
+    public boolean yaSigue(){
+     Usuario u= this.usuarios.get(this.usuRec);
+     Usuario aSeguir = this.usuarios.get(this.usuAseguir);
+     
+     Map<String,Usuario> listita=new HashMap<>();
+     listita = u.getUsuSeguidos();
+        if(listita.get(aSeguir.getNick())!=null){
+        return true;
+    }
     
+     Set se=listita.entrySet();
+     Iterator it = se.iterator();
+     while(it.hasNext()){
+         Map.Entry mentry = (Map.Entry) it.next();
+         Usuario aux= (Usuario) mentry.getValue();
+         if((aSeguir.getNick().equals(aux.getSeguido()))==true){
+          return true;   
+         }
+         
+     }
+     
+          
+    if(u.getNick().equals(aSeguir.getNick())){
+        return true;
+    }
+    else return false;
+    }
     
      @Override
     public boolean seguirUsuario(){
@@ -110,11 +137,13 @@ public class ctrlUsuario implements IUsuario {
           if(u instanceof Colaborador){
               if(aSeguir instanceof Colaborador){
                   this.usu.seguirCC(u.getNick(), aSeguir.getNick());
-                   return u.seguirUsuario(aSeguir);
+                    u.seguirUsuario(aSeguir);
+                    return true;
               }
               else if(aSeguir instanceof Proponente){
                   this.usu.seguirCP(u.getNick(), aSeguir.getNick());
-                   return u.seguirUsuario(aSeguir);
+                   u.seguirUsuario(aSeguir);
+                   return true;
               }
               
           }
@@ -122,11 +151,13 @@ public class ctrlUsuario implements IUsuario {
           if(u instanceof Proponente){
             if(aSeguir instanceof Proponente){
                 this.usu.seguirPP(u.getNick(), aSeguir.getNick());
-                return u.seguirUsuario(aSeguir);
+                u.seguirUsuario(aSeguir);
+                return true;
             }
             else if(aSeguir instanceof Colaborador){
                 this.usu.seguirPC(u.getNick(), aSeguir.getNick());
-                 return u.seguirUsuario(aSeguir);
+                 u.seguirUsuario(aSeguir);
+                 return true;
             }
               
           }
@@ -264,6 +295,7 @@ public class ctrlUsuario implements IUsuario {
     @Override
     public void cargarProponentes() {
         this.usuarios = this.usu.cargarProponentes();
+       
     }
 
     @Override
@@ -314,7 +346,8 @@ public class ctrlUsuario implements IUsuario {
             Map.Entry mentry = (Map.Entry) iterator.next();
             if(mentry.getValue() instanceof Colaborador)
             {
-            Colaborador aux = (Colaborador) mentry.getValue();               
+            Colaborador aux = (Colaborador) mentry.getValue();   
+            
             listita.add(aux.obtenerInfo());
             }
         }
@@ -365,9 +398,86 @@ public class ctrlUsuario implements IUsuario {
         Map<String,  Usuario> listita = new HashMap<>();
         listita.putAll(this.usu.cargarColaboradores());
         listita.putAll(this.usu.cargarProponentes());
-        this.usuarios = listita;
+        
+        this.usuarios = this.cargarSeg(listita);
     }
+    
+@Override
+public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
+    List<Usuario> usuPP= new ArrayList<>();
+     List<Usuario> usuPC= new ArrayList<>();
+                    List<Usuario> usuCC= new ArrayList<>();
+      List<Usuario> usuCP= new ArrayList<>();
+          Map<String, Usuario> nueva= new HashMap<>();
+    
+    nueva=lista;
+    usuPP=this.usu.cargarSegPP();
+       usuPC=this.usu.cargarSegPC();
+        usuCC=this.usu.cargarSegCC();
+    usuCP=this.usu.cargarSegCP();
+    
+    
+    
+    Set se=nueva.entrySet();
+   
+    Iterator it=se.iterator();
 
+
+    while (it.hasNext()) {
+        Map.Entry mentry = (Map.Entry) it.next();
+        if (mentry.getValue() instanceof Proponente) {
+            Proponente aux = (Proponente) mentry.getValue();
+
+
+    for(int i=0; i < usuPP.size(); i++){
+                 Usuario auxPP = (Usuario) usuPP.get(i);
+                if (aux.getNick().equals(auxPP.getNick()) == true) {
+                    aux.seguirUsuBD(auxPP);
+                }
+            }
+            
+  
+            
+            
+            for(int i=0; i < usuPC.size(); i++){
+                 Usuario auxPC = (Usuario) usuPC.get(i);
+                if (aux.getNick().equals(auxPC.getNick()) == true) {
+                    aux.seguirUsuBD(auxPC);
+                }
+            }
+            
+
+            
+
+        }
+        
+        else if(mentry.getValue() instanceof Colaborador){
+            Colaborador aux2 = (Colaborador) mentry.getValue();
+            
+            
+              for(int i=0; i < usuCC.size(); i++){
+                 Usuario auxCC = (Usuario) usuCC.get(i);
+                if (aux2.getNick().equals(auxCC.getNick()) == true) {
+                    aux2.seguirUsuBD(auxCC);
+                }
+            }
+            
+
+   
+              for(int i=0; i < usuCP.size(); i++){
+                 Usuario auxCP = (Usuario) usuCP.get(i);
+                if (aux2.getNick().equals(auxCP.getNick()) == true) {
+                    aux2.seguirUsuBD(auxCP);
+                }
+            }
+          
+            
+        }
+    }
+    
+    return nueva;
+}
+    
     @Override
     public void cargarUsuarios() {
         try {

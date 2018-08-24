@@ -24,10 +24,16 @@ public class Usuario {
     String tipo;
     private Map<String, Usuario> usuSeguidos;
     private Map<String, Propuesta> propuFav;
+    String seguido;
 
 
     public Usuario(String nick) {
         this.nick = nick;
+    }
+    
+    public Usuario(String nick, String seguido){
+        this.nick = nick;
+        this.seguido =seguido;
     }
 
 
@@ -54,6 +60,11 @@ public class Usuario {
         return nombre;
     }
 
+    public String getSeguido(){
+        return seguido;
+    }
+            
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -117,12 +128,17 @@ public class Usuario {
         this.propuFav = propuFav;
     }
     
-    public boolean seguirUsuario(Usuario aSeguir){
+    public void seguirUsuario(Usuario aSeguir){
        
         
         this.usuSeguidos.put(aSeguir.getNick(), aSeguir);
-        return true;
+      //  return true;
           }
+    
+    public void seguirUsuBD(Usuario aSeguir){
+        
+        this.usuSeguidos.put(aSeguir.getSeguido(), aSeguir);
+    }
     
     
     public boolean dejarDeSeguir(Usuario aSeguir){

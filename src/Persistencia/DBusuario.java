@@ -18,8 +18,10 @@ import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -290,7 +292,88 @@ public class DBusuario {
         }
 
     }
-
+  public List<Usuario> cargarSegPP() {
+        try {
+            List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM siguepp");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("Seguidor");
+                Usuario p = new Usuario(nick, rs.getString("Seguido"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+  
+  public List<Usuario> cargarSegPC() {
+        try {
+           List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM seguirpc");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("SeguidorP");
+                Usuario p = new Usuario(nick, rs.getString("SeguidoC"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+  
+   public List<Usuario> cargarSegCC() {
+        try {
+            List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM siguecc");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("Seguidor");
+                Usuario p = new Usuario(nick, rs.getString("Seguido"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+   
+    public List<Usuario> cargarSegCP() {
+        try {
+            List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM seguircp");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("SeguidorC");
+                Usuario p = new Usuario(nick, rs.getString("SeguidoP"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+  
+  
+  
     public Map<String, Usuario> cargarProponentes() {
         try {
             Map<String, Usuario> lista = new HashMap<String, Usuario>();
