@@ -28,6 +28,7 @@ import javax.swing.DefaultListModel;
 import java.text.DateFormat;
 import Logica.Colaborador;
 import Logica.Proponente;
+import Logica.Propuesta;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -53,8 +54,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
      
     public Alta_Colaboracion(IPropuesta Ip, IUsuario iUsu) {
        initComponents();
+       setClosable(true);
        this.IP = Ip;
        this.iUsu = iUsu;
+       DtPropuesta p = IP.traerPropuesta("Pilsen Rock");
+       Propuesta pf = IP.getPropPorNick("Pilsen Rock");
        cargarColab();
     }
 
@@ -490,6 +494,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Propuesta p = IP.getPropPorNick(titulo1);
         if("".equals(titulo1))
         {
             JOptionPane.showMessageDialog(null, "Debe elegir una propuesta antes de continuar", "Propuestas", JOptionPane.WARNING_MESSAGE);
@@ -569,6 +574,28 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         tRetornos.setText(p.getTRetornos());
         fechaP.setText(df.format(p.getFechaPub()));
         this.titulo1 = p.getTitulo();
+        String wat = p.getTRetornos();
+        if(p.getTRetornos().equals("entrada"))
+        {
+            jRadioButton2.setSelected(true);
+            jRadioButton2.setEnabled(true);
+            jRadioButton1.setSelected(false);
+            jRadioButton1.setEnabled(false);
+        }
+        else if (p.getTRetornos().equals("porcentaje"))
+        {
+            jRadioButton1.setSelected(true);
+            jRadioButton1.setEnabled(true);
+            jRadioButton2.setSelected(false);
+            jRadioButton2.setEnabled(false);
+        }
+        else
+        {
+            jRadioButton1.setEnabled(true);
+            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(false);
+            jRadioButton2.setEnabled(true);
+        }
     }//GEN-LAST:event_listaPropsMouseClicked
 
     private void listaColabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaColabsMouseClicked
@@ -740,7 +767,6 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 public void cargarColab(){
-    this.IP.cargarPropuestas();
     List<DtPropuesta> listita = this.IP.listarPropuestas();
     DefaultTableModel model = (DefaultTableModel) listaProps.getModel();
     model.setRowCount(0);
@@ -787,7 +813,7 @@ public void limpiar()
     this.titulo1 = "";
     listaProps.clearSelection();
     listaColabs.clearSelection();
-    cargarColab();
+//    cargarColab();
     ImageIcon imagen = new ImageIcon("");
     Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
          imagenProp.setIcon(icono);

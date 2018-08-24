@@ -5,9 +5,11 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,35 +20,35 @@ import java.util.Set;
 public class Colaborador extends Usuario {
 
         private
-                Map<Integer, Colaboracion> colHechas;
+                List<Colaboracion> colHechas;
 
-    public Colaborador(Map<Integer, Colaboracion> colHechas, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
+    public Colaborador(List<Colaboracion> colHechas, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
         super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav);
         this.colHechas = colHechas;
     }
 
     public Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
        super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
-       this.colHechas = new HashMap<>(); 
+       this.colHechas = new ArrayList<>(); 
     }
 
    public void AddColab(Colaboracion c)
    {
-       this.colHechas.put(1, c);
+       this.colHechas.add(c);
    }
    
 
-    public Map<Integer, Colaboracion> getColHechas() {
+    public List<Colaboracion> getColHechas() {
         return colHechas;
     }
 
-    public void setColHechas(Map<Integer, Colaboracion> colHechas) {
+    public void setColHechas(List<Colaboracion> colHechas) {
         this.colHechas = colHechas;
     }
     
     public DtColaborador obtenerInfo()
     {
-        return new DtColaborador(this.nick, this.nombre, this.Apellido, this.Correo, this.fecha, this.img);
+        return new DtColaborador(this.nick, this.nombre, this.Apellido, this.Correo, this.fecha, this.img, this.colHechas);
     }
     
     

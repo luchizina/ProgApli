@@ -20,12 +20,13 @@ import javax.swing.SwingUtilities;
  */
 public class Principal extends javax.swing.JFrame {
 
-  private ICategoria icat;
+  private final ICategoria icat;
     /**
      * Creates new form Principal
      */
-    private IUsuario iUsu;
-    private IPropuesta IP;
+    private final IUsuario iUsu;
+    private final IPropuesta IP;
+    private boolean lol = true;
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -44,6 +45,7 @@ public class Principal extends javax.swing.JFrame {
                 IP.cargarPropuestas();
                 this.IP.cargarColaboraciones();
                 this.IP.EstadosPropuestas(); // testear
+                lol = false;
                
     }
 
@@ -649,6 +651,7 @@ su.setVisible(true);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new Principal().setVisible(true);
+            
         });
     }
 

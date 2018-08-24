@@ -44,6 +44,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     public Consultar_Proponente(IPropuesta Ip, IUsuario iUsu, ICategoria iCat) { 
         initComponents();
         estaditos.addItem("Ingresada");
+        setClosable(true);
         estaditos.addItem("Publicada");
         estaditos.addItem("En Financiación");
         estaditos.addItem("Financiada");

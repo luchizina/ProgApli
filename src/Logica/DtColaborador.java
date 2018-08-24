@@ -9,6 +9,7 @@ package Logica;
 import Logica.*;
 import java.util.Map;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -22,9 +23,9 @@ public class DtColaborador extends DtUsuario {
             String correo;
             Date fecha;
             String img;
-            Map<String,DtColaboracion> colaboraciones;
+            List<Colaboracion> colaboraciones;
 
-    public DtColaborador(String nick, String nombre, String apellido, String correo, Date fecha, String img, Map<String, DtColaboracion> colaboraciones) {
+    public DtColaborador(String nick, String nombre, String apellido, String correo, Date fecha, String img, List<Colaboracion> colaboraciones) {
         this.nick = nick;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -91,11 +92,11 @@ public class DtColaborador extends DtUsuario {
         this.img = img;
     }
 
-    public Map<String, DtColaboracion> getColaboraciones() {
+    public List<Colaboracion> getColaboraciones() {
         return colaboraciones;
     }
 
-    public void setColaboraciones(Map<String, DtColaboracion> colaboraciones) {
+    public void setColaboraciones(List<Colaboracion> colaboraciones) {
         this.colaboraciones = colaboraciones;
     }
 
