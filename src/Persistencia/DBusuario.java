@@ -348,7 +348,7 @@ public class DBusuario {
             String[] nombre = {"Horacio", "Martín", "Héctor", "Tabaré", "Waldemar “Cachila” ", "Julio", "Diego", "Kairo", "Itendencia"};
             String[] apellido = {"Rubino", "Buscaglia", "Guido", "Cardozo", "Silva", "Bocca", "Parodi", "Herrera", "Durazno"};
             Date[] fechasN = {hrubino, mb, hg, tc, cs, jb, dp, kh, lb};
-            String[] urlImg = {"C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hr.JPG", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\mb.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hg.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\tc.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\cs.jpg", null, null, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\kh.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\lb.png"};
+            String[] urlImg = {"Prueba\\Proponente\\hr.JPG", "Prueba\\Proponente\\mb.jpg", "Prueba\\Proponente\\hg.jpg", "Prueba\\Proponente\\tc.jpg", "Prueba\\Proponente\\cs.jpg", null, null, "Prueba\\Proponente\\kh.jpg", "Prueba\\Proponente\\lb.png"};
             String[] direccion = {"18 de Julio 1234", "Colonia 4321", "Gral. Flores 5645", "Santiago Rivas 1212", "Br. Artigas 4567", "Benito Blanco 4321", "Emilio Frugoni 1138 Ap. 02", "Paraguay 1423", "8 de Octubre 1429"};
             String[] link = {"https://twitter.com/horaciorubino", "http://www.martinbuscaglia.com/", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "https://www.facebook.com/C1080?ref=br_rs", "", "http://www.efectocine.com/", "", "http://durazno.gub.uy/portal/index.php"};
             String[] biografias = {"Horacio Rubino Torres nace el 25 de febrero de 1962, es conductor, actor y libretista.\n"
