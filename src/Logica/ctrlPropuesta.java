@@ -214,7 +214,6 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
-        Propuesta p = propuestas.get("Un dia de Julio");
     }
     
     @Override

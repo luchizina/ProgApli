@@ -631,7 +631,6 @@ public static String getHoraActual() {
                        jCateg.addItem(combito.getNombre());
         }
         
-        this.iUsu.cargarProponentes();
         List<DtProponente> propo = this.iUsu.listarProponentes();
         for(int k=0; k<propo.size(); k++){
             DtProponente prop=(DtProponente) propo.get(k);
