@@ -485,10 +485,11 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
 }
 
 
-public boolean validaWeb(String algo){
-    if(algo.matches("(http://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(www\\.)(.+)(\\.)(.+)") || algo.matches("(https://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(http://)(.+)(\\.)(.+)") || algo.matches("(https://)(.+)(\\.)(.+)")){
+    @Override
+    public boolean validaWeb(String algo){
+    if(algo.matches("(http://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(www\\.)(.+)(\\.)(.+)") || algo.matches("(https://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(http://)(.+)(\\.)(.+)") || algo.matches("(https://)(.+)(\\.)(.+)") || algo.equals("")){
         return true;
-    }
+    } 
     return false;
 }
  

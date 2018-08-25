@@ -471,7 +471,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya esta en uso", "Correo", JOptionPane.WARNING_MESSAGE);
-                        }
+                            }                         
                     } else {
                         JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
                     }
