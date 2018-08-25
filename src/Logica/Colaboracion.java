@@ -20,16 +20,18 @@ public class Colaboracion {
             int monto;
             Colaborador colab;
             Propuesta prop;
+            String hora;
 
             Fabrica fab = Fabrica.getInstance();
             private IPropuesta IP = fab.getICtrlPropuesta();
             private IUsuario iUsu = fab.getICtrlUsuario();
-    public Colaboracion(Date fecha, String retorno, int monto, Colaborador colab, Propuesta prop) {
+    public Colaboracion(Date fecha, String retorno, int monto, Colaborador colab, Propuesta prop, String hora) {
         this.fecha = fecha;
         this.retorno = retorno;
         this.monto = monto;
         this.colab = colab;
         this.prop = prop;
+        this.hora = hora;
     }
 
     public Date getFecha() {
@@ -71,6 +73,8 @@ public class Colaboracion {
     public void setProp(Propuesta prop) {
         this.prop = prop;
     }
+    
+    
             
             
 }

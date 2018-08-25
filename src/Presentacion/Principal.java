@@ -20,12 +20,13 @@ import javax.swing.SwingUtilities;
  */
 public class Principal extends javax.swing.JFrame {
 
-  private ICategoria icat;
+  private final ICategoria icat;
     /**
      * Creates new form Principal
      */
-    private IUsuario iUsu;
-    private IPropuesta IP;
+    private final IUsuario iUsu;
+    private final IPropuesta IP;
+    private boolean lol = true;
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -43,7 +44,9 @@ public class Principal extends javax.swing.JFrame {
                 iUsu.cargarUsuarios();
                 IP.cargarPropuestas();
                 this.IP.cargarColaboraciones();
+                this.IP.actualizarMontos();
                 this.IP.EstadosPropuestas(); // testear
+                lol = false;
                
     }
 
@@ -60,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -138,7 +142,20 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem7.setText("Consulta por estado");
         jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem7MouseClicked(evt);
+            }
+        });
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem7);
+
+        jMenuItem17.setText("jMenuItem17");
+        jMenu5.add(jMenuItem17);
 
         jMenu1.add(jMenu5);
 
@@ -366,6 +383,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem7.setText("Consulta por estado");
         jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener()
+        {
+                    public void actionPerformed(java.awt.event.ActionEvent evt)
+                    {
+                        jMenuItem7ActionPerformed(evt);
+                    }
+                });
+        
         jMenu5.add(jMenuItem7);
 
         jMenu1.add(jMenu5);
@@ -505,7 +530,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        Consultar_Proponente consultarProp = new Consultar_Proponente(IP, iUsu, icat);
+       this.setMinimumSize(new Dimension(consultarProp.getWidth()+20,consultarProp.getHeight()+80));
+       jp.add(consultarProp);
+       consultarProp.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -616,6 +644,18 @@ su.setVisible(true);
             
     }//GEN-LAST:event_jpComponentShown
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+
+        ConsultaPropEst con = new ConsultaPropEst(iUsu, IP);
+        this.setMinimumSize(new Dimension(con.getWidth()+20,con.getHeight()+80));
+        jp.add(con);
+        con.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -646,6 +686,7 @@ su.setVisible(true);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new Principal().setVisible(true);
+            
         });
     }
 
@@ -666,6 +707,7 @@ su.setVisible(true);
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

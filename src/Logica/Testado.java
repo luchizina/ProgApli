@@ -14,11 +14,9 @@ import Logica.*;
  */
 public enum Testado {
             Ingresada,
-             Publicada,
-             En_financiacion,
-             Financiada,
-             No_financiada,
-             Cancelada;
-             
-   
+            Publicada,
+            En_Financiacion,
+            Financiada,
+            No_Financiada,
+            Cancelada;
 }

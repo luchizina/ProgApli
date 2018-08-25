@@ -70,7 +70,19 @@ public class ctrlPropuesta implements IPropuesta {
     
     public Propuesta getPropPorNick(String nick)
     {
+        Propuesta pr = this.propuestas.get("Un día de Julio");
         return this.propuestas.get(nick);
+    }
+    
+    public void actualizarMontos()
+    {
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            aux.actualizarMonto();
+        }
     }
  
 
@@ -161,13 +173,15 @@ public class ctrlPropuesta implements IPropuesta {
     public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR)
     {
         Date lul = new Date();
-        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop);
-      
+        String horita = java.time.LocalTime.now().toString();
+        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop, horita);
+        
         if (dbPropuesta.agregarColaboracion(c))
         {
             this.colaboraciones.add(c);
             prop.addColab(c);
             colab.AddColab(c);
+            prop.actualizarMonto();
             return true;
         }
         return false;
@@ -219,6 +233,8 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.cargarPropuestasPrueba();
         this.dbE.agregarListPrueb();
         this.cargarPropuestas();
+        this.dbPropuesta.colaboracionesPrueba();
+        //this.cargarColaboraciones();
     }
     
     public void cargarColaboraciones()
@@ -306,6 +322,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
     
     
+    @Override
     public List<String> NombrePropoConsulta(){
         
         return this.propuestaconsulta.NombreColaborantes();
@@ -339,6 +356,7 @@ public class ctrlPropuesta implements IPropuesta {
                 Nicks.add(N); 
             }
     }
+    this.propuestaconsulta = null;    
     return Nicks;
     };
     

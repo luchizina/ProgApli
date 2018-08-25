@@ -18,8 +18,10 @@ import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,6 +85,75 @@ public class DBusuario {
         }
     }
 
+    public void seguirCPprueb() {
+        String[] seguidorC = {"robinh", "robinh", "robinh", "marcelot", "marcelot", "marcelot", "novick", "novick", "novick", "sergiop", "sergiop", "sergiop", "nicoJ", "nicoJ", "juanP", "juanP", "juanP", "Mengano", "Mengano", "Perengano", "Tiajaci", "Tiajaci"};
+        String[] seguidoP = {"hectorg", "juliob", "diegop", "cachilas", "juliob", "kairoh", "hrubino", "tabarec", "cachilas", "mbusca", "juliob", "diegop", "diegop", "durazno", "tabarec", "cachilas", "kairoh", "hectorg", "juliob", "diegop", "juliob", "kairoh"};
+        for (int i = 0; i < 22; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguircp "
+                        + "(SeguidorC, SeguidoP) values(?,?)");
+                statement.setString(1, seguidorC[i]);
+                statement.setString(2, seguidoP[i]);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void seguirCCPrueb() {
+        String[] seguidorC = {"chino", "tonyp", "Mengano", "Perengano", "Tiajaci"};
+        String[] seguidoC = {"tonyp", "chino", "chino", "tonyp", "sergiop"};
+        for (int i = 0; i < 5; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguecc "
+                        + "(Seguidor, Seguido) values(?,?)");
+                statement.setString(1, seguidorC[i]);
+                statement.setString(2, seguidoC[i]);
+
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void seguirPCPrueb(){
+        String [] seguidorP = {"kairoh","durazno"};
+        String [] seguidoC = {"sergiop","nicoJ"};
+        for(int i = 0; i<2; i++){
+            try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguirpc "
+                    + "(SeguidorP, SeguidoC) values(?,?)");
+            statement.setString(1, seguidorP[i]);
+            statement.setString(2, seguidoC[i]);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        }
+    }
+    
+    public void seguirPPprueb(){
+        String [] seguidorP = {"hrubino","hrubino","hrubino","mbusca","mbusca","mbusca","hectorg","hectorg","tabarec","tabarec","cachilas","juliob","juliob","diegop","diegop","durazno"};
+        String [] seguidoP = {"hectorg","diegop","durazno","tabarec","cachilas","kairoh","mbusca","juliob","hrubino","cachilas","hrubino","mbusca","diegop","hectorg","durazno","hrubino"};
+        for(int i=0;i<16;i++){
+             try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO siguepp "
+                    + "(Seguidor, Seguido) values(?,?)");
+            statement.setString(1, seguidorP[i]);
+            statement.setString(2, seguidoP[i]);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        }
+    }
+
     public boolean seguirCP(String nickcolab, String nickProp) {
 
         try {
@@ -90,7 +161,6 @@ public class DBusuario {
                     + "(SeguidorC, SeguidoP) values(?,?)");
             statement.setString(1, nickcolab);
             statement.setString(2, nickProp);
-
             statement.executeUpdate();
             statement.close();
             return true;
@@ -222,7 +292,88 @@ public class DBusuario {
         }
 
     }
-
+  public List<Usuario> cargarSegPP() {
+        try {
+            List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM siguepp");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("Seguidor");
+                Usuario p = new Usuario(nick, rs.getString("Seguido"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+  
+  public List<Usuario> cargarSegPC() {
+        try {
+           List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM seguirpc");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("SeguidorP");
+                Usuario p = new Usuario(nick, rs.getString("SeguidoC"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+  
+   public List<Usuario> cargarSegCC() {
+        try {
+            List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM siguecc");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("Seguidor");
+                Usuario p = new Usuario(nick, rs.getString("Seguido"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+   
+    public List<Usuario> cargarSegCP() {
+        try {
+            List<Usuario> lista = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM seguircp");
+          //  st.setString(1,nickProp);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String nick = rs.getString("SeguidorC");
+                Usuario p = new Usuario(nick, rs.getString("SeguidoP"));
+                lista.add(p);
+            }
+            rs.close();
+            st.close();
+            return lista;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+  
+  
+  
     public Map<String, Usuario> cargarProponentes() {
         try {
             Map<String, Usuario> lista = new HashMap<String, Usuario>();
@@ -255,6 +406,9 @@ public class DBusuario {
             PreparedStatement a = conexion.prepareStatement("Delete FROM propuesta");
             a.executeUpdate();
             a.close();
+            PreparedStatement b = conexion.prepareStatement("Delete FROM colaboracion");
+            b.executeUpdate();
+            b.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -277,7 +431,7 @@ public class DBusuario {
             String[] nombre = {"Horacio", "Martín", "Héctor", "Tabaré", "Waldemar “Cachila” ", "Julio", "Diego", "Kairo", "Itendencia"};
             String[] apellido = {"Rubino", "Buscaglia", "Guido", "Cardozo", "Silva", "Bocca", "Parodi", "Herrera", "Durazno"};
             Date[] fechasN = {hrubino, mb, hg, tc, cs, jb, dp, kh, lb};
-            String[] urlImg = {"C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hr.JPG", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\mb.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\hg.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\tc.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\cs.jpg", null, null, "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\kh.jpg", "C:\\Users\\Nuevo\\Desktop\\Prueba\\Proponente\\lb.png"};
+            String[] urlImg = {"Prueba\\Proponente\\hr.JPG", "Prueba\\Proponente\\mb.jpg", "Prueba\\Proponente\\hg.jpg", "Prueba\\Proponente\\tc.jpg", "Prueba\\Proponente\\cs.jpg", null, null, "Prueba\\Proponente\\kh.jpg", "Prueba\\Proponente\\lb.png"};
             String[] direccion = {"18 de Julio 1234", "Colonia 4321", "Gral. Flores 5645", "Santiago Rivas 1212", "Br. Artigas 4567", "Benito Blanco 4321", "Emilio Frugoni 1138 Ap. 02", "Paraguay 1423", "8 de Octubre 1429"};
             String[] link = {"https://twitter.com/horaciorubino", "http://www.martinbuscaglia.com/", "", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs", "https://www.facebook.com/C1080?ref=br_rs", "", "http://www.efectocine.com/", "", "http://durazno.gub.uy/portal/index.php"};
             String[] biografias = {"Horacio Rubino Torres nace el 25 de febrero de 1962, es conductor, actor y libretista.\n"
@@ -349,9 +503,9 @@ public class DBusuario {
             Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    } 
-    
-    public void CargarColabPrueba(){
+    }
+
+    public void CargarColabPrueba() {
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
             Date rh = sd.parse("1940-08-03");
@@ -365,13 +519,13 @@ public class DBusuario {
             Date mg = sd.parse("1982-02-02");
             Date pl = sd.parse("1985-03-03");
             Date tj = sd.parse("1990-04-04");
-            String [] nick = {"robinh","marcelot","novick","sergiop","chino","tonyp","nicoJ","juanP","Mengano","Perengano", "Tiajaci"};
-            String [] correos = {"Robin.h@tinglesa.com.uy", "marcelot@ideasdelsur.com.ar", "edgardo@novick.com.uy", "puglia@alpanpan.com.uy", "chino@trico.org.uy", "eltony@manya.org.uy", "jodal@artech.com.uy", "juanp@elpueblo.com", "menganog@elpueblo.com", "pere@elpueblo.com","jacinta@elpueblo.com"};
-            String [] nombres = {"Robin", "Marcelo", "Edgardo", "Sergio", "Alvaro", "Antonio", "Nicolás", "Juan", "Mengano", "Perengano", "Tía"};
-            String [] apellidos = {"Henderson", "Tinelli", "Novick", "Puglia", "Recoba", "Pacheco", "Jodal", "Perez", "Gómez", "López", "Jacinta"};
-            Date [] fechasN ={rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
-            String [] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
-             for (int i = 0; i < 11; i++) {
+            String[] nick = {"robinh", "marcelot", "novick", "sergiop", "chino", "tonyp", "nicoJ", "juanP", "Mengano", "Perengano", "Tiajaci"};
+            String[] correos = {"Robin.h@tinglesa.com.uy", "marcelot@ideasdelsur.com.ar", "edgardo@novick.com.uy", "puglia@alpanpan.com.uy", "chino@trico.org.uy", "eltony@manya.org.uy", "jodal@artech.com.uy", "juanp@elpueblo.com", "menganog@elpueblo.com", "pere@elpueblo.com", "jacinta@elpueblo.com"};
+            String[] nombres = {"Robin", "Marcelo", "Edgardo", "Sergio", "Alvaro", "Antonio", "Nicolás", "Juan", "Mengano", "Perengano", "Tía"};
+            String[] apellidos = {"Henderson", "Tinelli", "Novick", "Puglia", "Recoba", "Pacheco", "Jodal", "Perez", "Gómez", "López", "Jacinta"};
+            Date[] fechasN = {rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
+            String[] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
+            for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
                     String[] aux = imagenes[i].split("\\.");
@@ -405,7 +559,7 @@ public class DBusuario {
         } catch (ParseException ex) {
             Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public Map<String, Colaborador> cargarColaboradores() {
