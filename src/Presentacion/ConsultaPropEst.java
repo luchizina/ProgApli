@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import Logica.Colaborador;
 import Logica.DtProponente;
 import Logica.DtPropuesta;
 import Logica.Estado;
@@ -32,6 +33,7 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
     private IPropuesta IP;
     private IUsuario iUsu;
     List<DtPropuesta> listitaActual;
+    List<Colaborador> colabActuales;
     public ConsultaPropEst(IUsuario iUsu, IPropuesta IP) {
         initComponents();
         estaditos.addItem("Ingresada");
@@ -43,6 +45,8 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         estaditos.addItem("Cancelada");
         this.IP = IP;
         this.iUsu = iUsu;
+        filtroTit.setEnabled(false);
+        filtroColabs.setEnabled(false);
     }
 
     /**
@@ -94,7 +98,7 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         label1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label1.setText("Lista de Estados");
 
-        estaditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6" }));
+        estaditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         estaditos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estaditosActionPerformed(evt);
@@ -191,13 +195,27 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Lugar:");
 
+        listColabs.setFocusable(false);
         jScrollPane2.setViewportView(listColabs);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Filtrar por Nick o Nombre:");
 
+        filtroColabs.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                filtroColabsFocusGained(evt);
+            }
+        });
+        filtroColabs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filtroColabsKeyReleased(evt);
+            }
+        });
+
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Lista de Colaboradores:");
+
+        imagen.setFocusable(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Descripción:");
@@ -205,30 +223,45 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Imagen:");
 
+        estado.setFocusable(false);
+
+        proponente.setFocusable(false);
+
+        categoria.setFocusable(false);
         categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriaActionPerformed(evt);
             }
         });
 
+        precios.setFocusable(false);
+
+        fecha.setFocusable(false);
+
+        fechapub.setFocusable(false);
         fechapub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fechapubActionPerformed(evt);
             }
         });
 
+        montoT.setFocusable(false);
         montoT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 montoTActionPerformed(evt);
             }
         });
 
+        montoA.setFocusable(false);
+
+        lugar.setFocusable(false);
         lugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lugarActionPerformed(evt);
             }
         });
 
+        descripcion.setFocusable(false);
         jScrollPane4.setViewportView(descripcion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -368,6 +401,8 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
 
     private void estaditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estaditosActionPerformed
         // TODO add your handling code here:
+        limpiar();
+        filtroTit.setText("");
         String estadoSelec = estaditos.getSelectedItem().toString();
         List<DtPropuesta> listita2 = new ArrayList<>();
             List<DtPropuesta> listita = this.IP.listarPropuestas();
@@ -389,15 +424,21 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
             dlm.addElement("No hay propuestas disponibles");
             listProp.setEnabled(false);
             listProp.setFocusable(false);
+            filtroColabs.setEnabled(false);
+            filtroTit.setEnabled(false);
         }
         else
         {
            listProp.setEnabled(true); 
         listProp.setFocusable(true);
+        filtroTit.setEnabled(true);
+        filtroColabs.setEnabled(false);
         }
         DefaultListModel dlm2 = new DefaultListModel();
         listColabs.setModel(dlm2);
-        this.listitaActual = listita2;   
+        this.listitaActual = listita2;
+        
+        
     }//GEN-LAST:event_estaditosActionPerformed
 
     private void filtroTitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroTitFocusGained
@@ -436,8 +477,9 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
 
     private void listPropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPropMouseClicked
         // TODO add your handling code here:
-        if(listProp.isEnabled())
+        if(listProp.getModel().getSize() > 0 && listProp.isEnabled())
         {
+           List<Colaborador> listitacolabs = new ArrayList<>();
         int index = listProp.getSelectedIndex();
         ListModel  model= listProp.getModel();
         String f = (String) model.getElementAt(index);
@@ -449,13 +491,14 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         String lul = (String) nicks.get(b);
         String lul2 = iUsu.traerColaborador(lul).getNombre()+"("+lul+(")");
         dlm.addElement(lul2);
+        listitacolabs.add(iUsu.traerColaborador(lul));
     }
         if(dlm.isEmpty())
         {
             dlm.addElement("Esta propuesta aún no tiene colaboradores");
         }
         listColabs.setModel(dlm);
-        
+        this.colabActuales = listitacolabs;
         estado.setText(p.getEstActual().getEstado().toString());
         Proponente e = iUsu.traerProponente(p.getPropo());
         proponente.setText(e.getNombre()+"("+e.getNick()+")");
@@ -467,6 +510,8 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         montoT.setText(Integer.toString(p.getMontototal()));
         descripcion.setText(p.getDescripcion());
         montoA.setText(Integer.toString(p.getMontoActual()));
+        filtroColabs.setText("");
+        filtroColabs.setEnabled(true);
         ImageIcon imagen2 = new ImageIcon(p.getImg());
             Icon icono = new ImageIcon(imagen2.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
             imagen.setIcon(icono);
@@ -489,6 +534,36 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lugarActionPerformed
 
+    private void filtroColabsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroColabsFocusGained
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_filtroColabsFocusGained
+
+    private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
+        // TODO add your handling code here:
+        if (filtroColabs.getText().equals("")) { // SI NO BUSCA
+            if (!this.colabActuales.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < colabActuales.size(); i++) {
+                    Colaborador p = (Colaborador) colabActuales.get(i);
+                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                }
+                listColabs.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!this.colabActuales.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < colabActuales.size(); i++) {
+                    Colaborador p = (Colaborador) colabActuales.get(i);
+                    if (p.getNick().contains(filtroColabs.getText()) || p.getNombre().contains(filtroColabs.getText())) {
+                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    }
+                }
+                listColabs.setModel(modelo);
+            }
+        }
+    }//GEN-LAST:event_filtroColabsKeyReleased
+
     private void limpiar()
     {
         estado.setText("");
@@ -507,6 +582,9 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         ImageIcon imagen2 = new ImageIcon("");
         Icon icono = new ImageIcon(imagen2.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
           imagen.setIcon(icono);
+          DefaultListModel modelo = new DefaultListModel();
+          listColabs.setModel(modelo);
+          this.colabActuales = null;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField categoria;

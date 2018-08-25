@@ -41,6 +41,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     private ICategoria iCat;
     private IUsuario iUsu;
     private Proponente prop;
+    List<Colaborador> colabActuales;
     public Consultar_Proponente(IPropuesta Ip, IUsuario iUsu, ICategoria iCat) { 
         initComponents();
         estaditos.addItem("Ingresada");
@@ -53,7 +54,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         estaditos.setEnabled(false);
         listProp.setEnabled(false);
         listColabs.setEnabled(false);
-        
+        filtroColabs.setEnabled(false);
         this.IP = Ip;
         this.iUsu = iUsu;
         this.iCat = iCat;
@@ -259,9 +260,11 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         jScrollPane5.setViewportView(listColabs);
 
         imagenP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        imagenP.setFocusable(false);
 
         biografia.setColumns(20);
         biografia.setRows(5);
+        biografia.setFocusable(false);
         jScrollPane6.setViewportView(biografia);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -472,6 +475,14 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
             direccion.setText(p.getDireccion());
             biografia.setText(p.getBiografia());
             web.setText(p.getLinkWeb());
+//            estaditos.setSelectedIndex(-1);
+            DefaultListModel dlm = new DefaultListModel();
+            listProp.setModel(dlm);
+            listColabs.setModel(dlm);
+            filtroColabs.setText("");
+            filtroColabs.setEnabled(false);
+            montito.setText("");
+            this.colabActuales = null;
             p.getImg();
             ImageIcon imagen = new ImageIcon(p.getImg());
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
@@ -487,6 +498,7 @@ this.prop = p;
 
     private void listPropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPropMouseClicked
         // TODO add your handling code here:
+        List<Colaborador> listita2 = new ArrayList<>();
         if(listProp.isEnabled())
         {
         int index = listProp.getSelectedIndex();
@@ -500,13 +512,20 @@ this.prop = p;
         String lul = (String) nicks.get(b);
         String lul2 = iUsu.traerColaborador(lul).getNombre()+"("+lul+(")");
         dlm.addElement(lul2);
+        listita2.add(iUsu.traerColaborador(lul));
     }
         if(dlm.isEmpty())
         {
             dlm.addElement("Esta propuesta aún no tiene colaboradores");
+            listColabs.setModel(dlm);
         }
+        else
+        {
         listColabs.setModel(dlm);
+        filtroColabs.setEnabled(true);
+        }
         montito.setText(Integer.toString(p.getMontoActual())+"/"+Integer.toString(p.getMontototal()));
+        this.colabActuales = listita2;
     }//GEN-LAST:event_listPropMouseClicked
     }
     
@@ -607,7 +626,27 @@ this.prop = p;
 
     private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
         // TODO add your handling code here:
-        
+        if (filtroColabs.getText().equals("")) { // SI NO BUSCA
+            if (!this.colabActuales.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < colabActuales.size(); i++) {
+                    Colaborador p = (Colaborador) colabActuales.get(i);
+                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                }
+                listColabs.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!this.colabActuales.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < colabActuales.size(); i++) {
+                    Colaborador p = (Colaborador) colabActuales.get(i);
+                    if (p.getNick().contains(filtroColabs.getText()) || p.getNombre().contains(filtroColabs.getText())) {
+                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    }
+                }
+                listColabs.setModel(modelo);
+            }
+        }
     }//GEN-LAST:event_filtroColabsKeyReleased
     
     
