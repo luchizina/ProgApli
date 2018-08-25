@@ -350,7 +350,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
             jLImagen.setIcon(icono);
             if (x.getEstActual() != null) {
-                if (x.getEstActual().getEstado().equals("Ingresada")) {
+                if (x.getEstActual().getEstado().toString().equals("Ingresada")) {
                     TxtEstado.setText("Ingresada");
                 } else if (x.getEstActual().getEstado().toString().equals("Publicada")) {
                     TxtEstado.setText("Publicada");

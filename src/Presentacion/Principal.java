@@ -63,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -152,6 +153,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem7);
+
+        jMenuItem17.setText("jMenuItem17");
+        jMenu5.add(jMenuItem17);
 
         jMenu1.add(jMenu5);
 
@@ -379,6 +383,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem7.setText("Consulta por estado");
         jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener()
+        {
+                    public void actionPerformed(java.awt.event.ActionEvent evt)
+                    {
+                        jMenuItem7ActionPerformed(evt);
+                    }
+                });
+        
         jMenu5.add(jMenuItem7);
 
         jMenu1.add(jMenu5);
@@ -635,6 +647,7 @@ su.setVisible(true);
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
 
         ConsultaPropEst con = new ConsultaPropEst(iUsu, IP);
+        this.setMinimumSize(new Dimension(con.getWidth()+20,con.getHeight()+80));
         jp.add(con);
         con.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -694,6 +707,7 @@ su.setVisible(true);
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
