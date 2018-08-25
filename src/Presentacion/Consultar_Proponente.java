@@ -48,7 +48,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         estaditos.addItem("Publicada");
         estaditos.addItem("En Financiación");
         estaditos.addItem("Financiada");
-        estaditos.addItem("No financiada");
+        estaditos.addItem("No Financiada");
         estaditos.addItem("Cancelada");
         estaditos.setEnabled(false);
         listProp.setEnabled(false);
@@ -421,10 +421,6 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
     private void estaditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estaditosActionPerformed
         String estadoSelec = estaditos.getSelectedItem().toString();
-            if(estadoSelec.equals("En Financiación"))
-                estadoSelec = "En_Financiacion";
-            if(estadoSelec.equals("No financiada"))
-                estadoSelec = "No_Financiada";
             List<DtPropuesta> listita = IP.listarPropuestas();
                 DefaultListModel dlm = new DefaultListModel();
     for(int b = 0; b<listita.size(); b++)

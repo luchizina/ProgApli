@@ -324,4 +324,14 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
        return x;
    };
     
+    
+    public void actualizarMonto()
+    {
+        this.montoActual = 0;
+        for(int i = 0; i<this.colaboraciones.size(); i++)
+        {
+            Colaboracion aux = (Colaboracion) this.colaboraciones.get(i);
+            this.montoActual = this.montoActual+aux.getMonto();
+        }
+    }
 }

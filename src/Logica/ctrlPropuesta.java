@@ -73,6 +73,17 @@ public class ctrlPropuesta implements IPropuesta {
         Propuesta pr = this.propuestas.get("Un día de Julio");
         return this.propuestas.get(nick);
     }
+    
+    public void actualizarMontos()
+    {
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            aux.actualizarMonto();
+        }
+    }
  
 
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
@@ -170,6 +181,7 @@ public class ctrlPropuesta implements IPropuesta {
             this.colaboraciones.add(c);
             prop.addColab(c);
             colab.AddColab(c);
+            prop.actualizarMonto();
             return true;
         }
         return false;

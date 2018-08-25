@@ -43,7 +43,8 @@ public class Principal extends javax.swing.JFrame {
                 iUsu.cargarUsuarios2();
                 iUsu.cargarUsuarios();
                 IP.cargarPropuestas();
-                this.IP.cargarColaboraciones();  
+                this.IP.cargarColaboraciones();
+                this.IP.actualizarMontos();
                 this.IP.EstadosPropuestas(); // testear
                 lol = false;
                
@@ -140,6 +141,16 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem7.setText("Consulta por estado");
         jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem7MouseClicked(evt);
+            }
+        });
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem7);
 
         jMenu1.add(jMenu5);
@@ -620,6 +631,17 @@ su.setVisible(true);
     private void jpComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jpComponentShown
             
     }//GEN-LAST:event_jpComponentShown
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+
+        ConsultaPropEst con = new ConsultaPropEst(iUsu, IP);
+        jp.add(con);
+        con.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7MouseClicked
 
     /**
      * @param args the command line arguments

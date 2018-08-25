@@ -73,6 +73,8 @@ public class Colaboracion {
     public void setProp(Propuesta prop) {
         this.prop = prop;
     }
+    
+    
             
             
 }
