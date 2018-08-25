@@ -36,6 +36,11 @@ public class DtProponente  extends DtUsuario  {
 
     }
 
+    public DtProponente(String nick) {
+        this.nick = nick;
+    }
+    
+
     public String getNick() {
         return nick;
     }

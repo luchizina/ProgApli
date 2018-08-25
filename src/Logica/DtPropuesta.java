@@ -45,7 +45,7 @@ public DtPropuesta(Propuesta p)
     this.fechaPub = p.getFechaPub();
     this.tRetornos = p.getTipoRetorno();
     this.colaboradores = p.listarColaboradores();
-    this.propoACargo = p.getProp();
+    this.propoACargo = p.getPropo();
     this.estActual = p.getEstActual();
 }
 
@@ -62,7 +62,7 @@ public DtPropuesta(Propuesta p, String x){
     this.fechaPub = p.getFechaPub();
     this.tRetornos = p.getTipoRetorno();
     this.colaboradores = p.listarColaboradores();
-    this.propoACargo = p.getProp();
+    this.propoACargo = p.getPropo();
     this.estActual = p.getEstActual();
     this.categoria = x;
 

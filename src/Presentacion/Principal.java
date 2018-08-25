@@ -537,7 +537,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        Consultar_colaborador consultarCola = new Consultar_colaborador(IP, icat,iUsu);
+       this.setMinimumSize(new Dimension(consultarCola.getWidth()+20,consultarCola.getHeight()+80));
+       jp.add(consultarCola);
+       consultarCola.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

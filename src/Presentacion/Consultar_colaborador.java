@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Logica.Colaborador;
+import Logica.DtColaboracion;
 import Logica.DtColaborador;
 import Logica.DtProponente;
 import Logica.ICategoria;
@@ -19,16 +20,19 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
    
 public class Consultar_colaborador extends javax.swing.JInternalFrame {
-    private IPropuesta IP;
-    private ICategoria iCat;
-    private IUsuario iUsu;
+    private final IPropuesta IP;
+    private final ICategoria iCat;
+    private final IUsuario iUsu;
     private Colaborador cola;
-   
+    DefaultTableModel modeloT;
     public Consultar_colaborador(IPropuesta IP,ICategoria iCat, IUsuario iUsu) {
+            modeloT = new DefaultTableModel(null, getColumnas());
+            jTa = new JTable(modeloT);
         initComponents();
         this.IP = IP;
         this.iUsu = iUsu;
@@ -42,8 +46,8 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         dlm.addElement(lul);
     }
     
-    listPropo.setModel(dlm);    
-        
+    listCola.setModel(dlm);    
+
     }
 
     /**
@@ -57,76 +61,51 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listPropo = new javax.swing.JList<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listCola = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         lblApe1 = new javax.swing.JLabel();
         lblNick1 = new javax.swing.JLabel();
         lblNom1 = new javax.swing.JLabel();
         lblCorreo1 = new javax.swing.JLabel();
         lblFechaN1 = new javax.swing.JLabel();
-        lblImg1 = new javax.swing.JLabel();
         lblNick = new javax.swing.JLabel();
         lblNom = new javax.swing.JLabel();
         lblCorreo = new javax.swing.JLabel();
         lblApe = new javax.swing.JLabel();
         lblFechaN = new javax.swing.JLabel();
-        lblImg = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTa = new javax.swing.JTable();
+        jCo = new java.awt.TextField();
+        lblImg = new javax.swing.JLabel();
+        lblNick2 = new javax.swing.JLabel();
+        lblNick3 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setMaximizable(true);
         setTitle("Consulta colaborador");
         setToolTipText("");
 
-        listPropo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listPropo.addMouseListener(new java.awt.event.MouseAdapter() {
+        listCola.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listPropoMouseClicked(evt);
+                listColaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(listPropo);
+        jScrollPane1.setViewportView(listCola);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblApe1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblApe1.setText("Apellido:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblNick1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNick1.setText("Nickname:");
 
-        lblApe1.setText("Apellido");
+        lblNom1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNom1.setText("Nombre:");
 
-        lblNick1.setText("Nickname");
-
-        lblNom1.setText("Nombre");
-
-        lblCorreo1.setText("Correo");
+        lblCorreo1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblCorreo1.setText("Correo:");
 
         lblFechaN1.setText("Fecha de nacimiento");
-
-        lblImg1.setText("Imagen");
 
         lblNick.setText("Nickname");
 
@@ -136,9 +115,8 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
 
         lblApe.setText("Apellido");
 
-        lblFechaN.setText("Fecha de nacimiento");
-
-        lblImg.setText("Imagen");
+        lblFechaN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblFechaN.setText("Fecha de nacimiento:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,81 +125,123 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaN1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(lblNick1)
                         .addComponent(lblNick, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblNom1)
-                        .addComponent(lblNom, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                        .addComponent(lblNom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblApe1)
                         .addComponent(lblApe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblCorreo1)
                         .addComponent(lblFechaN)
-                        .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lblFechaN1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblImg1)
-                    .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                        .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNick1)
-                    .addComponent(lblImg1))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNick)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNom1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNom)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblApe1)
-                        .addGap(3, 3, 3)
-                        .addComponent(lblApe)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblCorreo1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCorreo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblFechaN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblFechaN1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(lblNick1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNick)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNom1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblApe1)
+                .addGap(3, 3, 3)
+                .addComponent(lblApe)
+                .addGap(4, 4, 4)
+                .addComponent(lblCorreo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCorreo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFechaN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFechaN1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        jTa.setModel(modeloT);
+        jScrollPane2.setViewportView(jTa);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
+        );
+
+        jCo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCoKeyReleased(evt);
+            }
+        });
+
+        lblImg.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblNick2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNick2.setText("Imagen:");
+
+        lblNick3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNick3.setText("Filtrar:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNick3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNick2))
+                .addGap(57, 57, 57))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNick3))
+                            .addGap(6, 6, 6)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNick2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblImg, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,35 +249,21 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 247, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listPropoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPropoMouseClicked
-     int index = listPropo.getSelectedIndex();
-        ListModel  model= listPropo.getModel();
+    private void listColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listColaMouseClicked
+        modeloT.setRowCount(0);
+        int index = listCola.getSelectedIndex();
+        ListModel  model= listCola.getModel();
         String f = (String) model.getElementAt(index);
         String[] partes = f.split(Pattern.quote("("));
         String parte1 = partes[0];
@@ -279,17 +285,55 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
 //        this.nick1 = c.getNick();
         this.pack();
         this.cola = p;
-      
-    }//GEN-LAST:event_listPropoMouseClicked
+        
+        setFilas(iUsu.traerColaborador(parte4));
+    }//GEN-LAST:event_listColaMouseClicked
+
+    private void jCoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoKeyReleased
+       List<DtColaborador> Colab = iUsu.listarColaboradores();
+        if (jCo.getText().equals("")) { // SI NO BUSCA
+            if (!Colab.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < Colab.size(); i++) {
+                    DtColaborador p = (DtColaborador) Colab.get(i);
+                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                }
+                listCola.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!Colab.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < Colab.size(); i++) {
+                    DtColaborador p = (DtColaborador) Colab.get(i);
+                    if (p.getNombre().contains(jCo.getText()) || p.getNick().contains(jCo.getText())) {
+                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    }
+                }
+                listCola.setModel(modelo);
+            }
+        }
+    }//GEN-LAST:event_jCoKeyReleased
+private String[] getColumnas()
+{
+String columna[] = new String [] {"Título","Monto actual","Proponente","Estado actual"};
+return columna;
+}
+private void setFilas(Colaborador c){
+        List<DtColaboracion> list = iUsu.datosCol(c);
+        for(int i=0; i<list.size();i++){
+            modeloT.addRow(new Object[] {list.get(i).getPropuesta().getTitulo(),list.get(i).getPropuesta().getMontoActual(),list.get(i).getPropuesta().getPropo(),list.get(i).getPropuesta().getEstActual().toString()});
+        }
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private java.awt.TextField jCo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTa;
     private javax.swing.JLabel lblApe;
     private javax.swing.JLabel lblApe1;
     private javax.swing.JLabel lblCorreo;
@@ -297,11 +341,12 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFechaN;
     private javax.swing.JLabel lblFechaN1;
     private javax.swing.JLabel lblImg;
-    private javax.swing.JLabel lblImg1;
     private javax.swing.JLabel lblNick;
     private javax.swing.JLabel lblNick1;
+    private javax.swing.JLabel lblNick2;
+    private javax.swing.JLabel lblNick3;
     private javax.swing.JLabel lblNom;
     private javax.swing.JLabel lblNom1;
-    private javax.swing.JList<String> listPropo;
+    private javax.swing.JList<String> listCola;
     // End of variables declaration//GEN-END:variables
 }
