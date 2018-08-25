@@ -440,7 +440,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, "Colaborador agregado");
                             this.limpiar();
                         } else {
-                            JOptionPane.showMessageDialog(null, "No ha podido ser agregado");
+                            JOptionPane.showMessageDialog(null, "El usuario no ha podido ser agregado", "Colaborador", JOptionPane.WARNING_MESSAGE);
                             this.limpiar();
                         }
                     } else {
@@ -457,13 +457,17 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                 if (usuario.existeNick(nickname.getText()) == true) {
                     if (this.vacios() == false && direccion.getText().equals("") == false) {
                         if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
-                            boolean oki = usuario.altaProponente(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
-                            if (oki) {
-                                JOptionPane.showMessageDialog(null, "Proponente agregado");
-                                this.limpiar();
+                            if (usuario.validaWeb(link.getText())) {
+                                boolean oki = usuario.altaProponente(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
+                                if (oki) {
+                                    JOptionPane.showMessageDialog(null, "Proponente agregado");
+                                    this.limpiar();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "El usuario no ha podido ser agregado", "Proponente", JOptionPane.WARNING_MESSAGE);
+                                    this.limpiar();
+                                }
                             } else {
-                                JOptionPane.showMessageDialog(null, "El proponente no ha podido ser agregado");
-                                this.limpiar();
+                                JOptionPane.showMessageDialog(null, "El link ingresado es invalido", "Link web", JOptionPane.WARNING_MESSAGE);
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya esta en uso", "Correo", JOptionPane.WARNING_MESSAGE);
@@ -489,7 +493,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
 
     private boolean vacios() {
         if (nickname.getText().equals("") || nombre.getText().equals("") || apellido.getText().equals("")
-                || email.getText().equals("") || fecha.getDate().equals(null)) {
+                || email.getText().equals("") || fecha.getDate() == null) {
             return true;
         }
         return false;
@@ -508,6 +512,10 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         biografia.setText("");
         link.setText("");
         imagen.setIcon(null);
+        webValido.setText("");
+        nombreAviso.setText("");
+        apellidoValido.setText("");
+        correoValido.setText("");
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -568,7 +576,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
 
     private void linkFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_linkFocusLost
         if (this.link.getText().equals("") == false) {
-            if (link.getText().matches("(www\\.)(.+)(\\.)(.+)")) {
+            if (usuario.validaWeb(this.link.getText())) {
                 webValido.setText("");
             } else {
                 webValido.setText("Pagina web invalida");

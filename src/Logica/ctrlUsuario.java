@@ -483,6 +483,14 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
     
     return nueva;
 }
+
+
+public boolean validaWeb(String algo){
+    if(algo.matches("(http://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(www\\.)(.+)(\\.)(.+)") || algo.matches("(https://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(http://)(.+)(\\.)(.+)") || algo.matches("(https://)(.+)(\\.)(.+)")){
+        return true;
+    }
+    return false;
+}
  
     @Override
     public void cargarUsuarios() {
