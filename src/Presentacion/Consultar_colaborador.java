@@ -321,7 +321,7 @@ return columna;
 private void setFilas(Colaborador c){
         List<DtColaboracion> list = iUsu.datosCol(c);
         for(int i=0; i<list.size();i++){
-            modeloT.addRow(new Object[] {list.get(i).getPropuesta().getTitulo(),list.get(i).getPropuesta().getMontoActual(),list.get(i).getPropuesta().getPropo(),list.get(i).getPropuesta().getEstActual().toString()});
+            modeloT.addRow(new Object[] {list.get(i).getPropuesta().getTitulo(),list.get(i).getPropuesta().getMontoActual(),list.get(i).getPropuesta().getPropo(),list.get(i).getPropuesta().getEstActual().getEstado().toString()});
         }
 }
 
