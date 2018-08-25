@@ -74,7 +74,6 @@ public class Colaboracion {
         this.prop = prop;
     }
     
-    
-            
+   
             
 }

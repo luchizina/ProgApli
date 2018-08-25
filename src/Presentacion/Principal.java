@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 /**
  *
@@ -537,7 +538,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        Consultar_colaborador consultarCola = new Consultar_colaborador(IP, icat,iUsu);
+       this.setMinimumSize(new Dimension(consultarCola.getWidth()+20,consultarCola.getHeight()+80));
+       jp.add(consultarCola);
+       consultarCola.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -613,12 +617,17 @@ cat.setVisible(true);
     
     
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea cargar los datos de prueba? Los datos seran borrados", "Aviso", JOptionPane.YES_NO_OPTION);
+        if(resp == 0){
         iUsu.limpiarUsuarios();
         iUsu.cargarPropPrueba();
         icat.cargar();
         IP.cargarProp();
-
-        //IP.CargaPropuestasPrueba();
+        JOptionPane.showMessageDialog(null, "Datos cargados satisfactoriamente");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Operacion cancelada");
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed

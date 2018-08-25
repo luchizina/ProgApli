@@ -184,6 +184,11 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                 TxtBuscadorFocusGained(evt);
             }
         });
+        TxtBuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtBuscadorActionPerformed(evt);
+            }
+        });
         TxtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TxtBuscadorKeyPressed(evt);
@@ -457,6 +462,10 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
     private void TxtPropuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPropuestoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtPropuestoActionPerformed
+
+    private void TxtBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBuscadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtBuscadorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -73,7 +73,7 @@ public class DBPropuesta {
         statement.setString(8, String.valueOf(p.getTipoRetorno()));
         statement.setInt(9, p.getMontoTotal());
         statement.setString(10, p.getCate());
-        statement.setString(11, p.getProp());
+        statement.setString(11, p.getPropo());
         statement.setString(12, p.getLugar());
         statement.executeUpdate();
         statement.close();

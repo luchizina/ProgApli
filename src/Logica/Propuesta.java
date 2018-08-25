@@ -68,7 +68,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     }
 
 
-    public String getProp() {
+    public String getPropo() {
         return Prop;
     }
      public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate,String lugar) {

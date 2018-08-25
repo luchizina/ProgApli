@@ -231,14 +231,6 @@ public class ctrlUsuario implements IUsuario {
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-
 
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
@@ -354,7 +346,21 @@ public class ctrlUsuario implements IUsuario {
         return listita;
     }
     
-    
+
+@Override
+public List<DtColaboracion> datosCol(Colaborador a){
+  List<DtColaboracion> listita = new ArrayList<>();
+  List<Colaboracion> listitaC = new ArrayList<>();
+           
+             listitaC = a.getColHechas();
+             for(int i=0; i<listitaC.size();i++){
+                 DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
+                 DtColaboracion cola = new DtColaboracion(prop);
+                  listita.add(cola);
+        }
+        return listita;
+    }
+       
     
 
 
@@ -477,7 +483,16 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
     
     return nueva;
 }
-    
+
+
+    @Override
+    public boolean validaWeb(String algo){
+    if(algo.matches("(http://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(www\\.)(.+)(\\.)(.+)") || algo.matches("(https://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(http://)(.+)(\\.)(.+)") || algo.matches("(https://)(.+)(\\.)(.+)") || algo.equals("")){
+        return true;
+    } 
+    return false;
+}
+ 
     @Override
     public void cargarUsuarios() {
         try {
