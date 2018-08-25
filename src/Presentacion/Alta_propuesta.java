@@ -443,7 +443,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void bt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt2ActionPerformed
-       
+        
       //your handling code here:
     }//GEN-LAST:event_bt2ActionPerformed
 public static String getHoraActual() {
