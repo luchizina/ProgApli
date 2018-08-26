@@ -574,7 +574,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        Modificar_Propuesta Mod = new Modificar_Propuesta(IP,icat);
+        this.setMinimumSize(new Dimension(Mod.getWidth()+20,Mod.getHeight()+80));
+        jp.add(Mod);
+        Mod.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed

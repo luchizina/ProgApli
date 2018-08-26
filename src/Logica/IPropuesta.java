@@ -34,4 +34,5 @@ public interface IPropuesta {
     public abstract void actualizarMontos();
     public abstract List<Colaboracion> listarColaboraciones();
     public abstract void cancelarColaboracion(String c, String p);
+    public abstract boolean actualizarDatos(String titulo, Date fecha, int entrada, int monto, String lugar, String cat, String retorno, String desc, String url);
 }
