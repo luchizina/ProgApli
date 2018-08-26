@@ -32,4 +32,6 @@ public interface IPropuesta {
     public abstract List<String> ListarProp(); 
     public abstract void EstadosPropuestas();
     public abstract void actualizarMontos();
+    public abstract List<Colaboracion> listarColaboraciones();
+    public abstract void cancelarColaboracion(String c, String p);
 }

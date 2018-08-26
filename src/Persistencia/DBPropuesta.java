@@ -93,6 +93,22 @@ public class DBPropuesta {
             }
         }
     }
+    
+    public boolean eliminarColaboracion(Colaboracion co) throws SQLException
+    {
+        //        try {
+                PreparedStatement statement = conexion.prepareStatement("DELETE FROM colaboracion WHERE "
+                        + "colaboracion.NickCol = '"+co.getColab().getNick()+"' AND colaboracion.TituloP = '"+co.getProp().getTitulo()+"'");
+//            statement.setString(1, co.getColab().getNick());
+//            statement.setString(2, co.getProp().getTitulo());
+            statement.executeUpdate();
+            statement.close();
+        return true;
+//    } catch (SQLException ex) {
+//                Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+//                return false;
+//            }
+    }
 
     public void cargarPropuestasPrueba() {
         String[] fechas = {"2018-09-16", "2018-10-07", "2018-10-19", "2018-10-21", "2018-11-18", "2018-11-16", "2018-12-03", "2018-10-12"};

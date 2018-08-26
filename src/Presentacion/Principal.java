@@ -65,6 +65,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -156,7 +157,20 @@ public class Principal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem17.setText("jMenuItem17");
+        jMenuItem17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem7MouseClicked(evt);
+            }
+        });
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem17);
+
+        jMenuItem18.setText("jMenuItem17");
+        jMenu5.add(jMenuItem18);
 
         jMenu1.add(jMenu5);
 
@@ -187,6 +201,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem13.setText("Cancelar colaboracion");
         jMenuItem13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem13);
 
         jMenu1.add(jMenu6);
@@ -284,6 +303,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem16.setText("Cancelar colaboracion");
         jMenuItem16.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem16);
 
         jMenuBar1.add(jMenu7);
@@ -423,6 +447,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem13.setText("Cancelar colaboracion");
         jMenuItem13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem13);
 
         jMenu1.add(jMenu6);
@@ -665,6 +694,19 @@ su.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7MouseClicked
 
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+        Cancelar_Colaboracion alt = new Cancelar_Colaboracion(IP);
+        this.setMinimumSize(new Dimension(alt.getWidth()+20,alt.getHeight()+80));
+        jp.add(alt);
+        alt.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -717,6 +759,7 @@ su.setVisible(true);
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

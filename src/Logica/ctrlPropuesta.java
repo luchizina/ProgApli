@@ -30,6 +30,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -155,6 +156,11 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
     
+    public List<Colaboracion> listarColaboraciones()
+    {
+        return this.colaboraciones;
+    }
+    
     @Override
     public boolean existeColaboracion(String nick, String titulo)
     {
@@ -192,6 +198,33 @@ public class ctrlPropuesta implements IPropuesta {
         return currentTime;
     }
 
+    public void cancelarColaboracion(String c, String p)
+    {
+        String[] partes = c.split(Pattern.quote("("));
+        String parte1 = partes[0];
+        String parte2 = partes[1];
+        String[] partes3 = parte2.split(Pattern.quote(")"));
+        String parte4 = partes3[0];
+        for(int i = 0; i<this.colaboraciones.size(); i++)
+        {
+            Colaboracion co = (Colaboracion) colaboraciones.get(i);
+            if(co.getColab().getNick().equals(parte4) && co.getProp().getTitulo().equals(p))
+            {
+                try {
+                    if(dbPropuesta.eliminarColaboracion(co))
+                    {
+                        this.colaboraciones.remove(co);
+                        co.getColab().removeColab(co);
+                        co.getProp().removeColab(co);
+                        co = null;
+                        break;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
     public Date fecha(String fecha) {
         java.util.Date fec;
         java.sql.Date sqlDate = null;

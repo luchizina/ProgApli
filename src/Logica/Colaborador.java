@@ -37,6 +37,7 @@ public class Colaborador extends Usuario {
        this.colHechas.add(c);
    }
    
+   
 
     public List<Colaboracion> getColHechas() {
         return colHechas;
@@ -49,6 +50,11 @@ public class Colaborador extends Usuario {
     public DtColaborador obtenerInfo()
     {
         return new DtColaborador(this.nick, this.nombre, this.Apellido, this.Correo, this.fecha, this.img, this.colHechas);
+    }
+
+    void removeColab(Colaboracion co)
+    {
+        this.colHechas.remove(co);
     }
     
     

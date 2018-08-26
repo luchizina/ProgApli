@@ -146,6 +146,8 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     {
         this.colaboraciones.add(c);
     }
+    
+    
 
     public String getImg() {
         return img;
@@ -334,4 +336,11 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
             this.montoActual = this.montoActual+aux.getMonto();
         }
     }
+
+
+    void removeColab(Colaboracion co)
+    {
+         this.colaboraciones.remove(co);
+    }
+    
 }
