@@ -593,6 +593,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
             jRadioButton2.setEnabled(true);
             jRadioButton1.setSelected(false);
             jRadioButton1.setEnabled(false);
+            this.tipoR1 = "entrada";
         }
         else if (p.getTRetornos().equals("porcentaje"))
         {
@@ -600,6 +601,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
             jRadioButton1.setEnabled(true);
             jRadioButton2.setSelected(false);
             jRadioButton2.setEnabled(false);
+            this.tipoR1 = "porcentaje";
         }
         else
         {
@@ -607,6 +609,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
             jRadioButton1.setSelected(false);
             jRadioButton2.setSelected(false);
             jRadioButton2.setEnabled(true);
+            this.tipoR1 = "porcentaje, entradas";
         }
     }//GEN-LAST:event_listaPropsMouseClicked
 
