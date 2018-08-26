@@ -42,7 +42,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         List<DtCategoria> combo = this.cat.listarCategorias();
         for(int i=0; i< combo.size(); i++){
             DtCategoria combito=(DtCategoria) combo.get(i);
-                       categoria.addItem(combito.getNombre());
+                       categorias.addItem(combito.getNombre());
         }
         this.lista();
     }
@@ -73,7 +73,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         lugar = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        categoria = new javax.swing.JComboBox<>();
+        categorias = new javax.swing.JComboBox<>();
         imagenProp = new javax.swing.JLabel();
         url = new javax.swing.JTextField();
         nuevo = new javax.swing.JButton();
@@ -237,7 +237,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                                     .addComponent(actual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(catAct, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(categoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 114, Short.MAX_VALUE)))))
+                                        .addComponent(categorias, javax.swing.GroupLayout.Alignment.LEADING, 0, 114, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -320,7 +320,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                             .addComponent(catAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -390,6 +390,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
             Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
             imagenProp.setIcon(icono);
             catAct.setText(propu.getNombreCate());
+            categorias.setSelectedItem(propu.getNombreCate());
             if (propu.getEstActual() != null) {
                 if (propu.getEstActual().getEstado().toString().equals("Ingresada")) {
                     estado.setText("Ingresada");
@@ -467,7 +468,9 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        catAct.setText(categoria.getSelectedItem().toString());
+        if(catAct.getText().equals(categorias.getSelectedItem().toString())==false){
+        catAct.setText(categorias.getSelectedItem().toString());
+        }
         String TRetorno;
         if(entrada.isSelected() && porcentaje.isSelected()){
             TRetorno= "entrada" + "," + "porcentaje";
@@ -509,7 +512,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField buscar;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField catAct;
-    private javax.swing.JComboBox<String> categoria;
+    private javax.swing.JComboBox<String> categorias;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JRadioButton entrada;
     private javax.swing.JTextField estado;

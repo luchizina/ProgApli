@@ -423,6 +423,18 @@ public class ctrlPropuesta implements IPropuesta {
                 }
          boolean ok=this.dbPropuesta.modificarProp(titulo, fecha, entrada, monto, lugar, cat, retorno, desc, url);
          if(ok){
+             for(Propuesta prop: this.propuestas.values()){
+                 if(prop.getTitulo().equals(titulo)){
+                     prop.setFecha(fecha);
+                     prop.setPrecioE(entrada);
+                     prop.setMontoTotal(monto);
+                     prop.setLugar(lugar);
+                     prop.setCate(cat);
+                     prop.setTipoRetorno(retorno);
+                     prop.setDesc(desc);
+                     prop.setImg(url);
+                 }
+             }
              return true;
          }
          else {
