@@ -304,7 +304,7 @@ public class DBPropuesta {
 
     public boolean modificarProp(String titulo, Date fecha, int entrada, int monto, String lugar, String cat, String retorno, String desc, String url) {
         try {
-            PreparedStatement st = conexion.prepareStatement("UPDATE propuesta SET Fecha=?, Precio=?, ImagenUrl=?, TipoRetorno=?, MontoTotal=?, categoria=?, lugar=?, Descripcion=? WHERE Titulo=" + titulo);
+            PreparedStatement st = conexion.prepareStatement("UPDATE propuesta SET Fecha=?, Precio=?, ImagenUrl=?, TipoRetorno=?, MontoTotal=?, categoria=?, lugar=?, Descripcion=? WHERE Titulo=?");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String fechaSt = sdf.format(fecha);
             st.setString(1, fechaSt);
@@ -315,6 +315,7 @@ public class DBPropuesta {
             st.setString(6, cat);
             st.setString(7, lugar);
             st.setString(8, desc);
+            st.setString(9, titulo);
             st.executeUpdate();
             st.close();
             return true;
