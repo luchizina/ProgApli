@@ -130,18 +130,18 @@ public class DBPropuesta {
         String[] lugares = {"Jardín Botánico", "Teatro de Verano", "Teatro Solís", "Rural de Prado", "Auditorio Nacional del Sodre", "Landia", "Teatro el Galpón", "Durazno"};
         String[] fechitap = {"2018-05-15", "2018-06-18", "2017-07-17", "2018-07-30", "2018-08-04", "2018-08-06", "2018-08-18", "2018-08-23"};
         for (int i = 0; i < 8; i++) {
-             String Imagen = null;
-                if (imagenes[i] != null) {
-                    String[] aux = imagenes[i].split("\\.");
-                    String termina = aux[1];
-                    String origen = imagenes[i];
-                    String destino = "Imagenes/Propuesta/" +titulos[i] + "." + termina;
-                    if (this.copia(origen, destino) == true) {
-                        Imagen = destino;
-                    } else {
-                        Imagen = null;
-                    }
+            String Imagen = null;
+            if (imagenes[i] != null) {
+                String[] aux = imagenes[i].split("\\.");
+                String termina = aux[1];
+                String origen = imagenes[i];
+                String destino = "Imagenes/Propuesta/" + titulos[i] + "." + termina;
+                if (this.copia(origen, destino) == true) {
+                    Imagen = destino;
+                } else {
+                    Imagen = null;
                 }
+            }
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO propuesta "
                         + "(Titulo, Descripcion, Fecha, Precio, montoActual, fechaPub, ImagenUrl, TipoRetorno, MontoTotal, categoria, nickprop, lugar) values(?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -164,7 +164,8 @@ public class DBPropuesta {
             }
         }
     }
-        public boolean copia(String origen, String destino) {
+
+    public boolean copia(String origen, String destino) {
         try {
             File aor = new File(origen);
             File ade = new File(destino);
@@ -177,7 +178,6 @@ public class DBPropuesta {
             return false;
         }
     }
-    
 
 //    public boolean borrarPersona(Persona p){
 //        try {
@@ -247,28 +247,28 @@ public class DBPropuesta {
             return false;
         }
     }
-    
-    public void colaboracionesPrueba(){
-        String [] colaboradores = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano", "novick", "sergiop", "marcelot", "sergiop", "chino", "novick", "tonyp", "sergiop", "marcelot", "tonyp", "marcelot"};
-        String [] propuestas = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente","Religiosamente","Religiosamente","Religiosamente","El Pimiento Indomable","El Pimiento Indomable","Pilsen Rock","Pilsen Rock","Pilsen Rock","Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio"};
-        String [] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-08-05", "2018-08-10", "2018-08-15", "2018-08-13", "2018-08-14", "2018-08-15", "2018-08-17"};
-        String [] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30"};
-        Integer [] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000};
-        String [] retornos = {"porcentaje","porcentaje","porcentaje","porcentaje","entrada","entrada","porcentaje","porcentaje","porcentaje","porcentaje","entrada", "porcentaje","entrada","porcentaje","porcentaje","entrada","porcentaje"};
-        for(int i = 0; i<17; i++){
+
+    public void colaboracionesPrueba() {
+        String[] colaboradores = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano", "novick", "sergiop", "marcelot", "sergiop", "chino", "novick", "tonyp", "sergiop", "marcelot", "tonyp", "marcelot"};
+        String[] propuestas = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio"};
+        String[] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-08-05", "2018-08-10", "2018-08-15", "2018-08-13", "2018-08-14", "2018-08-15", "2018-08-17"};
+        String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30"};
+        Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000};
+        String[] retornos = {"porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "entrada", "porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "porcentaje", "entrada", "porcentaje", "porcentaje", "entrada", "porcentaje"};
+        for (int i = 0; i < 17; i++) {
             try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
-            statement.setString(1, fechas[i]);
-            statement.setString(2, retornos[i]);
-            statement.setInt(3, montos[i]);
-            statement.setString(4, colaboradores[i]);
-            statement.setString(5, propuestas[i]);
-            statement.setString(6, horas[i]);
-            statement.executeUpdate();
-            statement.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
+                statement.setString(1, fechas[i]);
+                statement.setString(2, retornos[i]);
+                statement.setInt(3, montos[i]);
+                statement.setString(4, colaboradores[i]);
+                statement.setString(5, propuestas[i]);
+                statement.setString(6, horas[i]);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -299,6 +299,28 @@ public class DBPropuesta {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    public boolean modificarProp(String titulo, Date fecha, int entrada, int monto, String lugar, String cat, String retorno, String desc, String url) {
+        try {
+            PreparedStatement st = conexion.prepareStatement("UPDATE propuesta SET Fecha=?, Precio=?, ImagenUrl=?, TipoRetorno=?, MontoTotal=?, categoria=?, lugar=?, Descripcion=? WHERE Titulo=" + titulo);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaSt = sdf.format(fecha);
+            st.setString(1, fechaSt);
+            st.setInt(2, entrada);
+            st.setString(3, url);
+            st.setString(4, retorno);
+            st.setInt(5, monto);
+            st.setString(6, cat);
+            st.setString(7, lugar);
+            st.setString(8, desc);
+            st.executeUpdate();
+            st.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 }

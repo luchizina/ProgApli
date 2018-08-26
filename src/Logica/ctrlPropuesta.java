@@ -96,7 +96,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "Imagenes/Propusta/" + nickP + "." + termina;
+                    String destino = "Imagenes/Propuesta/" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -370,4 +370,31 @@ public class ctrlPropuesta implements IPropuesta {
             this.dbE.SetearEstadoPropuesta(aux);
         }       
      };
+
+    @Override
+    public boolean actualizarDatos(String titulo, Date fecha, int entrada, int monto, String lugar, String cat, String retorno, String desc, String url) {
+         if (url.equals("") == false) {
+                    String[] aux = url.split("\\.");
+                    String termina = aux[1];
+                    String destino = "Imagenes/Propuesta/" + titulo + "." + termina;
+                    try {
+                        if (this.copy(url, destino) == true) {
+                            url = destino;
+                        } else {
+                            url = null;
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+         boolean ok=this.dbPropuesta.modificarProp(titulo, fecha, entrada, monto, lugar, cat, retorno, desc, url);
+         if(ok){
+             return true;
+         }
+         else {
+             return false;
+         }
+         
+    }
 }
