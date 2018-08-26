@@ -105,6 +105,7 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         lblCorreo1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCorreo1.setText("Correo:");
 
+        lblFechaN1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblFechaN1.setText("Fecha de nacimiento");
 
         lblNick.setText("Nickname");
@@ -115,7 +116,6 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
 
         lblApe.setText("Apellido");
 
-        lblFechaN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblFechaN.setText("Fecha de nacimiento:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -134,8 +134,8 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
                         .addComponent(lblApe1)
                         .addComponent(lblApe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblCorreo1)
-                        .addComponent(lblFechaN)
-                        .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblFechaN))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -158,10 +158,10 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCorreo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFechaN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFechaN1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFechaN)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTa.setModel(modeloT);
@@ -225,7 +225,7 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
