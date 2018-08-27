@@ -266,13 +266,20 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.cargarPropuestasPrueba();
         this.dbE.agregarListPrueb();
         this.cargarPropuestas();
+        this.EstadosPropuestas();
         this.dbPropuesta.colaboracionesPrueba();
         this.cargarColaboraciones();
+        this.actualizarMontos();
     }
     
     public void cargarColaboraciones()
     {
         this.colaboraciones = this.dbPropuesta.cargarColaboraciones();
+    }
+    
+    @Override
+    public void cargarEstados(){
+        this.dbPropuesta.cargarEstados();
     }
 
     public List<DtPropuesta> listarPropuestas() {

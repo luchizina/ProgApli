@@ -136,7 +136,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" pref="12" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="estado" alignment="3" min="-2" max="-2" attributes="0"/>

@@ -454,14 +454,14 @@ public static String getHoraActual() {
       Estado estA = new Estado(Testado.Ingresada);
       String TRetorno;
         if(jR1.isSelected() && jR2.isSelected()){
-            TRetorno= jR1.getText() + "," + jR2.getText();
+            TRetorno= "entrada" + "," + "porcentaje";
         }
         else if(jR1.isSelected() && !(jR2.isSelected())){
-            TRetorno=jR1.getText();
+            TRetorno="porcentaje";
         }
         else 
         {
-            TRetorno=jR2.getText();
+            TRetorno="entrada";
         }
         
         if(vacios() == false)
