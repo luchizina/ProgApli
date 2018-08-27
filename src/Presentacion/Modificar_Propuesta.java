@@ -10,7 +10,9 @@ import Logica.DtPropuesta;
 import Logica.ICategoria;
 import Logica.IPropuesta;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +34,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
      */
     private IPropuesta prop;
     private ICategoria cat;
-    public Modificar_Propuesta(IPropuesta p, ICategoria icat) {
+    public Modificar_Propuesta(IPropuesta p, ICategoria icat) throws ParseException {
         initComponents();
         this.prop = p;
         this.cat=icat;
@@ -45,6 +47,10 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                        categorias.addItem(combito.getNombre());
         }
         this.lista();
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        Date desde = new Date();
+        Date hasta = sd.parse("2030-01-01");
+        this.fechaEv.setSelectableDateRange(desde, hasta);
     }
 
     /**
@@ -94,6 +100,8 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         catAct = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Modificar Propuesta");
 
@@ -104,6 +112,11 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(lista);
 
+        buscar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                buscarFocusGained(evt);
+            }
+        });
         buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscarKeyReleased(evt);
@@ -122,9 +135,27 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Precio de entrada:");
 
+        precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                precioKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Monto necesario:");
 
+        monto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                montoKeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Lugar:");
+
+        lugar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lugarKeyTyped(evt);
+            }
+        });
 
         jLabel9.setText("Categoria:");
 
@@ -161,6 +192,11 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         });
 
         cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Descripcion: ");
 
@@ -481,15 +517,80 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         else 
         {
             TRetorno="porcentaje";
-        } 
+        }
+        if(entrada.isSelected()==false && porcentaje.isSelected()==false){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar algun tipo de retorno");
+        } else {
         boolean ok = this.prop.actualizarDatos(titulo.getText(), fechaEv.getDate(), Integer.parseInt(precio.getText()), Integer.parseInt(monto.getText()), lugar.getText(), catAct.getText(), TRetorno, descripcion.getText(), url.getText());
         if(ok){
             JOptionPane.showMessageDialog(null, "Datos modificados");
+            this.limpiar();
         }
         else {
             JOptionPane.showMessageDialog(null, "Error al modificar los datos");
+            this.limpiar();
+        }
         }
     }//GEN-LAST:event_aceptarActionPerformed
+
+    private void limpiar(){
+        lista.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
+          descripcion.setText("");
+          lugar.setText("");
+          monto.setText("");
+          actual.setText("");
+          precio.setText("");
+          fechaEv.setDate(null);
+          titulo.setText("");
+          categorias.setSelectedItem(null);
+          catAct.setText("");
+          porcentaje.setSelected(false);
+          entrada.setSelected(false);
+          estado.setText("");
+          proponente.setText("");
+          ImageIcon imagen = new ImageIcon(""); 
+          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+          imagenProp.setIcon(icono);
+    }
+    private void buscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarFocusGained
+         this.limpiar();
+    }//GEN-LAST:event_buscarFocusGained
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        this.limpiar();
+        this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
+
+    private void precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioKeyTyped
+       char car = evt.getKeyChar();
+       if(car == KeyEvent.VK_BACK_SPACE || Character.isDigit(car)){
+           JOptionPane.showMessageDialog(null, "Bien ahi");
+       } else {
+           JOptionPane.showMessageDialog(null, "Solo se admiten numeros");
+           evt.consume();
+       }
+    }//GEN-LAST:event_precioKeyTyped
+
+    private void montoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoKeyTyped
+        char car = evt.getKeyChar();
+       if(car == KeyEvent.VK_BACK_SPACE || Character.isDigit(car)){
+           JOptionPane.showMessageDialog(null, "Bien ahi");
+       } else {
+           JOptionPane.showMessageDialog(null, "Solo se admiten numeros");
+           evt.consume();
+       }
+    }//GEN-LAST:event_montoKeyTyped
+
+    private void lugarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lugarKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car)){
+            JOptionPane.showMessageDialog(null, "Anda");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Solo letras");
+            evt.consume();
+        }
+    }//GEN-LAST:event_lugarKeyTyped
 
     private void lista(){
          List<String> pro = prop.ListarProp();

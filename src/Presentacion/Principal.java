@@ -98,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
         jp.setLayout(jpLayout);
         jpLayout.setHorizontalGroup(
             jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
+            .addGap(0, 721, Short.MAX_VALUE)
         );
         jpLayout.setVerticalGroup(
             jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +318,9 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,7 +576,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        Modificar_Propuesta Mod = new Modificar_Propuesta(IP,icat);
+        Modificar_Propuesta Mod = null;
+        try {
+          Mod = new Modificar_Propuesta(IP, icat);
+      } catch (ParseException ex) {
+          Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+      }
         this.setMinimumSize(new Dimension(Mod.getWidth()+20,Mod.getHeight()+80));
         jp.add(Mod);
         Mod.setVisible(true);
