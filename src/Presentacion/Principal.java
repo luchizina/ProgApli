@@ -197,6 +197,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem12.setText("Consultar");
         jMenuItem12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem12);
 
         jMenuItem13.setText("Cancelar colaboracion");
@@ -445,6 +450,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem12.setText("Consultar");
         jMenuItem12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem12);
 
         jMenuItem13.setText("Cancelar colaboracion");
@@ -716,6 +726,14 @@ su.setVisible(true);
         jp.add(alt);
         alt.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+        Consulta_colaboracion_a_propuesta altx = new Consulta_colaboracion_a_propuesta(IP,iUsu);
+        this.setMinimumSize(new Dimension(altx.getWidth()+20,altx.getHeight()+80));
+        jp.add(altx);
+        altx.setVisible(true); 
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments

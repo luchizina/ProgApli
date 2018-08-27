@@ -20,6 +20,7 @@ public class DtColaboracion {
             Tretorno retorno;
             DtColaborador colaborador;
             DtPropuesta propuesta;
+            String Hora="";
             
     public DtColaboracion(Date fecha, int monto, Tretorno retorno, DtColaborador colaborador, DtPropuesta propuesta) {
         this.fecha = fecha;
@@ -28,6 +29,17 @@ public class DtColaboracion {
         this.colaborador = colaborador;
         this.propuesta = propuesta;
     }
+    
+    public DtColaboracion(String xHora,Date fecha, int monto, Tretorno retorno, DtColaborador colaborador, DtPropuesta propuesta) {
+        this.Hora = xHora;
+        this.fecha = fecha;
+        this.monto = monto;
+        this.retorno = retorno;
+        this.colaborador = colaborador;
+        this.propuesta = propuesta;
+    }
+    
+    
     public DtColaboracion(DtPropuesta propuesta) {
               this.propuesta = propuesta;
     }
@@ -65,6 +77,12 @@ public class DtColaboracion {
         this.propuesta = propuesta;
     }
     
-    
+     public Date getFecha() {
+        return fecha;
+    }
+     
+    public String getHora() {
+        return Hora;
+    } 
            
 }
