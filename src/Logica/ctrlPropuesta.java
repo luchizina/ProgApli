@@ -277,6 +277,7 @@ public class ctrlPropuesta implements IPropuesta {
         this.colaboraciones = this.dbPropuesta.cargarColaboraciones();
     }
     
+    @Override
     public void cargarEstados(){
         this.dbPropuesta.cargarEstados();
     }

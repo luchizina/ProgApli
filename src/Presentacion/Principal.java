@@ -46,8 +46,8 @@ public class Principal extends javax.swing.JFrame {
                 IP.cargarPropuestas();
                 this.IP.cargarColaboraciones();
                 this.IP.actualizarMontos();
+                //this.IP.cargarEstados();
                 this.IP.EstadosPropuestas(); // testear
-                this.IP.cargarEstados();
                 lol = false;
                
     }
