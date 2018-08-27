@@ -39,9 +39,9 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         estaditos.addItem("Ingresada");
         setClosable(true);
         estaditos.addItem("Publicada");
-        estaditos.addItem("En Financiación");
+        estaditos.addItem("En_Financiacion");
         estaditos.addItem("Financiada");
-        estaditos.addItem("No Financiada");
+        estaditos.addItem("No_Financiada");
         estaditos.addItem("Cancelada");
         this.IP = IP;
         this.iUsu = iUsu;

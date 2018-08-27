@@ -477,11 +477,11 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                     estado.setText("Ingresada");
                 } else if (propu.getEstActual().getEstado().toString().equals("Publicada")) {
                     estado.setText("Publicada");
-                } else if (propu.getEstActual().getEstado().toString().equals("En Financiacion")) {
+                } else if (propu.getEstActual().getEstado().toString().equals("En_Financiacion")) {
                     estado.setText("En Financiacion");
                 } else if (propu.getEstActual().getEstado().toString().equals("Financiada")) {
                     estado.setText("Financiada");
-                } else if (propu.getEstActual().getEstado().toString().equals("No Financiada")) {
+                } else if (propu.getEstActual().getEstado().toString().equals("No_Financiada")) {
                     estado.setText("No Financiada");
                 } else {
                     estado.setText("Cancelada");
@@ -649,14 +649,15 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_montoKeyTyped
 
+    
     private void lugarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lugarKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE || car == KeyEvent.VK_SPACE){
+        if(Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE || car == KeyEvent.VK_SPACE || Character.isDigit(car)){
             lugarCont.setText("");
         }
         else {
             evt.consume();
-            lugarCont.setText("Solo se admiten letras");
+            lugarCont.setText("Solo se admiten letras y numeros");
         }
     }//GEN-LAST:event_lugarKeyTyped
 
