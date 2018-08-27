@@ -561,7 +561,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         catAct.setText(categorias.getSelectedItem().toString());
         }
         if(entrada.isSelected() && porcentaje.isSelected()){
-            retornocamb.setText("entrada" + "," + "porcentaje"); 
+            retornocamb.setText("entrada" + ", " + "porcentaje"); 
         }
         else if(entrada.isSelected() && !(porcentaje.isSelected())){
             retornocamb.setText("entrada");

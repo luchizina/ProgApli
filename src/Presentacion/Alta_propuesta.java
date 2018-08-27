@@ -454,7 +454,7 @@ public static String getHoraActual() {
       Estado estA = new Estado(Testado.Ingresada);
       String TRetorno;
         if(jR1.isSelected() && jR2.isSelected()){
-            TRetorno= "entrada" + "," + "porcentaje";
+            TRetorno= "entrada" + ", " + "porcentaje";
         }
         else if(jR1.isSelected() && !(jR2.isSelected())){
             TRetorno="porcentaje";
