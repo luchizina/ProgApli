@@ -409,6 +409,21 @@ public class DBusuario {
             PreparedStatement b = conexion.prepareStatement("Delete FROM colaboracion");
             b.executeUpdate();
             b.close();
+            PreparedStatement c = conexion.prepareStatement("Delete FROM listestado");
+            c.executeUpdate();
+            c.close();
+            PreparedStatement d = conexion.prepareStatement("Delete FROM seguircp");
+            d.executeUpdate();
+            d.close();
+            PreparedStatement e = conexion.prepareStatement("Delete FROM seguirpc");
+            e.executeUpdate();
+            e.close();
+            PreparedStatement f = conexion.prepareStatement("Delete FROM siguecc");
+            f.executeUpdate();
+            f.close();
+            PreparedStatement g = conexion.prepareStatement("Delete FROM siguepp");
+            g.executeUpdate();
+            g.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
