@@ -123,10 +123,10 @@ public class ctrlUsuario implements IUsuario {
      }
      
           
-    if(u.getNick().equals(aSeguir.getNick())){
-        return true;
-    }
-    else return false;
+//    if(u.getNick().equals(aSeguir.getNick())){
+//        return true;
+//    }
+     return false;
     }
     
      @Override
