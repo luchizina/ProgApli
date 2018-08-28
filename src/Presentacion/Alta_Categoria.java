@@ -39,8 +39,8 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         
         this.iCat=icat;
         this.iCat.cargarCategorias();
-        List<DtCategoria> catego = this.iCat.listarCategorias();
-
+       
+cmbCategorias.addItem("Seleccione la categoría padre...");
         List<DtCategoria> combo = this.iCat.listarCategorias();
         for(int i=0; i< combo.size(); i++){
             DtCategoria combito=(DtCategoria) combo.get(i);
@@ -115,6 +115,11 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         });
 
         cmbCategorias.setEnabled(false);
+        cmbCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriasActionPerformed(evt);
+            }
+        });
 
         lblLet.setForeground(new java.awt.Color(255, 51, 51));
         lblLet.setText("No se permite ingresar números");
@@ -223,15 +228,26 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DtCategoria ing = new DtCategoria("algo", "algo");
          
+        
+       if(txtNombre.getText().equals("")){
+           javax.swing.JOptionPane.showMessageDialog(null, "No ha ingresado una categoría");
+       
+       }
+       else{
+           
+     
      if(rBtnNo.isSelected()==true){
           DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria");
           ing=nuevo;
      }
-     else
+     else if(rBtnSi.isSelected()== true && (cmbCategorias.getSelectedItem().toString()).equals(cmbCategorias.getItemAt(0))==false){
+         
+  
      {
               DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
               ing=nuevo;
           }
+     
                
           boolean ok=iCat.ingresarCat(ing);
            List<DtCategoria> catego = this.iCat.listarCategorias();
@@ -241,18 +257,26 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
             cmbCategorias.removeAllItems();
+            cmbCategorias.addItem("Seleccione la categoría padre...");
             for(int i=0; i< combo.size(); i++){
             DtCategoria combito=(DtCategoria) combo.get(i);
                        cmbCategorias.addItem(combito.getNombre());
         }
+            rBtnSi.setSelected(false);
+            rBtnNo.setSelected(true);
+            cmbCategorias.setSelectedIndex(0);
             
 
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"La categoría ya está ingresada");
         }
-        this.txtNombre.setText("");
      
+        }
+     else {
+         javax.swing.JOptionPane.showMessageDialog(null, "Seleccione una categoría padre");
+     }
         
+          }
         
         
         
@@ -277,6 +301,10 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void cmbCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriasActionPerformed
 
     
 
