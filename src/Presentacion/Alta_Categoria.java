@@ -46,7 +46,147 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
             DtCategoria combito=(DtCategoria) combo.get(i);
                        cmbCategorias.addItem(combito.getNombre());
         }
+        
+        
+        
+        List<DtCategoria> catego = this.iCat.listarCategorias();
+        DefaultTreeModel modeloArbol=null;
+        DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
+        
+        modeloArbol= new DefaultTreeModel(raiz);
+        
+        for(int i=0; i<catego.size(); i++){
+            DtCategoria c=(DtCategoria) catego.get(i);
+            if(c.getProfundidad()==0){
+                
+            
+            modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
+       }
             }
+        
+          for (int k = 0; k < catego.size(); k++) {
+            DtCategoria ca = (DtCategoria) catego.get(k);
+            int otro = modeloArbol.getChildCount(raiz);
+            for (int m = 0; m < otro; m++) {
+                DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
+                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) 
+                {
+                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
+                } 
+                else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
+                {
+                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
+                }
+
+            }
+        }
+        
+        arbolito.setModel(modeloArbol);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            }
+    
+    
+    
+    
+    
+    public DefaultMutableTreeNode devolverNodo(DefaultMutableTreeNode nodo, String padre){
+         Enumeration<DefaultMutableTreeNode> hijos = nodo.children();
+         Enumeration<DefaultMutableTreeNode> otroshijos = nodo.children();
+ DefaultMutableTreeNode n=new DefaultMutableTreeNode();
+             DefaultMutableTreeNode p=new DefaultMutableTreeNode();
+             DefaultMutableTreeNode q=new DefaultMutableTreeNode();
+       if(nodo.getChildCount()==0){
+           return null;
+       }
+       
+             // if(nodo.getChildCount()>0){
+           
+                    while(hijos.hasMoreElements()){
+                        n=(DefaultMutableTreeNode) (hijos.nextElement());
+                      String hijito = n.getUserObject().toString();
+                        Enumeration<DefaultMutableTreeNode> hijitos =n.children();
+                      if(padre.equals(hijito)){
+                          return n;
+                      }
+                         while(hijitos.hasMoreElements()){
+                          p=(DefaultMutableTreeNode) (hijitos.nextElement());
+                          String hijote = p.getUserObject().toString();
+                         if(padre.equals(hijote)){
+                          return p;
+                      }
+                        
+                      }
+//                     
+                    }
+                    while(otroshijos.hasMoreElements()){
+                        q=(DefaultMutableTreeNode) (otroshijos.nextElement());
+                        return devolverNodo(q, padre);
+                    }
+                      return null;
+                    }
+    
+    
+     public boolean tieneEsteHijo( DefaultMutableTreeNode nodo, String padre){
+       // cmbCategorias.addItem(nodo.toString());
+       Enumeration<DefaultMutableTreeNode> hijos = nodo.children();
+       Enumeration<DefaultMutableTreeNode> otroshijos = nodo.children();
+             DefaultMutableTreeNode n=new DefaultMutableTreeNode();
+             DefaultMutableTreeNode p=new DefaultMutableTreeNode();
+              DefaultMutableTreeNode q=new DefaultMutableTreeNode();
+       if(nodo.getChildCount()==0){
+           return false;
+       }
+  
+                         while(hijos.hasMoreElements()){
+                        n=(DefaultMutableTreeNode) (hijos.nextElement());
+                      String hijito = n.getUserObject().toString();
+                      Enumeration<DefaultMutableTreeNode> hijitos =n.children();
+                      if(padre.equals(hijito)){
+                          return true;
+                      }
+                      
+                      while(hijitos.hasMoreElements()){
+                          p=(DefaultMutableTreeNode) (hijitos.nextElement());
+                          String hijote = p.getUserObject().toString();
+                         if(padre.equals(hijote)){
+                          return true;
+                      }
+                        
+                      }
+                    }  
+                             while(otroshijos.hasMoreElements()){
+                        q=(DefaultMutableTreeNode) (otroshijos.nextElement());
+                         return tieneEsteHijo(q,padre);
+                    }
+//              while(hijos.hasMoreElements()){
+//              n=(DefaultMutableTreeNode) (hijos.nextElement());
+//              
+//                      return tieneEsteHijo(n, padre);
+//                      }
+return false;
+           
+                    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,6 +218,8 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         cmbCategorias = new javax.swing.JComboBox<>();
         lblLet = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        arbolito = new javax.swing.JTree();
 
         setClosable(true);
 
@@ -177,6 +319,8 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Alta de categoría");
 
+        jScrollPane1.setViewportView(arbolito);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,15 +330,23 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addGap(71, 71, 71)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 175, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -331,6 +483,7 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree arbolito;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbCategorias;
     private javax.swing.JButton jButton1;
@@ -339,6 +492,7 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLet;
     private javax.swing.JRadioButton rBtnNo;
     private javax.swing.JRadioButton rBtnSi;
