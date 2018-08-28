@@ -105,17 +105,8 @@ public class ctrlCategoria implements ICategoria {
     
     @Override
     public int traerProfu(String nombre){
-       Set se= this.categorias.entrySet();
-       Iterator it= se.iterator();
-        while(it.hasNext()){
-              Map.Entry mentry = (Map.Entry) it.next();
-            Categoria aux = (Categoria) mentry.getValue();
-            if(aux.getNombre().equals(nombre)){
-                return aux.getProfundidad();
-            }
-        }
-        return 0;
-        
+      Categoria aux= this.categorias.get(nombre);
+      return aux.getProfundidad();
     }
 
     @Override
