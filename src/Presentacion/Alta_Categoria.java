@@ -390,7 +390,7 @@ return false;
        
        else if(rBtnNo.isSelected()==true){
        
-          DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria");
+          DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria",0);
           ing=nuevo;
           
                  boolean ok=iCat.ingresarCat(ing);
@@ -425,8 +425,9 @@ return false;
          }
                     else{
                         
-                  
-       DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
+                  int suma= this.iCat.traerProfu(cmbCategorias.getSelectedItem().toString())+1;
+                        
+       DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString(), suma);
               ing=nuevo;
               
                      boolean ok=iCat.ingresarCat(ing);

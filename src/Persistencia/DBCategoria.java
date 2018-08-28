@@ -64,9 +64,10 @@ public class DBCategoria {
     public boolean agregarCategoria(Categoria c) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO categoria "
-                    + "(NombreH, NombreP) values(?,?)");
+                    + "(NombreH, NombreP, profundidad) values(?,?,?)");
             statement.setString(1, c.getNombre());
             statement.setString(2, c.getPadre());
+            statement.setInt(3, c.getProfundidad());
            // statement.setInt(3, c.getProfundidad());
             statement.executeUpdate();
             statement.close();

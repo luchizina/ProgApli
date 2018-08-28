@@ -91,7 +91,7 @@ public class ctrlCategoria implements ICategoria {
         if (this.categorias.get(datos.getNombre()) != null) {
             return false;
         } else {
-            Categoria c = new Categoria(datos.getNombre(), datos.getPadre());
+            Categoria c = new Categoria(datos.getNombre(), datos.getPadre(), datos.getProfundidad());
             boolean res = this.dbCategoria.agregarCategoria(c);
             if (res) {
                 //Colección genérica común
