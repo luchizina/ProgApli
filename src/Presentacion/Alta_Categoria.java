@@ -233,23 +233,17 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
            javax.swing.JOptionPane.showMessageDialog(null, "No ha ingresado una categoría");
        
        }
-       else{
+       else if(!rBtnSi.isSelected() && !rBtnNo.isSelected()){
+           javax.swing.JOptionPane.showMessageDialog(null, "Seleccione si tiene padre o no");
            
-     
-     if(rBtnNo.isSelected()==true){
+       }
+       
+       else if(rBtnNo.isSelected()==true){
+       
           DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria");
           ing=nuevo;
-     }
-     else if(rBtnSi.isSelected()== true && (cmbCategorias.getSelectedItem().toString()).equals(cmbCategorias.getItemAt(0))==false){
-         
-  
-     {
-              DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
-              ing=nuevo;
-          }
-     
-               
-          boolean ok=iCat.ingresarCat(ing);
+          
+                 boolean ok=iCat.ingresarCat(ing);
            List<DtCategoria> catego = this.iCat.listarCategorias();
          List<DtCategoria> combo = this.iCat.listarCategorias();
        
@@ -270,16 +264,46 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"La categoría ya está ingresada");
         }
-     
-        }
-     else {
-         javax.swing.JOptionPane.showMessageDialog(null, "Seleccione una categoría padre");
+           
      }
-        
+     
+     
+     else if(rBtnSi.isSelected()== true) 
+     {
+                    if(cmbCategorias.getSelectedItem().toString().equals(cmbCategorias.getItemAt(0)) && txtNombre.getText().equals("")==false){
+             javax.swing.JOptionPane.showMessageDialog(null, "Seleccione una categoría padre");
+         }
+                    else{
+                        
+                  
+       DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
+              ing=nuevo;
+              
+                     boolean ok=iCat.ingresarCat(ing);
+           List<DtCategoria> catego = this.iCat.listarCategorias();
+         List<DtCategoria> combo = this.iCat.listarCategorias();
+       
+       
+        if (ok){
+            javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+            cmbCategorias.removeAllItems();
+            cmbCategorias.addItem("Seleccione la categoría padre...");
+            for(int i=0; i< combo.size(); i++){
+            DtCategoria combito=(DtCategoria) combo.get(i);
+                       cmbCategorias.addItem(combito.getNombre());
+        }
+            rBtnSi.setSelected(false);
+            rBtnNo.setSelected(true);
+            cmbCategorias.setSelectedIndex(0);
+            
+
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(null,"La categoría ya está ingresada");
+        }
+             }    
           }
-        
-        
-        
+     
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
