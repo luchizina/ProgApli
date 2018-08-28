@@ -54,8 +54,53 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
         
         modeloArbol= new DefaultTreeModel(raiz);
+        arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
         
-        for(int i=0; i<catego.size(); i++){
+//        for(int i=0; i<catego.size(); i++){
+//            DtCategoria c=(DtCategoria) catego.get(i);
+//            if(c.getProfundidad()==0){
+//                
+//            
+//            modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
+//       }
+//            }
+//        
+//          for (int k = 0; k < catego.size(); k++) {
+//            DtCategoria ca = (DtCategoria) catego.get(k);
+//            int otro = modeloArbol.getChildCount(raiz);
+//            for (int m = 0; m < otro; m++) {
+//                DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
+//                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) 
+//                {
+//                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
+//                } 
+//                else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
+//                {
+//                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
+//                }
+//
+//            }
+//        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            }
+    
+   public DefaultTreeModel imprimirArbol(DefaultTreeModel modeloArbol, List<DtCategoria> catego, DefaultMutableTreeNode raiz ){
+          for(int i=0; i<catego.size(); i++){
             DtCategoria c=(DtCategoria) catego.get(i);
             if(c.getProfundidad()==0){
                 
@@ -80,23 +125,8 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
 
             }
         }
-        
-        arbolito.setModel(modeloArbol);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-            }
+          return modeloArbol;
+   } 
     
     
     
@@ -377,6 +407,10 @@ return false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DtCategoria ing = new DtCategoria("algo", "algo");
+        DefaultTreeModel modeloArbol=null;
+        DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
+        
+        modeloArbol= new DefaultTreeModel(raiz);
          
         
        if(txtNombre.getText().equals("")){
@@ -400,6 +434,11 @@ return false;
        
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+            arbolito.removeAll();
+            arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
+            
+            
+            
             cmbCategorias.removeAllItems();
             cmbCategorias.addItem("Seleccione la categoría padre...");
             for(int i=0; i< combo.size(); i++){
@@ -437,6 +476,12 @@ return false;
        
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+           
+            
+            arbolito.removeAll();
+               arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
+               
+               
             cmbCategorias.removeAllItems();
             cmbCategorias.addItem("Seleccione la categoría padre...");
             for(int i=0; i< combo.size(); i++){
