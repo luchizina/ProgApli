@@ -122,6 +122,7 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
                 {
                     modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
                 }
+                
 
             }
         }
