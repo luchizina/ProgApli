@@ -103,13 +103,10 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
           for(int i=0; i<catego.size(); i++){
             DtCategoria c=(DtCategoria) catego.get(i);
             if(c.getProfundidad()==0){
-                
-            
             modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
        }
-            }
-        
-          for (int k = 0; k < catego.size(); k++) {
+            else{
+                  for (int k = 0; k < catego.size(); k++) {
             DtCategoria ca = (DtCategoria) catego.get(k);
             int otro = modeloArbol.getChildCount(raiz);
             for (int m = 0; m < otro; m++) {
@@ -118,13 +115,18 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
                 {
                     modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
                 } 
-                else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
+                else if ((ca.getNombre().equals(nodito.toString())) == false && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
                 {
                     modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
                 }
+               
 
             }
-        }
+        } 
+            }
+            }
+        
+       
           return modeloArbol;
    } 
     
