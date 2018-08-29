@@ -81,12 +81,14 @@ public class DBCategoria {
     public void cargarCatPrueba() {
         String[] categoria = {"Teatro", "Teatro Dramático", "Teatro Musical", "Comedia", "Stand-up", "Literatura", "Música", "Festival", "Concierto", "Cine", "Cine al Aire Libre", "Cine a Pedal", "Danza", "Ballet", "Flamenco", "Carnaval", "Murga", "Humoristas", "Parodistas", "Lubolos", "Revista"};
         String[] padre = {"Categoria", "Teatro", "Teatro", "Teatro", "Comedia", "Categoria", "Categoria", "Música", "Música", "Categoria", "Cine", "Cine", "Categoria", "Danza", "Danza", "Categoria", "Carnaval", "Carnaval", "Carnaval", "Carnaval", "Carnaval"};
+        Integer [] profundidad = {0, 1, 1, 1, 2, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1};
         for (int i = 0; i < 21; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO categoria "
-                        + "(NombreH, NombreP) values(?,?)");
+                        + "(NombreH, NombreP, profundidad) values(?,?, ?)");
                 statement.setString(1, categoria[i]);
                 statement.setString(2, padre[i]);
+                statement.setInt(3, profundidad[i]);
                 statement.executeUpdate();
                 statement.close();
             } catch (SQLException ex) {

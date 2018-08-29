@@ -26,7 +26,6 @@ public abstract boolean escorreo(String correo);
      public abstract List<DtProponente> listarUsuario();
      public abstract List<DtColaborador> listarColaboradores();
     
-      public abstract void cargarUsuarios();
      public abstract void cargarPropPrueba();
      public abstract boolean copia(String origen, String destino);
      public abstract Colaborador traerColaborador(String lul);

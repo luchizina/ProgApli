@@ -42,7 +42,7 @@ public class Principal extends javax.swing.JFrame {
 ////        fabrica.cargarDatosPrueba();
 //          fabrica.pruebas();
                 iUsu.cargarUsuarios2();
-                iUsu.cargarUsuarios();
+                icat.cargarCategorias();
                 IP.cargarPropuestas();
                 this.IP.cargarColaboraciones();
                 this.IP.actualizarMontos();
