@@ -186,6 +186,11 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                 TxtBuscadorFocusGained(evt);
             }
         });
+        TxtBuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtBuscadorActionPerformed(evt);
+            }
+        });
         TxtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TxtBuscadorKeyPressed(evt);
@@ -475,6 +480,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
           TxtEstado.setText("");
           TxtRetorno.setText("");
           ImageIcon imagen = new ImageIcon("");
+          jLPropuestas.clearSelection();
           DefaultListModel modelo = new DefaultListModel(); 
           jLColaboradores.setModel(modelo);
           Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
