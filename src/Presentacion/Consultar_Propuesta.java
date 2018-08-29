@@ -186,6 +186,11 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                 TxtBuscadorFocusGained(evt);
             }
         });
+        TxtBuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtBuscadorActionPerformed(evt);
+            }
+        });
         TxtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TxtBuscadorKeyPressed(evt);
@@ -462,23 +467,24 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
 
     private void TxtBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtBuscadorFocusGained
         // TODO add your handling code here:
-         jLPropuestas.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
-          TxtDescriopcion.setText("");
-          TxtLugar.setText("");
-          TxtMontoTotal.setText("");
-          TxtMontoActual.setText("");
-          TxtPrecio.setText("");
-          TxtFecha.setText("");
-          TxtFPublica.setText("");
-          TxtPropuesto.setText("");
-          TxtCategoria.setText("");
-          TxtEstado.setText("");
-          TxtRetorno.setText("");
-          ImageIcon imagen = new ImageIcon("");
-          DefaultListModel modelo = new DefaultListModel(); 
-          jLColaboradores.setModel(modelo);
-          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
-          jLImagen.setIcon(icono);
+        jLPropuestas.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
+        TxtDescriopcion.setText("");
+        TxtLugar.setText("");
+        TxtMontoTotal.setText("");
+        TxtMontoActual.setText("");
+        TxtPrecio.setText("");
+        TxtFecha.setText("");
+        TxtFPublica.setText("");
+        TxtPropuesto.setText("");
+        TxtCategoria.setText("");
+        TxtEstado.setText("");
+        TxtRetorno.setText("");
+        ImageIcon imagen = new ImageIcon("");
+        jLPropuestas.clearSelection();
+        DefaultListModel modelo = new DefaultListModel();
+        jLColaboradores.setModel(modelo);
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
+        jLImagen.setIcon(icono);
     }//GEN-LAST:event_TxtBuscadorFocusGained
 
     private void TxtPropuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPropuestoActionPerformed

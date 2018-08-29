@@ -122,6 +122,11 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
                 TxtBuscarColaboradorFocusGained(evt);
             }
         });
+        TxtBuscarColaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtBuscarColaboradorActionPerformed(evt);
+            }
+        });
         TxtBuscarColaborador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TxtBuscarColaboradorKeyReleased(evt);
@@ -277,6 +282,8 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         // TODO add your handling code here:
         jLColaborador.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
         jLColaboracion.setSelectedIndex(-1);
+        jLColaborador.clearSelection();
+        jLColaboracion.clearSelection();
         TxtFecha.setText("");
         TxtHora.setText("");
         TxtMonto.setText("");
@@ -288,7 +295,7 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
 
     private void TxtBuscarColaboradorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarColaboradorKeyReleased
         // TODO add your handling code here:
-
+        
         List<DtColaborador> pro = IU.listarColaboradores();
         if (TxtBuscarColaborador.getText().equals("")) { // SI NO BUSCA
             if (!pro.isEmpty()) {
@@ -343,6 +350,10 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
             javax.swing.JOptionPane.showMessageDialog(null, "No hay Colaborantes");
         }
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void TxtBuscarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBuscarColaboradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtBuscarColaboradorActionPerformed
 
      private String ObtenerNick(String nombre) {
         boolean nicksolo = false;

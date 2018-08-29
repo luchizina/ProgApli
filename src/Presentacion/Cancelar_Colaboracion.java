@@ -10,6 +10,7 @@ import Logica.DtPropuesta;
 import Logica.IPropuesta;
 import Logica.Proponente;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -42,7 +43,6 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaColabs = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         listaColabs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,8 +80,6 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Cancelar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,8 +90,7 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -101,10 +98,8 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -115,11 +110,18 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int index = listaColabs.getSelectedRow();
         TableModel model = listaColabs.getModel();
+        if(!listaColabs.getSelectionModel().isSelectionEmpty())
+        {
         String c = (String) model.getValueAt(index, 0);
         String p = (String) model.getValueAt(index, 1);
         this.IP.cancelarColaboracion(c,p);
         cargarDatitos();
-        
+        JOptionPane.showMessageDialog(null, "Colaboración cancelada con éxito");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No se ha podido cancelar la colaboración");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     void cargarDatitos()
     {
@@ -137,7 +139,6 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable listaColabs;
     // End of variables declaration//GEN-END:variables

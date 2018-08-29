@@ -680,7 +680,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     }
     
     private boolean vacio(){
-        if(lugar.getText().equals("") || monto.getText().equals("") || entrada.getText().equals("")
+        if(lugar.getText().equals("") || monto.getText().equals("") || precio.getText().equals("")
                 || descripcion.getText().equals("") || catAct.getText().equals("") || categorias.getSelectedItem()==null
                 ){
             return true;

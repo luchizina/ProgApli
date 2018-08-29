@@ -132,7 +132,7 @@ public class DBListEstado {
             ResultSet rsx = stx.executeQuery();
             while (rsx.next()) {
                 String ex = rsx.getString("Estado");
-                java.sql.Time Actualhora = rsx.getTime("Hora"); // falta comparar con la hora
+                java.sql.Time Actualhora = rsx.getTime("Hora"); // falta comparar con la hora 
                 java.util.Date Actualfecha = rsx.getDate("Fecha");
                 Testado dx;
                 if (ex.equals("Ingresada")) {
