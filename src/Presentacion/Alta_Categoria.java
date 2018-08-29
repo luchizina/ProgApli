@@ -54,49 +54,81 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
         
         modeloArbol= new DefaultTreeModel(raiz);
+        arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
         
-        for(int i=0; i<catego.size(); i++){
+//        for(int i=0; i<catego.size(); i++){
+//            DtCategoria c=(DtCategoria) catego.get(i);
+//            if(c.getProfundidad()==0){
+//                
+//            
+//            modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
+//       }
+//            }
+//        
+//          for (int k = 0; k < catego.size(); k++) {
+//            DtCategoria ca = (DtCategoria) catego.get(k);
+//            int otro = modeloArbol.getChildCount(raiz);
+//            for (int m = 0; m < otro; m++) {
+//                DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
+//                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) 
+//                {
+//                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
+//                } 
+//                else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
+//                {
+//                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
+//                }
+//
+//            }
+//        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            }
+    
+   public DefaultTreeModel imprimirArbol(DefaultTreeModel modeloArbol, List<DtCategoria> catego, DefaultMutableTreeNode raiz ){
+          for(int i=0; i<catego.size(); i++){
             DtCategoria c=(DtCategoria) catego.get(i);
             if(c.getProfundidad()==0){
-                
-            
             modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
        }
-            }
-        
-          for (int k = 0; k < catego.size(); k++) {
+            else{
+                  for (int k = 0; k < catego.size(); k++) {
             DtCategoria ca = (DtCategoria) catego.get(k);
             int otro = modeloArbol.getChildCount(raiz);
             for (int m = 0; m < otro; m++) {
                 DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
-                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) 
+                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getNombre()) == false) 
                 {
                     modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
                 } 
-                else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
+                else if ((ca.getNombre().equals(nodito.toString())) == false && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
                 {
                     modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
                 }
+               
 
             }
-        }
-        
-        arbolito.setModel(modeloArbol);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        } 
             }
+            }
+        
+       
+          return modeloArbol;
+   } 
     
     
     
@@ -331,22 +363,19 @@ return false;
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(71, 71, 71)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 175, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -377,6 +406,10 @@ return false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DtCategoria ing = new DtCategoria("algo", "algo");
+        DefaultTreeModel modeloArbol=null;
+        DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
+        
+        modeloArbol= new DefaultTreeModel(raiz);
          
         
        if(txtNombre.getText().equals("")){
@@ -390,7 +423,7 @@ return false;
        
        else if(rBtnNo.isSelected()==true){
        
-          DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria");
+          DtCategoria nuevo= new DtCategoria(txtNombre.getText(), "Categoria",0);
           ing=nuevo;
           
                  boolean ok=iCat.ingresarCat(ing);
@@ -400,6 +433,11 @@ return false;
        
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+            arbolito.removeAll();
+            arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
+            
+            
+            
             cmbCategorias.removeAllItems();
             cmbCategorias.addItem("Seleccione la categoría padre...");
             for(int i=0; i< combo.size(); i++){
@@ -425,8 +463,9 @@ return false;
          }
                     else{
                         
-                  
-       DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString());
+                  int suma= this.iCat.traerProfu(cmbCategorias.getSelectedItem().toString())+1;
+                        
+       DtCategoria nuevo= new DtCategoria(txtNombre.getText(), cmbCategorias.getSelectedItem().toString(), suma);
               ing=nuevo;
               
                      boolean ok=iCat.ingresarCat(ing);
@@ -436,6 +475,12 @@ return false;
        
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+           
+            
+            arbolito.removeAll();
+               arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
+               
+               
             cmbCategorias.removeAllItems();
             cmbCategorias.addItem("Seleccione la categoría padre...");
             for(int i=0; i< combo.size(); i++){

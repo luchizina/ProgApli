@@ -91,7 +91,7 @@ public class ctrlCategoria implements ICategoria {
         if (this.categorias.get(datos.getNombre()) != null) {
             return false;
         } else {
-            Categoria c = new Categoria(datos.getNombre(), datos.getPadre());
+            Categoria c = new Categoria(datos.getNombre(), datos.getPadre(), datos.getProfundidad());
             boolean res = this.dbCategoria.agregarCategoria(c);
             if (res) {
                 //Colección genérica común
@@ -105,17 +105,8 @@ public class ctrlCategoria implements ICategoria {
     
     @Override
     public int traerProfu(String nombre){
-       Set se= this.categorias.entrySet();
-       Iterator it= se.iterator();
-        while(it.hasNext()){
-              Map.Entry mentry = (Map.Entry) it.next();
-            Categoria aux = (Categoria) mentry.getValue();
-            if(aux.getNombre().equals(nombre)){
-                return aux.getProfundidad();
-            }
-        }
-        return 0;
-        
+      Categoria aux= this.categorias.get(nombre);
+      return aux.getProfundidad();
     }
 
     @Override
