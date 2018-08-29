@@ -622,6 +622,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
           montoN.setText("");
           lugarCont.setText("");
           retornoact.setText("");
+          lista.clearSelection();
     }
     private void buscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarFocusGained
          this.limpiar();

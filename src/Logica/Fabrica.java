@@ -51,19 +51,5 @@ public class Fabrica {
         iu.cargarProponentes();
     }
        
-       public void limpiar(){
-           IUsuario iu = this.getICtrlUsuario();
-           iu.limpiarUsuarios();
-       }
-       
-       public void cargaProp(){
-           IUsuario iu = this.getICtrlUsuario();
-           iu.cargarPropPrueba();
-       }
-       
-       public void pruebas(){
-          IUsuario iu = this.getICtrlUsuario();
-          iu.cargarUsuarios();
-       }
-       
+    
 }
