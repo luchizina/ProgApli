@@ -216,6 +216,7 @@ public class ctrlPropuesta implements IPropuesta {
                         this.colaboraciones.remove(co);
                         co.getColab().removeColab(co);
                         co.getProp().removeColab(co);
+                        this.actualizarMontos();
                         co = null;
                         break;
                     }
