@@ -574,6 +574,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       
         Consultar_Proponente consultarProp = new Consultar_Proponente(IP, iUsu, icat);
        this.setMinimumSize(new Dimension(consultarProp.getWidth()+20,consultarProp.getHeight()+80));
        jp.add(consultarProp);
@@ -581,6 +582,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       
         Consultar_colaborador consultarCola = new Consultar_colaborador(IP, icat,iUsu);
        this.setMinimumSize(new Dimension(consultarCola.getWidth()+20,consultarCola.getHeight()+80));
        jp.add(consultarCola);

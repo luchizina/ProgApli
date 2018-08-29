@@ -434,6 +434,7 @@ return false;
        
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
+            txtNombre.setText("");
             arbolito.removeAll();
             arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
             
