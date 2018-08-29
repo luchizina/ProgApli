@@ -52,7 +52,7 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         List<DtCategoria> catego = this.iCat.listarCategorias();
         DefaultTreeModel modeloArbol=null;
         DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
-        
+      
         modeloArbol= new DefaultTreeModel(raiz);
         arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
         
