@@ -574,7 +574,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       
+       jp.removeAll();
+        jp.repaint();
         Consultar_Proponente consultarProp = new Consultar_Proponente(IP, iUsu, icat);
        this.setMinimumSize(new Dimension(consultarProp.getWidth()+20,consultarProp.getHeight()+80));
        jp.add(consultarProp);
@@ -582,7 +583,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       
+       jp.removeAll();
+        jp.repaint();
         Consultar_colaborador consultarCola = new Consultar_colaborador(IP, icat,iUsu);
        this.setMinimumSize(new Dimension(consultarCola.getWidth()+20,consultarCola.getHeight()+80));
        jp.add(consultarCola);
@@ -590,6 +592,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        jp.removeAll();
+        jp.repaint();
         Modificar_Propuesta Mod = null;
         try {
           Mod = new Modificar_Propuesta(IP, icat);
@@ -602,8 +606,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void Propuesta_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Propuesta_altaActionPerformed
-      try {
-         
+      jp.removeAll();
+        jp.repaint();
+        try {    
           Alta_propuesta ap=new Alta_propuesta(IP,icat,iUsu);
           System.out.println(ap.getHeight() + ap.getWidth());
           
@@ -619,6 +624,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_Propuesta_altaActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        jp.removeAll();
+        jp.repaint();
         Consultar_Propuesta propu = new Consultar_Propuesta(IP);
         this.setMinimumSize(new Dimension(propu.getWidth()+20,propu.getHeight()+80));
         jp.add(propu);
@@ -626,7 +633,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-       Alta_Colaboracion cola = new Alta_Colaboracion(IP, iUsu);
+       jp.removeAll();
+        jp.repaint();
+        Alta_Colaboracion cola = new Alta_Colaboracion(IP, iUsu);
        this.setMinimumSize(new Dimension(cola.getWidth()+20,cola.getHeight()+80));
        jp.add(cola);
        cola.setVisible(true);
@@ -634,7 +643,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-       Registrar_usuario us = null;
+     jp.removeAll();
+        jp.repaint();
+        Registrar_usuario us = null;
       try {
           us = new Registrar_usuario(iUsu); // Se crea una instancia del JinternalFrame
       } catch (ParseException ex) {
@@ -657,7 +668,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-Alta_Categoria cat = new Alta_Categoria(icat);
+jp.removeAll();
+        jp.repaint();
+        Alta_Categoria cat = new Alta_Categoria(icat);
 this.setMinimumSize(new Dimension(cat.getWidth()+20,cat.getHeight()+80));
 jp.add(cat);
 cat.setVisible(true);
@@ -670,6 +683,8 @@ cat.setVisible(true);
     
     
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       jp.removeAll();
+        jp.repaint();
         int resp = JOptionPane.showConfirmDialog(null, "¿Desea cargar los datos de prueba? Los datos seran borrados", "Aviso", JOptionPane.YES_NO_OPTION);
         if(resp == 0){
         iUsu.limpiarUsuarios();
@@ -685,7 +700,8 @@ cat.setVisible(true);
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-                 
+      jp.removeAll();
+        jp.repaint();           
 Seguir_usuario su = new Seguir_usuario(iUsu);
 jp.add(su);
 su.setVisible(true);
@@ -695,7 +711,8 @@ su.setVisible(true);
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        
+        jp.removeAll();
+        jp.repaint();
         Dejar_de_seguir_usuario dej = new Dejar_de_seguir_usuario(iUsu);
         jp.add(dej);
         dej.setVisible(true);
@@ -707,7 +724,8 @@ su.setVisible(true);
     }//GEN-LAST:event_jpComponentShown
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-
+jp.removeAll();
+        jp.repaint();
         ConsultaPropEst con = new ConsultaPropEst(iUsu, IP);
         this.setMinimumSize(new Dimension(con.getWidth()+20,con.getHeight()+80));
         jp.add(con);
@@ -725,6 +743,8 @@ su.setVisible(true);
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
+       jp.removeAll();
+        jp.repaint();
         Cancelar_Colaboracion alt = new Cancelar_Colaboracion(IP);
         this.setMinimumSize(new Dimension(alt.getWidth()+20,alt.getHeight()+80));
         jp.add(alt);
@@ -733,6 +753,8 @@ su.setVisible(true);
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
+     jp.removeAll();
+        jp.repaint();
         Consulta_colaboracion_a_propuesta altx = new Consulta_colaboracion_a_propuesta(IP,iUsu);
         this.setMinimumSize(new Dimension(altx.getWidth()+20,altx.getHeight()+80));
         jp.add(altx);
