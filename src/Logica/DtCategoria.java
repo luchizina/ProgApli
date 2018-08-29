@@ -17,11 +17,17 @@ public class DtCategoria {
             String nombre;
             String padre;
              Map<String,Categoria> hijos;
+             int profundidad;
             
             public DtCategoria(String nombre, String padre, Map<String,Categoria> hijos){
                 this.nombre=nombre;
                 this.padre=padre;
                 this.hijos=hijos;
+            }
+            public DtCategoria(String nombre, String padre, int profundidad){
+                this.nombre=nombre;
+                this.padre=padre;
+                this.profundidad=profundidad;
             }
             
             public DtCategoria(String nombre, String padre){
@@ -39,6 +45,11 @@ public class DtCategoria {
             public String getPadre(){
                 return this.padre;
             }
+            
+            public int getProfundidad(){
+                return this.profundidad;
+            }
+                    
             
             public Map<String,Categoria> getHijos(){
                 return this.hijos;

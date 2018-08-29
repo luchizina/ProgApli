@@ -74,6 +74,8 @@ public class Colaboracion {
         this.prop = prop;
     }
     
-   
+    public String getHora() {
+        return hora;
+    }
             
 }

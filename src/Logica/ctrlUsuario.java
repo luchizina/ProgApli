@@ -41,6 +41,7 @@ public class ctrlUsuario implements IUsuario {
     private Map<String, Proponente> Proponentes;
     private String usuRec;
     private String usuAseguir;
+    private Colaborador ColaboradorConsulta = null;
 
     private DBusuario usu = null;
 
@@ -122,10 +123,10 @@ public class ctrlUsuario implements IUsuario {
      }
      
           
-    if(u.getNick().equals(aSeguir.getNick())){
-        return true;
-    }
-    else return false;
+//    if(u.getNick().equals(aSeguir.getNick())){
+//        return true;
+//    }
+     return false;
     }
     
      @Override
@@ -573,4 +574,43 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
 
 //    long ini = System.currentTimeMillis();
 //    InputStream fuente = null;
+    
+    @Override
+    public List<String> SeleccionarColaborante(String xNick){
+        Colaborador x = (Colaborador) usuarios.get(xNick);
+        this.ColaboradorConsulta = x;
+        List<String> nombresP = new ArrayList<>();
+        List<Colaboracion> listitaC = new ArrayList<>();
+             listitaC = x.getColHechas();
+             for(int i=0; i<listitaC.size();i++){
+                 String name = listitaC.get(i).getProp().getTitulo();
+                  nombresP.add(name);
+        }
+    return nombresP;
+    };
+    
+
+    @Override
+     public DtColaboracion SeleccionarColaboracion(String xTitulo){
+     Colaborador x = this.ColaboradorConsulta;
+        List<Colaboracion> listitaC = new ArrayList<>();
+             listitaC = x.getColHechas();
+             for(int i=0; i<listitaC.size();i++){
+                 
+                 if(xTitulo.equals(listitaC.get(i).getProp().getTitulo()))
+                 {
+                 DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
+                 Tretorno re = new Tretorno();
+                 if(listitaC.get(i).getRetorno().equals("Entradas")){
+                     re.gsetEntraada("Entrada");
+                 }
+                 else {
+                     re.gsetPorcentaje("Porcentaje");
+                 }
+                 DtColaboracion colad = new DtColaboracion(listitaC.get(i).getHora(),listitaC.get(i).getFecha(),listitaC.get(i).getMonto(), re, null, prop);
+                 return colad; //colad
+                 }
+        }
+     return null;
+     };
 }

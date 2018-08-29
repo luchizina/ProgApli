@@ -110,7 +110,7 @@ public class ctrlPropuesta implements IPropuesta {
 
                 }
                 //  public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String Lugar) {
-
+                fechaPub = new Date();
                 Propuesta pe;
                 pe = new Propuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, estActual, img, Lugar);
                 pe.setProp(nickP);
@@ -134,7 +134,7 @@ public class ctrlPropuesta implements IPropuesta {
                         System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
                     }
                     ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
-                    System.out.println(est.getEst().toString() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
+                    System.out.println(est.getEst() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
                     // pe.getListaDeEstados().put(estActual.getEstado(), est);
 
                     boolean Est = this.dbE.agregarEstado(est, titulo);
@@ -266,13 +266,20 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.cargarPropuestasPrueba();
         this.dbE.agregarListPrueb();
         this.cargarPropuestas();
+        this.EstadosPropuestas();
         this.dbPropuesta.colaboracionesPrueba();
         this.cargarColaboraciones();
+        this.actualizarMontos();
     }
     
     public void cargarColaboraciones()
     {
         this.colaboraciones = this.dbPropuesta.cargarColaboraciones();
+    }
+    
+    @Override
+    public void cargarEstados(){
+        this.dbPropuesta.cargarEstados();
     }
 
     public List<DtPropuesta> listarPropuestas() {

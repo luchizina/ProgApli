@@ -264,7 +264,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
             }
         });
 
-        jCateg.setSelectedIndex(-1);
         jCateg.setBorder(null);
         jCateg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCateg.addActionListener(new java.awt.event.ActionListener() {
@@ -375,15 +374,17 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8)
                             .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(adv2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(adv2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jPrecioT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(adv1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(adv1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(jPrecioT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton2)
@@ -407,6 +408,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
             Jpanel1.setVisible(false);
         }
       urlimagen.setText("");
+      img.setIcon(null);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -429,7 +431,7 @@ public static String getHoraActual() {
     return formateador.format(ahora);
 }
  private boolean vacios() {
-        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("") || (!jR1.isSelected() && !jR2.isSelected()) || jDate.getDate() == null) {
+        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("") || (!jR1.isSelected() && !jR2.isSelected()) || (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) || jDate.getDate() == null || (jRadioButton1.isSelected() && urlimagen.getText().equals(""))) {
             return true;
         }
         return false;
@@ -453,14 +455,14 @@ public static String getHoraActual() {
       Estado estA = new Estado(Testado.Ingresada);
       String TRetorno;
         if(jR1.isSelected() && jR2.isSelected()){
-            TRetorno= jR1.getText() + "," + jR2.getText();
+            TRetorno= "entrada" + ", " + "porcentaje";
         }
         else if(jR1.isSelected() && !(jR2.isSelected())){
-            TRetorno=jR1.getText();
+            TRetorno="porcentaje";
         }
         else 
         {
-            TRetorno=jR2.getText();
+            TRetorno="entrada";
         }
         
         if(vacios() == false)

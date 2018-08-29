@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Set;
 import Persistencia.DBCategoria;
 import Logica.Categoria;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -68,7 +70,20 @@ public class ctrlCategoria implements ICategoria {
             Categoria aux = (Categoria) mentry.getValue();
             retorna.add(aux.obtenerInfo());
         }
+        Collections.sort(retorna, new Sortbyroll());
+        
         return retorna;
+    }
+    
+    class Sortbyroll implements Comparator<DtCategoria>{
+        
+        public int compare(DtCategoria a, DtCategoria b ){
+            if(a.getProfundidad() > b.getProfundidad()){
+                return 1;
+            }else{
+                return -1;
+            }
+        }
     }
 
     @Override
@@ -76,7 +91,7 @@ public class ctrlCategoria implements ICategoria {
         if (this.categorias.get(datos.getNombre()) != null) {
             return false;
         } else {
-            Categoria c = new Categoria(datos.getNombre(), datos.getPadre());
+            Categoria c = new Categoria(datos.getNombre(), datos.getPadre(), datos.getProfundidad());
             boolean res = this.dbCategoria.agregarCategoria(c);
             if (res) {
                 //Colección genérica común
@@ -86,6 +101,12 @@ public class ctrlCategoria implements ICategoria {
             return res;
         }
 
+    }
+    
+    @Override
+    public int traerProfu(String nombre){
+      Categoria aux= this.categorias.get(nombre);
+      return aux.getProfundidad();
     }
 
     @Override

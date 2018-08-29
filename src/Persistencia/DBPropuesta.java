@@ -82,11 +82,20 @@ public class DBPropuesta {
     }
 
     public void cargarEstados() {
-        String[] estados = {"Ingresada", "Publicada", "En Financiación", "Financiada", "Cancelada", "No Financiada"};
+        try {
+            PreparedStatement algo = conexion.prepareStatement("Delete FROM estado");
+            algo.executeUpdate();
+            algo.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[] estados = {"Ingresada", "Publicada", "En Financiacion", "Financiada", "Cancelada", "No Financiada"};
         for (int i = 0; i < 6; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO estado " + "(Estado) values (?)");
                 statement.setString(1, estados[i]);
+                statement.executeUpdate();
+                statement.close();
                 //Estado e = new Estado (Testado.valueOf(estados[i]));
             } catch (SQLException ex) {
                 Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -230,6 +239,7 @@ public class DBPropuesta {
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
                 Propuesta p = new Propuesta(lugar, titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp, precio);
                 lista.put(titulo, p);
+                
             }
             rs.close();
             st.close();

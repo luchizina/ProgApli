@@ -34,22 +34,22 @@ public class DBCategoria {
             Map<String, Categoria> lista = new HashMap<String, Categoria>();
             Map<String, Categoria> hijos = new HashMap<>();
             PreparedStatement st = conexion.prepareStatement("SELECT * FROM categoria");
-            PreparedStatement st2 = conexion.prepareStatement("SELECT * FROM categoria where NombreP !='No'");
+//            PreparedStatement st2 = conexion.prepareStatement("SELECT * FROM categoria where NombreP !='No'");
             ResultSet rs = st.executeQuery();
-            ResultSet rs2 = st2.executeQuery();
+//            ResultSet rs2 = st2.executeQuery();
             while (rs.next()) {
 
                 //nuevo
-                while (rs2.next()) {
-                    if (rs.getString("NombreH").compareTo(rs2.getString("NombreP")) == 0) {
-                        Categoria hijo = new Categoria(rs2.getString("NombreH"), rs2.getString("NombreP"));
-                        hijos.put(rs2.getString("NombreH"), hijo);
-                    }
-                }
-                rs2.beforeFirst();
+//                while (rs2.next()) {
+//                    if (rs.getString("NombreH").compareTo(rs2.getString("NombreP")) == 0) {
+//                        Categoria hijo = new Categoria(rs2.getString("NombreH"), rs2.getString("NombreP"));
+//                        hijos.put(rs2.getString("NombreH"), hijo);
+//                    }
+//                }
+//                rs2.beforeFirst();
 //               //nuevo
 
-                Categoria p = new Categoria(rs.getString("NombreH"), rs.getString("NombreP"), hijos);
+                Categoria p = new Categoria(rs.getString("NombreH"), rs.getString("NombreP"), rs.getInt("profundidad"));
                 lista.put(rs.getString("NombreH"), p);
             }
             rs.close();
@@ -64,9 +64,11 @@ public class DBCategoria {
     public boolean agregarCategoria(Categoria c) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO categoria "
-                    + "(NombreH, NombreP) values(?,?)");
+                    + "(NombreH, NombreP, profundidad) values(?,?,?)");
             statement.setString(1, c.getNombre());
             statement.setString(2, c.getPadre());
+            statement.setInt(3, c.getProfundidad());
+           // statement.setInt(3, c.getProfundidad());
             statement.executeUpdate();
             statement.close();
             return true;

@@ -42,4 +42,6 @@ public abstract boolean escorreo(String correo);
      public abstract Proponente traerProponente(String lul);
      public abstract boolean yaSigue();
      public abstract List<DtColaboracion> datosCol(Colaborador a);
+      public abstract List<String> SeleccionarColaborante(String xNick);
+      public abstract DtColaboracion SeleccionarColaboracion(String xTitulo);
 }

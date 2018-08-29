@@ -237,21 +237,35 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     private void btnSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguirActionPerformed
         // TODO add your handling code here:
        
-              this.iUsu.seleccionarUsuario(cmbProp.getSelectedItem().toString());
-                this.iUsu.seleccionarUsuSeg(cmbSeg.getSelectedItem().toString());
-                if((cmbProp.getSelectedItem().toString()).equals(cmbProp.getItemAt(0))==true || (cmbSeg.getSelectedItem().toString()).equals(cmbSeg.getItemAt(0))== true){
-                    
-                   javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar un usuario");
+             
+                
+               if(!(jRadioButton3.isSelected()) && !(jRadioButton4.isSelected())){
+                    javax.swing.JOptionPane.showMessageDialog(null, "Seleccione el tipo de usuario a seguir");
                 }
-                else if(this.iUsu.yaSigue()){
-            javax.swing.JOptionPane.showMessageDialog(null, "Ya sigue a este usuario, o sos vos");
-        }
+                
+               else if((cmbProp.getSelectedItem().toString()).equals(cmbProp.getItemAt(0))==true || (cmbSeg.getSelectedItem().toString()).equals(cmbSeg.getItemAt(0))== true){
+                    
+                   javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar un usuario de la lista");
+                }
+                
+               
+          
         else{
             
-       
+        this.iUsu.seleccionarUsuario(cmbProp.getSelectedItem().toString());
+                this.iUsu.seleccionarUsuSeg(cmbSeg.getSelectedItem().toString());
+                     if(this.iUsu.yaSigue()){
+            javax.swing.JOptionPane.showMessageDialog(null, "Ya sigue a este usuario");
+        }
+                     else if(cmbProp.getSelectedItem().toString().equals(cmbSeg.getSelectedItem().toString())){
+                         javax.swing.JOptionPane.showMessageDialog(null, "El usuario no se puede seguir a si mismo");
+                     }
+                     else{
+                         
+                  
         boolean ok= this.iUsu.seguirUsuario();
         if (ok){
-            javax.swing.JOptionPane.showMessageDialog(null,"Usuario seguido");
+            javax.swing.JOptionPane.showMessageDialog(null,"Ha seguido al usuario con éxito");
 jRadioButton1.setSelected(false);
 jRadioButton2.setSelected(false);
 jRadioButton3.setSelected(false);
@@ -262,6 +276,7 @@ cmbSeg.setSelectedIndex(0);
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
          }
+                        }
 
     }//GEN-LAST:event_btnSeguirActionPerformed
 
