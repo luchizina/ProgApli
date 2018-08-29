@@ -254,6 +254,7 @@ return false;
         arbolito = new javax.swing.JTree();
 
         setClosable(true);
+        setTitle("Alta de categoría");
 
         jLabel2.setText("Ingresar nueva categoría");
 
