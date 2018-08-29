@@ -82,7 +82,6 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         lblNick3 = new javax.swing.JLabel();
 
         setClosable(true);
-        setMaximizable(true);
         setTitle("Consulta colaborador");
         setToolTipText("");
 
@@ -165,6 +164,7 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         );
 
         jTa.setModel(modeloT);
+        jTa.setEnabled(false);
         jScrollPane2.setViewportView(jTa);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -262,6 +262,7 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
 
     private void listColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listColaMouseClicked
         modeloT.setRowCount(0);
+        if(listCola.getModel().getSize() != 0){
         int index = listCola.getSelectedIndex();
         ListModel  model= listCola.getModel();
         String f = (String) model.getElementAt(index);
@@ -287,6 +288,11 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         this.cola = p;
         
         setFilas(iUsu.traerColaborador(parte4));
+        }
+        else {
+         javax.swing.JOptionPane.showMessageDialog(null,"Lista vacia");
+           
+        }
     }//GEN-LAST:event_listColaMouseClicked
 
     private void jCoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoKeyReleased

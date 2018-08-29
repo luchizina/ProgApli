@@ -17,6 +17,7 @@ public class Categoria {
             String nombre; 
             String padre;
             Map<String,Categoria> hijos;
+                    int profundidad;
 
     public Categoria(String nombre, Map<String, Categoria> hijos) {
         this.nombre = nombre;
@@ -32,6 +33,14 @@ public class Categoria {
         this.padre=padre;
         this.hijos=hijos;
     }
+    
+    public Categoria(String nombre, String padre, int profundidad){
+        this.nombre= nombre;
+        this.padre=padre;
+        this.profundidad=profundidad;
+        
+        
+    }
 
     public String getNombre() {
         return nombre;
@@ -39,6 +48,10 @@ public class Categoria {
     
     public String getPadre(){
         return padre;
+    }
+    
+    public int getProfundidad(){
+        return profundidad;
     }
     public void setPadre(String padre){
         this.padre=padre;
@@ -57,7 +70,7 @@ public class Categoria {
     }
     
     public DtCategoria obtenerInfo(){
-        return new DtCategoria(nombre,padre, hijos);
+        return new DtCategoria(nombre,padre, profundidad);
     }
             
             

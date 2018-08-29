@@ -15,8 +15,8 @@ import java.util.Map;
 public interface ICategoria {
     public abstract List<DtCategoria> listarCategorias();
 public abstract boolean ingresarCat(DtCategoria datos);
+public abstract int traerProfu(String nombre);
 public abstract void cargarCategorias();
-public abstract void categoriasPrueba();
 public abstract void cargaCatPrueb();
 public abstract void cargar();
 }

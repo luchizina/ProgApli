@@ -89,6 +89,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.pink, null, null));
         setClosable(true);
+        setTitle("Registrar Usuario");
         setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N

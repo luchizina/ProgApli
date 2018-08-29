@@ -408,6 +408,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
             Jpanel1.setVisible(false);
         }
       urlimagen.setText("");
+      img.setIcon(null);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -430,7 +431,7 @@ public static String getHoraActual() {
     return formateador.format(ahora);
 }
  private boolean vacios() {
-        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("") || (!jR1.isSelected() && !jR2.isSelected()) || jDate.getDate() == null) {
+        if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) jProp.getSelectedItem()).equals("") || (!jR1.isSelected() && !jR2.isSelected()) || (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) || jDate.getDate() == null || (jRadioButton1.isSelected() && urlimagen.getText().equals(""))) {
             return true;
         }
         return false;
