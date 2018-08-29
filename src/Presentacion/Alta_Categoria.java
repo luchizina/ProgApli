@@ -111,7 +111,7 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
             int otro = modeloArbol.getChildCount(raiz);
             for (int m = 0; m < otro; m++) {
                 DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
-                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) 
+                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getNombre()) == false) 
                 {
                     modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
                 } 
