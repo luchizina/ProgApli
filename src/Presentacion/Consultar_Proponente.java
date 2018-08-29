@@ -42,6 +42,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     private IUsuario iUsu;
     private Proponente prop;
     List<Colaborador> colabActuales;
+    String estSeleccionado;
     public Consultar_Proponente(IPropuesta Ip, IUsuario iUsu, ICategoria iCat) { 
         initComponents();
         estaditos.addItem("Ingresada");
@@ -212,7 +213,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
         web.setFocusable(false);
 
-        estaditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        estaditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         estaditos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 estaditosMouseClicked(evt);
@@ -376,7 +377,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(web, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10))
                                 .addGap(6, 6, 6))
@@ -396,14 +397,14 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(estaditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(jScrollPane7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(montito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -419,6 +420,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
     private void estaditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estaditosActionPerformed
         String estadoSelec = estaditos.getSelectedItem().toString();
+        this.estSeleccionado = estadoSelec;
             List<DtPropuesta> listita = IP.listarPropuestas();
                 DefaultListModel dlm = new DefaultListModel();
     for(int b = 0; b<listita.size(); b++)
@@ -472,7 +474,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
             direccion.setText(p.getDireccion());
             biografia.setText(p.getBiografia());
             web.setText(p.getLinkWeb());
-//            estaditos.setSelectedIndex(-1);
+       
             DefaultListModel dlm = new DefaultListModel();
             listProp.setModel(dlm);
             listColabs.setModel(dlm);
@@ -486,7 +488,9 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
             imagenP.setIcon(icono);
 //        this.nick1 = c.getNick();
 this.prop = p;
-        estaditos.setEnabled(true);
+            estaditos.setEnabled(true);
+                 estaditos.setSelectedIndex(0);
+        
             }
     }//GEN-LAST:event_listPropoMouseClicked
 
