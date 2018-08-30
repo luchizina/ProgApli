@@ -299,7 +299,8 @@ cmbSeg.setSelectedIndex(0);
         cmbProp.setVisible(true);
                for(int i=0; i< props.size(); i++){
             DtProponente combitoProp=(DtProponente) props.get(i);
-                       cmbProp.addItem(combitoProp.getNick());
+            String hola = combitoProp.getNombre()+"("+combitoProp.getNick()+(")");
+                       cmbProp.addItem(hola);
                        
                                       
         }
@@ -319,7 +320,8 @@ cmbSeg.setSelectedIndex(0);
                               
               for(int i=0; i< colabs.size(); i++){
                   DtColaborador combitoColab=(DtColaborador) colabs.get(i);
-                  cmbProp.addItem(combitoColab.getNick());
+                 String hola = combitoColab.getNombre()+"("+combitoColab.getNick()+(")");
+                       cmbProp.addItem(hola);
                   
               }
         
@@ -337,7 +339,9 @@ cmbSeg.setSelectedIndex(0);
         cmbSeg.setVisible(true);
                for(int i=0; i< props.size(); i++){
             DtProponente combitoProp=(DtProponente) props.get(i);
-                       cmbSeg.addItem(combitoProp.getNick());
+            String hola = combitoProp.getNombre()+"("+combitoProp.getNick()+(")");
+                       cmbSeg.addItem(hola);
+                      
                        
                                       
         }
@@ -358,7 +362,8 @@ cmbSeg.setSelectedIndex(0);
                               
               for(int i=0; i< colabs.size(); i++){
                   DtColaborador combitoColab=(DtColaborador) colabs.get(i);
-                  cmbSeg.addItem(combitoColab.getNick());
+                    String hola = combitoColab.getNombre()+"("+combitoColab.getNick()+(")");
+                       cmbSeg.addItem(hola);
                   
               }
         jPanel3.setVisible(true);
