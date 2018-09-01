@@ -11,6 +11,8 @@ import Logica.ctrlCategoria;
 import java.util.List;
 import java.util.ArrayList;
 import Logica.DtCategoria;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -52,10 +54,7 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         List<DtCategoria> catego = this.iCat.listarCategorias();
         DefaultTreeModel modeloArbol=null;
         DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("Categoria");
-      
-        modeloArbol= new DefaultTreeModel(raiz);
-        arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
-        
+        construirArbolito(catego, raiz);
 //        for(int i=0; i<catego.size(); i++){
 //            DtCategoria c=(DtCategoria) catego.get(i);
 //            if(c.getProfundidad()==0){
@@ -99,35 +98,22 @@ cmbCategorias.addItem("Seleccione la categoría padre...");
         
             }
     
-   public DefaultTreeModel imprimirArbol(DefaultTreeModel modeloArbol, List<DtCategoria> catego, DefaultMutableTreeNode raiz ){
-          for(int i=0; i<catego.size(); i++){
-            DtCategoria c=(DtCategoria) catego.get(i);
-            if(c.getProfundidad()==0){
-            modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
-       }
-            else{
-                  for (int k = 0; k < catego.size(); k++) {
-            DtCategoria ca = (DtCategoria) catego.get(k);
-            int otro = modeloArbol.getChildCount(raiz);
-            for (int m = 0; m < otro; m++) {
-                DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
-                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getNombre()) == false) 
-                {
-                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
-                } 
-                else if ((ca.getNombre().equals(nodito.toString())) == false && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
-                {
-                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
-                }
-                
-
-            }
-        } 
-            }
-            }
-        
-       
-          return modeloArbol;
+   public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz){
+         if(catego.getPadre().compareTo(raiz.toString()) == 0)
+         {
+             DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
+             raiz.add(nodito);
+         }
+         
+         else
+         {
+             for (int i = 0; i<raiz.getChildCount(); i++)
+             {
+                 imprimirArbol(catego, (DefaultMutableTreeNode) raiz.getChildAt(i));
+             }
+         }
+         DefaultTreeModel modelito = new DefaultTreeModel(raiz);
+         return modelito;
    } 
     
     
@@ -443,7 +429,7 @@ return false;
             javax.swing.JOptionPane.showMessageDialog(null,"Categoría Dada de alta");
             txtNombre.setText("");
             arbolito.removeAll();
-            arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
+            construirArbolito(catego, raiz);
             
             
             
@@ -487,7 +473,7 @@ return false;
            
             
             arbolito.removeAll();
-               arbolito.setModel(this.imprimirArbol(modeloArbol, catego, raiz));
+               construirArbolito(catego, raiz);
                
                
             cmbCategorias.removeAllItems();
@@ -507,8 +493,8 @@ return false;
              }    
           }
      
+          
 
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
@@ -534,7 +520,14 @@ return false;
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCategoriasActionPerformed
 
-    
+    private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz)
+    {
+        Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
+        for(int i = 0; i < catego.size(); i++)
+        {
+        arbolito.setModel(this.imprimirArbol(catego.get(i), raiz));
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolito;
