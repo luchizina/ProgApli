@@ -131,6 +131,11 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
                 listPropoMouseClicked(evt);
             }
         });
+        listPropo.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listPropoValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listPropo);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -454,74 +459,12 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_correoActionPerformed
 
     private void estaditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estaditosActionPerformed
-        String estadoSelec = estaditos.getSelectedItem().toString();
-            List<DtPropuesta> listita = IP.listarPropuestas();
-                DefaultListModel dlm = new DefaultListModel();
-    for(int b = 0; b<listita.size(); b++)
-    {
-        DtPropuesta q = (DtPropuesta) listita.get(b);
-        Estado f = q.getEstActual();
-        if(estadoSelec.equalsIgnoreCase(q.getEstActual().getEstado().toString()) && q.getPropo().equals(this.prop.getNick()))
-        {
-        String lul = q.getTitulo();
-        dlm.addElement(lul);
-        }
-    }
-        listProp.setModel(dlm);
-        if(listProp.getModel().getSize() == 0)
-        {
-            dlm.addElement("No hay propuestas disponibles");
-            listProp.setEnabled(false);
-            listProp.setFocusable(false);
-        }
-        else
-        {
-           listProp.setEnabled(true); 
-        listProp.setFocusable(true);
-        }
-        montito.setText("");
-        DefaultListModel dlm2 = new DefaultListModel();
-        listColabs.setModel(dlm2);
+       buscarPorEstadito(estaditos.getSelectedItem().toString());
     }//GEN-LAST:event_estaditosActionPerformed
 
     private void listPropoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPropoMouseClicked
         
-            int index = listPropo.getSelectedIndex();
             
-            ListModel  model= listPropo.getModel();
-            String f = (String) model.getElementAt(index);
-            String[] partes = f.split(Pattern.quote("("));
-            String parte1 = partes[0];
-            String parte2 = partes[1];
-            String[] partes3 = parte2.split(Pattern.quote(")"));
-            String parte4 = partes3[0];
-            Proponente p = iUsu.traerProponente(parte4);
-            nick.setText(p.getNick());
-            nombre.setText(p.getNombre());
-            apellido.setText(p.getApellido());
-            correo.setText(p.getCorreo());
-            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-            String fecha = sd.format(p.getFecha());
-            fechaNac.setText(fecha);
-            direccion.setText(p.getDireccion());
-            biografia.setText(p.getBiografia());
-            web.setText(p.getLinkWeb());
-//            estaditos.setSelectedIndex(-1);
-            DefaultListModel dlm = new DefaultListModel();
-            listProp.setModel(dlm);
-            listColabs.setModel(dlm);
-            filtroColabs.setText("");
-            filtroColabs.setEnabled(false);
-            montito.setText("");
-            this.colabActuales = null;
-            p.getImg();
-            ImageIcon imagen = new ImageIcon(p.getImg());
-            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
-            imagenP.setIcon(icono);
-//        this.nick1 = c.getNick();
-this.prop = p;
-       
-        estaditos.setEnabled(true);
     }//GEN-LAST:event_listPropoMouseClicked
 
     private void estaditosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estaditosMouseClicked
@@ -680,8 +623,82 @@ this.prop = p;
             }
         }
     }//GEN-LAST:event_filtroColabsKeyReleased
+
+    private void listPropoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropoValueChanged
+        // TODO add your handling code here:
+        int index = listPropo.getSelectedIndex();
+            
+            ListModel  model= listPropo.getModel();
+            String f = (String) model.getElementAt(index);
+            String[] partes = f.split(Pattern.quote("("));
+            String parte1 = partes[0];
+            String parte2 = partes[1];
+            String[] partes3 = parte2.split(Pattern.quote(")"));
+            String parte4 = partes3[0];
+            Proponente p = iUsu.traerProponente(parte4);
+            nick.setText(p.getNick());
+            nombre.setText(p.getNombre());
+            apellido.setText(p.getApellido());
+            correo.setText(p.getCorreo());
+            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sd.format(p.getFecha());
+            fechaNac.setText(fecha);
+            direccion.setText(p.getDireccion());
+            biografia.setText(p.getBiografia());
+            web.setText(p.getLinkWeb());
+//            estaditos.setSelectedIndex(-1);
+            DefaultListModel dlm = new DefaultListModel();
+            listProp.setModel(dlm);
+            listColabs.setModel(dlm);
+            filtroColabs.setText("");
+            filtroColabs.setEnabled(false);
+            montito.setText("");
+            this.colabActuales = null;
+            p.getImg();
+            ImageIcon imagen = new ImageIcon(p.getImg());
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
+            imagenP.setIcon(icono);
+//        this.nick1 = c.getNick();
+this.prop = p;
+       
+        estaditos.setEnabled(true);
+        estaditos.setSelectedItem("Financiada");
+        buscarPorEstadito("Financiada");
+    }//GEN-LAST:event_listPropoValueChanged
     
-    
+    public void buscarPorEstadito(String lul)
+    {
+         String estadoSelec = lul;
+            List<DtPropuesta> listita = IP.listarPropuestas();
+                DefaultListModel dlm = new DefaultListModel();
+    for(int b = 0; b<listita.size(); b++)
+    {
+        DtPropuesta q = (DtPropuesta) listita.get(b);
+        Estado f = q.getEstActual();
+        if(estadoSelec.equalsIgnoreCase(q.getEstActual().getEstado().toString()) && q.getPropo().equals(this.prop.getNick()))
+        {
+        String lul2 = q.getTitulo();
+        dlm.addElement(lul2);
+        }
+    }
+        listProp.setModel(dlm);
+        if(listProp.getModel().getSize() == 0)
+        {
+            dlm.addElement("No hay propuestas disponibles");
+            listProp.setEnabled(false);
+            listProp.setFocusable(false);
+            this.colabActuales = null;
+            filtroColabs.setEnabled(false);
+        }
+        else
+        {
+           listProp.setEnabled(true); 
+        listProp.setFocusable(true);
+        }
+        montito.setText("");
+        DefaultListModel dlm2 = new DefaultListModel();
+        listColabs.setModel(dlm2);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
     private javax.swing.JTextArea biografia;
