@@ -449,6 +449,7 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
     private void filtroTitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroTitFocusGained
         // TODO add your handling code here:
         limpiar();
+
     }//GEN-LAST:event_filtroTitFocusGained
 
     private void filtroTitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroTitKeyReleased
@@ -526,6 +527,7 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
 
     private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
         // TODO add your handling code here:
+        if(colabActuales != null)
         this.iUsu.filtrarC(filtroColabs.getText(), listColabs, colabActuales);
     }//GEN-LAST:event_filtroColabsKeyReleased
 

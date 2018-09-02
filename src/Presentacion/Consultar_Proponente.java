@@ -250,6 +250,11 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
                 listPropMouseClicked(evt);
             }
         });
+        listProp.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listPropValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(listProp);
 
         jScrollPane4.setViewportView(jScrollPane3);
@@ -501,8 +506,10 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         }
         montito.setText(Integer.toString(p.getMontoActual())+"/"+Integer.toString(p.getMontototal()));
         this.colabActuales = listita2;
+        filtroColabs.setText("");
+    }    
     }//GEN-LAST:event_listPropMouseClicked
-    }
+    
     
     private void filtroPropKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroPropKeyPressed
         // TODO add your handling code here:
@@ -598,6 +605,11 @@ this.prop = p;
         estaditos.setSelectedItem("Financiada");
         buscarPorEstadito("Financiada");
     }//GEN-LAST:event_listPropoValueChanged
+
+    private void listPropValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropValueChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_listPropValueChanged
     
     public void buscarPorEstadito(String lul)
     {
@@ -631,6 +643,7 @@ this.prop = p;
         montito.setText("");
         DefaultListModel dlm2 = new DefaultListModel();
         listColabs.setModel(dlm2);
+        filtroColabs.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
