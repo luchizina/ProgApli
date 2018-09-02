@@ -527,7 +527,8 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaValueChanged
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        List<String> pro = prop.ListarProp();
+        /*List<String> pro = prop.ListarProp();
+        
         if (buscar.getText().equals("")) {
             if (!pro.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
@@ -548,7 +549,8 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                 }
                 lista.setModel(modelo);
             }
-        }
+        }*/
+        this.prop.filtrar(this.buscar.getText(), lista);
     }//GEN-LAST:event_buscarKeyReleased
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
