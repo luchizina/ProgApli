@@ -41,6 +41,9 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         Date hasta = new Date();
         Date desde = sd.parse("1918-01-01");
         this.fecha.setSelectableDateRange(desde, hasta);
+        ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
+        Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(220, 220, Image.SCALE_DEFAULT));
+        imagen.setIcon(iconito);
     }
 
     /**
@@ -95,6 +98,8 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("INGRESE LOS SIGUIENTES DATOS:");
 
+        /*
+        */
         imagen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton1.setText("Cargar imagen");
@@ -349,7 +354,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(urlimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
@@ -362,7 +367,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addComponent(urlimagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -473,7 +478,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya esta en uso", "Correo", JOptionPane.WARNING_MESSAGE);
-                            }                         
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Hay campos obligatorios que aun no ha llenado", "Campos", JOptionPane.WARNING_MESSAGE);
                     }
@@ -504,10 +509,10 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    
-    private boolean direccion(){
+
+    private boolean direccion() {
         String dir = direccion.getText().trim();
-        if(dir.isEmpty()){
+        if (dir.isEmpty()) {
             return true;
         }
         return false;
@@ -525,7 +530,9 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         direccion.setText("");
         biografia.setText("");
         link.setText("");
-        imagen.setIcon(null);
+        ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
+        Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(220, 220, Image.SCALE_DEFAULT));
+        imagen.setIcon(iconito);
         webValido.setText("");
         nombreAviso.setText("");
         apellidoValido.setText("");
