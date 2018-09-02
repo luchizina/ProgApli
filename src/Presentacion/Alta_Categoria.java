@@ -285,18 +285,16 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         DefaultMutableTreeNode selec = (DefaultMutableTreeNode) arbolito.getSelectionPath().getLastPathComponent();
         DefaultMutableTreeNode nuev = new DefaultMutableTreeNode(txtNombre.getText());
 
-        if (txtNombre.getText().equals("")) {
+        if (this.control(txtNombre.getText())) {
             javax.swing.JOptionPane.showMessageDialog(null, "No ha ingresado una categoría");
 
-        }
+        } else {
 
         if (selec.getUserObject().toString().equals("Categoria")) {
 
             DtCategoria nuevo = new DtCategoria(nuev.toString(), "Categoria", 0);
 
             boolean ok = iCat.ingresarCat(nuevo);
-            List<DtCategoria> combo = this.iCat.listarCategorias();
-
             if (ok) {
                 txtNombre.setText("");
                 selec.add(nuev);
@@ -317,8 +315,6 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
             DtCategoria nuevo = new DtCategoria(txtNombre.getText(), selec.toString(), suma);
 
             boolean ok = iCat.ingresarCat(nuevo);
-            List<DtCategoria> combo = this.iCat.listarCategorias();
-
             if (ok) {
                 javax.swing.JOptionPane.showMessageDialog(null, "Categoría Dada de alta");
                 txtNombre.setText("");
@@ -332,9 +328,17 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                 javax.swing.JOptionPane.showMessageDialog(null, "La categoría ya está ingresada");
             }
         }
-
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private boolean control(String nombre){
+        String nombrecito = nombre.trim();
+        if(nombrecito.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+    
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
 
         char c = evt.getKeyChar();

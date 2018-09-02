@@ -70,13 +70,14 @@ public class ctrlCategoria implements ICategoria {
             Categoria aux = (Categoria) mentry.getValue();
             retorna.add(aux.obtenerInfo());
         }
-        Collections.sort(retorna, new Sortbyroll());
+        //Collections.sort(retorna, new Sortbyroll());
         
         return retorna;
     }
     
     class Sortbyroll implements Comparator<DtCategoria>{
         
+        @Override
         public int compare(DtCategoria a, DtCategoria b ){
             if(a.getProfundidad() > b.getProfundidad()){
                 return 1;
