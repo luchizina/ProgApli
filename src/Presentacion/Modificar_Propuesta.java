@@ -479,9 +479,15 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
             proponente.setText(propu.getPropo());
             titulo.setText(propu.getTitulo());
             url.setText(propu.getImg());
+            if(propu.getImg() != null){
             ImageIcon img = new ImageIcon(propu.getImg());
             Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
             imagenProp.setIcon(icono);
+            } else if (propu.getImg() == null){
+            ImageIcon img = new ImageIcon("Imagenes/not-available-es.png");
+            Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+            imagenProp.setIcon(icono);
+            }
             TreePath tp = new TreePath(propu.getNombreCate());
             arbol.setSelectionPath(tp);
             catAct.setText(propu.getNombreCate());
