@@ -78,11 +78,16 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
     }
 
     public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
-        if (catego.getPadre().compareTo(raiz.toString()) == 0) {
+        if (catego.getPadre().compareTo(raiz.toString()) == 0)
+        {
             DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
             raiz.add(nodito);
-        } else {
-            for (int i = 0; i < raiz.getChildCount(); i++) {
+        } 
+        
+        else   
+        {
+            for (int i = 0; i < raiz.getChildCount(); i++)
+            {
                 imprimirArbol(catego, (DefaultMutableTreeNode) raiz.getChildAt(i));
             }
         }

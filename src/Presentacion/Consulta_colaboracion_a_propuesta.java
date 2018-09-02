@@ -50,7 +50,6 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         jLColaborador = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
         TxtFecha = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TxtHora = new javax.swing.JTextField();
@@ -64,6 +63,8 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         jLColaboracion = new javax.swing.JList<>();
         jLabel9 = new javax.swing.JLabel();
 
+        setTitle(" Consulta de colaboración a propuesta ");
+        setToolTipText("");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -107,9 +108,6 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         jLabel6.setText("Fecha:");
 
         TxtFecha.setEditable(false);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel1.setText(" Consulta de colaboración a propuesta ");
 
         jLabel7.setText("Hora:");
 
@@ -160,10 +158,8 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addContainerGap(83, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addContainerGap(223, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -199,8 +195,7 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(5, 5, 5)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +226,7 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                        .addGap(0, 38, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -284,6 +279,8 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         jLColaboracion.setSelectedIndex(-1);
         jLColaborador.clearSelection();
         jLColaboracion.clearSelection();
+         DefaultListModel modelo = new DefaultListModel();
+        jLColaboracion.setModel(modelo);
         TxtFecha.setText("");
         TxtHora.setText("");
         TxtMonto.setText("");
@@ -295,29 +292,7 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
 
     private void TxtBuscarColaboradorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscarColaboradorKeyReleased
         // TODO add your handling code here:
-        
-        List<DtColaborador> pro = IU.listarColaboradores();
-        if (TxtBuscarColaborador.getText().equals("")) { // SI NO BUSCA
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    DtColaborador p = (DtColaborador) pro.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                }
-                jLColaborador.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    DtColaborador p = (DtColaborador) pro.get(i);
-                    if (p.getNombre().contains(TxtBuscarColaborador.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                    }
-                }
-                jLColaborador.setModel(modelo);
-            }
-        }
+                jLColaborador.setModel(IU.BUSCADOR_Colaborador(TxtBuscarColaborador.getText()));
     }//GEN-LAST:event_TxtBuscarColaboradorKeyReleased
 
     private void jLColaboracionValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jLColaboracionValueChanged
@@ -383,7 +358,6 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
     private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jLColaboracion;
     private javax.swing.JList<String> jLColaborador;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

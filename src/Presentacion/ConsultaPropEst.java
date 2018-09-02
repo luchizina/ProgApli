@@ -95,6 +95,8 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextPane();
 
+        setTitle("Filtrar Propuestas por Estado");
+
         label1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label1.setText("Lista de Estados");
 
@@ -447,31 +449,12 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
     private void filtroTitFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroTitFocusGained
         // TODO add your handling code here:
         limpiar();
+
     }//GEN-LAST:event_filtroTitFocusGained
 
     private void filtroTitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroTitKeyReleased
         // TODO add your handling code here:
-        if (filtroTit.getText().equals("")) { // SI NO BUSCA
-            if (!listitaActual.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < listitaActual.size(); i++) {
-                    DtPropuesta p = (DtPropuesta) listitaActual.get(i);
-                    modelo.addElement(p.getTitulo());
-                }
-                listProp.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!listitaActual.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < listitaActual.size(); i++) {
-                    DtPropuesta p = (DtPropuesta) listitaActual.get(i);
-                    if (p.getTitulo().contains(filtroTit.getText())) {
-                        modelo.addElement(p.getTitulo());
-                    }
-                }
-                listProp.setModel(modelo);
-            }
-        }
+        this.IP.filtrarP(filtroTit.getText(), listProp, listitaActual);
     }//GEN-LAST:event_filtroTitKeyReleased
 
     private void listPropValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropValueChanged
@@ -544,27 +527,8 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
 
     private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
         // TODO add your handling code here:
-        if (filtroColabs.getText().equals("")) { // SI NO BUSCA
-            if (!this.colabActuales.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < colabActuales.size(); i++) {
-                    Colaborador p = (Colaborador) colabActuales.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                }
-                listColabs.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!this.colabActuales.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < colabActuales.size(); i++) {
-                    Colaborador p = (Colaborador) colabActuales.get(i);
-                    if (p.getNick().contains(filtroColabs.getText()) || p.getNombre().contains(filtroColabs.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                    }
-                }
-                listColabs.setModel(modelo);
-            }
-        }
+        if(colabActuales != null)
+        this.iUsu.filtrarC(filtroColabs.getText(), listColabs, colabActuales);
     }//GEN-LAST:event_filtroColabsKeyReleased
 
     private void limpiar()

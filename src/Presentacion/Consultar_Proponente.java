@@ -250,6 +250,11 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
                 listPropMouseClicked(evt);
             }
         });
+        listProp.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listPropValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(listProp);
 
         jScrollPane4.setViewportView(jScrollPane3);
@@ -501,8 +506,10 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
         }
         montito.setText(Integer.toString(p.getMontoActual())+"/"+Integer.toString(p.getMontototal()));
         this.colabActuales = listita2;
+        filtroColabs.setText("");
+    }    
     }//GEN-LAST:event_listPropMouseClicked
-    }
+    
     
     private void filtroPropKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroPropKeyPressed
         // TODO add your handling code here:
@@ -510,7 +517,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
 
     private void filtroPropFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroPropFocusGained
         // TODO add your handling code here:
-        limpiar();
+//        limpiar();
     }//GEN-LAST:event_filtroPropFocusGained
 
     private void filtroPropFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroPropFocusLost
@@ -519,29 +526,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_filtroPropFocusLost
 
     private void filtroPropKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroPropKeyReleased
-        // TODO add your handling code here:
-        List<DtProponente> pro = iUsu.listarProponentes();
-        if (filtroProp.getText().equals("")) { // SI NO BUSCA
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    DtProponente p = (DtProponente) pro.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                }
-                listPropo.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    DtProponente p = (DtProponente) pro.get(i);
-                    if (p.getNombre().contains(filtroProp.getText()) || p.getNick().contains(filtroProp.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                    }
-                }
-                listPropo.setModel(modelo);
-            }
-        }
+        this.iUsu.filtrarP(this.filtroProp.getText(), listPropo);
     }//GEN-LAST:event_filtroPropKeyReleased
 
     private void limpiar()
@@ -561,67 +546,22 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
           listPropo.clearSelection();
           ImageIcon imagen = new ImageIcon("");
          DefaultListModel modelo = new DefaultListModel(); 
+         DefaultListModel modelo2 = new DefaultListModel();
          listProp.setModel(modelo);
-         listColabs.setModel(modelo);
-         List<DtProponente> listita = iUsu.listarProponentes();
-    DefaultListModel dlm2 = new DefaultListModel();
-    for(int b = 0; b<listita.size(); b++)
-    {
-        DtProponente q = (DtProponente) listita.get(b);
-        String lul = q.getNombre()+"("+q.getNick()+(")");
-        dlm2.addElement(lul);
-    }
-    
-    listPropo.setModel(dlm2); 
+         listColabs.setModel(modelo2);
+         this.iUsu.filtrarP(this.filtroProp.getText(), listPropo);
           Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
           imagenP.setIcon(icono);
             }
     
     private void filtroColabsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_filtroColabsFocusGained
         // TODO add your handling code here:
-//        filtroColabs.setText("");
-//        int index = listProp.getSelectedIndex();
-//        ListModel  model= listProp.getModel();
-//        String f = (String) model.getElementAt(index);
-//        DtPropuesta p= IP.traerPropuesta(f);
-//        List<String> nicks = new ArrayList<>(p.getColabs().keySet());
-//        DefaultListModel dlm = new DefaultListModel();
-//        for(int b = 0; b<nicks.size(); b++)
-//    {
-//        String lul = (String) nicks.get(b);
-//        String lul2 = iUsu.traerColaborador(lul).getNombre()+"("+lul+(")");
-//        dlm.addElement(lul2);
-//    }
-//        if(dlm.isEmpty())
-//        {
-//            dlm.addElement("Esta propuesta aún no tiene colaboradores");
-//        }
-//        listColabs.setModel(dlm);
+
     }//GEN-LAST:event_filtroColabsFocusGained
 
     private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
         // TODO add your handling code here:
-        if (filtroColabs.getText().equals("")) { // SI NO BUSCA
-            if (!this.colabActuales.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < colabActuales.size(); i++) {
-                    Colaborador p = (Colaborador) colabActuales.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                }
-                listColabs.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!this.colabActuales.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < colabActuales.size(); i++) {
-                    Colaborador p = (Colaborador) colabActuales.get(i);
-                    if (p.getNick().contains(filtroColabs.getText()) || p.getNombre().contains(filtroColabs.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
-                    }
-                }
-                listColabs.setModel(modelo);
-            }
-        }
+        this.iUsu.filtrarC(filtroColabs.getText(), listColabs, colabActuales);
     }//GEN-LAST:event_filtroColabsKeyReleased
 
     private void listPropoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropoValueChanged
@@ -665,6 +605,11 @@ this.prop = p;
         estaditos.setSelectedItem("Financiada");
         buscarPorEstadito("Financiada");
     }//GEN-LAST:event_listPropoValueChanged
+
+    private void listPropValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropValueChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_listPropValueChanged
     
     public void buscarPorEstadito(String lul)
     {
@@ -698,6 +643,7 @@ this.prop = p;
         montito.setText("");
         DefaultListModel dlm2 = new DefaultListModel();
         listColabs.setModel(dlm2);
+        filtroColabs.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;

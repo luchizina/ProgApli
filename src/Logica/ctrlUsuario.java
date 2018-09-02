@@ -29,6 +29,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -485,6 +487,59 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
     return nueva;
 }
 
+    @Override
+    public void filtrarP(String campito, JList listita)
+{
+        List<DtProponente> listita2 = this.listarProponentes();
+        if (campito.equals("")) { // SI NO BUSCA
+            if (!listita2.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < listita2.size(); i++) {
+                    DtProponente p = (DtProponente) listita2.get(i);
+                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                }
+                listita.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!listita2.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < listita2.size(); i++) {
+                    DtProponente p = (DtProponente) listita2.get(i);
+                    if (p.getNombre().contains(campito) || p.getNick().contains(campito)) {
+                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    }
+                }
+                listita.setModel(modelo);
+            }
+        }
+}
+    
+    @Override
+    public void filtrarC(String campito, JList listita, List<Colaborador> listita2)
+    {
+        if (campito.equals("")) { // SI NO BUSCA
+            if (!listita2.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < listita2.size(); i++) {
+                    Colaborador p = (Colaborador) listita2.get(i);
+                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                }
+                listita.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!listita2.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < listita2.size(); i++) {
+                    Colaborador p = (Colaborador) listita2.get(i);
+                    if (p.getNick().contains(campito) || p.getNombre().contains(campito)) {
+                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    }
+                }
+                listita.setModel(modelo);
+            }
+        }
+    }
+
 
     @Override
     public boolean validaWeb(String algo){
@@ -535,4 +590,33 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         }
      return null;
      };
+     
+     
+    @Override
+    public DefaultListModel BUSCADOR_Colaborador(String Palabra) {
+        DefaultListModel modelo = new DefaultListModel();
+        List<DtColaborador> col = this.listarColaboradores();
+        if (Palabra.equals("")) { // SI NO BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtColaborador p = (DtColaborador) col.get(i);
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                }
+            }
+        } else {                                // SI BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtColaborador p = (DtColaborador) col.get(i);
+                    if (p.getNick().contains(Palabra) || p.getNombre().contains(Palabra)) {
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                    }
+                }
+            }
+        }
+        return modelo;
+    }
+;
+     
 }

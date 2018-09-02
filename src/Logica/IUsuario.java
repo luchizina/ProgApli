@@ -8,6 +8,8 @@ package Logica;
 import java.util.Date;
 import java.util.Map;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -43,4 +45,7 @@ public abstract boolean escorreo(String correo);
      public abstract List<DtColaboracion> datosCol(Colaborador a);
       public abstract List<String> SeleccionarColaborante(String xNick);
       public abstract DtColaboracion SeleccionarColaboracion(String xTitulo);
+      public abstract void filtrarP(String campo, JList lista);
+      public abstract void filtrarC(String campo, JList lista, List<Colaborador> listita);
+     public abstract DefaultListModel BUSCADOR_Colaborador(String Palabra);
 }

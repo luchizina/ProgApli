@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import Logica.*;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
@@ -36,5 +37,7 @@ public interface IPropuesta {
     public abstract void actualizarMontos();
     public abstract List<Colaboracion> listarColaboraciones();
     public abstract void cancelarColaboracion(String c, String p);
+    public abstract void filtrarP(String campito, JList lista, List<DtPropuesta> prop);
     public abstract boolean actualizarDatos(String titulo, Date fecha, int entrada, int monto, String lugar, String cat, String retorno, String desc, String url);
+    public abstract DefaultListModel BUSCADOR_Propuestas(String Palabra);
 }
