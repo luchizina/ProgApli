@@ -382,7 +382,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
     public boolean existeNick(String nick) {
 
         for (Usuario u : this.usuarios.values()) {
-            if (u.getNick().equals(nick)) {
+            if (u.getNick().equalsIgnoreCase(nick)) {
                 return false;
             }
         }
@@ -393,7 +393,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
     public boolean existeCorreo(String correo) {
 
         for (Usuario u : this.usuarios.values()) {
-            if (u.getCorreo().equals(correo)) {
+            if (u.getCorreo().equalsIgnoreCase(correo)) {
                 return false;
             }
         }
