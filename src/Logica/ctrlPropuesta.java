@@ -451,4 +451,30 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
     }
+    
+    @Override
+    public DefaultListModel BUSCADOR_Propuestas(String Palabra) {
+        DefaultListModel modelo = new DefaultListModel();
+        if (Palabra.equals("")) {                      // SI NO BUSCA
+            if (!this.ListarProp().isEmpty()) {
+                for (int i = 0; i < propuestas.size(); i++) {
+                    String p = (String) this.ListarProp().get(i);
+                    modelo.addElement(p);
+                }
+            }
+        } else {                                    // SI BUSCA
+            if (!this.ListarProp().isEmpty()) {
+                for (int i = 0; i < propuestas.size(); i++) {
+                    String p = (String) this.ListarProp().get(i);
+                    if (p.contains(Palabra)) {
+                        modelo.addElement(p);
+                    }
+                }
+            }
+        }
+        return modelo; 
+    }
+;
+    
+    
 }

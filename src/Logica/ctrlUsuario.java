@@ -590,4 +590,33 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         }
      return null;
      };
+     
+     
+    @Override
+    public DefaultListModel BUSCADOR_Colaborador(String Palabra) {
+        DefaultListModel modelo = new DefaultListModel();
+        List<DtColaborador> col = this.listarColaboradores();
+        if (Palabra.equals("")) { // SI NO BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtColaborador p = (DtColaborador) col.get(i);
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                }
+            }
+        } else {                                // SI BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtColaborador p = (DtColaborador) col.get(i);
+                    if (p.getNick().contains(Palabra) || p.getNombre().contains(Palabra)) {
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                    }
+                }
+            }
+        }
+        return modelo;
+    }
+;
+     
 }

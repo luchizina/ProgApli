@@ -50,7 +50,6 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLImagen = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TxtDescriopcion = new javax.swing.JTextPane();
         TxtFecha = new javax.swing.JTextField();
@@ -81,6 +80,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         jLabel16 = new javax.swing.JLabel();
         TxtRetorno = new javax.swing.JTextField();
 
+        setTitle("Consulta de propuestas");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -112,9 +112,6 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         jLabel10.setText("Propuesto por:");
 
         jLabel12.setText("Imagen:");
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel1.setText("Consulta de propuestas");
 
         TxtDescriopcion.setEditable(false);
         jScrollPane3.setViewportView(TxtDescriopcion);
@@ -220,9 +217,6 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(96, 503, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
@@ -270,7 +264,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel7)
                                             .addComponent(jLabel10)
                                             .addComponent(jLabel5))
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGap(0, 47, Short.MAX_VALUE))
                                     .addComponent(TxtPrecio))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,8 +278,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
@@ -338,14 +331,14 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(TxtRetorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                     .addComponent(jLImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                 .addGap(2, 2, 2)
                 .addComponent(jButton1)
@@ -441,28 +434,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
 
     private void TxtBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyReleased
         // TODO add your handling code here:
-         List<String> pro = propuesta.ListarProp();
-        if (TxtBuscador.getText().equals("")) { // SI NO BUSCA
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    String p = (String) pro.get(i);
-                    modelo.addElement(p);
-                }
-                jLPropuestas.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    String p = (String) pro.get(i);
-                    if (p.contains(TxtBuscador.getText())) {
-                        modelo.addElement(p);
-                    }
-                }
-                jLPropuestas.setModel(modelo);
-            }
-        }
+         jLPropuestas.setModel(propuesta.BUSCADOR_Propuestas(TxtBuscador.getText()));
     }//GEN-LAST:event_TxtBuscadorKeyReleased
 
     private void TxtBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtBuscadorFocusGained
@@ -513,7 +485,6 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JList<String> jLColaboradores;
     private javax.swing.JLabel jLImagen;
     private javax.swing.JList<String> jLPropuestas;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
