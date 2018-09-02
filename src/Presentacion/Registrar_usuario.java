@@ -457,7 +457,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         } else {
             if (jRadioButton2.isSelected() == true) {
                 if (usuario.existeNick(nickname.getText()) == true) {
-                    if (this.vacios() == false && direccion.getText().equals("") == false) {
+                    if (this.vacios() == false && this.direccion() == false) {
                         if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
                             if (usuario.validaWeb(link.getText())) {
                                 boolean oki = usuario.altaProponente(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
@@ -494,8 +494,20 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     }
 
     private boolean vacios() {
-        if (nickname.getText().equals("") || nombre.getText().equals("") || apellido.getText().equals("")
-                || email.getText().equals("") || fecha.getDate() == null) {
+        String nick = nickname.getText().trim();
+        String nomb = nombre.getText().trim();
+        String ap = apellido.getText().trim();
+        String correo = email.getText().trim();
+        if (nick.isEmpty() || nomb.isEmpty() || ap.isEmpty()
+                || correo.isEmpty() || fecha.getDate() == null) {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean direccion(){
+        String dir = direccion.getText().trim();
+        if(dir.isEmpty()){
             return true;
         }
         return false;

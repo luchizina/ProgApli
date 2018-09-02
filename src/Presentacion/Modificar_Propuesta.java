@@ -38,10 +38,11 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
      */
     private IPropuesta prop;
     private ICategoria cat;
+
     public Modificar_Propuesta(IPropuesta p, ICategoria icat) throws ParseException {
         initComponents();
         this.prop = p;
-        this.cat=icat;
+        this.cat = icat;
         this.cat.cargarCategorias();
         List<DtCategoria> catego = this.cat.listarCategorias();
         this.lista();
@@ -443,14 +444,14 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-      private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
+    private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
         Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
         for (int i = 0; i < catego.size(); i++) {
             arbol.setModel(this.imprimirArbol(catego.get(i), raiz));
         }
     }
-      
-          public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
+
+    public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
         if (catego.getPadre().compareTo(raiz.toString()) == 0) {
             DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
             raiz.add(nodito);
@@ -462,9 +463,9 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         DefaultTreeModel modelito = new DefaultTreeModel(raiz);
         return modelito;
     }
-      
+
     private void listaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaValueChanged
-        if(lista.getSelectedIndex() != -1){
+        if (lista.getSelectedIndex() != -1) {
             DtPropuesta propu = prop.SeleccionarProp(lista.getSelectedValue());
             Date fecha = propu.getFecha();
             SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
@@ -499,20 +500,20 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                     estado.setText("Cancelada");
                 }
             }
-            
+
             String retorno = propu.getTRetornos();
-            if(retorno.equals("entrada, porcentaje")){
+            if (retorno.equals("entrada, porcentaje")) {
                 entrada.setSelected(true);
                 porcentaje.setSelected(true);
                 retornoact.setText("entrada, porcentaje");
             }
-            
-            if(retorno.equals("entrada")){
+
+            if (retorno.equals("entrada")) {
                 entrada.setSelected(true);
                 porcentaje.setSelected(false);
                 retornoact.setText("entrada");
             }
-            if(retorno.equals("porcentaje")){
+            if (retorno.equals("porcentaje")) {
                 entrada.setSelected(false);
                 porcentaje.setSelected(true);
                 retornoact.setText("porcentaje");
@@ -521,13 +522,13 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
             entradaP.setText("");
             montoN.setText("");
             lugarCont.setText("");
-            
+
         }
     }//GEN-LAST:event_listaValueChanged
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
         List<String> pro = prop.ListarProp();
-        if (buscar.getText().equals("")) { 
+        if (buscar.getText().equals("")) {
             if (!pro.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < pro.size(); i++) {
@@ -536,7 +537,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                 }
                 lista.setModel(modelo);
             }
-        } else {                               
+        } else {
             if (!pro.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < pro.size(); i++) {
@@ -552,88 +553,88 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
 
-            JFileChooser j = new JFileChooser();
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
-            j.setFileFilter(filtro);
-            int ap = j.showOpenDialog(this);
-            if (ap == JFileChooser.APPROVE_OPTION) {
-                File file = j.getSelectedFile();
-                String ruta = file.getPath();
-                this.url.setText(ruta);
-                ImageIcon imagen3 = new ImageIcon(ruta);
-                Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.imagenProp.getWidth(), this.imagenProp.getHeight(), Image.SCALE_DEFAULT));
-                this.imagenProp.setIcon(icono);
-                this.pack();
-            }     
+        JFileChooser j = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagenes", "jpg", "png");
+        j.setFileFilter(filtro);
+        int ap = j.showOpenDialog(this);
+        if (ap == JFileChooser.APPROVE_OPTION) {
+            File file = j.getSelectedFile();
+            String ruta = file.getPath();
+            this.url.setText(ruta);
+            ImageIcon imagen3 = new ImageIcon(ruta);
+            Icon icono = new ImageIcon(imagen3.getImage().getScaledInstance(this.imagenProp.getWidth(), this.imagenProp.getHeight(), Image.SCALE_DEFAULT));
+            this.imagenProp.setIcon(icono);
+            this.pack();
+        }
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        if(lista.getSelectedValue()!=null){
-        if(catAct.getText().equals(arbol.getSelectionPath().getLastPathComponent().toString())==false || arbol.getSelectionPath().getLastPathComponent() != null){
-        catAct.setText(arbol.getSelectionPath().getLastPathComponent().toString());
-        }
-        if(entrada.isSelected() && porcentaje.isSelected()){
-            retornocamb.setText("entrada" + ", " + "porcentaje"); 
-        }
-        else if(entrada.isSelected() && !(porcentaje.isSelected())){
-            retornocamb.setText("entrada");
-        }
-        else 
-        {
-            retornocamb.setText("porcentaje");
-        }
-        
-        if(this.vacio()){
-            JOptionPane.showMessageDialog(null, "Ha dejado campos vacios");
-        } else {
-        if(entrada.isSelected()==false && porcentaje.isSelected()==false){
-            retornocamb.setText("");
-            JOptionPane.showMessageDialog(null, "Debe seleccionar algun tipo de retorno");
-        } else {
-        if(retornoact.getText().equals(retornocamb.getText())==false && retornocamb.getText().equals("")==false){
-            retornoact.setText(retornocamb.getText());
-        }
-        boolean ok = this.prop.actualizarDatos(titulo.getText(), fechaEv.getDate(), Integer.parseInt(precio.getText()), Integer.parseInt(monto.getText()), lugar.getText(), catAct.getText(), retornoact.getText(), descripcion.getText(), url.getText());
-        if(ok){
-            JOptionPane.showMessageDialog(null, "Datos modificados");
-            this.limpiar();
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Error al modificar los datos");
-            this.limpiar();
-        }
-        }
-        }
+        if (lista.getSelectedValue() != null) {
+            if (arbol.getSelectionPath().getLastPathComponent().toString().equals("Categoria") == false) {
+                if (catAct.getText().equals(arbol.getSelectionPath().getLastPathComponent().toString()) == false || arbol.getSelectionPath().getLastPathComponent() != null) {
+                    catAct.setText(arbol.getSelectionPath().getLastPathComponent().toString());
+                }
+                if (entrada.isSelected() && porcentaje.isSelected()) {
+                    retornocamb.setText("entrada" + ", " + "porcentaje");
+                } else if (entrada.isSelected() && !(porcentaje.isSelected())) {
+                    retornocamb.setText("entrada");
+                } else {
+                    retornocamb.setText("porcentaje");
+                }
+
+                if (this.vacio()) {
+                    JOptionPane.showMessageDialog(null, "Ha dejado campos vacios");
+                } else {
+                    if (entrada.isSelected() == false && porcentaje.isSelected() == false) {
+                        retornocamb.setText("");
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar algun tipo de retorno");
+                    } else {
+                        if (retornoact.getText().equals(retornocamb.getText()) == false && retornocamb.getText().equals("") == false) {
+                            retornoact.setText(retornocamb.getText());
+                        }
+                        boolean ok = this.prop.actualizarDatos(titulo.getText(), fechaEv.getDate(), Integer.parseInt(precio.getText()), Integer.parseInt(monto.getText()), lugar.getText(), catAct.getText(), retornoact.getText(), descripcion.getText(), url.getText());
+                        if (ok) {
+                            JOptionPane.showMessageDialog(null, "Datos modificados");
+                            this.limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error al modificar los datos");
+                            this.limpiar();
+                        }
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "La categoria no puede ser seleccionada");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado alguna propuesta");
         }
     }//GEN-LAST:event_aceptarActionPerformed
 
-    private void limpiar(){
+    private void limpiar() {
         lista.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
-          descripcion.setText("");
-          lugar.setText("");
-          monto.setText("");
-          actual.setText("");
-          precio.setText("");
-          fechaEv.setDate(null);
-          titulo.setText("");
-          catAct.setText("");
-          porcentaje.setSelected(false);
-          entrada.setSelected(false);
-          estado.setText("");
-          proponente.setText("");
-          ImageIcon imagen = new ImageIcon(""); 
-          Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-          imagenProp.setIcon(icono);
-          entradaP.setText("");
-          montoN.setText("");
-          lugarCont.setText("");
-          retornoact.setText("");
-          lista.clearSelection();
+        descripcion.setText("");
+        lugar.setText("");
+        monto.setText("");
+        actual.setText("");
+        precio.setText("");
+        fechaEv.setDate(null);
+        titulo.setText("");
+        catAct.setText("");
+        porcentaje.setSelected(false);
+        entrada.setSelected(false);
+        estado.setText("");
+        proponente.setText("");
+        ImageIcon imagen = new ImageIcon("");
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+        imagenProp.setIcon(icono);
+        entradaP.setText("");
+        montoN.setText("");
+        lugarCont.setText("");
+        retornoact.setText("");
+        lista.clearSelection();
     }
     private void buscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarFocusGained
-         this.limpiar();
+        this.limpiar();
     }//GEN-LAST:event_buscarFocusGained
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
@@ -642,41 +643,40 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioKeyTyped
-       char car = evt.getKeyChar();
-       if(car == KeyEvent.VK_BACK_SPACE || Character.isDigit(car)){
-           entradaP.setText("");
-       } else {
-           evt.consume();
-           entradaP.setText("Solo numeros");
-       }
+        char car = evt.getKeyChar();
+        if (car == KeyEvent.VK_BACK_SPACE || Character.isDigit(car)) {
+            entradaP.setText("");
+        } else {
+            evt.consume();
+            entradaP.setText("Solo numeros");
+        }
     }//GEN-LAST:event_precioKeyTyped
 
     private void montoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoKeyTyped
         char car = evt.getKeyChar();
-       if(car == KeyEvent.VK_BACK_SPACE || Character.isDigit(car)){
-           montoN.setText("");
-       } else {
-           evt.consume();
-           montoN.setText("Solo numeros");
-       }
+        if (car == KeyEvent.VK_BACK_SPACE || Character.isDigit(car)) {
+            montoN.setText("");
+        } else {
+            evt.consume();
+            montoN.setText("Solo numeros");
+        }
     }//GEN-LAST:event_montoKeyTyped
 
-    
+
     private void lugarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lugarKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE || car == KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if (Character.isLetter(car) || car == KeyEvent.VK_BACK_SPACE || car == KeyEvent.VK_SPACE || Character.isDigit(car)) {
             lugarCont.setText("");
-        }
-        else {
+        } else {
             evt.consume();
             lugarCont.setText("Solo letras o numeros");
         }
     }//GEN-LAST:event_lugarKeyTyped
 
-    private void lista(){
-         List<String> pro = prop.ListarProp();
-        if (!pro.isEmpty()) {                                                   
-            DefaultListModel modelo = new DefaultListModel();                   
+    private void lista() {
+        List<String> pro = prop.ListarProp();
+        if (!pro.isEmpty()) {
+            DefaultListModel modelo = new DefaultListModel();
             for (int i = 0; i < pro.size(); i++) {
                 String p = (String) pro.get(i);
                 modelo.addElement(p);
@@ -686,10 +686,14 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "No hay Propuestas");
         }
     }
-    
-    private boolean vacio(){
-        if(lugar.getText().equals("") || monto.getText().equals("") || precio.getText().equals("")
-                || descripcion.getText().equals("") || catAct.getText().equals("") || arbol.getSelectionPath().toString().equals("")){
+
+    private boolean vacio() {
+        String lug = lugar.getText().trim();
+        String mon = monto.getText().trim();
+        String prec = precio.getText().trim();
+        String des = descripcion.getText().trim();
+        if (lug.isEmpty() || mon.isEmpty() || prec.isEmpty()
+                || des.isEmpty() || catAct.getText().equals("")) {
             return true;
         }
         return false;
