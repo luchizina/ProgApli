@@ -426,4 +426,29 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
     }
+    
+    public void filtrarP(String campito, JList listita, List<DtPropuesta> propuestitas)
+    {
+        if (campito.equals("")) { // SI NO BUSCA
+            if (!propuestitas.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < propuestitas.size(); i++) {
+                    DtPropuesta p = (DtPropuesta) propuestitas.get(i);
+                    modelo.addElement(p.getTitulo());
+                }
+                listita.setModel(modelo);
+            }
+        } else {                                // SI BUSCA
+            if (!propuestitas.isEmpty()) {
+                DefaultListModel modelo = new DefaultListModel();
+                for (int i = 0; i < propuestitas.size(); i++) {
+                    DtPropuesta p = (DtPropuesta) propuestitas.get(i);
+                    if (p.getTitulo().contains(campito)) {
+                        modelo.addElement(p.getTitulo());
+                    }
+                }
+                listita.setModel(modelo);
+            }
+        }
+    }
 }
