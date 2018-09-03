@@ -512,6 +512,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         jRadioButton2.setSelected(false);
         urlimagen.setText("");
         img.setIcon(null);
+        ListProp.clearSelection();
+        jTree1.clearSelection();
     }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
         String hora = getHoraActual();
@@ -554,6 +556,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                         } else {
                             javax.swing.JOptionPane.showMessageDialog(null, "Error al dar de alta la propuesta o la propuesta ya existe");
                         }
+
                     } else {
                         JOptionPane.showMessageDialog(null, "El titulo ya esta en uso");
                     }
@@ -562,8 +565,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
                 javax.swing.JOptionPane.showMessageDialog(null, "Algún campo obligatorio está vacio, por favor verifique.");
 
             }
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Algún campo obligatorio está vacio, por favor verifique.");
         }
     }//GEN-LAST:event_bt2MouseClicked
 

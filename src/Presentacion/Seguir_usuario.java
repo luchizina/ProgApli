@@ -10,6 +10,9 @@ import Logica.DtProponente;
 import Logica.IUsuario;
 import Logica.Usuario;
 import java.util.List;
+import java.util.regex.Pattern;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -28,11 +31,6 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     public Seguir_usuario(IUsuario iusu) {
         initComponents();
         this.iUsu=iusu;
-     
-        
-        cmbProp.setVisible(false);
-        cmbSeg.setVisible(false);
-        
         jPanel3.setVisible(false);
       
               
@@ -54,17 +52,24 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        cmbProp = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        cmbSeg = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         btnSeguir = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Seguir usuario");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Elige tipo de seguidor:");
 
         SeguidorGrup.add(jRadioButton1);
@@ -83,9 +88,13 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbProp.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel3.setText("Filtrar:");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbPropActionPerformed(evt);
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -94,19 +103,22 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(66, 66, 66))
+                        .addContainerGap()
+                        .addComponent(jLabel8))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cmbProp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(23, 23, 23)))
-                .addComponent(jRadioButton2)
-                .addContainerGap(132, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel8)
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -114,16 +126,19 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1))
         );
-
-        jLabel9.setText("Elige usuario a seguir");
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Proponente");
@@ -141,11 +156,51 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbSeg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSegActionPerformed(evt);
-            }
-        });
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Elige usuario a seguir");
+
+        jScrollPane2.setViewportView(jList2);
+
+        jLabel1.setText("Filtrar:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton3)
+                            .addComponent(jRadioButton4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel9)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jRadioButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton4))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         btnSeguir.setText("Seguir");
         btnSeguir.addActionListener(new java.awt.event.ActionListener() {
@@ -154,102 +209,70 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnSeguir)
-                .addGap(46, 46, 46))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jRadioButton3)
-                        .addGap(61, 61, 61)
-                        .addComponent(jRadioButton4))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cmbSeg, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(jLabel9))))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbSeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(btnSeguir)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSeguir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSeguir))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPropActionPerformed
-   
-       
-        
-  
-
-        
-    }//GEN-LAST:event_cmbPropActionPerformed
-
     private void btnSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguirActionPerformed
         // TODO add your handling code here:
-       
-             
+            if(jList1.getSelectedIndex() > -1 && jList1.getSelectedIndex() > -1){
+             int index = jList1.getSelectedIndex();
+             ListModel  model= jList1.getModel();
+            String f = (String) model.getElementAt(index);
+            String[] partes = f.split(Pattern.quote("("));
+            String parte1 = partes[0];
+            String parte2 = partes[1];
+            String[] partes3 = parte2.split(Pattern.quote(")"));
+            String parte4 = partes3[0];
+              int index2 = jList2.getSelectedIndex();
+             ListModel  model2= jList2.getModel();
+            String fa = (String) model2.getElementAt(index2);
+            String[] partes2 = fa.split(Pattern.quote("("));
+            String parte12 = partes2[0];
+            String parte22 = partes2[1];
+            String[] partes32 = parte22.split(Pattern.quote(")"));
+            String parte42 = partes32[0];
                 
                if(!(jRadioButton3.isSelected()) && !(jRadioButton4.isSelected())){
                     javax.swing.JOptionPane.showMessageDialog(null, "Seleccione el tipo de usuario a seguir");
                 }
-                
-               else if((cmbProp.getSelectedItem().toString()).equals(cmbProp.getItemAt(0))==true || (cmbSeg.getSelectedItem().toString()).equals(cmbSeg.getItemAt(0))== true){
-                    
-                   javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar un usuario de la lista");
-                }
-                
-               
+                           
           
         else{
             
-        this.iUsu.seleccionarUsuario(cmbProp.getSelectedItem().toString());
-                this.iUsu.seleccionarUsuSeg(cmbSeg.getSelectedItem().toString());
-                     if(this.iUsu.yaSigue()){
+        this.iUsu.seleccionarUsuario(parte4);
+                this.iUsu.seleccionarUsuSeg(parte42);
+        javax.swing.JOptionPane.showMessageDialog(null, parte4 + " a  a " + parte42);
+       
+                if(this.iUsu.yaSigue()){
             javax.swing.JOptionPane.showMessageDialog(null, "Ya sigue a este usuario");
         }
-                     else if(cmbProp.getSelectedItem().toString().equals(cmbSeg.getSelectedItem().toString())){
-                         javax.swing.JOptionPane.showMessageDialog(null, "El usuario no se puede seguir a si mismo");
+                else if(parte4.equals(parte42)){
+                      javax.swing.JOptionPane.showMessageDialog(null, "El usuario no se puede seguir a si mismo");
                      }
                      else{
                          
@@ -261,120 +284,118 @@ jRadioButton1.setSelected(false);
 jRadioButton2.setSelected(false);
 jRadioButton3.setSelected(false);
 jRadioButton4.setSelected(false);
-cmbProp.setSelectedIndex(0);
-cmbSeg.setSelectedIndex(0);
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
          }
                         }
-
+            }
+            else
+            {
+                 javax.swing.JOptionPane.showMessageDialog(null,"Error ");
+            }
     }//GEN-LAST:event_btnSeguirActionPerformed
-
-    private void cmbSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSegActionPerformed
-      
-       
-           
-      
-      
-         
-// TODO add your handling code here:
-    }//GEN-LAST:event_cmbSegActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
        List<DtProponente> props=this.iUsu.listarProponentes();
+        DefaultListModel dlm = new DefaultListModel();
         if(jRadioButton1.isSelected())
        {
-           cmbProp.removeAllItems();
-           cmbProp.addItem("Seleccione usuario...");
-        cmbProp.setVisible(true);
+          
                for(int i=0; i< props.size(); i++){
             DtProponente combitoProp=(DtProponente) props.get(i);
-            String hola = combitoProp.getNombre()+"("+combitoProp.getNick()+(")");
-                       cmbProp.addItem(hola);
+                   
                        
-                                      
+              
+            String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+            dlm.addElement(lul);
         }
-                  
-        
+
+        jList1.setModel(dlm);                         
         jPanel3.setVisible(true);
        }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-      List<DtColaborador> colabs=this.iUsu.listarColaboradores();
+        List<DtColaborador> props=this.iUsu.listarColaboradores();
+        DefaultListModel dlm = new DefaultListModel();
         if(jRadioButton2.isSelected())
        {
-           cmbProp.removeAllItems();
-        cmbProp.addItem("Seleccione usuario...");
-        cmbProp.setVisible(true);
-                              
-              for(int i=0; i< colabs.size(); i++){
-                  DtColaborador combitoColab=(DtColaborador) colabs.get(i);
-                 String hola = combitoColab.getNombre()+"("+combitoColab.getNick()+(")");
-                       cmbProp.addItem(hola);
-                  
-              }
-        
-        
+          
+               for(int i=0; i< props.size(); i++){
+            DtColaborador combitoProp=(DtColaborador) props.get(i);
+                      
+              
+            String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+            dlm.addElement(lul);
+        }
+
+        jList1.setModel(dlm);                         
         jPanel3.setVisible(true);
        }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-          List<DtProponente> props=this.iUsu.listarProponentes();
-        if(jRadioButton3.isSelected())
+         List<DtProponente> props=this.iUsu.listarProponentes();
+        DefaultListModel dlm = new DefaultListModel();
+        if(jRadioButton1.isSelected())
        {
-               cmbSeg.removeAllItems();
-                cmbSeg.addItem("Seleccione usuario...");
-        cmbSeg.setVisible(true);
+          
                for(int i=0; i< props.size(); i++){
             DtProponente combitoProp=(DtProponente) props.get(i);
-            String hola = combitoProp.getNombre()+"("+combitoProp.getNick()+(")");
-                       cmbSeg.addItem(hola);
                       
-                       
-                                      
+              
+            String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+            dlm.addElement(lul);
         }
-      
-        cmbSeg.setVisible(true);
+
+        jList2.setModel(dlm);                         
         jPanel3.setVisible(true);
        }
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-  List<DtColaborador> colabs=this.iUsu.listarColaboradores();
+   List<DtColaborador> props=this.iUsu.listarColaboradores();
+        DefaultListModel dlm = new DefaultListModel();
         if(jRadioButton4.isSelected())
        {
-        
-            cmbSeg.removeAllItems();
-       cmbSeg.addItem("Seleccione usuario...");
-        cmbSeg.setVisible(true);
-                              
-              for(int i=0; i< colabs.size(); i++){
-                  DtColaborador combitoColab=(DtColaborador) colabs.get(i);
-                    String hola = combitoColab.getNombre()+"("+combitoColab.getNick()+(")");
-                       cmbSeg.addItem(hola);
-                  
-              }
+          
+               for(int i=0; i< props.size(); i++){
+            DtColaborador combitoProp=(DtColaborador) props.get(i);
+                       
+            String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+            dlm.addElement(lul);
+        }
+
+        jList2.setModel(dlm);                         
         jPanel3.setVisible(true);
-       }        // TODO add your handling code here:
+       }
     }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup SeguidorGrup;
     private javax.swing.JButton btnSeguir;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cmbProp;
-    private javax.swing.JComboBox<String> cmbSeg;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

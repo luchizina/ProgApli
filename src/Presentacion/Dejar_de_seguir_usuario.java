@@ -14,6 +14,9 @@ import Logica.DtProponente;
 import Logica.IUsuario;
 import Logica.Usuario;
 import java.util.List;
+import java.util.regex.Pattern;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
     private IUsuario iUsu;
     /**
@@ -21,27 +24,8 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
      */
     public Dejar_de_seguir_usuario(IUsuario iusu) {
         initComponents();
-       
-        cmbProp.setVisible(false);
-        cmbSeg.setVisible(false);
-      
           this.iUsu=iusu;
-    btnDej.setVisible(false);
-        
-        
-     
-          
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,34 +38,24 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jLabel2 = new javax.swing.JLabel();
-        cmbProp = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        cmbSeg = new javax.swing.JComboBox<>();
         btnDej = new javax.swing.JButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Dejar de seguir usuario");
-
-        jLabel2.setText("Seleccionar usuario");
-
-        cmbProp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbPropActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Seleccionar usuario a dejar de seguir");
-
-        cmbSeg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSegActionPerformed(evt);
-            }
-        });
 
         btnDej.setText("Dejar de seguir");
         btnDej.addActionListener(new java.awt.event.ActionListener() {
@@ -90,109 +64,162 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("Colaboradores");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jList1);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Proponentes");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jList2);
 
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Colaboradores");
+        jRadioButton2.setText("Colaborador");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
             }
         });
 
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Proponente");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jRadioButton4);
+        jRadioButton4.setText("Colaborador");
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
+
         buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("Proponentes");
+        jRadioButton3.setText("Proponente");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Elige usuario a dejar de seguir");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Elige usuario a dejar de seguir");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Filtrar:");
+
+        jLabel3.setText("Filtrar:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton2))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnDej)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmbProp, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jRadioButton3))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton4)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cmbSeg, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDej, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                                .addComponent(jRadioButton3)
+                                .addComponent(jRadioButton4))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(17, 17, 17)
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel2)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jRadioButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton4)
+                            .addComponent(jScrollPane2))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(13, 13, 13)
-                .addComponent(cmbProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel5)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmbSeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
                 .addComponent(btnDej)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDejActionPerformed
-        // TODO add your handling code here:
+        if(jList1.getSelectedIndex() > -1 && jList1.getSelectedIndex() > -1){
+             int index = jList1.getSelectedIndex();
+             ListModel  model= jList1.getModel();
+            String f = (String) model.getElementAt(index);
+            String[] partes = f.split(Pattern.quote("("));
+            String parte1 = partes[0];
+            String parte2 = partes[1];
+            String[] partes3 = parte2.split(Pattern.quote(")"));
+            String parte4 = partes3[0];
+              int index2 = jList2.getSelectedIndex();
+             ListModel  model2= jList2.getModel();
+            String fa = (String) model2.getElementAt(index2);
+            String[] partes2 = fa.split(Pattern.quote("("));
+            String parte12 = partes2[0];
+            String parte22 = partes2[1];
+            String[] partes32 = parte22.split(Pattern.quote(")"));
+            String parte42 = partes32[0];
+            
       if(!(jRadioButton3.isSelected()) && !(jRadioButton4.isSelected())){
                     javax.swing.JOptionPane.showMessageDialog(null, "Seleccione el tipo de usuario a dejar de seguir");
                 }
-                
-               else if((cmbProp.getSelectedItem().toString()).equals(cmbProp.getItemAt(0))==true || (cmbSeg.getSelectedItem().toString()).equals(cmbSeg.getItemAt(0))== true){
-                    
-                   javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar un usuario de la lista");
-                }
-                
-               
-          
         else{
             
-        this.iUsu.seleccionarUsuario(cmbProp.getSelectedItem().toString());
-                this.iUsu.seleccionarUsuSeg(cmbSeg.getSelectedItem().toString());
+        this.iUsu.seleccionarUsuario(parte4);
+                this.iUsu.seleccionarUsuSeg(parte42);
           
-                      if(cmbProp.getSelectedItem().toString().equals(cmbSeg.getSelectedItem().toString())){
+                      if(parte4.equals(parte42)){
                          javax.swing.JOptionPane.showMessageDialog(null, "El usuario no se puede dejar de seguir a si mismo");
                      }
                                 else if(!(this.iUsu.yaSigue())){
@@ -208,121 +235,112 @@ jRadioButton1.setSelected(false);
 jRadioButton2.setSelected(false);
 jRadioButton3.setSelected(false);
 jRadioButton4.setSelected(false);
-cmbProp.setSelectedIndex(0);
-cmbSeg.setSelectedIndex(0);
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
          }
                         }
+        }
+        else
+        {
+        
+         javax.swing.JOptionPane.showMessageDialog(null,"Seleccione a un usuario de la lista");
+        }
     }//GEN-LAST:event_btnDejActionPerformed
 
-    private void cmbPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPropActionPerformed
-        // TODO add your handling code here:
-         
-    }//GEN-LAST:event_cmbPropActionPerformed
-
-    private void cmbSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSegActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_cmbSegActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-   List<DtProponente> props=this.iUsu.listarProponentes();
-   if(btnDej.isVisible()==false){
-       btnDej.setVisible(true);     
-   }
- 
-        if(jRadioButton1.isSelected())
-       {
-             
-    cmbProp.removeAllItems();
-           cmbProp.addItem("Seleccione usuario...");
-        cmbProp.setVisible(true);
-              for(int i=0; i< props.size(); i++){
-            DtProponente combitoProp=(DtProponente) props.get(i);
-                       cmbProp.addItem(combitoProp.getNick());
-                
-                                      
-        }
-       
-       }
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-if(btnDej.isVisible()==false){
-    btnDej.setVisible(true);
-}
-        List<DtColaborador> colabs=this.iUsu.listarColaboradores();
+        List<DtColaborador> props=this.iUsu.listarColaboradores();
+        DefaultListModel dlm = new DefaultListModel();
         if(jRadioButton2.isSelected())
-       {
-        
-           cmbProp.removeAllItems();
-           cmbProp.addItem("Seleccione usuario...");
-        cmbProp.setVisible(true);
-               for(int i=0; i< colabs.size(); i++){
-            DtColaborador combitoProp=(DtColaborador) colabs.get(i);
-                       cmbProp.addItem(combitoProp.getNick());
-               }
-       // jPanel3.setVisible(true);
-       }        // TODO add your handling code here:
+        {
+
+            for(int i=0; i< props.size(); i++){
+                DtColaborador combitoProp=(DtColaborador) props.get(i);
+
+                String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+                dlm.addElement(lul);
+            }
+
+            jList1.setModel(dlm);
+            
+        }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-   List<DtProponente> props=this.iUsu.listarProponentes();
-        if(jRadioButton3.isSelected())
-       {
-      
-     
-             
-    cmbSeg.removeAllItems();
-           cmbSeg.addItem("Seleccione usuario...");
-        cmbSeg.setVisible(true);
-              for(int i=0; i< props.size(); i++){
-            DtProponente combitoProp=(DtProponente) props.get(i);
-                      
-                       cmbSeg.addItem(combitoProp.getNick());
-                                      
-        
-       
-       }
-        //jPanel3.setVisible(true);
-       }        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        List<DtProponente> props=this.iUsu.listarProponentes();
+        DefaultListModel dlm = new DefaultListModel();
+        if(jRadioButton1.isSelected())
+        {
+
+            for(int i=0; i< props.size(); i++){
+                DtProponente combitoProp=(DtProponente) props.get(i);
+
+                String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+                dlm.addElement(lul);
+            }
+
+            jList1.setModel(dlm);
+            
+        }
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-  List<DtColaborador> colabs=this.iUsu.listarColaboradores();
+        List<DtColaborador> props=this.iUsu.listarColaboradores();
+        DefaultListModel dlm = new DefaultListModel();
         if(jRadioButton4.isSelected())
-       {
-                cmbSeg.removeAllItems();
-           cmbSeg.addItem("Seleccione usuario...");
-        cmbSeg.setVisible(true);
-              for(int i=0; i< colabs.size(); i++){
-            DtColaborador combitoProp=(DtColaborador) colabs.get(i);
-                      
-                       cmbSeg.addItem(combitoProp.getNick());
-                                      
-        
-       
-       }
-       // jPanel3.setVisible(true);
-       }          // TODO add your handling code here:
+        {
+
+            for(int i=0; i< props.size(); i++){
+                DtColaborador combitoProp=(DtColaborador) props.get(i);
+
+                String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+                dlm.addElement(lul);
+            }
+
+            jList2.setModel(dlm);
+           
+        }
     }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        List<DtProponente> props=this.iUsu.listarProponentes();
+        DefaultListModel dlm = new DefaultListModel();
+        if(jRadioButton1.isSelected())
+        {
+
+            for(int i=0; i< props.size(); i++){
+                DtProponente combitoProp=(DtProponente) props.get(i);
+
+                String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+                dlm.addElement(lul);
+            }
+
+            jList2.setModel(dlm);
+            }
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDej;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JComboBox<String> cmbProp;
-    private javax.swing.JComboBox<String> cmbSeg;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
