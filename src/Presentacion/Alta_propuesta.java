@@ -554,6 +554,10 @@ public static String getHoraActual() {
               else if(jRadioButton1.isSelected() || jRadioButton2.isSelected())
          {
              String catego= jTree1.getSelectionPath().getLastPathComponent().toString();
+             if(this.IP.existeTitulo(jTitulo.getText())==true){
+                 javax.swing.JOptionPane.showMessageDialog(null, "Ya existe esta propuesta");
+             
+             
              
         boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()),catego,estA,urlimagen.getText(),parte4,hora,jLugar.getText());
              if (ok){
@@ -562,9 +566,10 @@ public static String getHoraActual() {
              }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
              }
-         } else {
+         }else {
                  JOptionPane.showMessageDialog(null, "El titulo ya esta en uso");
              }
+             } 
          }
         
         else{
