@@ -25,6 +25,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -42,7 +43,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
      private IPropuesta IP;
      private IUsuario iUsu;
      private ICategoria iCat;
-     
+
      public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUs) throws ParseException
     {
         initComponents();
@@ -553,6 +554,7 @@ public static String getHoraActual() {
               else if(jRadioButton1.isSelected() || jRadioButton2.isSelected())
          {
              String catego= jTree1.getSelectionPath().getLastPathComponent().toString();
+             
         boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()),catego,estA,urlimagen.getText(),parte4,hora,jLugar.getText());
              if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
@@ -560,15 +562,18 @@ public static String getHoraActual() {
              }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
              }
+         } else {
+                 JOptionPane.showMessageDialog(null, "El titulo ya esta en uso");
+             }
          }
-        }
+        
         else{
             javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
             
         }
       }else{
            javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
-      } 
+      }
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
@@ -729,7 +734,7 @@ public static String getHoraActual() {
     }
     
     
+    }
     
     
-    
-}
+

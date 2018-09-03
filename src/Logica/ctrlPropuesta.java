@@ -402,7 +402,16 @@ public class ctrlPropuesta implements IPropuesta {
          
     }
     
-
+    
+    @Override
+    public boolean existeTitulo(String titulo){
+    for(Propuesta p: this.propuestas.values()){
+        if(p.getTitulo().equalsIgnoreCase(titulo)){
+            return true;
+        }
+    }
+    return false;
+}
     
     public void filtrarP(String campito, JList listita, List<DtPropuesta> propuestitas)
     {
