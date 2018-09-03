@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -289,7 +290,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "No ha ingresado una categoría");
 
         } else {
-
+            if(this.iCat.existecat(txtNombre.getText())==false){
         if (selec.getUserObject().toString().equals("Categoria")) {
 
             DtCategoria nuevo = new DtCategoria(nuev.toString(), "Categoria", 0);
@@ -328,6 +329,9 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
                 javax.swing.JOptionPane.showMessageDialog(null, "La categoría ya está ingresada");
             }
         }
+        } else {
+                JOptionPane.showMessageDialog(null, "La categoria ya existe");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -105,6 +105,16 @@ public class ctrlCategoria implements ICategoria {
     }
     
     @Override
+    public boolean existecat(String nom){
+        for(Categoria cat: this.categorias.values()){
+            if(cat.getNombre().equalsIgnoreCase(nom)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
     public int traerProfu(String nombre){
       Categoria aux= this.categorias.get(nombre);
       return aux.getProfundidad();

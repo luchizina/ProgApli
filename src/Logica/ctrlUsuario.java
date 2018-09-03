@@ -618,5 +618,28 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         return modelo;
     }
 ;
-     
+     public DefaultListModel BUSCADOR_Proponente(String palabrita) {
+        DefaultListModel modelo = new DefaultListModel();
+        List<DtProponente> col = this.listarProponentes();
+        if (palabrita.equals("")) { // SI NO BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtProponente p = (DtProponente) col.get(i);
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                }
+            }
+        } else {                                // SI BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtProponente p = (DtProponente) col.get(i);
+                    if (p.getNick().contains(palabrita) || p.getNombre().contains(palabrita)) {
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                    }
+                }
+            }
+        }
+        return modelo;
+    }
 }
