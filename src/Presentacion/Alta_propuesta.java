@@ -517,7 +517,11 @@ public static String getHoraActual() {
       Estado estA = new Estado(Testado.Ingresada);
       String TRetorno;
       //
+      if(ListProp.getSelectedIndex()>-1){
+          
+      
         String f = (String) ListProp.getSelectedValue();
+        
         String[] partes = f.split(Pattern.quote("("));
         String parte1 = partes[0];
         String parte2 = partes[1];
@@ -537,11 +541,13 @@ public static String getHoraActual() {
         if(vacios() == false)
         {
               if (jTree1.isSelectionEmpty()==true) {
-                  if(jTree1.getSelectionPath().getLastPathComponent().toString().equals("Categoria") == true){
+                  
+                   javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
+              }else if(jTree1.getSelectionPath().getLastPathComponent().toString().equals("Categoria") == true){
                       
+                 javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
+               
                  
-                javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
-                 }
                         }
               
               else if(jRadioButton1.isSelected() || jRadioButton2.isSelected())
@@ -560,7 +566,9 @@ public static String getHoraActual() {
             javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
             
         }
-        
+      }else{
+           javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
+      } 
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
