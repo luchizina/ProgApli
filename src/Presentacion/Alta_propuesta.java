@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Presentacion;
+
 import Logica.DtCategoria;
 import Logica.DtColaborador;
 import Logica.IPropuesta;
@@ -40,12 +41,11 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     /**
      * Creates new form Alta_propuesta
      */
-     private IPropuesta IP;
-     private IUsuario iUsu;
-     private ICategoria iCat;
+    private IPropuesta IP;
+    private IUsuario iUsu;
+    private ICategoria iCat;
 
-     public Alta_propuesta(IPropuesta IP,ICategoria cat, IUsuario iUs) throws ParseException
-    {
+    public Alta_propuesta(IPropuesta IP, ICategoria cat, IUsuario iUs) throws ParseException {
         initComponents();
         this.IP = IP;
         Jpanel1.setVisible(false);
@@ -57,22 +57,21 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         Date hasta = sd.parse("2030-01-01");
         this.jDate.setSelectableDateRange(desde, hasta);
         urlimagen.setVisible(false);
-         List<DtProponente> listita = iUsu.listarProponentes();
-    DefaultListModel dlm = new DefaultListModel();
-    for(int b = 0; b<listita.size(); b++)
-    {
-        DtProponente q = (DtProponente) listita.get(b);
-        String lul = q.getNombre()+"("+q.getNick()+(")");
-        dlm.addElement(lul);
-    }
-     ListProp.setModel(dlm);   
-     
-      List<DtCategoria> catego = this.iCat.listarCategorias();
-       DefaultTreeModel modeloArbol = null;
+        List<DtProponente> listita = iUsu.listarProponentes();
+        DefaultListModel dlm = new DefaultListModel();
+        for (int b = 0; b < listita.size(); b++) {
+            DtProponente q = (DtProponente) listita.get(b);
+            String lul = q.getNombre() + "(" + q.getNick() + (")");
+            dlm.addElement(lul);
+        }
+        ListProp.setModel(dlm);
+
+        List<DtCategoria> catego = this.iCat.listarCategorias();
+        DefaultTreeModel modeloArbol = null;
         DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
         construirArbolito(catego, raiz);
     }
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -463,43 +462,44 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        if(Jpanel1.isVisible() == true){
+        if (Jpanel1.isVisible() == true) {
             Jpanel1.setVisible(false);
         }
-      urlimagen.setText("");
-      img.setIcon(null);
+        urlimagen.setText("");
+        img.setIcon(null);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        if(Jpanel1.isVisible() == false){
+        if (Jpanel1.isVisible() == false) {
             Jpanel1.setVisible(true);
-        } 
+        }
         img.setHorizontalAlignment(JLabel.CENTER);
         img.setVerticalAlignment(JLabel.CENTER);
         ImageIcon imgencita = new ImageIcon("Imagenes/prop.png");
         Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_DEFAULT));
         img.setIcon(iconito);
-       
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void bt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt2ActionPerformed
-        
-      //your handling code here:
+
+        //your handling code here:
     }//GEN-LAST:event_bt2ActionPerformed
-public static String getHoraActual() {
-    Date ahora = new Date();
-    SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
-    return formateador.format(ahora);
-}
- private boolean vacios() {
+    public static String getHoraActual() {
+        Date ahora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
+        return formateador.format(ahora);
+    }
+
+    private boolean vacios() {
         if (jTitulo.getText().equals("") || jLugar.getText().equals("") || jPrecioE.getText().equals("") || jPrecioT.getText().equals("") || ((String) jCateg.getSelectedItem()).equals("") || ((String) ListProp.getSelectedValue()).equals("") || (!jR1.isSelected() && !jR2.isSelected()) || (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) || jDate.getDate() == null || (jRadioButton1.isSelected() && urlimagen.getText().equals(""))) {
             return true;
         }
         return false;
     }
- private void limpiar() {
+
+    private void limpiar() {
         jTitulo.setText("");
         jDesc.setText("");
         jLugar.setText("");
@@ -514,71 +514,57 @@ public static String getHoraActual() {
         img.setIcon(null);
     }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
-     String hora = getHoraActual();
-      Estado estA = new Estado(Testado.Ingresada);
-      String TRetorno;
-      //
-      if(ListProp.getSelectedIndex()>-1){
-          
-      
-        String f = (String) ListProp.getSelectedValue();
-        
-        String[] partes = f.split(Pattern.quote("("));
-        String parte1 = partes[0];
-        String parte2 = partes[1];
-        String[] partes3 = parte2.split(Pattern.quote(")"));
-        String parte4 = partes3[0];
-        if(jR1.isSelected() && jR2.isSelected()){
-            TRetorno= "entrada" + ", " + "porcentaje";
-        }
-        else if(jR1.isSelected() && !(jR2.isSelected())){
-            TRetorno="porcentaje";
-        }
-        else 
-        {
-            TRetorno="entrada";
-        }
-        
-        if(vacios() == false)
-        {
-              if (jTree1.isSelectionEmpty()==true) {
-                  
-                   javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
-              }else if(jTree1.getSelectionPath().getLastPathComponent().toString().equals("Categoria") == true){
-                      
-                 javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
-               
-                 
+        String hora = getHoraActual();
+        Estado estA = new Estado(Testado.Ingresada);
+        String TRetorno;
+        //
+        if (ListProp.getSelectedIndex() > -1) {
+
+            String f = (String) ListProp.getSelectedValue();
+
+            String[] partes = f.split(Pattern.quote("("));
+            String parte1 = partes[0];
+            String parte2 = partes[1];
+            String[] partes3 = parte2.split(Pattern.quote(")"));
+            String parte4 = partes3[0];
+            if (jR1.isSelected() && jR2.isSelected()) {
+                TRetorno = "entrada" + ", " + "porcentaje";
+            } else if (jR1.isSelected() && !(jR2.isSelected())) {
+                TRetorno = "porcentaje";
+            } else {
+                TRetorno = "entrada";
+            }
+
+            if (vacios() == false) {
+                if (jTree1.isSelectionEmpty() == true) {
+
+                    javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
+                } else if (jTree1.getSelectionPath().getLastPathComponent().toString().equals("Categoria") == true) {
+
+                    javax.swing.JOptionPane.showMessageDialog(null, "Tiene que seleccionar una categoría válida");
+
+                } else if (jRadioButton1.isSelected() || jRadioButton2.isSelected()) {
+                    String catego = jTree1.getSelectionPath().getLastPathComponent().toString();
+                    if (this.IP.existeTitulo(jTitulo.getText()) == false) {
+
+                        boolean ok = IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()), 0, jDate.getDate(), TRetorno, Integer.parseInt(jPrecioT.getText()), catego, estA, urlimagen.getText(), parte4, hora, jLugar.getText());
+                        if (ok) {
+                            javax.swing.JOptionPane.showMessageDialog(null, "Propuesta Dada de alta");
+                            limpiar();
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(null, "Error al dar de alta la propuesta o la propuesta ya existe");
                         }
-              
-              else if(jRadioButton1.isSelected() || jRadioButton2.isSelected())
-         {
-             String catego= jTree1.getSelectionPath().getLastPathComponent().toString();
-             if(this.IP.existeTitulo(jTitulo.getText())==true){
-                 javax.swing.JOptionPane.showMessageDialog(null, "Ya existe esta propuesta");
-             
-             
-             
-        boolean ok=IP.AgregarPropuesta(jTitulo.getText(), jDesc.getText(), jDate.getDate(), Integer.parseInt(jPrecioE.getText()),0,jDate.getDate(),TRetorno,Integer.parseInt(jPrecioT.getText()),catego,estA,urlimagen.getText(),parte4,hora,jLugar.getText());
-             if (ok){
-            javax.swing.JOptionPane.showMessageDialog(null,"Propuesta Dada de alta");
-            limpiar();
-             }else{
-            javax.swing.JOptionPane.showMessageDialog(null,"Error al dar de alta la propuesta o la propuesta ya existe");
-             }
-         }else {
-                 JOptionPane.showMessageDialog(null, "El titulo ya esta en uso");
-             }
-             } 
-         }
-        
-        else{
-            javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
-            
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El titulo ya esta en uso");
+                    }
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null, "Algún campo obligatorio está vacio, por favor verifique.");
+
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Algún campo obligatorio está vacio, por favor verifique.");
         }
-      }else{
-           javax.swing.JOptionPane.showMessageDialog(null,"Algún campo obligatorio está vacio, por favor verifique.");
-      }
     }//GEN-LAST:event_bt2MouseClicked
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
@@ -587,7 +573,7 @@ public static String getHoraActual() {
     }//GEN-LAST:event_bt1ActionPerformed
 
     private void jCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCategActionPerformed
-     
+
     }//GEN-LAST:event_jCategActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -605,11 +591,11 @@ public static String getHoraActual() {
                 this.img.setIcon(icono);
                 this.pack();
             }
-      }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
- 
+
     private void jPrecioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrecioEActionPerformed
-        
+
     }//GEN-LAST:event_jPrecioEActionPerformed
 
     private void jPrecioEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPrecioEKeyTyped
@@ -617,8 +603,8 @@ public static String getHoraActual() {
         if (Character.isDigit(car)) {
             adv2.setText("");
         } else {
-             adv2.setText("Solo se admiten numeros");
-             evt.consume();
+            adv2.setText("Solo se admiten numeros");
+            evt.consume();
         }
     }//GEN-LAST:event_jPrecioEKeyTyped
 
@@ -627,39 +613,38 @@ public static String getHoraActual() {
         if (Character.isDigit(car)) {
             adv1.setText("");
         } else {
-             adv1.setText("Solo se admiten numeros");
-             evt.consume();
-        }      
+            adv1.setText("Solo se admiten numeros");
+            evt.consume();
+        }
     }//GEN-LAST:event_jPrecioTKeyTyped
 
     private void jCoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoKeyPressed
-          List<DtProponente> prop = iUsu.listarProponentes();
+        List<DtProponente> prop = iUsu.listarProponentes();
         if (jCo.getText().equals("")) { // SI NO BUSCA
             if (!prop.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < prop.size(); i++) {
                     DtProponente p = (DtProponente) prop.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                 }
                 ListProp.setModel(modelo);
             }
         } else {                                // SI BUSCA
             if (!prop.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i <prop.size(); i++) {
+                for (int i = 0; i < prop.size(); i++) {
                     DtProponente p = (DtProponente) prop.get(i);
                     if (p.getNombre().contains(jCo.getText()) || p.getNick().contains(jCo.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                     }
                 }
                 ListProp.setModel(modelo);
-               
-               
+
             }
         }
     }//GEN-LAST:event_jCoKeyPressed
- 
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel1;
     private javax.swing.JList<String> ListProp;
@@ -705,20 +690,18 @@ public static String getHoraActual() {
     private javax.swing.JTextField urlimagen;
     // End of variables declaration//GEN-END:variables
 
-    private void cargar(){
+    private void cargar() {
         this.iCat.cargarCategorias();
-      //  List<DtCategoria> catego = this.iCat.listarCategorias();
+        //  List<DtCategoria> catego = this.iCat.listarCategorias();
         List<DtCategoria> combo = this.iCat.listarCategorias();
-        for(int i=0; i< combo.size(); i++){
-            DtCategoria combito=(DtCategoria) combo.get(i);
-                       jCateg.addItem(combito.getNombre());
+        for (int i = 0; i < combo.size(); i++) {
+            DtCategoria combito = (DtCategoria) combo.get(i);
+            jCateg.addItem(combito.getNombre());
         }
-        
-        }
-    
-    
-    
-      private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
+
+    }
+
+    private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
         Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
         for (int i = 0; i < catego.size(); i++) {
             jTree1.setModel(this.imprimirArbol(catego.get(i), raiz));
@@ -737,9 +720,5 @@ public static String getHoraActual() {
         DefaultTreeModel modelito = new DefaultTreeModel(raiz);
         return modelito;
     }
-    
-    
-    }
-    
-    
 
+}
