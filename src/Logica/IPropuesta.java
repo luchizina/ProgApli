@@ -18,7 +18,6 @@ import javax.swing.JList;
  */
 public interface IPropuesta {
 
-    public abstract void filtrar(String campo, JList lista);
     public abstract void cargarPropuestas();
     public abstract List<DtPropuesta> listarPropuestas();
     public abstract DtPropuesta traerPropuesta(String titulo);

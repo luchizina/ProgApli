@@ -402,30 +402,7 @@ public class ctrlPropuesta implements IPropuesta {
          
     }
     
-    @Override
-    public void filtrar(String campo, JList lista){ 
-        if (campo.equals("")) {
-            if (!this.ListarProp().isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < propuestas.size(); i++) {
-                    String p = (String) this.ListarProp().get(i);
-                    modelo.addElement(p);
-                }
-                lista.setModel(modelo);
-            }
-        } else {
-            if (!this.ListarProp().isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < propuestas.size(); i++) {
-                    String p = (String) this.ListarProp().get(i);
-                    if (p.contains(campo)) {
-                        modelo.addElement(p);
-                    }
-                }
-                lista.setModel(modelo);
-            }
-        }
-    }
+
     
     public void filtrarP(String campito, JList listita, List<DtPropuesta> propuestitas)
     {

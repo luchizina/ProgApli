@@ -479,14 +479,14 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
             proponente.setText(propu.getPropo());
             titulo.setText(propu.getTitulo());
             url.setText(propu.getImg());
-            if(propu.getImg() != null){
-            ImageIcon img = new ImageIcon(propu.getImg());
-            Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-            imagenProp.setIcon(icono);
-            } else if (propu.getImg() == null){
-            ImageIcon img = new ImageIcon("Imagenes/not-available-es.png");
-            Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-            imagenProp.setIcon(icono);
+            if (propu.getImg() == null || propu.getImg().equals("")) {
+                ImageIcon img = new ImageIcon("Imagenes/not-available-es.png");
+                Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+                imagenProp.setIcon(icono);
+            } else {
+                ImageIcon img = new ImageIcon(propu.getImg());
+                Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+                imagenProp.setIcon(icono);
             }
             TreePath tp = new TreePath(propu.getNombreCate());
             arbol.setSelectionPath(tp);
@@ -556,7 +556,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
                 lista.setModel(modelo);
             }
         }*/
-        this.prop.filtrar(this.buscar.getText(), lista);
+        lista.setModel(this.prop.BUSCADOR_Propuestas(buscar.getText()));
     }//GEN-LAST:event_buscarKeyReleased
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed

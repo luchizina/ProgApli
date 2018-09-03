@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Presentacion;
+
 import Logica.DtCategoria;
 import Logica.IPropuesta;
 import Logica.DtFecha;
@@ -44,20 +45,19 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     /**
      * Creates new form Alta_Colaboracion
      */
-    
     private IPropuesta IP;
-     private IUsuario iUsu;
-     private ICategoria iCat;
-     private String titulo1 = "";
-     private String nick1 = "";
-     private String tipoR1 = "";
-     
+    private IUsuario iUsu;
+    private ICategoria iCat;
+    private String titulo1 = "";
+    private String nick1 = "";
+    private String tipoR1 = "";
+
     public Alta_Colaboracion(IPropuesta Ip, IUsuario iUsu) {
-       initComponents();
-       setClosable(true);
-       this.IP = Ip;
-       this.iUsu = iUsu;
-       cargarColab();
+        initComponents();
+        setClosable(true);
+        this.IP = Ip;
+        this.iUsu = iUsu;
+        cargarColab();
     }
 
     /**
@@ -515,54 +515,36 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Propuesta p = IP.getPropPorNick(titulo1);
-        if("".equals(titulo1))
-        {
+        if ("".equals(titulo1)) {
             JOptionPane.showMessageDialog(null, "Debe elegir una propuesta antes de continuar", "Propuestas", JOptionPane.WARNING_MESSAGE);
-        }
-        else
-        {
-            if("".equals(nick1))
-        {
-            JOptionPane.showMessageDialog(null, "Debe elegir un colaborador antes de continuar", "Colaboradores", JOptionPane.WARNING_MESSAGE);
-        }
-            else
-            {
-        if(!jRadioButton1.isSelected() && !jRadioButton2.isSelected())
-        {
-            JOptionPane.showMessageDialog(null, "Debe elegir un tipo de retorno antes de continuar", "Retorno", JOptionPane.WARNING_MESSAGE);
-        }
-        else
-        {
-            if("".equals(monto.getText()))
-            {
-                JOptionPane.showMessageDialog(null, "Debe elegir un monto para la colaboracion antes de continuar", "Monto", JOptionPane.WARNING_MESSAGE);
-            }
-            else
-            {
-        if(IP.existeColaboracion(nick1, titulo1))
-        {
-            JOptionPane.showMessageDialog(null, "El colaborador seleccionado ya ha colaborado en esta propuesta", "Error", JOptionPane.WARNING_MESSAGE);
-        }
-        else
-        {
-                 boolean ok = IP.altaColaboracion(IP.getPropPorNick(titulo1), iUsu.traerColaborador(nick1), monto.getText(), tipoR1);
-                 if(ok)
-                 {
-                     JOptionPane.showMessageDialog(null, "La colaboración se ha registrado con éxito");
-                     this.limpiar();
-                 }
-                 else
-                 {
-                 JOptionPane.showMessageDialog(null, "No se ha podido registrar la colaboración");
-                 this.limpiar();
-                 }
-            
-        }
-        }
-        }
+        } else {
+            if ("".equals(nick1)) {
+                JOptionPane.showMessageDialog(null, "Debe elegir un colaborador antes de continuar", "Colaboradores", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Debe elegir un tipo de retorno antes de continuar", "Retorno", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    if ("".equals(monto.getText())) {
+                        JOptionPane.showMessageDialog(null, "Debe elegir un monto para la colaboracion antes de continuar", "Monto", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        if (IP.existeColaboracion(nick1, titulo1)) {
+                            JOptionPane.showMessageDialog(null, "El colaborador seleccionado ya ha colaborado en esta propuesta", "Error", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            boolean ok = IP.altaColaboracion(IP.getPropPorNick(titulo1), iUsu.traerColaborador(nick1), monto.getText(), tipoR1);
+                            if (ok) {
+                                JOptionPane.showMessageDialog(null, "La colaboración se ha registrado con éxito");
+                                this.limpiar();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se ha podido registrar la colaboración");
+                                this.limpiar();
+                            }
+
+                        }
+                    }
+                }
             }
         }
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -595,24 +577,19 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         fechaP.setText(df.format(p.getFechaPub()));
         this.titulo1 = p.getTitulo();
         String wat = p.getTRetornos();
-        if(p.getTRetornos().equals("entrada"))
-        {
+        if (p.getTRetornos().equals("entrada")) {
             jRadioButton2.setSelected(true);
             jRadioButton2.setEnabled(true);
             jRadioButton1.setSelected(false);
             jRadioButton1.setEnabled(false);
             this.tipoR1 = "entrada";
-        }
-        else if (p.getTRetornos().equals("porcentaje"))
-        {
+        } else if (p.getTRetornos().equals("porcentaje")) {
             jRadioButton1.setSelected(true);
             jRadioButton1.setEnabled(true);
             jRadioButton2.setSelected(false);
             jRadioButton2.setEnabled(false);
             this.tipoR1 = "porcentaje";
-        }
-        else
-        {
+        } else {
             jRadioButton1.setEnabled(true);
             jRadioButton1.setSelected(false);
             jRadioButton2.setSelected(false);
@@ -624,7 +601,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private void listaColabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaColabsMouseClicked
         // TODO add your handling code here:
         int index = listaColabs.getSelectedIndex();
-        ListModel  model= listaColabs.getModel();
+        ListModel model = listaColabs.getModel();
         String f = (String) model.getElementAt(index);
         String[] partes = f.split(Pattern.quote("("));
         String parte1 = partes[0];
@@ -637,9 +614,15 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         apellido.setText(c.getApellido());
         correo.setText(c.getCorreo());
         c.getImg();
-        ImageIcon imagen = new ImageIcon(c.getImg());
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-        imagenProp.setIcon(icono);
+        if (c.getImg() == null || c.getImg().equals("")) {
+            ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
+            Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+            imagenProp.setIcon(iconito);
+        } else {
+            ImageIcon imagen = new ImageIcon(c.getImg());
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+            imagenProp.setIcon(icono);
+        }
         this.nick1 = c.getNick();
         this.pack();
     }//GEN-LAST:event_listaColabsMouseClicked
@@ -671,7 +654,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                 for (int i = 0; i < listita.size(); i++) {
                     DtPropuesta p = (DtPropuesta) listita.get(i);
                     Proponente p2 = iUsu.traerProponente(p.getPropo());
-                    Object[] dat={p.getTitulo(), p2.getNombre()+"("+p2.getNick()+")"};
+                    Object[] dat = {p.getTitulo(), p2.getNombre() + "(" + p2.getNick() + ")"};
                     model.addRow(dat);
                 }
                 listaProps.setModel(model);
@@ -682,7 +665,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                     DtPropuesta p = (DtPropuesta) listita.get(i);
                     Proponente p2 = iUsu.traerProponente(p.getPropo());
                     if (p.getTitulo().contains(filtroPropu.getText()) || p2.getNick().contains(filtroPropu.getText())) {
-                        Object[] dat={p.getTitulo(), p2.getNombre()+"("+p2.getNick()+")"};
+                        Object[] dat = {p.getTitulo(), p2.getNombre() + "(" + p2.getNick() + ")"};
                         model.addRow(dat);
                     }
                 }
@@ -701,18 +684,17 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         this.nick1 = "";
         ImageIcon imagen = new ImageIcon("");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-          imagenProp.setIcon(icono);
+        imagenProp.setIcon(icono);
         List<DtColaborador> listita2 = this.iUsu.listarColaboradores();
-    DefaultListModel dlm = new DefaultListModel();
-    for(int b = 0; b<listita2.size(); b++)
-    {
-        DtColaborador q = (DtColaborador) listita2.get(b);
-        String lul = q.getNombre()+"("+q.getNick()+(")");
-        dlm.addElement(lul);
-    }
-    
-    listaColabs.setModel(dlm);
-    
+        DefaultListModel dlm = new DefaultListModel();
+        for (int b = 0; b < listita2.size(); b++) {
+            DtColaborador q = (DtColaborador) listita2.get(b);
+            String lul = q.getNombre() + "(" + q.getNick() + (")");
+            dlm.addElement(lul);
+        }
+
+        listaColabs.setModel(dlm);
+
     }//GEN-LAST:event_filtroColabsFocusGained
 
     private void filtroColabsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroColabsKeyReleased
@@ -723,7 +705,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < pro.size(); i++) {
                     DtColaborador p = (DtColaborador) pro.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                 }
                 listaColabs.setModel(modelo);
             }
@@ -733,7 +715,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                 for (int i = 0; i < pro.size(); i++) {
                     DtColaborador p = (DtColaborador) pro.get(i);
                     if (p.getNombre().contains(filtroColabs.getText()) || p.getNick().contains(filtroColabs.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                     }
                 }
                 listaColabs.setModel(modelo);
@@ -744,20 +726,14 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private void montoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if(car >= '0' && car <= '9')
-        {
-            if(car == '0' && monto.getText().equals(""))
-            {
-                  adv.setText("Solo se admiten numeros positivos");
-                    evt.consume();        
+        if (car >= '0' && car <= '9') {
+            if (car == '0' && monto.getText().equals("")) {
+                adv.setText("Solo se admiten numeros positivos");
+                evt.consume();
+            } else {
+                adv.setText("");
             }
-            else
-            {
-               adv.setText("");
-            }
-        }
-        else
-        {
+        } else {
             adv.setText("Solo se admiten numeros positivos");
             evt.consume();
         }
@@ -812,65 +788,56 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tRetornos;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
-public void cargarColab(){
-    List<DtPropuesta> listita = this.IP.listarPropuestas();
-    DefaultTableModel model = (DefaultTableModel) listaProps.getModel();
-    model.setRowCount(0);
-    for(int i = 0; i < listita.size(); i++)
-    {
-        DtPropuesta p = (DtPropuesta) listita.get(i);
-        Proponente p2 = iUsu.traerProponente(p.getPropo());
-        Object[] dat={p.getTitulo(), p2.getNombre()+"("+p2.getNick()+")"};
-        model.addRow(dat);
-    }
-    
-    List<DtColaborador> listita2 = this.iUsu.listarColaboradores();
-    DefaultListModel dlm = new DefaultListModel();
-    for(int b = 0; b<listita2.size(); b++)
-    {
-        DtColaborador q = (DtColaborador) listita2.get(b);
-        String lul = q.getNombre()+"("+q.getNick()+(")");
-        dlm.addElement(lul);
-    }
-    
-    listaColabs.setModel(dlm);
+public void cargarColab() {
+        List<DtPropuesta> listita = this.IP.listarPropuestas();
+        DefaultTableModel model = (DefaultTableModel) listaProps.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < listita.size(); i++) {
+            DtPropuesta p = (DtPropuesta) listita.get(i);
+            Proponente p2 = iUsu.traerProponente(p.getPropo());
+            Object[] dat = {p.getTitulo(), p2.getNombre() + "(" + p2.getNick() + ")"};
+            model.addRow(dat);
+        }
 
-}
+        List<DtColaborador> listita2 = this.iUsu.listarColaboradores();
+        DefaultListModel dlm = new DefaultListModel();
+        for (int b = 0; b < listita2.size(); b++) {
+            DtColaborador q = (DtColaborador) listita2.get(b);
+            String lul = q.getNombre() + "(" + q.getNick() + (")");
+            dlm.addElement(lul);
+        }
 
-public void limpiar()
-{
-    titulo.setText("");
-    descripcion.setText("");
-    fecha.setText("");
-    precioE.setText("");
-    montoA.setText("");
-    montoT.setText("");
-    tRetornos.setText("");
-    fechaP.setText("");
-    nick.setText("");
-    nombre.setText("");
-    apellido.setText("");
-    correo.setText("");
-    imagenProp.setText("");
-    monto.setText("");
-    filtroPropu.setText("");
-    this.tipoR1 = "";
-    this.nick1 = "";
-    this.titulo1 = "";
-    listaProps.clearSelection();
-    listaColabs.clearSelection();
+        listaColabs.setModel(dlm);
+
+    }
+
+    public void limpiar() {
+        titulo.setText("");
+        descripcion.setText("");
+        fecha.setText("");
+        precioE.setText("");
+        montoA.setText("");
+        montoT.setText("");
+        tRetornos.setText("");
+        fechaP.setText("");
+        nick.setText("");
+        nombre.setText("");
+        apellido.setText("");
+        correo.setText("");
+        imagenProp.setText("");
+        monto.setText("");
+        filtroPropu.setText("");
+        this.tipoR1 = "";
+        this.nick1 = "";
+        this.titulo1 = "";
+        listaProps.clearSelection();
+        listaColabs.clearSelection();
 //    cargarColab();
-    ImageIcon imagen = new ImageIcon("");
-    Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-         imagenProp.setIcon(icono);
-    jRadioButton1.setSelected(false);
-    jRadioButton2.setSelected(false);
-}
-    
-    
+        ImageIcon imagen = new ImageIcon("");
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+        imagenProp.setIcon(icono);
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+    }
 
 }
-
-
-
-

@@ -17,21 +17,22 @@ import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-
 /**
  *
  * @author Nuevo
  */
 public class Consultar_Propuesta extends javax.swing.JInternalFrame {
+
     private IPropuesta propuesta;
+
     /**
      * Creates new form Consultar_Propuesta
      */
     public Consultar_Propuesta() {
         initComponents();
     }
-    
-     public Consultar_Propuesta(IPropuesta propu) {
+
+    public Consultar_Propuesta(IPropuesta propu) {
         initComponents();
         this.propuesta = propu;
     }
@@ -349,9 +350,9 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLPropuestasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jLPropuestasValueChanged
-        
+
         if (jLPropuestas.getSelectedIndex() != -1) {
-            DtPropuesta x = propuesta.SeleccionarProp(jLPropuestas.getSelectedValue()); 
+            DtPropuesta x = propuesta.SeleccionarProp(jLPropuestas.getSelectedValue());
             List<String> nombres = propuesta.ColaborantesDePro();
             Date date = x.getFecha();
             DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
@@ -370,9 +371,15 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
             TxtPropuesto.setText(x.getPropo());
             TxtCategoria.setText(x.getNombreCate());
             TxtRetorno.setText(x.getTRetornos());
-            ImageIcon imagen = new ImageIcon(x.getImg());
-            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
-            jLImagen.setIcon(icono);
+            if (x.getImg() == null || x.getImg().equals("")) {
+                ImageIcon img = new ImageIcon("Imagenes/not-available-es.png");
+                Icon icono = new ImageIcon(img.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
+                jLImagen.setIcon(icono);
+            } else {
+                ImageIcon imagen2 = new ImageIcon(x.getImg());
+                Icon icono = new ImageIcon(imagen2.getImage().getScaledInstance(jLImagen.getWidth(), jLImagen.getHeight(), Image.SCALE_DEFAULT));
+                jLImagen.setIcon(icono);
+            }
             if (x.getEstActual() != null) {
                 if (x.getEstActual().getEstado().toString().equals("Ingresada")) {
                     TxtEstado.setText("Ingresada");
@@ -403,10 +410,10 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
-        
+
         List<String> pro = propuesta.ListarProp();
         if (!pro.isEmpty()) {                                                   // SI HAY PROPUESTAS
-            DefaultListModel modelo = new DefaultListModel();                   
+            DefaultListModel modelo = new DefaultListModel();
             for (int i = 0; i < pro.size(); i++) {
                 String p = (String) pro.get(i);
                 modelo.addElement(p);
@@ -419,22 +426,22 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         this.dispose(); 
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TxtBuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyTyped
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_TxtBuscadorKeyTyped
 
     private void TxtBuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyPressed
         // TODO add your handling code here:
-         
+
     }//GEN-LAST:event_TxtBuscadorKeyPressed
 
     private void TxtBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtBuscadorKeyReleased
         // TODO add your handling code here:
-         jLPropuestas.setModel(propuesta.BUSCADOR_Propuestas(TxtBuscador.getText()));
+        jLPropuestas.setModel(propuesta.BUSCADOR_Propuestas(TxtBuscador.getText()));
     }//GEN-LAST:event_TxtBuscadorKeyReleased
 
     private void TxtBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtBuscadorFocusGained

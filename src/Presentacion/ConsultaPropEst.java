@@ -498,9 +498,15 @@ public class ConsultaPropEst extends javax.swing.JInternalFrame {
         montoA.setText(Integer.toString(p.getMontoActual()));
         filtroColabs.setText("");
         filtroColabs.setEnabled(true);
+        if(p.getImg() == null || p.getImg().equals("")){
+            ImageIcon img = new ImageIcon("Imagenes/not-available-es.png");
+            Icon icono = new ImageIcon(img.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
+            imagen.setIcon(icono);
+        }else{
         ImageIcon imagen2 = new ImageIcon(p.getImg());
             Icon icono = new ImageIcon(imagen2.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
             imagen.setIcon(icono);
+        }
     } 
     }//GEN-LAST:event_listPropMouseClicked
 

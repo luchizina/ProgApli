@@ -595,9 +595,15 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
             montito.setText("");
             this.colabActuales = null;
             p.getImg();
+            if (p.getImg() == null || p.getImg().equals("")) {
+                ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
+                Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
+                imagenP.setIcon(iconito);
+            } else {
             ImageIcon imagen = new ImageIcon(p.getImg());
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenP.getWidth(), imagenP.getHeight(), Image.SCALE_DEFAULT));
             imagenP.setIcon(icono);
+            }
 //        this.nick1 = c.getNick();
 this.prop = p;
        

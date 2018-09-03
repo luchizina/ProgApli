@@ -23,30 +23,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
-   
+
 public class Consultar_colaborador extends javax.swing.JInternalFrame {
+
     private final IPropuesta IP;
     private final ICategoria iCat;
     private final IUsuario iUsu;
     private Colaborador cola;
     DefaultTableModel modeloT;
-    public Consultar_colaborador(IPropuesta IP,ICategoria iCat, IUsuario iUsu) {
-            modeloT = new DefaultTableModel(null, getColumnas());
-            jTa = new JTable(modeloT);
+
+    public Consultar_colaborador(IPropuesta IP, ICategoria iCat, IUsuario iUsu) {
+        modeloT = new DefaultTableModel(null, getColumnas());
+        jTa = new JTable(modeloT);
         initComponents();
         this.IP = IP;
         this.iUsu = iUsu;
         this.iCat = iCat;
-      List<DtColaborador> listita = iUsu.listarColaboradores();
-    DefaultListModel dlm = new DefaultListModel();
-    for(int b = 0; b<listita.size(); b++)
-    {
-        DtColaborador q = (DtColaborador) listita.get(b);
-        String lul = q.getNombre()+"("+q.getNick()+(")");
-        dlm.addElement(lul);
-    }
-    
-    listCola.setModel(dlm);    
+        List<DtColaborador> listita = iUsu.listarColaboradores();
+        DefaultListModel dlm = new DefaultListModel();
+        for (int b = 0; b < listita.size(); b++) {
+            DtColaborador q = (DtColaborador) listita.get(b);
+            String lul = q.getNombre() + "(" + q.getNick() + (")");
+            dlm.addElement(lul);
+        }
+
+        listCola.setModel(dlm);
 
     }
 
@@ -262,47 +263,52 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
 
     private void listColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listColaMouseClicked
         modeloT.setRowCount(0);
-        if(listCola.getModel().getSize() != 0){
-        int index = listCola.getSelectedIndex();
-        ListModel  model= listCola.getModel();
-        String f = (String) model.getElementAt(index);
-        String[] partes = f.split(Pattern.quote("("));
-        String parte1 = partes[0];
-        String parte2 = partes[1];
-        String[] partes3 = parte2.split(Pattern.quote(")"));
-        String parte4 = partes3[0];
-        Colaborador p = iUsu.traerColaborador(parte4);
-        lblNick.setText(p.getNick());
-        lblNom.setText(p.getNombre());
-        lblApe.setText(p.getApellido());
-        lblCorreo.setText(p.getCorreo());
-        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha = sd.format(p.getFecha());
-        lblFechaN.setText(fecha);
-        p.getImg();
-        ImageIcon imagen = new ImageIcon(p.getImg());
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(lblImg.getWidth(), lblImg.getHeight(), Image.SCALE_DEFAULT));
-        lblImg.setIcon(icono);
+        if (listCola.getModel().getSize() != 0) {
+            int index = listCola.getSelectedIndex();
+            ListModel model = listCola.getModel();
+            String f = (String) model.getElementAt(index);
+            String[] partes = f.split(Pattern.quote("("));
+            String parte1 = partes[0];
+            String parte2 = partes[1];
+            String[] partes3 = parte2.split(Pattern.quote(")"));
+            String parte4 = partes3[0];
+            Colaborador p = iUsu.traerColaborador(parte4);
+            lblNick.setText(p.getNick());
+            lblNom.setText(p.getNombre());
+            lblApe.setText(p.getApellido());
+            lblCorreo.setText(p.getCorreo());
+            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sd.format(p.getFecha());
+            lblFechaN.setText(fecha);
+            p.getImg();
+            if (p.getImg() == null || p.getImg().equals("")) {
+                ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
+                Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(lblImg.getWidth(), lblImg.getHeight(), Image.SCALE_DEFAULT));
+                lblImg.setIcon(iconito);
+            } else {
+                ImageIcon imagen = new ImageIcon(p.getImg());
+                Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(lblImg.getWidth(), lblImg.getHeight(), Image.SCALE_DEFAULT));
+                lblImg.setIcon(icono);
+            }
 //        this.nick1 = c.getNick();
-        this.pack();
-        this.cola = p;
-        
-        setFilas(iUsu.traerColaborador(parte4));
-        }
-        else {
-         javax.swing.JOptionPane.showMessageDialog(null,"Lista vacia");
-           
+            this.pack();
+            this.cola = p;
+
+            setFilas(iUsu.traerColaborador(parte4));
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Lista vacia");
+
         }
     }//GEN-LAST:event_listColaMouseClicked
 
     private void jCoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoKeyReleased
-       List<DtColaborador> Colab = iUsu.listarColaboradores();
+        List<DtColaborador> Colab = iUsu.listarColaboradores();
         if (jCo.getText().equals("")) { // SI NO BUSCA
             if (!Colab.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < Colab.size(); i++) {
                     DtColaborador p = (DtColaborador) Colab.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                 }
                 listCola.setModel(modelo);
             }
@@ -312,24 +318,24 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
                 for (int i = 0; i < Colab.size(); i++) {
                     DtColaborador p = (DtColaborador) Colab.get(i);
                     if (p.getNombre().contains(jCo.getText()) || p.getNick().contains(jCo.getText())) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                     }
                 }
                 listCola.setModel(modelo);
             }
         }
     }//GEN-LAST:event_jCoKeyReleased
-private String[] getColumnas()
-{
-String columna[] = new String [] {"Título","Monto actual","Proponente","Estado actual"};
-return columna;
-}
-private void setFilas(Colaborador c){
+    private String[] getColumnas() {
+        String columna[] = new String[]{"Título", "Monto actual", "Proponente", "Estado actual"};
+        return columna;
+    }
+
+    private void setFilas(Colaborador c) {
         List<DtColaboracion> list = iUsu.datosCol(c);
-        for(int i=0; i<list.size();i++){
-            modeloT.addRow(new Object[] {list.get(i).getPropuesta().getTitulo(),list.get(i).getPropuesta().getMontoActual(),list.get(i).getPropuesta().getPropo(),list.get(i).getPropuesta().getEstActual().getEstado().toString()});
+        for (int i = 0; i < list.size(); i++) {
+            modeloT.addRow(new Object[]{list.get(i).getPropuesta().getTitulo(), list.get(i).getPropuesta().getMontoActual(), list.get(i).getPropuesta().getPropo(), list.get(i).getPropuesta().getEstActual().getEstado().toString()});
         }
-}
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -48,6 +49,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         this.jDate.setSelectableDateRange(desde, hasta);
         urlimagen.setVisible(false);
     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -417,9 +419,13 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         if(Jpanel1.isVisible() == false){
-            
             Jpanel1.setVisible(true);
-        }   
+        } 
+        img.setHorizontalAlignment(JLabel.CENTER);
+        img.setVerticalAlignment(JLabel.CENTER);
+        ImageIcon imgencita = new ImageIcon("Imagenes/prop.png");
+        Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_DEFAULT));
+        img.setIcon(iconito);
        
 
 // TODO add your handling code here:
