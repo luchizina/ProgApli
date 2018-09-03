@@ -526,7 +526,7 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_filtroPropFocusLost
 
     private void filtroPropKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroPropKeyReleased
-        this.iUsu.filtrarP(this.filtroProp.getText(), listPropo);
+        listPropo.setModel(this.iUsu.BUSCADOR_Proponente(filtroProp.getText()));
     }//GEN-LAST:event_filtroPropKeyReleased
 
     private void limpiar()
@@ -567,7 +567,8 @@ public class Consultar_Proponente extends javax.swing.JInternalFrame {
     private void listPropoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropoValueChanged
         // TODO add your handling code here:
         int index = listPropo.getSelectedIndex();
-            
+            if(index != -1)
+            {
             ListModel  model= listPropo.getModel();
             String f = (String) model.getElementAt(index);
             String[] partes = f.split(Pattern.quote("("));
@@ -610,6 +611,7 @@ this.prop = p;
         estaditos.setEnabled(true);
         estaditos.setSelectedItem("Financiada");
         buscarPorEstadito("Financiada");
+            }
     }//GEN-LAST:event_listPropoValueChanged
 
     private void listPropValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listPropValueChanged
