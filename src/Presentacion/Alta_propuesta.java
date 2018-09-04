@@ -67,7 +67,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         List<DtCategoria> catego = this.iCat.listarCategorias();
         DefaultTreeModel modeloArbol = null;
         DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
-        construirArbolito(catego, raiz);
+        jTree1.setModel(this.iCat.construirArbolito(catego, raiz));
     }
 
     /**

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +34,8 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -437,6 +440,8 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
     }
+    
+    
     
     @Override
     public DefaultListModel BUSCADOR_Propuestas(String Palabra) {

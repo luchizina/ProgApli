@@ -48,130 +48,9 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         List<DtCategoria> catego = this.iCat.listarCategorias();
         DefaultTreeModel modeloArbol = null;
         DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
-        construirArbolito(catego, raiz);
+        arbolito.setModel(this.iCat.construirArbolito(catego, raiz));
         arbolito.setSelectionRow(0);
-//        for(int i=0; i<catego.size(); i++){
-//            DtCategoria c=(DtCategoria) catego.get(i);
-//            if(c.getProfundidad()==0){
-//                
-//            
-//            modeloArbol.insertNodeInto(new DefaultMutableTreeNode(c.getNombre()), raiz, raiz.getChildCount());
-//       }
-//            }
-//        
-//          for (int k = 0; k < catego.size(); k++) {
-//            DtCategoria ca = (DtCategoria) catego.get(k);
-//            int otro = modeloArbol.getChildCount(raiz);
-//            for (int m = 0; m < otro; m++) {
-//                DefaultMutableTreeNode nodito = (DefaultMutableTreeNode) (modeloArbol.getChild(raiz, m));
-//                if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) == 0 && tieneEsteHijo(nodito, ca.getPadre()) == true) 
-//                {
-//                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), nodito, nodito.getChildCount());
-//                } 
-//                else if ((ca.getNombre().compareTo(nodito.toString())) != 0 && (ca.getPadre().compareTo(nodito.toString())) != 0 && tieneEsteHijo(raiz, ca.getPadre()) == true && tieneEsteHijo(devolverNodo(raiz, ca.getPadre()), ca.getNombre()) == false)
-//                {
-//                    modeloArbol.insertNodeInto(new DefaultMutableTreeNode(ca.getNombre()), devolverNodo(raiz, ca.getPadre()), devolverNodo(raiz, ca.getPadre()).getChildCount());
-//                }
-//
-//            }
-//        }
-
     }
-
-    public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
-        if (catego.getPadre().compareTo(raiz.toString()) == 0)
-        {
-            DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
-            raiz.add(nodito);
-        } 
-        
-        else   
-        {
-            for (int i = 0; i < raiz.getChildCount(); i++)
-            {
-                imprimirArbol(catego, (DefaultMutableTreeNode) raiz.getChildAt(i));
-            }
-        }
-        DefaultTreeModel modelito = new DefaultTreeModel(raiz);
-        return modelito;
-    }
-
-    public DefaultMutableTreeNode devolverNodo(DefaultMutableTreeNode nodo, String padre) {
-        Enumeration<DefaultMutableTreeNode> hijos = nodo.children();
-        Enumeration<DefaultMutableTreeNode> otroshijos = nodo.children();
-        DefaultMutableTreeNode n = new DefaultMutableTreeNode();
-        DefaultMutableTreeNode p = new DefaultMutableTreeNode();
-        DefaultMutableTreeNode q = new DefaultMutableTreeNode();
-        if (nodo.getChildCount() == 0) {
-            return null;
-        }
-
-        // if(nodo.getChildCount()>0){
-        while (hijos.hasMoreElements()) {
-            n = (DefaultMutableTreeNode) (hijos.nextElement());
-            String hijito = n.getUserObject().toString();
-            Enumeration<DefaultMutableTreeNode> hijitos = n.children();
-            if (padre.equals(hijito)) {
-                return n;
-            }
-            while (hijitos.hasMoreElements()) {
-                p = (DefaultMutableTreeNode) (hijitos.nextElement());
-                String hijote = p.getUserObject().toString();
-                if (padre.equals(hijote)) {
-                    return p;
-                }
-
-            }
-//                     
-        }
-        while (otroshijos.hasMoreElements()) {
-            q = (DefaultMutableTreeNode) (otroshijos.nextElement());
-            return devolverNodo(q, padre);
-        }
-        return null;
-    }
-
-    public boolean tieneEsteHijo(DefaultMutableTreeNode nodo, String padre) {
-        // cmbCategorias.addItem(nodo.toString());
-        Enumeration<DefaultMutableTreeNode> hijos = nodo.children();
-        Enumeration<DefaultMutableTreeNode> otroshijos = nodo.children();
-        DefaultMutableTreeNode n = new DefaultMutableTreeNode();
-        DefaultMutableTreeNode p = new DefaultMutableTreeNode();
-        DefaultMutableTreeNode q = new DefaultMutableTreeNode();
-        if (nodo.getChildCount() == 0) {
-            return false;
-        }
-
-        while (hijos.hasMoreElements()) {
-            n = (DefaultMutableTreeNode) (hijos.nextElement());
-            String hijito = n.getUserObject().toString();
-            Enumeration<DefaultMutableTreeNode> hijitos = n.children();
-            if (padre.equals(hijito)) {
-                return true;
-            }
-
-            while (hijitos.hasMoreElements()) {
-                p = (DefaultMutableTreeNode) (hijitos.nextElement());
-                String hijote = p.getUserObject().toString();
-                if (padre.equals(hijote)) {
-                    return true;
-                }
-
-            }
-        }
-        while (otroshijos.hasMoreElements()) {
-            q = (DefaultMutableTreeNode) (otroshijos.nextElement());
-            return tieneEsteHijo(q, padre);
-        }
-//              while(hijos.hasMoreElements()){
-//              n=(DefaultMutableTreeNode) (hijos.nextElement());
-//              
-//                      return tieneEsteHijo(n, padre);
-//                      }
-        return false;
-
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -361,12 +240,7 @@ public class Alta_Categoria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
-        Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
-        for (int i = 0; i < catego.size(); i++) {
-            arbolito.setModel(this.imprimirArbol(catego.get(i), raiz));
-        }
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolito;

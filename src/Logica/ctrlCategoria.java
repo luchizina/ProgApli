@@ -16,6 +16,8 @@ import Logica.Categoria;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -118,6 +120,33 @@ public class ctrlCategoria implements ICategoria {
     public int traerProfu(String nombre){
       Categoria aux= this.categorias.get(nombre);
       return aux.getProfundidad();
+    }
+    
+    public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
+        if (catego.getPadre().compareTo(raiz.toString()) == 0)
+        {
+            DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
+            raiz.add(nodito);
+        } 
+        
+        else   
+        {
+            for (int i = 0; i < raiz.getChildCount(); i++)
+            {
+                imprimirArbol(catego, (DefaultMutableTreeNode) raiz.getChildAt(i));
+            }
+        }
+        DefaultTreeModel modelito = new DefaultTreeModel(raiz);
+        return modelito;
+    }
+    
+    public DefaultTreeModel construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
+        Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
+        DefaultTreeModel p = null;
+        for (int i = 0; i < catego.size(); i++) {
+            p = (this.imprimirArbol(catego.get(i), raiz));
+        }
+        return p;
     }
 
 

@@ -7,6 +7,8 @@ package Logica;
 
 import java.util.List;
 import java.util.Map;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -20,4 +22,6 @@ public abstract int traerProfu(String nombre);
 public abstract void cargarCategorias();
 public abstract void cargaCatPrueb();
 public abstract void cargar();
+    public abstract DefaultTreeModel construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz);
+    public abstract DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz);
 }
