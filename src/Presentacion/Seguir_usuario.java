@@ -97,6 +97,11 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -160,6 +165,12 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
         jLabel9.setText("Elige usuario a seguir");
 
         jScrollPane2.setViewportView(jList2);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Filtrar:");
 
@@ -280,10 +291,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
         boolean ok= this.iUsu.seguirUsuario();
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Ha seguido al usuario con éxito");
-jRadioButton1.setSelected(false);
-jRadioButton2.setSelected(false);
-jRadioButton3.setSelected(false);
-jRadioButton4.setSelected(false);
+                limpiar();
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
@@ -299,67 +307,48 @@ jRadioButton4.setSelected(false);
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
        List<DtProponente> props=this.iUsu.listarProponentes();
         DefaultListModel dlm = new DefaultListModel();
-        if(jRadioButton1.isSelected())
-       {
-          
-               for(int i=0; i< props.size(); i++){
-            DtProponente combitoProp=(DtProponente) props.get(i);
-                   
-                       
-              
+            for(int i=0; i< props.size(); i++){
+            DtProponente combitoProp=(DtProponente) props.get(i);   
             String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
             dlm.addElement(lul);
         }
 
         jList1.setModel(dlm);                         
         jPanel3.setVisible(true);
-       }
+       
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         List<DtColaborador> props=this.iUsu.listarColaboradores();
         DefaultListModel dlm = new DefaultListModel();
-        if(jRadioButton2.isSelected())
-       {
-          
                for(int i=0; i< props.size(); i++){
             DtColaborador combitoProp=(DtColaborador) props.get(i);
-                      
-              
-            String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
+           String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
             dlm.addElement(lul);
-        }
-
+               }
         jList1.setModel(dlm);                         
         jPanel3.setVisible(true);
-       }
+       
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
          List<DtProponente> props=this.iUsu.listarProponentes();
         DefaultListModel dlm = new DefaultListModel();
-        if(jRadioButton1.isSelected())
-       {
-          
                for(int i=0; i< props.size(); i++){
-            DtProponente combitoProp=(DtProponente) props.get(i);
-                      
-              
+            DtProponente combitoProp=(DtProponente) props.get(i); 
             String lul = combitoProp.getNombre() + "(" + combitoProp.getNick() + (")");
             dlm.addElement(lul);
-        }
+               }
 
         jList2.setModel(dlm);                         
         jPanel3.setVisible(true);
-       }
+      
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
    List<DtColaborador> props=this.iUsu.listarColaboradores();
         DefaultListModel dlm = new DefaultListModel();
-        if(jRadioButton4.isSelected())
-       {
-          
+        
                for(int i=0; i< props.size(); i++){
             DtColaborador combitoProp=(DtColaborador) props.get(i);
                        
@@ -369,13 +358,45 @@ jRadioButton4.setSelected(false);
 
         jList2.setModel(dlm);                         
         jPanel3.setVisible(true);
-       }
+       
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+       if(jRadioButton1.isSelected())
+       {
+        jList1.setModel(this.iUsu.BUSCADOR_Proponente(jTextField2.getText())); 
+       }else if(jRadioButton2.isSelected())
+       {
+        jList1.setModel(this.iUsu.BUSCADOR_Colaborador(jTextField2.getText())); 
+       }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+    if(jRadioButton3.isSelected())
+       {
+        jList2.setModel(this.iUsu.BUSCADOR_Proponente(jTextField1.getText())); 
+       }else if(jRadioButton4.isSelected())
+       {
+        jList2.setModel(this.iUsu.BUSCADOR_Colaborador(jTextField1.getText())); 
+       }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyReleased
+     
+    private void limpiar()
+      {
+      DefaultListModel nuvo = new DefaultListModel();
+      jList1.clearSelection();
+      jList2.clearSelection();
+      jTextField1.setText("");
+      jTextField2.setText("");
+      buttonGroup1.clearSelection();
+      SeguidorGrup.clearSelection();
+      jList1.setModel(nuvo);
+      jList2.setModel(nuvo);
+      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup SeguidorGrup;
