@@ -69,7 +69,7 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         List<DtCategoria> catego = this.iCat.listarCategorias();
         DefaultTreeModel modeloArbol = null;
         DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
-        construirArbolito(catego, raiz);
+        jTree1.setModel(this.iCat.construirArbolito(catego, raiz));
     }
 
     /**
@@ -700,26 +700,6 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
             jCateg.addItem(combito.getNombre());
         }
 
-    }
-
-    private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
-        Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
-        for (int i = 0; i < catego.size(); i++) {
-            jTree1.setModel(this.imprimirArbol(catego.get(i), raiz));
-        }
-    }
-
-    public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
-        if (catego.getPadre().compareTo(raiz.toString()) == 0) {
-            DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
-            raiz.add(nodito);
-        } else {
-            for (int i = 0; i < raiz.getChildCount(); i++) {
-                imprimirArbol(catego, (DefaultMutableTreeNode) raiz.getChildAt(i));
-            }
-        }
-        DefaultTreeModel modelito = new DefaultTreeModel(raiz);
-        return modelito;
     }
 
 }

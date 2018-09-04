@@ -48,7 +48,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         this.lista();
         DefaultTreeModel modeloArbol = null;
         DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
-        construirArbolito(catego, raiz);
+        arbol.setModel(this.cat.construirArbolito(catego, raiz));
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         Date desde = new Date();
         Date hasta = sd.parse("2030-01-01");
@@ -444,25 +444,6 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz) {
-        Collections.sort(catego, (DtCategoria dt1, DtCategoria dt2) -> dt1.getProfundidad() - dt2.getProfundidad());
-        for (int i = 0; i < catego.size(); i++) {
-            arbol.setModel(this.imprimirArbol(catego.get(i), raiz));
-        }
-    }
-
-    public DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz) {
-        if (catego.getPadre().compareTo(raiz.toString()) == 0) {
-            DefaultMutableTreeNode nodito = new DefaultMutableTreeNode(catego.getNombre());
-            raiz.add(nodito);
-        } else {
-            for (int i = 0; i < raiz.getChildCount(); i++) {
-                imprimirArbol(catego, (DefaultMutableTreeNode) raiz.getChildAt(i));
-            }
-        }
-        DefaultTreeModel modelito = new DefaultTreeModel(raiz);
-        return modelito;
-    }
 
     private void listaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaValueChanged
         if (lista.getSelectedIndex() != -1) {
