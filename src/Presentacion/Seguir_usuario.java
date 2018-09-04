@@ -239,6 +239,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
 
     private void btnSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguirActionPerformed
         // TODO add your handling code here:
+         DefaultListModel dlm = new DefaultListModel();
             if(jList1.getSelectedIndex() > -1 && jList1.getSelectedIndex() > -1){
              int index = jList1.getSelectedIndex();
              ListModel  model= jList1.getModel();
@@ -280,10 +281,11 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
         boolean ok= this.iUsu.seguirUsuario();
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Ha seguido al usuario con éxito");
-jRadioButton1.setSelected(false);
+          jRadioButton1.setSelected(false);
 jRadioButton2.setSelected(false);
 jRadioButton3.setSelected(false);
 jRadioButton4.setSelected(false);
+jList1.setModel(dlm);
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
