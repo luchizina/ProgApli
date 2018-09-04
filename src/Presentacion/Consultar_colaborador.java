@@ -302,28 +302,7 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listColaMouseClicked
 
     private void jCoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoKeyReleased
-        List<DtColaborador> Colab = iUsu.listarColaboradores();
-        if (jCo.getText().equals("")) { // SI NO BUSCA
-            if (!Colab.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < Colab.size(); i++) {
-                    DtColaborador p = (DtColaborador) Colab.get(i);
-                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
-                }
-                listCola.setModel(modelo);
-            }
-        } else {                                // SI BUSCA
-            if (!Colab.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < Colab.size(); i++) {
-                    DtColaborador p = (DtColaborador) Colab.get(i);
-                    if (p.getNombre().contains(jCo.getText()) || p.getNick().contains(jCo.getText())) {
-                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
-                    }
-                }
-                listCola.setModel(modelo);
-            }
-        }
+        listCola.setModel(this.iUsu.BUSCADOR_Colaborador(jCo.getText()));
     }//GEN-LAST:event_jCoKeyReleased
     private String[] getColumnas() {
         String columna[] = new String[]{"Título", "Monto actual", "Proponente", "Estado actual"};
