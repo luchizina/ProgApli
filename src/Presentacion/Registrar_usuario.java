@@ -525,8 +525,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         email.setText("");
         fecha.setDate(null);
         urlimagen.setText("");
-        jRadioButton1.setSelected(false);
-        jRadioButton2.setSelected(false);
+        buttonGroup1.clearSelection();
         direccion.setText("");
         biografia.setText("");
         link.setText("");
@@ -554,11 +553,6 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                 this.imagen.setIcon(icono);
                 this.pack();
             }
-//            
-////            String ruta = j.getSelectedFile().getAbsolutePath();
-////            this.imagen.setIcon(new ImageIcon(ruta));
-////            this.urlimagen.setText(ruta);
-//        
     }//GEN-LAST:event_jButton1ActionPerformed
     }
 

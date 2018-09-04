@@ -106,9 +106,20 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Elige usuario a dejar de seguir");
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
 
@@ -231,10 +242,7 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
         boolean ok= this.iUsu.dejarDeSeguir();
         if (ok){
             javax.swing.JOptionPane.showMessageDialog(null,"Ha dejado de seguir al usuario con éxito");
-jRadioButton1.setSelected(false);
-jRadioButton2.setSelected(false);
-jRadioButton3.setSelected(false);
-jRadioButton4.setSelected(false);
+          this.limpiar();
         }else{
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
@@ -247,7 +255,9 @@ jRadioButton4.setSelected(false);
          javax.swing.JOptionPane.showMessageDialog(null,"Seleccione a un usuario de la lista");
         }
     }//GEN-LAST:event_btnDejActionPerformed
-
+ 
+    
+    
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         List<DtColaborador> props=this.iUsu.listarColaboradores();
         DefaultListModel dlm = new DefaultListModel();
@@ -323,6 +333,38 @@ jRadioButton4.setSelected(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+       if(jRadioButton1.isSelected())
+       {
+        jList1.setModel(this.iUsu.BUSCADOR_Proponente(jTextField2.getText())); 
+       }else if(jRadioButton2.isSelected())
+       {
+        jList1.setModel(this.iUsu.BUSCADOR_Colaborador(jTextField2.getText())); 
+       }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        if(jRadioButton3.isSelected())
+       {
+        jList2.setModel(this.iUsu.BUSCADOR_Proponente(jTextField1.getText())); 
+       }else if(jRadioButton4.isSelected())
+       {
+        jList2.setModel(this.iUsu.BUSCADOR_Colaborador(jTextField1.getText())); 
+       }
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+   private void limpiar()
+      {
+      DefaultListModel nuvo = new DefaultListModel();
+      jList1.clearSelection();
+      jList2.clearSelection();
+      jTextField1.setText("");
+      jTextField2.setText("");
+      buttonGroup1.clearSelection();
+      buttonGroup1.clearSelection();
+      jList1.setModel(nuvo);
+      jList2.setModel(nuvo);
+      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDej;
