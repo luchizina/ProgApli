@@ -204,7 +204,7 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDejActionPerformed
-        if(jList1.getSelectedIndex() > -1 && jList1.getSelectedIndex() > -1){
+        if(jList1.getSelectedIndex() > -1 && jList2.getSelectedIndex() > -1){
              int index = jList1.getSelectedIndex();
              ListModel  model= jList1.getModel();
             String f = (String) model.getElementAt(index);
@@ -244,7 +244,7 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(null,"Ha dejado de seguir al usuario con éxito");
           this.limpiar();
         }else{
-            javax.swing.JOptionPane.showMessageDialog(null,"Error ");
+            javax.swing.JOptionPane.showMessageDialog(null,"Error, falta seleccionar datos ");
         }
          }
                         }
@@ -252,7 +252,7 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
         else
         {
         
-         javax.swing.JOptionPane.showMessageDialog(null,"Seleccione a un usuario de la lista");
+         javax.swing.JOptionPane.showMessageDialog(null,"Error, falta seleccionar datos");
         }
     }//GEN-LAST:event_btnDejActionPerformed
  

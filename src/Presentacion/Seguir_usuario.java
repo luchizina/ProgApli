@@ -251,7 +251,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
     private void btnSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguirActionPerformed
         // TODO add your handling code here:
          DefaultListModel dlm = new DefaultListModel();
-            if(jList1.getSelectedIndex() > -1 && jList1.getSelectedIndex() > -1){
+            if(jList1.getSelectedIndex() > -1 && jList2.getSelectedIndex() > -1){
              int index = jList1.getSelectedIndex();
              ListModel  model= jList1.getModel();
             String f = (String) model.getElementAt(index);
@@ -278,7 +278,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             
         this.iUsu.seleccionarUsuario(parte4);
                 this.iUsu.seleccionarUsuSeg(parte42);
-        javax.swing.JOptionPane.showMessageDialog(null, parte4 + " a  a " + parte42);
+        javax.swing.JOptionPane.showMessageDialog(null, parte4 + " quiere seguir a: " + parte42);
        
                 if(this.iUsu.yaSigue()){
             javax.swing.JOptionPane.showMessageDialog(null, "Ya sigue a este usuario");
@@ -301,7 +301,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             }
             else
             {
-                 javax.swing.JOptionPane.showMessageDialog(null,"Error ");
+                 javax.swing.JOptionPane.showMessageDialog(null,"Error, falta seleccionar datos ");
             }
     }//GEN-LAST:event_btnSeguirActionPerformed
 
