@@ -276,7 +276,7 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
           
         else{
             
-        this.iUsu.seleccionarUsuario(parte4);
+                this.iUsu.seleccionarUsuario(parte4);
                 this.iUsu.seleccionarUsuSeg(parte42);
        
        
