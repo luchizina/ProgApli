@@ -44,6 +44,8 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
         listaColabs = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setTitle("Cancelar colaboracion a propuesta");
+
         listaColabs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

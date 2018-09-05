@@ -507,6 +507,8 @@ public class Alta_propuesta extends javax.swing.JInternalFrame {
         img.setIcon(null);
         ListProp.clearSelection();
         jTree1.clearSelection();
+        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
+        jTree1.setModel(this.iCat.construirArbolito(this.iCat.listarCategorias(), raiz));
     }
     private void bt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt2MouseClicked
         String hora = getHoraActual();
