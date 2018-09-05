@@ -278,8 +278,6 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             
         this.iUsu.seleccionarUsuario(parte4);
                 this.iUsu.seleccionarUsuSeg(parte42);
-        javax.swing.JOptionPane.showMessageDialog(null, parte4 + " quiere seguir a: " + parte42);
-       
                 if(this.iUsu.yaSigue()){
             javax.swing.JOptionPane.showMessageDialog(null, "Ya sigue a este usuario");
         }

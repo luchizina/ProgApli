@@ -77,10 +77,10 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTa = new javax.swing.JTable();
-        jCo = new java.awt.TextField();
         lblImg = new javax.swing.JLabel();
         lblNick2 = new javax.swing.JLabel();
         lblNick3 = new javax.swing.JLabel();
+        jCo = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Consulta colaborador");
@@ -184,12 +184,6 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
                 .addGap(0, 19, Short.MAX_VALUE))
         );
 
-        jCo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jCoKeyReleased(evt);
-            }
-        });
-
         lblImg.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblNick2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -198,20 +192,24 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
         lblNick3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNick3.setText("Filtrar:");
 
+        jCo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCoKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblNick3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -230,10 +228,11 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblNick3))
-                            .addGap(6, 6, 6)
+                            .addGap(2, 2, 2)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblNick3)
+                                .addComponent(jCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(4, 4, 4)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -302,6 +301,7 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listColaMouseClicked
 
     private void jCoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCoKeyReleased
+        
         listCola.setModel(this.iUsu.BUSCADOR_Colaborador(jCo.getText()));
     }//GEN-LAST:event_jCoKeyReleased
     private String[] getColumnas() {
@@ -315,10 +315,11 @@ public class Consultar_colaborador extends javax.swing.JInternalFrame {
             modeloT.addRow(new Object[]{list.get(i).getPropuesta().getTitulo(), list.get(i).getPropuesta().getMontoActual(), list.get(i).getPropuesta().getPropo(), list.get(i).getPropuesta().getEstActual().getEstado().toString()});
         }
     }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.TextField jCo;
+    private javax.swing.JTextField jCo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
