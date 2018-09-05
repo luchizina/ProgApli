@@ -437,7 +437,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+if (jRadioButton1.isSelected() == true || jRadioButton2.isSelected() == true) {
         if (jRadioButton1.isSelected() == true) {
             if (usuario.existeNick(nickname.getText()) == true) {
                 if (this.vacios() == false) {
@@ -487,8 +487,8 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                 }
             }
 
-            if (jRadioButton1.isSelected() == false && jRadioButton2.isSelected() == false) {
-                JOptionPane.showMessageDialog(null, "No eligio un tipo de usuario");
+            
+             
             }
 
 //        if(this.vacios() == false && direccion.getText().equals("") == false){
@@ -496,6 +496,9 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
 //        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+else {
+       JOptionPane.showMessageDialog(null, "No eligio un tipo de usuario");
+}
     }
 
     private boolean vacios() {
