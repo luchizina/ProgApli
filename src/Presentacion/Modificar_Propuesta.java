@@ -514,29 +514,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaValueChanged
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        /*List<String> pro = prop.ListarProp();
-        
-        if (buscar.getText().equals("")) {
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    String p = (String) pro.get(i);
-                    modelo.addElement(p);
-                }
-                lista.setModel(modelo);
-            }
-        } else {
-            if (!pro.isEmpty()) {
-                DefaultListModel modelo = new DefaultListModel();
-                for (int i = 0; i < pro.size(); i++) {
-                    String p = (String) pro.get(i);
-                    if (p.contains(buscar.getText())) {
-                        modelo.addElement(p);
-                    }
-                }
-                lista.setModel(modelo);
-            }
-        }*/
+
         lista.setModel(this.prop.BUSCADOR_Propuestas(buscar.getText()));
     }//GEN-LAST:event_buscarKeyReleased
 
@@ -600,6 +578,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void limpiar() {
+        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria");
         lista.setSelectedIndex(-1); //PARA QUE NO BUSCQUE SI SELECCIONA LA CAJA ADEMAS LIMPIA
         descripcion.setText("");
         lugar.setText("");
@@ -621,6 +600,7 @@ public class Modificar_Propuesta extends javax.swing.JInternalFrame {
         lugarCont.setText("");
         retornoact.setText("");
         lista.clearSelection();
+        arbol.setModel(this.cat.construirArbolito(this.cat.listarCategorias(), raiz));
     }
     private void buscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarFocusGained
         this.limpiar();
