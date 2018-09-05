@@ -311,6 +311,7 @@ public class ctrlUsuario implements IUsuario {
         this.usu.seguirCCPrueb();
         this.usu.seguirPCPrueb();
         this.usu.seguirPPprueb();
+        this.cargarSeg(usuarios);
     }
 
     @Override
