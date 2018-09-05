@@ -600,7 +600,9 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
     private void listaColabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaColabsMouseClicked
         // TODO add your handling code here:
+        
         int index = listaColabs.getSelectedIndex();
+        if (index > -1 ){
         ListModel model = listaColabs.getModel();
         String f = (String) model.getElementAt(index);
         String[] partes = f.split(Pattern.quote("("));
@@ -625,6 +627,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         }
         this.nick1 = c.getNick();
         this.pack();
+        }
     }//GEN-LAST:event_listaColabsMouseClicked
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
