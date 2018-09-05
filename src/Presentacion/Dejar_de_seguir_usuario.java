@@ -315,7 +315,7 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         List<DtProponente> props=this.iUsu.listarProponentes();
         DefaultListModel dlm = new DefaultListModel();
-        if(jRadioButton1.isSelected())
+        if(jRadioButton3.isSelected())
         {
 
             for(int i=0; i< props.size(); i++){
