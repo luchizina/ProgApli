@@ -41,7 +41,7 @@ public class DBusuario {
     public boolean agregarColaborador(Colaborador u) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
-                    + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC) values(?,?,?,?,?,?)");
+                    + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC, pass) values(?,?,?,?,?,?,?)");
             statement.setString(1, u.getNick());
             statement.setString(2, u.getCorreo());
             statement.setString(3, u.getNombre());
@@ -51,6 +51,7 @@ public class DBusuario {
             String fechaSt = sdf.format(fechaC);
             statement.setString(5, fechaSt);
             statement.setString(6, u.getImg());
+            statement.setString(7, u.getCont());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -63,7 +64,7 @@ public class DBusuario {
     public boolean agregarProponente(Proponente u) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
-                    + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb) values(?,?,?,?,?,?,?,?,?)");
+                    + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb, pass) values(?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, u.getNick());
             statement.setString(2, u.getCorreo());
             statement.setString(3, u.getNombre());
@@ -76,6 +77,7 @@ public class DBusuario {
             statement.setString(7, u.getDireccion());
             statement.setString(8, u.getBiografia());
             statement.setString(9, u.getLinkWeb());
+            statement.setString(10, u.getCont());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -381,7 +383,7 @@ public class DBusuario {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 String nick = rs.getString("NickP");
-                Proponente p = new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente");
+                Proponente p = new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente", rs.getString("pass"));
                 lista.put(nick, p);
             }
             rs.close();
@@ -584,7 +586,7 @@ public class DBusuario {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 String nick = rs.getString("NickC");
-                Colaborador p = new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador");
+                Colaborador p = new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador", rs.getString("pass"));
                 lista.put(nick, p);
             }
             rs.close();

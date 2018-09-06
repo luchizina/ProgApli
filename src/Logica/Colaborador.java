@@ -22,13 +22,13 @@ public class Colaborador extends Usuario {
         private
                 List<Colaboracion> colHechas;
 
-    public Colaborador(List<Colaboracion> colHechas, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
-        super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav);
+    public Colaborador(List<Colaboracion> colHechas, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav, String cont) {
+        super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav, cont);
         this.colHechas = colHechas;
     }
 
-    public Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo) {
-       super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
+    public Colaborador(String Nick, String Nombre, String Apellido, String Correo, Date fecha, String Imagen, String tipo, String cont) {
+       super(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo, cont);
        this.colHechas = new ArrayList<>(); 
     }
 
