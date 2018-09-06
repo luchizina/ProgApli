@@ -305,12 +305,13 @@ public class ctrlUsuario implements IUsuario {
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
-            File borrar = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Colaborador");
+            File borrar = new File("Imagenes\\Colaborador");
             this.borrarArch(borrar);
-            File borrar1 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Proponente");
+            borrar.delete();
+            File borrar1 = new File("Imagenes\\Proponente");
             this.borrarArch(borrar1);
             borrar1.delete();
-            File borrar2 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Propuesta");
+            File borrar2 = new File("Imagenes\\Propuesta");
             this.borrarArch(borrar2);
             borrar2.delete();
         } catch (SQLException ex) {
