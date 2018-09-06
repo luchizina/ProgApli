@@ -293,10 +293,26 @@ public class ctrlUsuario implements IUsuario {
        
     }
 
+    
+    public void borrarArch(File f){
+        File [] arch = f.listFiles();
+        for(int i=0; i<arch.length; i++){
+            arch[i].delete();
+        }
+    }
+    
     @Override
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
+            File borrar = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Colaborador");
+            this.borrarArch(borrar);
+            File borrar1 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Proponente");
+            this.borrarArch(borrar1);
+            borrar1.delete();
+            File borrar2 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Propuesta");
+            this.borrarArch(borrar2);
+            borrar2.delete();
         } catch (SQLException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
