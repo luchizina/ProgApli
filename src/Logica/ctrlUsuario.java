@@ -298,8 +298,10 @@ public class ctrlUsuario implements IUsuario {
     
     public void borrarArch(File f){
         File [] arch = f.listFiles();
+        if(arch.length > 0){
         for(int i=0; i<arch.length; i++){
             arch[i].delete();
+        }
         }
     }
     
@@ -307,15 +309,21 @@ public class ctrlUsuario implements IUsuario {
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
-            File borrar = new File("Imagenes\\Colaborador");
+            File borrar = new File("Imagenes/Colaborador");
+            if(borrar.exists()){
             this.borrarArch(borrar);
             borrar.delete();
-            File borrar1 = new File("Imagenes\\Proponente");
+            }
+            File borrar1 = new File("Imagenes/Proponente");
+            if(borrar1.exists()){
             this.borrarArch(borrar1);
             borrar1.delete();
-            File borrar2 = new File("Imagenes\\Propuesta");
+            }
+            File borrar2 = new File("Imagenes/Propuesta");
+            if(borrar2.exists()){
             this.borrarArch(borrar2);
             borrar2.delete();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }

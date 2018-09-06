@@ -447,6 +447,7 @@ public class DBusuario {
             String[] correo = {"horacio.rubino@guambia.com.uy", "Martin.bus@agadu.org.uy", "hector.gui@elgalpon.org.uy", "tabare.car@agadu.org.uy", "Cachila.sil@c1080.org.uy", "juliobocca@sodre.com.uy", "diego@efectocine.com", "kairoher@pilsenrock.com.uy", "comunicacion@durazno.gub.uy"};
             String[] nombre = {"Horacio", "Martín", "Héctor", "Tabaré", "Waldemar “Cachila” ", "Julio", "Diego", "Kairo", "Itendencia"};
             String[] apellido = {"Rubino", "Buscaglia", "Guido", "Cardozo", "Silva", "Bocca", "Parodi", "Herrera", "Durazno"};
+            String[] pass = {"pass1","pass2","pass3","pass4","pass5","pass6","pass7","pass8","pass9"};
             Date[] fechasN = {hrubino, mb, hg, tc, cs, jb, dp, kh, lb};
             String[] urlImg = {"Prueba\\Proponente\\hr.JPG", "Prueba\\Proponente\\mb.jpg", "Prueba\\Proponente\\hg.jpg", "Prueba\\Proponente\\tc.jpg", "Prueba\\Proponente\\cs.jpg", null, null, "Prueba\\Proponente\\kh.jpg", "Prueba\\Proponente\\lb.png"};
             String[] direccion = {"18 de Julio 1234", "Colonia 4321", "Gral. Flores 5645", "Santiago Rivas 1212", "Br. Artigas 4567", "Benito Blanco 4321", "Emilio Frugoni 1138 Ap. 02", "Paraguay 1423", "8 de Octubre 1429"};
@@ -497,7 +498,7 @@ public class DBusuario {
                 }
                 try {
                     PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
-                            + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb) values(?,?,?,?,?,?,?,?,?)");
+                            + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb, pass) values(?,?,?,?,?,?,?,?,?,?)");
                     statement.setString(1, nick[i]);
                     statement.setString(2, correo[i]);
                     statement.setString(3, nombre[i]);
@@ -510,6 +511,7 @@ public class DBusuario {
                     statement.setString(7, direccion[i]);
                     statement.setString(8, biografias[i]);
                     statement.setString(9, link[i]);
+                    statement.setString(10, pass[i]);
                     statement.executeUpdate();
                     statement.close();
                 } catch (SQLException ex) {
@@ -540,6 +542,7 @@ public class DBusuario {
             String[] correos = {"Robin.h@tinglesa.com.uy", "marcelot@ideasdelsur.com.ar", "edgardo@novick.com.uy", "puglia@alpanpan.com.uy", "chino@trico.org.uy", "eltony@manya.org.uy", "jodal@artech.com.uy", "juanp@elpueblo.com", "menganog@elpueblo.com", "pere@elpueblo.com", "jacinta@elpueblo.com"};
             String[] nombres = {"Robin", "Marcelo", "Edgardo", "Sergio", "Alvaro", "Antonio", "Nicolás", "Juan", "Mengano", "Perengano", "Tía"};
             String[] apellidos = {"Henderson", "Tinelli", "Novick", "Puglia", "Recoba", "Pacheco", "Jodal", "Perez", "Gómez", "López", "Jacinta"};
+            String[] pass = {"pass1","pass2","pass3","pass4","pass5","pass6","pass7","pass8","pass9","pass10","pass11"};
             Date[] fechasN = {rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
             String[] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
             for (int i = 0; i < 11; i++) {
@@ -557,7 +560,7 @@ public class DBusuario {
                 }
                 try {
                     PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
-                            + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC) values(?,?,?,?,?,?)");
+                            + "(NickC, CorreoC, NombreC, ApellidoC, FechaNacC, ImagenUrlC, pass) values(?,?,?,?,?,?,?)");
                     statement.setString(1, nick[i]);
                     statement.setString(2, correos[i]);
                     statement.setString(3, nombres[i]);
@@ -567,6 +570,7 @@ public class DBusuario {
                     String fechaSt = sdf.format(fechaC);
                     statement.setString(5, fechaSt);
                     statement.setString(6, Imagen);
+                    statement.setString(7, pass[i]);
                     statement.executeUpdate();
                     statement.close();
                 } catch (SQLException ex) {
