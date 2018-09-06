@@ -361,7 +361,7 @@ public class Dejar_de_seguir_usuario extends javax.swing.JInternalFrame {
       jTextField1.setText("");
       jTextField2.setText("");
       buttonGroup1.clearSelection();
-      buttonGroup1.clearSelection();
+      buttonGroup2.clearSelection();
       jList1.setModel(nuvo);
       jList2.setModel(nuvo);
       }

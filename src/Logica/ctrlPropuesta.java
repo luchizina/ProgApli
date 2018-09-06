@@ -336,7 +336,7 @@ public class ctrlPropuesta implements IPropuesta {
             if (aux != null){
             Nicks.add(aux.getTitulo()); 
             }
-        }       
+            }      
         return Nicks;
 };
  
