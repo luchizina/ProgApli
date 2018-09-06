@@ -79,6 +79,10 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         nombreAviso = new javax.swing.JLabel();
         apellidoValido = new javax.swing.JLabel();
         correoValido = new javax.swing.JLabel();
+        cont = new javax.swing.JLabel();
+        pass = new javax.swing.JPasswordField();
+        conf = new javax.swing.JLabel();
+        confpass = new javax.swing.JPasswordField();
         Jp2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         direccion = new javax.swing.JTextField();
@@ -183,6 +187,16 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             }
         });
 
+        cont.setText("Contraseña: ");
+
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
+            }
+        });
+
+        conf.setText("Confirmar contraseña:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -190,6 +204,26 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(conf)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(correoValido)
+                                .addGap(96, 96, 96))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(confpass, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(46, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(nombreAviso)
+                                .addGap(107, 107, 107))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(apellidoValido)
+                                .addGap(111, 111, 111))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -205,6 +239,10 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(apellido))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(37, 37, 37)
+                                .addComponent(email))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
@@ -213,27 +251,14 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                                         .addComponent(jRadioButton1))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel10)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 24, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(37, 37, 37)
-                                .addComponent(email)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(nombreAviso)
-                                .addGap(107, 107, 107))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(apellidoValido)
-                                .addGap(111, 111, 111))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(correoValido)
-                .addGap(96, 96, 96))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(cont)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,16 +283,27 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(correoValido)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel10)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(cont)
+                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(correoValido)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton1)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(conf)
+                            .addComponent(confpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(14, 14, 14))
         );
 
@@ -343,10 +379,11 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Jp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(Jp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -373,17 +410,17 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Jp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
                             .addComponent(jButton3))
-                        .addGap(39, 39, 39))))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(Jp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -442,13 +479,17 @@ if (jRadioButton1.isSelected() == true || jRadioButton2.isSelected() == true) {
             if (usuario.existeNick(nickname.getText()) == true) {
                 if (this.vacios() == false) {
                     if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
-                        boolean ok = usuario.altaColaborador(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), jRadioButton1.getText());
+                        if(pass.getText().equals(confpass.getText())){
+                        boolean ok = usuario.altaColaborador(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), jRadioButton1.getText(), pass.getText());
                         if (ok) {
                             JOptionPane.showMessageDialog(null, "Colaborador agregado");
                             this.limpiar();
                         } else {
                             JOptionPane.showMessageDialog(null, "El usuario no ha podido ser agregado", "Colaborador", JOptionPane.WARNING_MESSAGE);
                             this.limpiar();
+                        }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Contraseña", JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "El correo ingresado no es valido o ya fue utilizado", "Correo", JOptionPane.WARNING_MESSAGE);
@@ -465,13 +506,17 @@ if (jRadioButton1.isSelected() == true || jRadioButton2.isSelected() == true) {
                     if (this.vacios() == false && this.direccion() == false) {
                         if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
                             if (usuario.validaWeb(link.getText())) {
-                                boolean oki = usuario.altaProponente(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText());
+                                if(pass.getText().equals(confpass.getText())){
+                                boolean oki = usuario.altaProponente(nickname.getText(), email.getText(), nombre.getText(), apellido.getText(), fecha.getDate(), urlimagen.getText(), direccion.getText(), biografia.getText(), link.getText(), jRadioButton2.getText(), pass.getText());
                                 if (oki) {
                                     JOptionPane.showMessageDialog(null, "Proponente agregado");
                                     this.limpiar();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "El usuario no ha podido ser agregado", "Proponente", JOptionPane.WARNING_MESSAGE);
                                     this.limpiar();
+                                }
+                                }else{
+                                   JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Contraseña", JOptionPane.WARNING_MESSAGE); 
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(null, "El link ingresado es invalido", "Link web", JOptionPane.WARNING_MESSAGE);
@@ -506,8 +551,10 @@ else {
         String nomb = nombre.getText().trim();
         String ap = apellido.getText().trim();
         String correo = email.getText().trim();
+        String contr = pass.getText().trim();
+        String confi = confpass.getText().trim();
         if (nick.isEmpty() || nomb.isEmpty() || ap.isEmpty()
-                || correo.isEmpty() || fecha.getDate() == null) {
+                || correo.isEmpty() || fecha.getDate() == null || contr.isEmpty() || confi.isEmpty()) {
             return true;
         }
         return false;
@@ -539,6 +586,8 @@ else {
         nombreAviso.setText("");
         apellidoValido.setText("");
         correoValido.setText("");
+        pass.setText("");
+        confpass.setText("");
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -607,6 +656,10 @@ else {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
+
 //    private boolean controlFecha(Date elegida) throws ParseException{
 //        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 //        Date hasta = new Date();
@@ -624,6 +677,9 @@ else {
     private javax.swing.JTextArea biografia;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel conf;
+    private javax.swing.JPasswordField confpass;
+    private javax.swing.JLabel cont;
     private javax.swing.JLabel correoValido;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField email;
@@ -650,6 +706,7 @@ else {
     private javax.swing.JTextField nickname;
     private javax.swing.JTextField nombre;
     private javax.swing.JLabel nombreAviso;
+    private javax.swing.JPasswordField pass;
     private javax.swing.JTextField urlimagen;
     private javax.swing.JLabel webValido;
     // End of variables declaration//GEN-END:variables
