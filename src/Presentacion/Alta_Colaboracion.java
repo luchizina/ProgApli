@@ -550,7 +550,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         jRadioButton2.setSelected(false);
-        this.tipoR1 = "Porcentaje";
+        this.tipoR1 = "porcentaje";
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void precioEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioEActionPerformed
@@ -632,7 +632,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
         jRadioButton1.setSelected(false);
-        this.tipoR1 = "Entradas";
+        this.tipoR1 = "entrada";
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

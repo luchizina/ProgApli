@@ -606,11 +606,11 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
                  {
                  DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
                  Tretorno re = new Tretorno();
-                 if(listitaC.get(i).getRetorno().equals("Entradas")){
-                     re.gsetEntraada("Entrada");
+                 if(listitaC.get(i).getRetorno().equals("entrada")){
+                     re.gsetEntraada("entrada");
                  }
                  else {
-                     re.gsetPorcentaje("Porcentaje");
+                     re.gsetPorcentaje("porcentaje");
                  }
                  DtColaboracion colad = new DtColaboracion(listitaC.get(i).getHora(),listitaC.get(i).getFecha(),listitaC.get(i).getMonto(), re, null, prop);
                  return colad; //colad
