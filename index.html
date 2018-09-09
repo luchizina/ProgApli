@@ -1,0 +1,71 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CulturArte</title>
+<link rel="shortcut icon" href="images/logo.png" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/tooplate_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/ddsmoothmenu.js">
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+	mainmenuid: "tooplate_menu", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+</script>
+
+</head>
+
+<body>
+
+<div id="tooplate_header">
+	<div id="site_title"><h1><a href="#"></a></h1></div>
+    <div id="tooplate_menu" class="ddsmoothmenu">
+                <ul>
+                    <li><a href="index.html" class="selected">Inicio</a></li>
+                    <li><a href="#">Usuario</a>
+                      	<ul>
+                              
+                            <li><a href="registrar_usuario.html">Registrarse</a></li>
+                            <li><a href="#">Iniciar sesión</a></li>
+                            <li><a href="#">Consultar perfil</a></li>
+                            <li><span class="bottom"></span></li>
+                        </ul>
+                    </li>
+                    <li><a href="propuesta.html">Propuestas</a>
+                    </li>
+                </ul>
+                <br style="clear: left" />
+            </div> <!-- end of tooplate_menu -->
+</div> <!-- END of header -->
+<div id="tooplate_slider_wrapper">
+	<div id="tooplate_slider">
+        <div id="slider" class="nivoSlider">
+            <img src="images/slider/01.jpg" alt="Slider 01"/>
+            <a href="http://dev7studios.com"><img src="images/slider/02.jpg" alt="Slider 02"/></a>
+            <img src="images/slider/03.jpg" alt="Slider 03" />
+            <img src="images/slider/04.jpg" alt="Slider 04"/>
+        </div>
+		<script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
+        <script type="text/javascript">
+        $(window).load(function() {
+            $('#slider').nivoSlider();
+        });
+        </script>	
+    </div> <!-- END of slider -->
+</div> <!-- END of slider wrapper -->
+
+</body>
+</html>
