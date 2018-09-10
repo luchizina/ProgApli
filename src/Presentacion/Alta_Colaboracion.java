@@ -288,6 +288,11 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                 filtroPropuFocusGained(evt);
             }
         });
+        filtroPropu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtroPropuActionPerformed(evt);
+            }
+        });
         filtroPropu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 filtroPropuKeyReleased(evt);
@@ -740,6 +745,10 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_montoKeyTyped
+
+    private void filtroPropuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroPropuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtroPropuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

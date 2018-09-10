@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import Logica.Colaboracion;
+import static Logica.Testado.Publicada;
 import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -34,6 +35,8 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -159,6 +162,65 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
         return false;
+    }
+    
+    public DefaultTableModel BUSCADOR_Propuestas2(String palabrita, List<DtPropuesta> listita, TableModel modelito)
+    {
+        DefaultTableModel model = (DefaultTableModel) modelito;
+        model.setRowCount(0);
+        if (palabrita.equals("")) { // SI NO BUSCA
+            if (!listita.isEmpty()) {
+                for (int i = 0; i < listita.size(); i++) {
+                    DtPropuesta p = (DtPropuesta) listita.get(i);
+                    Proponente p2 = ctrlUsuario.getInstance().traerProponente(p.getPropo());
+                    Object[] dat = {p.getTitulo(), p2.getNombre() + "(" + p2.getNick() + ")"};
+                    model.addRow(dat);
+                }
+                return model;
+            }
+        } else {                                // SI BUSCA
+            if (!listita.isEmpty()) {
+                for (int i = 0; i < listita.size(); i++) {
+                    DtPropuesta p = (DtPropuesta) listita.get(i);
+                    Proponente p2 = ctrlUsuario.getInstance().traerProponente(p.getPropo());
+                    if (p.getTitulo().contains(palabrita) || p2.getNick().contains(palabrita)) {
+                        Object[] dat = {p.getTitulo(), p2.getNombre() + "(" + p2.getNick() + ")"};
+                        model.addRow(dat);
+                    }
+                }
+                
+            }
+        }
+        return model;
+    }
+    
+    public void cambiarEstadito(String p, String f)
+    {
+        Propuesta pr = this.propuestas.get(p);
+        Estado est = new Estado(Testado.valueOf(f));
+        pr.setEstActual(est);
+        Date fechita = new Date();
+         Date hora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
+        String fg = formateador.format(hora);
+        java.sql.Time fecFormatoTime = null;
+        try {
+                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+        
+            fecFormatoTime = new java.sql.Time(sdf.parse(fg).getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ListEstado estad = new ListEstado(fechita, fecFormatoTime, f);
+        try {
+            this.dbE.agregarEstado(estad, p);
+        } catch (SQLException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        pr.addLE(estad);
     }
     
     public List<Colaboracion> listarColaboraciones()
