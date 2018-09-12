@@ -431,6 +431,27 @@ public List<DtColaboracion> datosCol(Colaborador a){
         
         
     }
+
+    @Override
+    public DtUsuario traerDtUsuario(String nick) {
+        DtProponente prop = null;
+        DtColaborador colab = null;
+        for (Usuario u : this.usuarios.values()) {
+            if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
+                if (u instanceof Proponente) {
+                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont());
+                    return prop;
+                } else if (u instanceof Colaborador) {
+                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont());
+                    return colab;
+                }
+            }
+        }
+        return null;
+    }
+    
+    
+    
           
 
     @Override

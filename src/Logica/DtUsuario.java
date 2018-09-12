@@ -7,11 +7,15 @@ package Logica;
  */
 
 import Logica.*;
+import java.util.Date;
+import java.util.Map;
 
 /**
  *
  * @author Luchi
  */
 public class DtUsuario {
+
     
+
 }
