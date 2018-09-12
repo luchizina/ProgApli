@@ -419,6 +419,19 @@ public List<DtColaboracion> datosCol(Colaborador a){
         }
         return true;
     }
+    
+    @Override
+    public Usuario traerUsuario(String nick){
+         for (Usuario u : this.usuarios.values()) {
+            if (u.getNick().equalsIgnoreCase(nick)) {
+                return u;
+            }
+        }
+        return null;
+        
+        
+    }
+          
 
     @Override
     public boolean existeCorreo(String correo) {

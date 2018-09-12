@@ -31,7 +31,7 @@ public abstract boolean escorreo(String correo);
      public abstract void cargarPropPrueba();
      public abstract boolean copia(String origen, String destino);
      public abstract Colaborador traerColaborador(String lul);
-     
+     public abstract Usuario traerUsuario(String nick);
      public abstract void cargarUsuarios2();
      public abstract boolean validaWeb(String algo);
      public abstract boolean seguirUsuario();
