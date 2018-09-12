@@ -279,7 +279,7 @@ public class Consulta_colaboracion_a_propuesta extends javax.swing.JInternalFram
         jLColaboracion.setSelectedIndex(-1);
         jLColaborador.clearSelection();
         jLColaboracion.clearSelection();
-         DefaultListModel modelo = new DefaultListModel();
+        DefaultListModel modelo = new DefaultListModel();
         jLColaboracion.setModel(modelo);
         TxtFecha.setText("");
         TxtHora.setText("");

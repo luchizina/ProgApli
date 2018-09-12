@@ -18,8 +18,8 @@ public class Proponente extends Usuario {
             String biografia;
             String linkWeb;
 
-    public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
-        super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav);
+    public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav, String cont) {
+        super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav, cont);
         this.direccion = direccion;
         this.biografia = biografia;
         this.linkWeb = linkWeb;
@@ -34,12 +34,12 @@ public class Proponente extends Usuario {
 
     
 
-    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String Tipo) {
-        super(nick, nombre, Apellido, Correo, fecha, img, Tipo);
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String Tipo, String cont) {
+        super(nick, nombre, Apellido, Correo, fecha, img, Tipo, cont);
     }
 
-    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo) {
-        super(nick, nombre, Apellido, Correo, fecha, img, tipo);
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo, String cont) {
+        super(nick, nombre, Apellido, Correo, fecha, img, tipo, cont);
         this.direccion=dir;
         this.biografia=bio;
         this.linkWeb=link;

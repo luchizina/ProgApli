@@ -67,7 +67,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -158,21 +157,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
-        jMenuItem17.setText("jMenuItem17");
-        jMenuItem17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem7MouseClicked(evt);
-            }
-        });
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
+        jMenuItem17.setText("Evaluar_Propuesta");
         jMenu5.add(jMenuItem17);
-
-        jMenuItem18.setText("jMenuItem17");
-        jMenu5.add(jMenuItem18);
 
         jMenu1.add(jMenu5);
 
@@ -353,6 +339,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -426,6 +413,7 @@ public class Principal extends javax.swing.JFrame {
                 });
         
         jMenu5.add(jMenuItem7);
+        jMenu5.add(jMenuItem17);
 
         jMenu1.add(jMenu5);
 
@@ -437,7 +425,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
-
+        
+        jMenuItem17.setText("Evaluar Propuestas");
+        jMenuItem17.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu6.setText("Colaboraciones");
         jMenu6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -723,6 +718,17 @@ su.setVisible(true);
             
     }//GEN-LAST:event_jpComponentShown
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        jp.removeAll();
+        jp.repaint();
+        Evaluar_Propuesta ev = new Evaluar_Propuesta(IP, iUsu);
+        this.setMinimumSize(new Dimension(ev.getWidth()+20, ev.getHeight()+80));
+        jp.add(ev);
+        ev.setVisible(true);
+        
+    }
+        
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
 jp.removeAll();
         jp.repaint();
@@ -813,7 +819,6 @@ jp.removeAll();
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -25,6 +25,7 @@ public class Usuario {
     private Map<String, Usuario> usuSeguidos;
     private Map<String, Propuesta> propuFav;
     String seguido;
+    String cont;
 
 
     public Usuario(String nick) {
@@ -37,7 +38,7 @@ public class Usuario {
     }
 
 
-    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav) {
+    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav, String cont) {
         this.nick = nick;
         this.nombre = nombre;
         this.Apellido = Apellido;
@@ -46,6 +47,7 @@ public class Usuario {
         this.img = img;
         this.usuSeguidos = new HashMap<>();
         this.propuFav =new HashMap<>();
+        this.cont = cont;
     }
 
     public String getNick() {
@@ -148,7 +150,7 @@ public class Usuario {
     
     
 
-    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo){
+    public Usuario(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String tipo, String cont){
         this.nick = nick;
         this.nombre = nombre;
         this.Apellido = Apellido;
@@ -158,5 +160,14 @@ public class Usuario {
         this.tipo=tipo;
         this.propuFav = new HashMap<>();
         this.usuSeguidos = new HashMap<>();
+        this.cont = cont;
+    }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
     }
 }

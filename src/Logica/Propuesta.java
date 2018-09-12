@@ -45,7 +45,10 @@ public void setLE(List<ListEstado>  ELX) {
         this.LE = ELX;
     }
 
-
+public void addLE(ListEstado estadito)
+{
+    this.LE.add(estadito);
+}
 
 public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img,String lugar) {
         this.titulo = titulo;

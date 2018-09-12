@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import Logica.Colaborador;
 import Logica.Proponente;
+import java.security.NoSuchAlgorithmException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +62,7 @@ public class ctrlUsuario implements IUsuario {
     }
 
     @Override
-    public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo) {
+    public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass) {
         if (this.existe(Nick, Correo) == false) {
             return false;
         } else {
@@ -75,8 +76,8 @@ public class ctrlUsuario implements IUsuario {
                     Imagen = null;
                 }
             }
-
-            Colaborador c = new Colaborador(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo);
+//            String nuevo = this.sha1(pass);
+            Colaborador c = new Colaborador(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo, pass);
             boolean res = this.usu.agregarColaborador(c);
             if (res) {
                 this.usuarios.put(Nick, c);
@@ -237,7 +238,7 @@ public class ctrlUsuario implements IUsuario {
     }
 
     @Override
-    public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo) {
+    public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo, String pass) {
         if (this.existe(Nick, Correo) == false) {
             return false;
         } else {
@@ -252,7 +253,8 @@ public class ctrlUsuario implements IUsuario {
                 }
 
             }
-            Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo);
+//            String nuevo = this.sha1(pass);
+            Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo, pass);
                 boolean res = this.usu.agregarProponente(p);
             if (res) {
                 this.usuarios.put(Nick, p);
@@ -294,10 +296,35 @@ public class ctrlUsuario implements IUsuario {
        
     }
 
+    
+    public void borrarArch(File f){
+        File [] arch = f.listFiles();
+        if(arch.length > 0){
+        for(int i=0; i<arch.length; i++){
+            arch[i].delete();
+        }
+        }
+    }
+    
     @Override
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
+            File borrar = new File("Imagenes/Colaborador");
+            if(borrar.exists()){
+            this.borrarArch(borrar);
+            borrar.delete();
+            }
+            File borrar1 = new File("Imagenes/Proponente");
+            if(borrar1.exists()){
+            this.borrarArch(borrar1);
+            borrar1.delete();
+            }
+            File borrar2 = new File("Imagenes/Propuesta");
+            if(borrar2.exists()){
+            this.borrarArch(borrar2);
+            borrar2.delete();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -580,11 +607,11 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
                  {
                  DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
                  Tretorno re = new Tretorno();
-                 if(listitaC.get(i).getRetorno().equals("Entradas")){
-                     re.gsetEntraada("Entrada");
+                 if(listitaC.get(i).getRetorno().equals("entrada")){
+                     re.gsetEntraada("entrada");
                  }
                  else {
-                     re.gsetPorcentaje("Porcentaje");
+                     re.gsetPorcentaje("porcentaje");
                  }
                  DtColaboracion colad = new DtColaboracion(listitaC.get(i).getHora(),listitaC.get(i).getFecha(),listitaC.get(i).getMonto(), re, null, prop);
                  return colad; //colad
@@ -644,4 +671,23 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         }
         return modelo;
     }
+     
+     public String encripta(String pass, String type){
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance(type);
+            byte [] arreglo = md.digest(pass.getBytes());
+            StringBuffer sb =new StringBuffer();
+            for(int i=0; i<arreglo.length; ++i){
+                sb.append(Integer.toHexString((arreglo[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+     }
+     
+     public String sha1(String pass){
+         return this.encripta(pass, "SHA1");
+     }
 }
