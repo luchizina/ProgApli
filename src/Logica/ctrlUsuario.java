@@ -423,7 +423,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
     @Override
     public Usuario traerUsuario(String nick){
          for (Usuario u : this.usuarios.values()) {
-            if (u.getNick().equalsIgnoreCase(nick)) {
+            if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 return u;
             }
         }
