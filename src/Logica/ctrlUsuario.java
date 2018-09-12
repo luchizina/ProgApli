@@ -685,6 +685,7 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         return modelo;
     }
      
+     @Override
      public String encripta(String pass, String type){
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance(type);
@@ -700,6 +701,7 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         return null;
      }
      
+     @Override
      public String sha1(String pass){
          return this.encripta(pass, "SHA1");
      }

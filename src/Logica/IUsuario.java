@@ -49,4 +49,6 @@ public abstract boolean escorreo(String correo);
       public abstract void filtrarC(String campo, JList lista, List<Colaborador> listita);
      public abstract DefaultListModel BUSCADOR_Colaborador(String Palabra);
      public abstract DefaultListModel BUSCADOR_Proponente(String palabrita);
+     public abstract String sha1(String pass);
+     public abstract String encripta(String pass, String type);
 }
