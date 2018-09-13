@@ -452,7 +452,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
     
     @Override
     public DtInfo resolverLogin(String nick, String pass) {
-        DtInfo resultado = new DtInfo(true, "algo");
+        DtInfo resultado = new DtInfo(false, "algo");
         DtUsuario user = this.traerDtUsuario(nick);
         DtProponente prop = null;
         DtColaborador colab = null;
@@ -538,6 +538,10 @@ public List<DtColaboracion> datosCol(Colaborador a){
                 }
             }
 
+        }
+        else{
+            resultado.setEstLogin(false);
+            resultado.setMensaje("No existe un usuario en el sistema con ese nick");
         }
 
         return resultado;
