@@ -51,5 +51,6 @@ public abstract boolean escorreo(String correo);
      public abstract DefaultListModel BUSCADOR_Proponente(String palabrita);
      public abstract String sha1(String pass);
      public abstract String encripta(String pass, String type);
-     public DtUsuario traerDtUsuario(String nick);
+     public abstract DtUsuario traerDtUsuario(String nick);
+     public abstract DtInfo resolverLogin(String nick, String pass);
 }

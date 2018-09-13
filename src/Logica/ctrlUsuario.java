@@ -450,6 +450,99 @@ public List<DtColaboracion> datosCol(Colaborador a){
         return null;
     }
     
+    @Override
+    public DtInfo resolverLogin(String nick, String pass) {
+        DtInfo resultado = new DtInfo(true, "algo");
+        DtUsuario user = this.traerDtUsuario(nick);
+        DtProponente prop = null;
+        DtColaborador colab = null;
+        boolean valido=false;
+
+        if (user instanceof DtColaborador) {
+            colab = (DtColaborador) user;
+
+            if (this.escorreo(nick)) {
+                if (this.existeCorreo(nick)) {
+                    //no existe direccion de correo en sistema
+                    resultado.setEstLogin(false);
+                    resultado.setMensaje("No existe la dirección de correo ingresada en el sistema");
+
+                } else {
+                    if (colab.getPass().equals(pass)) {
+                        
+                        resultado.setEstLogin(true);
+                        resultado.setMensaje("Bienvenido");
+
+                    } else {
+                        resultado.setEstLogin(false);
+                        resultado.setMensaje("La contraseña ingresada es incorrecta");
+
+                    }
+                }
+            } else if (this.existeNick(nick)) {
+                //no existe el usuario en el sistema con ese nick
+                resultado.setEstLogin(false);
+              
+                resultado.setMensaje("No existe un usuario en el sistema con ese nick");
+
+            } else {
+                if (colab.getPass().equals(pass)) {
+                      
+                    resultado.setEstLogin(true);
+                    resultado.setMensaje("Bienvenido");
+
+                    //ingresa bien
+                } else {
+                    //la contraseña ingresada es incorrecta
+                    resultado.setEstLogin(false);
+                    resultado.setMensaje("La contraseña ingresada es incorrecta");
+
+                }
+            }
+
+        } else if (user instanceof DtProponente) {
+            prop = (DtProponente) user;
+            if (this.escorreo(nick)) {
+                if (this.existeCorreo(nick)) {
+                    //no existe la direccion de correo ingresada en el sistema
+                    resultado.setEstLogin(false);
+                    resultado.setMensaje("No existe la dirección de correo ingresada en el sistema");
+
+                } else {
+                    if (prop.getPass().equals(pass)) {
+                         
+                       resultado.setEstLogin(true);
+                       resultado.setMensaje("Bienvenido");
+                    } else {
+                        //la contraseña ingresada es incorrectafas
+                        resultado.setEstLogin(false);
+                        resultado.setMensaje("La contraseña ingresada es incorrecta");
+                    }
+                }
+            } else if (this.existeNick(nick)) {
+                //No existe un usuario en el sistema con ese nick
+                resultado.setEstLogin(false);
+                resultado.setMensaje("No existe un usuario en el sistema con ese nick");
+                
+
+            } else {
+                if (prop.getPass().equals(pass)) {
+                        
+                        resultado.setEstLogin(true);
+                        resultado.setMensaje("Bienvenido");
+                        
+                } else {
+                    resultado.setEstLogin(false);
+                    resultado.setMensaje("La contraseña ingresada es incorrecta");
+                    
+                }
+            }
+
+        }
+
+        return resultado;
+    }
+    
     
     
           

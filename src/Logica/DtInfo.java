@@ -28,11 +28,11 @@ public class DtInfo {
     }
     
     public void setEstLogin(boolean esta){
-        estLogin=esta;
+        this.estLogin=esta;
         
     }
     
     public void setMensaje(String mens){
-        mensaje=mens;
+        this.mensaje=mens;
     }
 }
