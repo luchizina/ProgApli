@@ -492,7 +492,8 @@ public List<DtColaboracion> datosCol(Colaborador a){
                       
                     resultado.setEstLogin(true);
                     resultado.setMensaje("Bienvenido");
-
+                    resultado.setNick(colab.getNick());
+                    resultado.setTipo("colaborador");
                     //ingresa bien
                 } else {
                     //la contraseña ingresada es incorrecta
@@ -515,6 +516,8 @@ public List<DtColaboracion> datosCol(Colaborador a){
                          
                        resultado.setEstLogin(true);
                        resultado.setMensaje("Bienvenido");
+                       resultado.setNick(prop.getNick());
+                       resultado.setTipo("proponente");
                     } else {
                         //la contraseña ingresada es incorrectafas
                         resultado.setEstLogin(false);
@@ -532,6 +535,8 @@ public List<DtColaboracion> datosCol(Colaborador a){
                         
                         resultado.setEstLogin(true);
                         resultado.setMensaje("Bienvenido");
+                        resultado.setTipo("proponente");
+                        resultado.setNick(prop.getNick());
                         
                 } else {
                     resultado.setEstLogin(false);

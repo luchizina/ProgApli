@@ -35,7 +35,7 @@ public class DtInfo {
         return nick;
     }
     
-    public String tipoUser(){
+    public String getTipoUser(){
         return tipoUser;
     }
     
