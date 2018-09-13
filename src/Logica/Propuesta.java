@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+import Logica.Comentario;
 
 /**
  *
@@ -36,6 +37,15 @@ public class Propuesta {
             List<Colaboracion> colaboraciones;
             //private Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
             private List<ListEstado> LE;
+            private List<Comentario> cometarios;
+
+    public List<Comentario> getCometarios() {
+        return cometarios;
+    }
+
+    public void setCometarios(List<Comentario> cometarios) {
+        this.cometarios = cometarios;
+    }
             
 public Propuesta(){
 
@@ -67,6 +77,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.Prop = Prop;
         //this.listaDeEstados = listaDeEstados;
         this.LE = new ArrayList();
+        this.cometarios =  new ArrayList();
         this.lugar = lugar;
     }
 
@@ -86,6 +97,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.colaboraciones = new ArrayList<>();
         //this.listaDeEstados = new HashMap<>();
         this.LE  = new ArrayList();
+        this.cometarios =  new ArrayList();
      }
      
      public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
@@ -104,7 +116,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          this.colaboraciones = new ArrayList<>();
          //this.listaDeEstados = new HashMap<>();
           this.LE = new ArrayList();
-         
+         this.cometarios =  new ArrayList();
      }
     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img, String lugar) {
         this.titulo = titulo;
@@ -119,6 +131,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.colaboraciones = new ArrayList<>();
         //this.listaDeEstados = new HashMap<>();
         this.LE = new ArrayList();
+        this.cometarios =  new ArrayList();
     }
     
     // AGREGE LUGAR 
@@ -139,6 +152,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          //this.listaDeEstados = new HashMap<>();
          this.LE = new ArrayList();
          this.lugar = xlugar;
+         this.cometarios =  new ArrayList();
          
      }
     
@@ -346,4 +360,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
          this.colaboraciones.remove(co);
     }
     
+    public void Agregar_Comentario(Comentario x){
+        this.cometarios.add(x);
+    };
 }

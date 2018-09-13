@@ -426,6 +426,15 @@ public class DBusuario {
             PreparedStatement g = conexion.prepareStatement("Delete FROM siguepp");
             g.executeUpdate();
             g.close();
+            PreparedStatement comentario = conexion.prepareStatement("Delete FROM comentarios");        // agregado
+            comentario.executeUpdate();
+            comentario.close();
+            PreparedStatement Fav_Colaborador = conexion.prepareStatement("Delete FROM favoriteacp");   // agregado
+            Fav_Colaborador.executeUpdate();
+            Fav_Colaborador.close();
+            PreparedStatement Fav_Proponente = conexion.prepareStatement("Delete FROM favoriteapp");    // agregado
+            Fav_Proponente.executeUpdate();
+            Fav_Proponente.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

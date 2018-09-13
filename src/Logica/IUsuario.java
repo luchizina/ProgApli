@@ -18,7 +18,7 @@ import javax.swing.JList;
 public interface IUsuario {
     public abstract boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass);
     public abstract boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo, String pass);
-public abstract boolean escorreo(String correo);
+    public abstract boolean escorreo(String correo);
     public abstract boolean existeNick(String nick);
     public abstract boolean existeCorreo(String correo);
     public abstract void cargarProponentes();

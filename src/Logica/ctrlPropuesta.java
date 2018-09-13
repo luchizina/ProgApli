@@ -338,6 +338,10 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.colaboracionesPrueba();
         this.cargarColaboraciones();
         this.actualizarMontos();
+        this.dbPropuesta.CargarComentarios_BaseDeDatos();   //agregado
+        this.dbPropuesta.CargarFavoritos_BaseDeDatos();     //agregado
+        this.Cargar_Comentarios_Memoria();                  //agregado  
+        this.Cargar_Favoritos_Memoria();                    //agregado
     }
     
     public void cargarColaboraciones()
@@ -528,6 +532,23 @@ public class ctrlPropuesta implements IPropuesta {
         return modelo; 
     }
 ;
+    public void Cargar_Comentarios_Memoria(){
+    this.dbPropuesta.CargarComentarios_Memoria();
+//    List<Comentario> x = this.dbPropuesta.CargarComentarios_Memoria();
+//    if(!x.isEmpty()){
+//        for (int i = 0; i < x.size(); i++) {
+//                    Comentario p = (Comentario) x.get(i);
+//                    p.getColaborador().getComentarios().add(p);
+//                    p.getPropuesta().getCometarios().add(p);
+//                    System.out.println(p.getPropuesta().getTitulo()+" "+p.getColaborador().getNombre());
+//                }
+//    }
+//    else {
+//        System.out.println("Vacio no anda algo");
+//    }
+    };
     
-    
+    public void Cargar_Favoritos_Memoria(){
+        this.dbPropuesta.CargarFavoritos_Memoria();
+    };
 }
