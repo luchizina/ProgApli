@@ -76,8 +76,8 @@ public class ctrlUsuario implements IUsuario {
                     Imagen = null;
                 }
             }
-//            String nuevo = this.sha1(pass);
-            Colaborador c = new Colaborador(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo, pass);
+            String nuevo = this.sha1(pass);
+            Colaborador c = new Colaborador(Nick, Nombre, Apellido, Correo, fecha, Imagen, tipo, nuevo);
             boolean res = this.usu.agregarColaborador(c);
             if (res) {
                 this.usuarios.put(Nick, c);
@@ -253,8 +253,8 @@ public class ctrlUsuario implements IUsuario {
                 }
 
             }
-//            String nuevo = this.sha1(pass);
-            Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo, pass);
+            String nuevo = this.sha1(pass);
+            Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo, nuevo);
                 boolean res = this.usu.agregarProponente(p);
             if (res) {
                 this.usuarios.put(Nick, p);
