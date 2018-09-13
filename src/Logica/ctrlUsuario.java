@@ -452,7 +452,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
     
     @Override
     public DtInfo resolverLogin(String nick, String pass) {
-        DtInfo resultado = new DtInfo(false, "algo");
+        DtInfo resultado = new DtInfo(false, "algo","algo","algo");
         DtUsuario user = this.traerDtUsuario(nick);
         DtProponente prop = null;
         DtColaborador colab = null;
@@ -472,6 +472,8 @@ public List<DtColaboracion> datosCol(Colaborador a){
                         
                         resultado.setEstLogin(true);
                         resultado.setMensaje("Bienvenido");
+                        resultado.setTipo("colaborador");
+                        resultado.setNick(colab.getNick());
 
                     } else {
                         resultado.setEstLogin(false);

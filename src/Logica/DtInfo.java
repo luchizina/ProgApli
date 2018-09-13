@@ -12,11 +12,15 @@ package Logica;
 public class DtInfo {
     boolean estLogin;
     String mensaje;
+    String nick;
+    String tipoUser;
     
-    public DtInfo(boolean est, String mens){
+    public DtInfo(boolean est, String mens, String nick, String tipoUser){
         
         this.estLogin=est;
         this.mensaje=mens;
+        this.nick=nick;
+        this.tipoUser=tipoUser;
     }
     
     public boolean getEstLogin(){
@@ -25,6 +29,22 @@ public class DtInfo {
     
     public String getMensaje(){
         return mensaje;
+    }
+    
+    public String getNick(){
+        return nick;
+    }
+    
+    public String tipoUser(){
+        return tipoUser;
+    }
+    
+    public void setNick(String nick){
+        this.nick=nick;
+    }
+    
+    public void setTipo(String tipo){
+        this.tipoUser=tipo;
     }
     
     public void setEstLogin(boolean esta){
