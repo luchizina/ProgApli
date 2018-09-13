@@ -471,8 +471,8 @@ public class DBPropuesta {
             }
         }
     }
-    
-   public void CargarFavoritos_Memoria() {
+
+    public void CargarFavoritos_Memoria() {
         try {
             // CARGANDO LOS FAVORITOS PROPONENTES
             IUsuario iUsu = fab.getICtrlUsuario();
@@ -490,7 +490,7 @@ public class DBPropuesta {
             }
             rs.close();
             st.close();
-             // CARGANDO LOS FAVORITOS COLABORADORES
+            // CARGANDO LOS FAVORITOS COLABORADORES
             PreparedStatement stx = conexion.prepareStatement("SELECT * FROM favoriteacp");
             ResultSet rsx = stx.executeQuery();
             while (rsx.next()) {
@@ -498,7 +498,7 @@ public class DBPropuesta {
                 String xtituloPropuesta = rsx.getString("TituloProp");
                 Colaborador col = iUsu.traerColaborador(xnombreColaborador);
                 Propuesta propu = IP.getPropPorNick(xtituloPropuesta);
-                
+
                 col.getPropuFav().put(xtituloPropuesta, propu);
                 //System.out.println(col.getNick()+"-"+propu.getTitulo());
             }
@@ -511,6 +511,6 @@ public class DBPropuesta {
         }
     }
 
-    ;   
+;   
     
 }
