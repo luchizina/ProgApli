@@ -439,10 +439,10 @@ public List<DtColaboracion> datosCol(Colaborador a){
         for (Usuario u : this.usuarios.values()) {
             if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 if (u instanceof Proponente) {
-                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont());
+                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido());
                     return prop;
                 } else if (u instanceof Colaborador) {
-                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont());
+                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido());
                     return colab;
                 }
             }
@@ -460,7 +460,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
 
         if (user instanceof DtColaborador) {
             colab = (DtColaborador) user;
-
+            String cadena1=colab.getNombre();
+            String cadena2=colab.getApellido();
+            String cadena3=" ";
+            String cadena4=cadena1.concat(cadena3);
+            String cadena5=cadena4.concat(cadena2);
             if (this.escorreo(nick)) {
                 if (this.existeCorreo(nick)) {
                     //no existe direccion de correo en sistema
@@ -471,7 +475,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                     if (colab.getPass().equals(pass)) {
                         
                         resultado.setEstLogin(true);
-                        resultado.setMensaje("Bienvenido");
+                        resultado.setMensaje(cadena5);
                         resultado.setTipo("colaborador");
                         resultado.setNick(colab.getNick());
 
@@ -491,7 +495,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                 if (colab.getPass().equals(pass)) {
                       
                     resultado.setEstLogin(true);
-                    resultado.setMensaje("Bienvenido");
+                    resultado.setMensaje(cadena5);
                     resultado.setNick(colab.getNick());
                     resultado.setTipo("colaborador");
                     //ingresa bien
@@ -505,6 +509,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
 
         } else if (user instanceof DtProponente) {
             prop = (DtProponente) user;
+              String cadena1=prop.getNombre();
+            String cadena2=prop.getApellido();
+            String cadena3=" ";
+            String cadena4=cadena1.concat(cadena3);
+            String cadena5=cadena4.concat(cadena2);
             if (this.escorreo(nick)) {
                 if (this.existeCorreo(nick)) {
                     //no existe la direccion de correo ingresada en el sistema
@@ -515,7 +524,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                     if (prop.getPass().equals(pass)) {
                          
                        resultado.setEstLogin(true);
-                       resultado.setMensaje("Bienvenido");
+                       resultado.setMensaje(cadena5);
                        resultado.setNick(prop.getNick());
                        resultado.setTipo("proponente");
                     } else {
@@ -534,7 +543,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                 if (prop.getPass().equals(pass)) {
                         
                         resultado.setEstLogin(true);
-                        resultado.setMensaje("Bienvenido");
+                        resultado.setMensaje(cadena5);
                         resultado.setTipo("proponente");
                         resultado.setNick(prop.getNick());
                         

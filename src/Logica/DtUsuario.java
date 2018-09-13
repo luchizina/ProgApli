@@ -16,6 +16,38 @@ import java.util.Map;
  */
 public class DtUsuario {
 
+    String nick;
+    String nombre;
+    String apellido;
     
+    
+    public String getNick(){
+        return nick;
+
+    }
+
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public String getApellido(){
+        return apellido;
+    }
+    
+    public void setNick(String nick){
+        this.nick=nick;
+
+    }
+    
+    public void setNombre(String nombre){
+        this.nombre=nombre;
+    }
+    
+    public void setApellido(String apellido){
+        this.apellido=apellido;
+    }
+
+
 
 }
+
