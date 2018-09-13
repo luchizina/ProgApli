@@ -453,6 +453,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
     @Override
     public DtInfo resolverLogin(String nick, String pass) {
         DtInfo resultado = new DtInfo(false, "algo","algo","algo");
+        String passEncriptada=sha1(pass);
         DtUsuario user = this.traerDtUsuario(nick);
         DtProponente prop = null;
         DtColaborador colab = null;
@@ -472,7 +473,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                     resultado.setMensaje("No existe la dirección de correo ingresada en el sistema");
 
                 } else {
-                    if (colab.getPass().equals(pass)) {
+                    if (colab.getPass().equals(passEncriptada)) {
                         
                         resultado.setEstLogin(true);
                         resultado.setMensaje(cadena5);
@@ -492,7 +493,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                 resultado.setMensaje("No existe un usuario en el sistema con ese nick");
 
             } else {
-                if (colab.getPass().equals(pass)) {
+                if (colab.getPass().equals(passEncriptada)) {
                       
                     resultado.setEstLogin(true);
                     resultado.setMensaje(cadena5);
@@ -521,7 +522,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                     resultado.setMensaje("No existe la dirección de correo ingresada en el sistema");
 
                 } else {
-                    if (prop.getPass().equals(pass)) {
+                    if (prop.getPass().equals(passEncriptada)) {
                          
                        resultado.setEstLogin(true);
                        resultado.setMensaje(cadena5);
@@ -540,7 +541,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
                 
 
             } else {
-                if (prop.getPass().equals(pass)) {
+                if (prop.getPass().equals(passEncriptada)) {
                         
                         resultado.setEstLogin(true);
                         resultado.setMensaje(cadena5);
