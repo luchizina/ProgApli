@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.ParseException;
@@ -426,6 +427,15 @@ public class DBusuario {
             PreparedStatement g = conexion.prepareStatement("Delete FROM siguepp");
             g.executeUpdate();
             g.close();
+            PreparedStatement comentario = conexion.prepareStatement("Delete FROM comentarios");        // agregado
+            comentario.executeUpdate();
+            comentario.close();
+            PreparedStatement Fav_Colaborador = conexion.prepareStatement("Delete FROM favoriteacp");   // agregado
+            Fav_Colaborador.executeUpdate();
+            Fav_Colaborador.close();
+            PreparedStatement Fav_Proponente = conexion.prepareStatement("Delete FROM favoriteapp");    // agregado
+            Fav_Proponente.executeUpdate();
+            Fav_Proponente.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -511,7 +521,7 @@ public class DBusuario {
                     statement.setString(7, direccion[i]);
                     statement.setString(8, biografias[i]);
                     statement.setString(9, link[i]);
-                    statement.setString(10, pass[i]);
+                    statement.setString(10, sha1(pass[i])); // encrip
                     statement.executeUpdate();
                     statement.close();
                 } catch (SQLException ex) {
@@ -570,7 +580,7 @@ public class DBusuario {
                     String fechaSt = sdf.format(fechaC);
                     statement.setString(5, fechaSt);
                     statement.setString(6, Imagen);
-                    statement.setString(7, pass[i]);
+                    statement.setString(7, sha1(pass[i])); //ecrip
                     statement.executeUpdate();
                     statement.close();
                 } catch (SQLException ex) {
@@ -615,4 +625,24 @@ public class DBusuario {
             return false;
         }
     }
+    
+     public String encripta(String pass, String type){
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance(type);
+            byte [] arreglo = md.digest(pass.getBytes());
+            StringBuffer sb =new StringBuffer();
+            for(int i=0; i<arreglo.length; ++i){
+                sb.append(Integer.toHexString((arreglo[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+     }
+     
+     
+     public String sha1(String pass){
+         return this.encripta(pass, "SHA1");
+     }
 }

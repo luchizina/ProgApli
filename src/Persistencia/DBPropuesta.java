@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
+import Logica.Comentario;
+import Logica.Proponente;
 
 /**
  *
@@ -41,6 +43,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DBPropuesta {
 
@@ -350,4 +353,164 @@ public class DBPropuesta {
             return false;
         }
     }
+    
+    // PARTE 2 DE LOS DATOS DE PRUEBA COMENTARIOS , FAVORITOS 
+    public void CargarComentarios_BaseDeDatos() {
+        String Colaborador[] = {"novick", "robinh", "nicoJ", "marcelot", "Mengano", "sergiop", "novick"};
+        String Propuesta[] = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente"};
+        String Comentario[] = {"Muy buena propuesta.", "Realmente una pena que la propuesta haya sido cancelada.", "No se lo pueden perder!", "Todos al teatro de verano este 7 de Octubre!", "Arriba Momosapiens!!!", "Los conmino a todos a ir!", "Excelente propuesta. Ahí estaremos."};
+        for (int i = 0; i < 7; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO comentarios ( Colaborador, Propuesta, Comentario) VALUES (?,?,?)");
+                statement.setString(1, Colaborador[i]);
+                statement.setString(2, Propuesta[i]);
+                statement.setString(3, Comentario[i]);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void CargarComentarios_Memoria() {
+        try {
+            IUsuario iUsu = fab.getICtrlUsuario();
+            IPropuesta IP = fab.getICtrlPropuesta();
+            //List<Comentario> k = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM comentarios");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String xpropuesta = rs.getString("Propuesta");
+                String xcolaborador = rs.getString("Colaborador");
+                String xtexto = rs.getString("Comentario");
+                Colaborador co = iUsu.traerColaborador(xcolaborador);
+                Propuesta pro = IP.getPropPorNick(xpropuesta);
+                Comentario c = new Comentario(co, pro, xtexto);
+                //k.add(c);
+                co.Agregar_Comentario(c);
+                pro.Agregar_Comentario(c);
+                //System.out.println(c.getPropuesta().getTitulo()+" "+c.getColaborador().getNombre()+" texto:"+c.getTexto());
+            }
+            rs.close();
+            st.close();
+            //return k;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //return null;
+        }
+    }
+
+    ;   
+    
+    
+   public void CargarFavoritos_BaseDeDatos() {
+        // FAVORITOS DE LOS COLABORADORES  Un dia de Julio != Un día de Julio
+        String Nombre_Colaborador[] = {"robinh",
+            "marcelot", "marcelot",
+            "novick", "novick",
+            "sergiop", "sergiop",
+            "chino",
+            "tonyp", "tonyp",
+            "nicoJ",
+            "juanP",
+            "Mengano", "Mengano",
+            "Perengano", "Perengano",
+            "Tiajaci", "Tiajaci"};
+
+        String TituloPropuesta_Colaborador[] = {"Cine en el Botánico",
+            "Religiosamente", "El Pimiento Indomable",
+            "Religiosamente", "Pilsen Rock",
+            "El Pimiento Indomable", "Romeo y Julieta",
+            "Pilsen Rock",
+            "Pilsen Rock", "Un dia de Julio",
+            "Cine en el Botánico",
+            "Pilsen Rock",
+            "Religiosamente", "Un dia de Julio",
+            "Pilsen Rock", "Un dia de Julio",
+            "Religiosamente", "El Lazarillo de Tormes"};
+        for (int i = 0; i < 18; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteacp(NickColb, TituloProp) VALUES (?,?)");
+                statement.setString(1, Nombre_Colaborador[i]);
+                statement.setString(2, TituloPropuesta_Colaborador[i]);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        // FAVORITOS DE LOS PROPONENTES
+        String Nombre_Proponente[] = {"hrubino", "hrubino", "hrubino",
+            "mbusca", "mbusca", "mbusca",
+            "hectorg", "hectorg",
+            "tabarec", "tabarec",
+            "cachilas",
+            "juliob", "juliob",
+            "diegop", "diegop",
+            "kairoh", "kairoh",
+            "durazno"};
+        String TituloPropuesta_Proponente[] = {"Religiosamente", "El Pimiento Indomable", "Un dia de Julio",
+            "Cine en el Botánico", "El Pimiento Indomable", "Pilsen Rock",
+            "Romeo y Julieta", "El Lazarillo de Tormes",
+            "Religiosamente", "Un dia de Julio",
+            "Religiosamente",
+            "Romeo y Julieta", "El Lazarillo de Tormes",
+            "Cine en el Botánico", "El Lazarillo de Tormes",
+            "Religiosamente", "Pilsen Rock",
+            "Durazno Rock"};
+        for (int i = 0; i < 18; i++) {
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteapp(NickProp, TituloP) VALUES (?,?)");
+                statement.setString(1, Nombre_Proponente[i]);
+                statement.setString(2, TituloPropuesta_Proponente[i]);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void CargarFavoritos_Memoria() {
+        try {
+            // CARGANDO LOS FAVORITOS PROPONENTES
+            IUsuario iUsu = fab.getICtrlUsuario();
+            IPropuesta IP = fab.getICtrlPropuesta();
+            //List<Comentario> k = new ArrayList<>();
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM favoriteapp");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String xnombreProponente = rs.getString("NickProp");
+                String xtituloPropuesta = rs.getString("TituloP");
+                Proponente pro = iUsu.traerProponente(xnombreProponente);
+                Propuesta propu = IP.getPropPorNick(xtituloPropuesta);
+                pro.getPropuFav().put(xtituloPropuesta, propu);
+                //System.out.println(pro.getNick()+"-"+propu.getTitulo());
+            }
+            rs.close();
+            st.close();
+            // CARGANDO LOS FAVORITOS COLABORADORES
+            PreparedStatement stx = conexion.prepareStatement("SELECT * FROM favoriteacp");
+            ResultSet rsx = stx.executeQuery();
+            while (rsx.next()) {
+                String xnombreColaborador = rsx.getString("NickColb");
+                String xtituloPropuesta = rsx.getString("TituloProp");
+                Colaborador col = iUsu.traerColaborador(xnombreColaborador);
+                Propuesta propu = IP.getPropPorNick(xtituloPropuesta);
+
+                col.getPropuFav().put(xtituloPropuesta, propu);
+                //System.out.println(col.getNick()+"-"+propu.getTitulo());
+            }
+            rsx.close();
+            stx.close();
+            //return k;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //return null;
+        }
+    }
+
+;   
+    
 }
