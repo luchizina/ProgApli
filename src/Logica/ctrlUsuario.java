@@ -541,7 +541,12 @@ public List<DtColaboracion> datosCol(Colaborador a){
         }
         else{
             resultado.setEstLogin(false);
+            if(this.escorreo(nick)){
+                resultado.setMensaje("El correo ingresado no existe en el sistema");
+            }
+            else{
             resultado.setMensaje("No existe un usuario en el sistema con ese nick");
+            }
         }
 
         return resultado;
