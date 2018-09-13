@@ -117,7 +117,6 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
         adv = new java.awt.Label();
 
         setResizable(true);
-        setTitle("Agregar colaboracion a propuesta");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Propuestas");
@@ -606,34 +605,36 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
 
     private void listaColabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaColabsMouseClicked
         // TODO add your handling code here:
+        
         int index = listaColabs.getSelectedIndex();
-        if (index > -1) {
-            ListModel model = listaColabs.getModel();
-            String f = (String) model.getElementAt(index);
-            String[] partes = f.split(Pattern.quote("("));
-            String parte1 = partes[0];
-            String parte2 = partes[1];
-            String[] partes3 = parte2.split(Pattern.quote(")"));
-            String parte4 = partes3[0];
-            Colaborador c = iUsu.traerColaborador(parte4);
-            nick.setText(c.getNick());
-            nombre.setText(c.getNombre());
-            apellido.setText(c.getApellido());
-            correo.setText(c.getCorreo());
-            c.getImg();
-            if (c.getImg() == null || c.getImg().equals("")) {
-                ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
-                Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-                imagenProp.setIcon(iconito);
-            } else {
-                ImageIcon imagen = new ImageIcon(c.getImg());
-                Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
-                imagenProp.setIcon(icono);
-            }
-            this.nick1 = c.getNick();
-            this.pack();
+        if (index > -1 ){
+        ListModel model = listaColabs.getModel();
+        String f = (String) model.getElementAt(index);
+        String[] partes = f.split(Pattern.quote("("));
+        String parte1 = partes[0];
+        String parte2 = partes[1];
+        String[] partes3 = parte2.split(Pattern.quote(")"));
+        String parte4 = partes3[0];
+        Colaborador c = iUsu.traerColaborador(parte4);
+        nick.setText(c.getNick());
+        nombre.setText(c.getNombre());
+        apellido.setText(c.getApellido());
+        correo.setText(c.getCorreo());
+        c.getImg();
+        if (c.getImg() == null || c.getImg().equals("")) {
+            ImageIcon imgencita = new ImageIcon("Imagenes/icono.jpg");
+            Icon iconito = new ImageIcon(imgencita.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+            imagenProp.setIcon(iconito);
+        } else {
+            ImageIcon imagen = new ImageIcon(c.getImg());
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(imagenProp.getWidth(), imagenProp.getHeight(), Image.SCALE_DEFAULT));
+            imagenProp.setIcon(icono);
+        }
+        this.nick1 = c.getNick();
+        this.pack();
+        }
     }//GEN-LAST:event_listaColabsMouseClicked
-    }
+
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
         jRadioButton1.setSelected(false);

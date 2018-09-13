@@ -31,7 +31,7 @@ public interface IUsuario {
      public abstract void cargarPropPrueba();
      public abstract boolean copia(String origen, String destino);
      public abstract Colaborador traerColaborador(String lul);
-     
+     public abstract Usuario traerUsuario(String nick);
      public abstract void cargarUsuarios2();
      public abstract boolean validaWeb(String algo);
      public abstract boolean seguirUsuario();
@@ -49,4 +49,8 @@ public interface IUsuario {
       public abstract void filtrarC(String campo, JList lista, List<Colaborador> listita);
      public abstract DefaultListModel BUSCADOR_Colaborador(String Palabra);
      public abstract DefaultListModel BUSCADOR_Proponente(String palabrita);
+     public abstract String sha1(String pass);
+     public abstract String encripta(String pass, String type);
+     public abstract DtUsuario traerDtUsuario(String nick);
+     public abstract DtInfo resolverLogin(String nick, String pass);
 }

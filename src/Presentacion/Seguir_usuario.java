@@ -276,8 +276,12 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
           
         else{
             
-        this.iUsu.seleccionarUsuario(parte4);
+                this.iUsu.seleccionarUsuario(parte4);
                 this.iUsu.seleccionarUsuSeg(parte42);
+      
+           
+      
+       
                 if(this.iUsu.yaSigue()){
             javax.swing.JOptionPane.showMessageDialog(null, "Ya sigue a este usuario");
         }
@@ -295,7 +299,11 @@ public class Seguir_usuario extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(null,"Error ");
         }
          }
-                        }
+                        
+       
+        }
+               
+               
             }
             else
             {

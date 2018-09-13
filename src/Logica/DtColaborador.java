@@ -24,6 +24,7 @@ public class DtColaborador extends DtUsuario {
             Date fecha;
             String img;
             List<Colaboracion> colaboraciones;
+            String pass;
 
     public DtColaborador(String nick, String nombre, String apellido, String correo, Date fecha, String img, List<Colaboracion> colaboraciones) {
         this.nick = nick;
@@ -42,6 +43,13 @@ public class DtColaborador extends DtUsuario {
         this.correo = correo;
         this.fecha = fecha;
         this.img = img;
+    }
+    
+    public DtColaborador(String nick, String correo, String pass)
+    {
+        this.nick=nick;
+        this.correo=correo;
+        this.pass=pass;
     }
 
     public String getNick() {
@@ -98,6 +106,10 @@ public class DtColaborador extends DtUsuario {
 
     public void setColaboraciones(List<Colaboracion> colaboraciones) {
         this.colaboraciones = colaboraciones;
+    }
+    
+      public String getPass(){
+        return pass;
     }
 
             
