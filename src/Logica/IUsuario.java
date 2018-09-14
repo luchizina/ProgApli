@@ -55,4 +55,5 @@ public interface IUsuario {
      public abstract String encripta(String pass, String type);
      public abstract DtUsuario traerDtUsuario(String nick);
      public abstract DtInfo resolverLogin(String nick, String pass);
+     public abstract List<DtUsuario> listarUsuarios();
 }

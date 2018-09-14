@@ -381,6 +381,15 @@ public class ctrlUsuario implements IUsuario {
         return listita;
     }
     
+    @Override
+    public List<DtUsuario> listarUsuarios(){
+        List<DtUsuario> lista=new ArrayList<>();
+        boolean a= lista.addAll(this.listarColaboradores());
+        boolean b= lista.addAll(this.listarProponentes());
+       if(a && b) return lista;
+        return null;
+    }
+    
 
 @Override
 public List<DtColaboracion> datosCol(Colaborador a){
