@@ -36,6 +36,16 @@ public class DtProponente  extends DtUsuario  {
         this.correo = correo;
 
     }
+    private DataImagen imagen;
+    public DtProponente(String nick,  final DataImagen img, String pass) {
+        this.nick = nick;
+        this.imagen = img;
+        this.pass=pass;
+    }
+
+    public DataImagen getImagen() {
+        return imagen;
+    }
 
     public DtProponente(String nick) {
         this.nick = nick;

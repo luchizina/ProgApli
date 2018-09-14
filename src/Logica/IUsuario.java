@@ -16,6 +16,8 @@ import javax.swing.JList;
  * @author Luchi
  */
 public interface IUsuario {
+    void configurarParametros(final String carpetaImagenes);
+    void agregarImagen(final DtUsuario usuario);
     public abstract boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass);
     public abstract boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo, String pass);
     public abstract boolean escorreo(String correo);

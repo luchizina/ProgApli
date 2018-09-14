@@ -24,6 +24,9 @@ import java.util.Map;
 import java.util.Set;
 import Logica.Colaborador;
 import Logica.Proponente;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardOpenOption.CREATE;
 import java.security.NoSuchAlgorithmException;
 
 import java.util.logging.Level;
@@ -845,4 +848,45 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
      public String sha1(String pass){
          return this.encripta(pass, "SHA1");
      }
+     String carpetaImagenes;
+     @Override
+	public void configurarParametros(String carpetaImagenes) {
+		this.carpetaImagenes = carpetaImagenes;
+		
+	}
+        
+        private Map<String,DataImagen> imagenesMap;
+	private static Logger LOG;
+        
+        @Override
+	public void agregarImagen(final DtUsuario imagenUsuario){
+		String nick = imagenUsuario.getNick();			
+		if (this.carpetaImagenes==null){
+			LOG.log(Level.SEVERE,"carpetaImagenes is null");
+			throw new IllegalStateException("La carpeta de imagenes no fue configurada");	
+		}//if
+		final File fileImagenes = new File(this.carpetaImagenes);
+		if (!fileImagenes.isDirectory()){
+			LOG.log(Level.SEVERE,this.carpetaImagenes + "no es un directorio");
+                    try {	
+                        throw new IOException("La carpeta de imagenes no fue configurada");
+                    } catch (IOException ex) {
+                        Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+		}//if
+		String pathStr = this.carpetaImagenes + File.separatorChar + nick;
+		final File dirUsuario = new File(pathStr);
+		if (!dirUsuario.isDirectory())
+			dirUsuario.mkdirs();
+		final DataImagen imagen = imagenUsuario.getImagen();
+		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();
+		Path path = Paths.get(pathStr);
+        try {
+            Files.write(path, imagen.getStream(), CREATE);
+        } catch (IOException ex) {
+            Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		//LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
+                imagenesMap.put(nick, imagen);
+	}
 }

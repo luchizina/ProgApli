@@ -19,6 +19,11 @@ public class DtUsuario {
     String nick;
     String nombre;
     String apellido;
+    private DataImagen imagen;
+
+    public DataImagen getImagen() {
+        return imagen;
+    }
     
     
     public String getNick(){
