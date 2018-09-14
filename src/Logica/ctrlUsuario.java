@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import Logica.Colaborador;
 import Logica.Proponente;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -72,7 +73,8 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -248,7 +250,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "Imagenes/Proponente/" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -284,11 +286,14 @@ public class ctrlUsuario implements IUsuario {
             File aor = new File(origen);
             File ade = new File(destino);
             ade.getParentFile().mkdirs();
-            ade.createNewFile();
+            if(ade.createNewFile()){
+                System.out.println("Se crea");
+            }
             Files.copy(aor.toPath(), ade.toPath(), StandardCopyOption.REPLACE_EXISTING);
             return true;
         } catch (IOException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            String algo = ex.toString();
             return false;
         }
     }
@@ -859,7 +864,9 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
 	private static Logger LOG;
         
         @Override
-	public void agregarImagen(final DtUsuario imagenUsuario){
+	public Path agregarImagen(final DtUsuario imagenUsuario){
+                this.imagenesMap = new HashMap<>();
+                LOG = Logger.getLogger(this.getClass().getPackage().getName());
 		String nick = imagenUsuario.getNick();			
 		if (this.carpetaImagenes==null){
 			LOG.log(Level.SEVERE,"carpetaImagenes is null");
@@ -883,10 +890,12 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
 		Path path = Paths.get(pathStr);
         try {
             Files.write(path, imagen.getStream(), CREATE);
+            return path;
         } catch (IOException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-		//LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
+		LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
                 imagenesMap.put(nick, imagen);
+        return path;
 	}
 }
