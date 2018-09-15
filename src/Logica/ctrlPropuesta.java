@@ -551,4 +551,20 @@ public class ctrlPropuesta implements IPropuesta {
     public void Cargar_Favoritos_Memoria(){
         this.dbPropuesta.CargarFavoritos_Memoria();
     };
+    
+    
+    @Override
+    public List<DtPropuesta> WEB_listarPropuestas_No_Ingresada() {
+        List<DtPropuesta> listita = new ArrayList<>();
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            if(aux.getEstActual().getEstado().toString().equals("Ingresada") == false){
+            listita.add(aux.obtenerInfo());
+            }
+        }
+        return listita;
+    }
 }
