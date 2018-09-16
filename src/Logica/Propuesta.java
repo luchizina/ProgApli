@@ -43,8 +43,8 @@ public class Propuesta {
         return cometarios;
     }
 
-    public void setCometarios(List<Comentario> cometarios) {
-        this.cometarios = cometarios;
+    public void setCometarios(List<Comentario> xcometarios) {
+        this.cometarios = xcometarios;
     }
             
 public Propuesta(){
