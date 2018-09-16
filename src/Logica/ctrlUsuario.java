@@ -98,6 +98,7 @@ public class ctrlUsuario implements IUsuario {
     }
     
     
+    @Override
     public Proponente traerProponente(String f)
     {
         Proponente p = (Proponente) this.usuarios.get(f);
