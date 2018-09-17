@@ -47,4 +47,5 @@ public interface IPropuesta {
     public abstract DefaultTableModel BUSCADOR_Propuestas2(String Palabra, List<DtPropuesta> listita, TableModel modelito);
     public abstract void cambiarEstadito(String p, String f);
     public abstract List<DtPropuesta> WEB_listarPropuestas_No_Ingresada();
+    public abstract List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x);
 }
