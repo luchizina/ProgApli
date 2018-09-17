@@ -567,4 +567,19 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return listita;
     }
+    
+    @Override
+   public List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x) {
+        List<DtPropuesta> listita = new ArrayList<>();
+        Set set = propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            if(aux.getCate().equals(x)){
+            listita.add(aux.obtenerInfo());
+            }
+        }
+        return listita;
+    } 
 }
