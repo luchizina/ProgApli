@@ -7,6 +7,7 @@ package Logica;
  */
 
 import Logica.*;
+import java.util.Date;
 
 /**
  *
@@ -22,7 +23,7 @@ public class DtProponente  extends DtUsuario  {
             String nombre;
             String apellido;
             String correo;
-            DtFecha fecha;
+            Date fecha;
             String pass;
 
     public DtProponente(String nick, String img, String biografia, String linkWeb, String direccion, String nombre, String apellido, String correo) {
@@ -42,6 +43,8 @@ public class DtProponente  extends DtUsuario  {
         this.imagen = img;
         this.pass=pass;
     }
+    
+    
 
     public DataImagen getImagen() {
         return imagen;
@@ -51,13 +54,18 @@ public class DtProponente  extends DtUsuario  {
         this.nick = nick;
     }
     
-    public DtProponente(String nick, String correo, String pass, String nombre, String apellido){
+    public DtProponente(String nick, String correo, String pass, String nombre, String apellido, DataImagen img, String linkWeb, String direccion, String biografia, Date fecha ){
         
         this.nick=nick;
         this.correo=correo;
         this.pass=pass;
         this.nombre=nombre;
         this.apellido=apellido;
+        this.imagen=img;
+        this.linkWeb=linkWeb;
+        this.direccion=direccion;
+        this.biografia=biografia;
+        this.fecha=fecha;
     }
     
 
@@ -125,11 +133,11 @@ public class DtProponente  extends DtUsuario  {
         this.correo = correo;
     }
 
-    public DtFecha getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(DtFecha fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
     

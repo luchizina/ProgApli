@@ -72,8 +72,9 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
+       
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -250,7 +251,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -389,8 +390,12 @@ public class ctrlUsuario implements IUsuario {
     @Override
     public List<DtUsuario> listarUsuarios(){
         List<DtUsuario> lista=new ArrayList<>();
-        boolean a= lista.addAll(this.listarColaboradores());
-        boolean b= lista.addAll(this.listarProponentes());
+        List<DtColaborador> colab=this.listarColaboradores();
+        List<DtProponente> prop=this.listarProponentes();
+        
+        boolean a= lista.addAll(colab);
+        boolean b=lista.addAll(prop);
+      
        if(a && b) return lista;
         return null;
     }
@@ -456,10 +461,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
         for (Usuario u : this.usuarios.values()) {
             if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 if (u instanceof Proponente) {
-                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido());
+                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido(), u.getImagen(), ((Proponente) u).getLinkWeb(), ((Proponente) u).getDireccion(),((Proponente) u).getBiografia(), u.getFecha());
+                   
                     return prop;
                 } else if (u instanceof Colaborador) {
-                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido());
+                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(),u.getFecha(), u.getApellido(), u.getImagen());
                     return colab;
                 }
             }
