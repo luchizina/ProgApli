@@ -132,12 +132,12 @@ public class ctrlUsuario implements IUsuario {
          
      }
      
-          
-//    if(u.getNick().equals(aSeguir.getNick())){
-//        return true;
-//    }
+
      return false;
     }
+    
+    
+    
     
      @Override
     public boolean seguirUsuario(){
@@ -210,6 +210,13 @@ public class ctrlUsuario implements IUsuario {
  
     
          return false;  
+    }
+    
+    @Override
+    public List<DtUsuario> traerSeguidores(String nick){
+        List<DtUsuario> usuario=new ArrayList<>();
+        return usuario;
+        
     }
     
     
