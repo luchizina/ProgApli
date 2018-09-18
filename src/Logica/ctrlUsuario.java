@@ -390,8 +390,12 @@ public class ctrlUsuario implements IUsuario {
     @Override
     public List<DtUsuario> listarUsuarios(){
         List<DtUsuario> lista=new ArrayList<>();
-        boolean a= lista.addAll(this.listarColaboradores());
-        boolean b= lista.addAll(this.listarProponentes());
+        List<DtColaborador> colab=this.listarColaboradores();
+        List<DtProponente> prop=this.listarProponentes();
+        
+        boolean a= lista.addAll(colab);
+        boolean b=lista.addAll(prop);
+      
        if(a && b) return lista;
         return null;
     }
