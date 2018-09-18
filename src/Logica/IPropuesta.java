@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import Logica.*;
+import java.nio.file.Path;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,8 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Luchi
  */
 public interface IPropuesta {
-
+    public void configurarParametros(String carpetaImagenes);
+    public Path agregarImagen(final DtPropuesta imagenUsuario);
     public abstract boolean existeTitulo(String titulo);
     public abstract void cargarPropuestas();
     public abstract List<DtPropuesta> listarPropuestas();
