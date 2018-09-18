@@ -34,10 +34,6 @@ public class DtCategoria {
                 this.nombre= nombre;
                 this.padre=padre;
             }
-
-    public DtCategoria() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
             public String getNombre(){
                 return this.nombre;
                            }

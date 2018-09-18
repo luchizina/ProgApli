@@ -73,7 +73,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Documentos\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
@@ -250,7 +250,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "\"C:\\Users\\Documentos\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
