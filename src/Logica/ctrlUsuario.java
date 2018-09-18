@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
+import java.awt.AWTKeyStroke;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import Logica.Colaborador;
 import Logica.Proponente;
-import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -91,16 +90,17 @@ public class ctrlUsuario implements IUsuario {
         }
     }
      @Override
-    public Colaborador traerColaborador(String f)
+    public Colaborador traerColaborador(String f) 
     {
-        Colaborador fa = (Colaborador) this.usuarios.get(f);
+        Colaborador fa = (Colaborador)this.usuarios.get(f);
         return fa;
     }
     
     
+    @Override
     public Proponente traerProponente(String f)
     {
-        Proponente p = (Proponente) this.usuarios.get(f);
+        Proponente p = (Proponente)this.usuarios.get(f);
         return p;
     }
     

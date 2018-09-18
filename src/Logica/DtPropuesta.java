@@ -5,7 +5,6 @@ package Logica;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Logica.*;
 import java.util.Map;
 import java.util.Date;
@@ -14,127 +13,124 @@ import java.util.Date;
  *
  * @author Luchi
  */
-public class DtPropuesta{
-    private 
-            String titulo;
-            String desc;
-            String img;
-            Date fecha;
-            String lugar;
-            int precio;
-            int montoActual;
-            int montoTotal;
-            Date fechaPub;
-            String tRetornos;
-            Map<String, DtColaborador> colaboradores;
-            String propoACargo;
-            Estado estActual;
-            String categoria="";
-       
+public class DtPropuesta {
 
-public DtPropuesta(Propuesta p)
-{
-    this.titulo = p.getTitulo();
-    this.desc = p.getDesc();
-    this.img = p.getImg();
-    this.fecha = p.getFecha();
-    this.lugar = p.getLugar();
-    this.precio = p.getPrecioE();
-    this.montoActual = p.getMontoActual();
-    this.montoTotal = p.getMontoTotal();
-    this.fechaPub = p.getFechaPub();
-    this.tRetornos = p.getTipoRetorno();
-    this.colaboradores = p.listarColaboradores();
-    this.propoACargo = p.getPropo();
-    this.estActual = p.getEstActual();
-}
+    private String titulo;
+    String desc;
+    String img;
+    Date fecha;
+    String lugar;
+    int precio;
+    int montoActual;
+    int montoTotal;
+    Date fechaPub;
+    String tRetornos;
+    Map<String, DtColaborador> colaboradores;
+    String propoACargo;
+    Estado estActual;
+    String categoria = "";
+
+    private DataImagen imagen;
+
+    public DtPropuesta(String titulo, final DataImagen img) {
+        this.titulo = titulo;
+        this.imagen = img;
+    }
+
+    public DataImagen getImagen() {
+        return imagen;
+    }
+
+    public DtPropuesta(Propuesta p) {
+        this.titulo = p.getTitulo();
+        this.desc = p.getDesc();
+        this.img = p.getImg();
+        this.fecha = p.getFecha();
+        this.lugar = p.getLugar();
+        this.precio = p.getPrecioE();
+        this.montoActual = p.getMontoActual();
+        this.montoTotal = p.getMontoTotal();
+        this.fechaPub = p.getFechaPub();
+        this.tRetornos = p.getTipoRetorno();
+        this.colaboradores = p.listarColaboradores();
+        this.propoACargo = p.getPropo();
+        this.estActual = p.getEstActual();
+    }
 
 // AGREGE CATEGORIA 
-public DtPropuesta(Propuesta p, String x){
-    this.titulo = p.getTitulo();
-    this.desc = p.getDesc();
-    this.img = p.getImg();
-    this.fecha = p.getFecha();
-    this.lugar = p.getLugar();
-    this.precio = p.getPrecioE();
-    this.montoActual = p.getMontoActual();
-    this.montoTotal = p.getMontoTotal();
-    this.fechaPub = p.getFechaPub();
-    this.tRetornos = p.getTipoRetorno();
-    this.colaboradores = p.listarColaboradores();
-    this.propoACargo = p.getPropo();
-    this.estActual = p.getEstActual();
-    this.categoria = x;
+    public DtPropuesta(Propuesta p, String x) {
+        this.titulo = p.getTitulo();
+        this.desc = p.getDesc();
+        this.img = p.getImg();
+        this.fecha = p.getFecha();
+        this.lugar = p.getLugar();
+        this.precio = p.getPrecioE();
+        this.montoActual = p.getMontoActual();
+        this.montoTotal = p.getMontoTotal();
+        this.fechaPub = p.getFechaPub();
+        this.tRetornos = p.getTipoRetorno();
+        this.colaboradores = p.listarColaboradores();
+        this.propoACargo = p.getPropo();
+        this.estActual = p.getEstActual();
+        this.categoria = x;
 
-};
+    }
 
-public String getTitulo()
-{
-    return titulo;
-}
+    ;
 
-public String getDescripcion()
-{
-    return desc;
-}
+public String getTitulo() {
+        return titulo;
+    }
 
-public String getImg()
-{
-    return img;
-}
+    public String getDescripcion() {
+        return desc;
+    }
 
-public Date getFecha()
-{
-    return fecha;
-}
+    public String getImg() {
+        return img;
+    }
 
-public String getLugar()
-{
-    return lugar;
-}
+    public Date getFecha() {
+        return fecha;
+    }
 
-public int getPrecio()
-{
-    return precio;
-}
+    public String getLugar() {
+        return lugar;
+    }
 
-public int getMontoActual()
-{
-    return montoActual;
-}
+    public int getPrecio() {
+        return precio;
+    }
 
-public int getMontototal()
-{
-    return montoTotal;
-}
+    public int getMontoActual() {
+        return montoActual;
+    }
 
-public Date getFechaPub()
-{
-    return fechaPub;
-}
+    public int getMontototal() {
+        return montoTotal;
+    }
 
-public String getPropo()
-{
-    return propoACargo;
-}
+    public Date getFechaPub() {
+        return fechaPub;
+    }
 
-public Estado getEstActual()
-{
-    return estActual;
-}
+    public String getPropo() {
+        return propoACargo;
+    }
 
-public String getTRetornos()
-{
-    return tRetornos;
-}
+    public Estado getEstActual() {
+        return estActual;
+    }
 
-public String getNombreCate()
-{
-    return categoria;
-}
+    public String getTRetornos() {
+        return tRetornos;
+    }
 
-public Map<String, DtColaborador> getColabs()
-        {
-            return this.colaboradores;
-        }
+    public String getNombreCate() {
+        return categoria;
+    }
+
+    public Map<String, DtColaborador> getColabs() {
+        return this.colaboradores;
+    }
 }
