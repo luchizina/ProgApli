@@ -576,7 +576,7 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if(aux.getCate().equals(x)){
+            if(aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false){
             listita.add(aux.obtenerInfo());
             }
         }
