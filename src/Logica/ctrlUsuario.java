@@ -461,10 +461,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
         for (Usuario u : this.usuarios.values()) {
             if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 if (u instanceof Proponente) {
-                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido());
+                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido(), u.getImagen(), ((Proponente) u).getLinkWeb(), ((Proponente) u).getDireccion(),((Proponente) u).getBiografia(), u.getFecha());
+                   
                     return prop;
                 } else if (u instanceof Colaborador) {
-                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido());
+                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(),u.getFecha(), u.getApellido(), u.getImagen());
                     return colab;
                 }
             }
