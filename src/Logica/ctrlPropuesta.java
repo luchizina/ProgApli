@@ -5,7 +5,6 @@
  */
 package Logica;
 
-import Logica.Propuesta;
 import Persistencia.DBListEstado;
 import Persistencia.DBPropuesta;
 import java.io.File;
@@ -15,7 +14,6 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
-import Logica.Colaboracion;
 import static Logica.Testado.Publicada;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -105,7 +103,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -143,8 +141,13 @@ public class ctrlPropuesta implements IPropuesta {
                     }
                     ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
                     System.out.println(est.getEst() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
-                    // pe.getListaDeEstados().put(estActual.getEstado(), est);
+                    
+                     pe.addLE(est);
 
+                      for(int i = 0; i<pe.getLE().size();i++){
+                      System.out.println(pe.getLE().get(i).getEst() +" ESTOOOO"+pe.getLE().get(i).getEst() );
+                      
+                      }
                     boolean Est = this.dbE.agregarEstado(est, titulo);
                     if (Est) {
                         System.out.println("Lo hace bien!!!");
