@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import static Logica.Testado.Publicada;
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -34,6 +35,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Iterator;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
@@ -629,4 +631,21 @@ public class ctrlPropuesta implements IPropuesta {
         imagenesMap.put(nick, imagen);
         return path;
     }
+     @Override
+        public BufferedImage retornarImagen(final String titulo)  {
+                /*if (!this.credencialesMap.keySet().contains(email)){
+                         throw new UsuarioNoEncontradoException(email);
+                }*/ 
+                DataImagen imagen=imagenesMap.get(titulo);
+                String pathStr = this.carpetaImagenes + File.separatorChar + titulo; 
+		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();              
+                File f = new File(pathStr);
+                BufferedImage bi = null;
+        try {
+            bi = ImageIO.read(f);
+        } catch (IOException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                return bi;
+        }   
 }

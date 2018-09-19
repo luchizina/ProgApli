@@ -26,7 +26,8 @@ public class Usuario {
     private Map<String, Propuesta> propuFav;
     String seguido;
     String cont;
-
+    DataImagen imagen;
+    
 
     public Usuario(String nick) {
         this.nick = nick;
@@ -50,6 +51,13 @@ public class Usuario {
         this.cont = cont;
     }
 
+    public DataImagen getImagen(){
+        return imagen;
+    }
+    public void setImagen(DataImagen img){
+        this.imagen=img;
+    }
+    
     public String getNick() {
         return nick;
     }
