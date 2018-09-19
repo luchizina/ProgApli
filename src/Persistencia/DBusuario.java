@@ -595,7 +595,7 @@ public class DBusuario {
 
     public Map<String, Colaborador> cargarColaboradores() {
         try {
-            Map<String, Colaborador> lista = new HashMap<String, Colaborador>();
+            Map<String, Colaborador> lista = new HashMap<>();
             try (PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador"); ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     String nick = rs.getString("NickC");
