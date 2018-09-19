@@ -6,6 +6,7 @@
 package Logica;
 
 import Logica.Propuesta;
+import Logica.ctrlUsuario;
 import Persistencia.DBListEstado;
 import Persistencia.DBPropuesta;
 import java.io.File;
@@ -15,8 +16,8 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
-import Logica.Colaboracion;
 import static Logica.Testado.Publicada;
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -36,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Iterator;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
@@ -105,7 +107,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -143,8 +145,13 @@ public class ctrlPropuesta implements IPropuesta {
                     }
                     ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
                     System.out.println(est.getEst() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
-                    // pe.getListaDeEstados().put(estActual.getEstado(), est);
+                    
+                     pe.addLE(est);
 
+                      for(int i = 0; i<pe.getLE().size();i++){
+                      System.out.println(pe.getLE().get(i).getEst() +" ESTOOOO"+pe.getLE().get(i).getEst() );
+                      
+                      }
                     boolean Est = this.dbE.agregarEstado(est, titulo);
                     if (Est) {
                         System.out.println("Lo hace bien!!!");
@@ -379,7 +386,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     }
 
-    ;
+ 
     
     
     @Override
@@ -564,6 +571,9 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return listita;
     }
+    
+   
+
 
     @Override
     public List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x) {
@@ -626,4 +636,21 @@ public class ctrlPropuesta implements IPropuesta {
         imagenesMap.put(nick, imagen);
         return path;
     }
+     @Override
+        public BufferedImage retornarImagen(final String titulo)  {
+                /*if (!this.credencialesMap.keySet().contains(email)){
+                         throw new UsuarioNoEncontradoException(email);
+                }*/ 
+                DataImagen imagen=imagenesMap.get(titulo);
+                String pathStr = this.carpetaImagenes + File.separatorChar + titulo; 
+		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();              
+                File f = new File(pathStr);
+                BufferedImage bi = null;
+        try {
+            bi = ImageIO.read(f);
+        } catch (IOException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                return bi;
+        }   
 }

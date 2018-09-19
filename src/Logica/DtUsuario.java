@@ -19,8 +19,17 @@ public class DtUsuario {
     String nick;
     String nombre;
     String apellido;
+    String seguido;
     private DataImagen imagen;
 
+    public String getSeguido(){
+        return seguido;
+    }
+    
+    public void setSeguido(String seg){
+        this.seguido=seg;
+    }
+    
     public DataImagen getImagen() {
         return imagen;
     }

@@ -596,15 +596,13 @@ public class DBusuario {
     public Map<String, Colaborador> cargarColaboradores() {
         try {
             Map<String, Colaborador> lista = new HashMap<String, Colaborador>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador");
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                String nick = rs.getString("NickC");
-                Colaborador p = new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador", rs.getString("pass"));
-                lista.put(nick, p);
+            try (PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador"); ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    String nick = rs.getString("NickC");
+                    Colaborador p = new Colaborador(nick, rs.getString("NombreC"), rs.getString("ApellidoC"), rs.getString("CorreoC"), rs.getDate("FechaNacC"), rs.getString("ImagenUrlC"), "Colaborador", rs.getString("pass"));
+                    lista.put(nick, p);
+                }
             }
-            rs.close();
-            st.close();
             return lista;
         } catch (SQLException ex) {
             ex.printStackTrace();
