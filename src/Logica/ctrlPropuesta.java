@@ -551,6 +551,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     ;
     
+    @Override
     public void Cargar_Favoritos_Memoria() {
         this.dbPropuesta.CargarFavoritos_Memoria();
     }

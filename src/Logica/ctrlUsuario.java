@@ -74,7 +74,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli\\ProgApli\\Imagenes\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
                 if (this.copia(Imagen, destino) == true) {
@@ -483,11 +483,11 @@ public class ctrlUsuario implements IUsuario {
         for (Usuario u : this.usuarios.values()) {
             if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 if (u instanceof Proponente) {
-                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido(), u.getImagen(), ((Proponente) u).getLinkWeb(), ((Proponente) u).getDireccion(), ((Proponente) u).getBiografia(), u.getFecha());
+                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido(), u.getImg(), ((Proponente) u).getLinkWeb(), ((Proponente) u).getDireccion(), ((Proponente) u).getBiografia(), u.getFecha());
 
                     return prop;
                 } else if (u instanceof Colaborador) {
-                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getFecha(), u.getApellido(), u.getImagen());
+                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getFecha(), u.getApellido(), u.getImg());
                     return colab;
                 }
             }
@@ -516,20 +516,13 @@ public class ctrlUsuario implements IUsuario {
         List<DtPropuesta> propuestas=new ArrayList<>();
         Colaborador colab= this.traerColaborador(nick);
         List<Colaboracion> colaboraciones= colab.getColHechas();
-        for(int i=0; 0<colaboraciones.size(); i++){
+        for(int i=0; i<colaboraciones.size(); i++){
             Colaboracion col=(Colaboracion) colaboraciones.get(i);
             Propuesta prop= col.getProp();
-            
-            
+            DtPropuesta pro = new DtPropuesta(prop);
+            propuestas.add(pro);
         }
-        
-        
-        
-        
-        
-        
         return propuestas;
-        
     }
      
      
