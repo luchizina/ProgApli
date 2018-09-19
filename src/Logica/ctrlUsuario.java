@@ -525,6 +525,46 @@ public List<DtColaboracion> datosCol(Colaborador a){
         return null;
     }
     
+    
+    @Override
+     public List<DtPropuesta> traerPropFav(String nick){
+         List<DtPropuesta> propuestas=new ArrayList<>();
+         Usuario u= this.traerUsuario(nick);
+         Map<String, Propuesta> otras=u.getPropuFav();
+         Set se= otras.entrySet();
+         Iterator it= se.iterator();
+         while(it.hasNext()){
+             Map.Entry mentry= (Map.Entry) it.next();
+             DtPropuesta prop= (DtPropuesta) mentry.getValue();
+             propuestas.add(prop);
+         }       
+         return propuestas;
+     }
+    
+         @Override
+    public List<DtPropuesta> traerPropuestasColaboradas(String nick){
+        List<DtPropuesta> propuestas=new ArrayList<>();
+        Colaborador colab= this.traerColaborador(nick);
+        List<Colaboracion> colaboraciones= colab.getColHechas();
+        for(int i=0; 0<colaboraciones.size(); i++){
+            Colaboracion col=(Colaboracion) colaboraciones.get(i);
+            Propuesta prop= col.getProp();
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        return propuestas;
+        
+    }
+     
+     
+     
+     
     @Override
     public DtInfo resolverLogin(String nick, String pass) {
         DtInfo resultado = new DtInfo(false, "algo","algo","algo");

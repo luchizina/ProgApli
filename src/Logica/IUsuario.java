@@ -59,4 +59,6 @@ public interface IUsuario {
      public abstract List<DtUsuario> listarUsuarios();
      public abstract List<DtUsuario> traerSeguidos(String nick);
      public abstract List<DtUsuario> traerSeguidores(String nick);
+      public abstract List<DtPropuesta> traerPropFav(String nick);
+        public abstract List<DtPropuesta> traerPropuestasColaboradas(String nick);  
 }
