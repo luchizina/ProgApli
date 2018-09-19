@@ -57,5 +57,6 @@ public interface IUsuario {
      public abstract DtUsuario traerDtUsuario(String nick);
      public abstract DtInfo resolverLogin(String nick, String pass);
      public abstract List<DtUsuario> listarUsuarios();
+     public abstract List<DtUsuario> traerSeguidos(String nick);
      public abstract List<DtUsuario> traerSeguidores(String nick);
 }
