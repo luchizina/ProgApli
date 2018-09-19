@@ -51,5 +51,7 @@ public interface IPropuesta {
     public abstract void cambiarEstadito(String p, String f);
     public abstract List<DtPropuesta> WEB_listarPropuestas_No_Ingresada();
     public abstract List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x);
+
     BufferedImage retornarImagen(final String titulo);
+
 }

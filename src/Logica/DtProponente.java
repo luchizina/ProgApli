@@ -54,14 +54,14 @@ public class DtProponente  extends DtUsuario  {
         this.nick = nick;
     }
     
-    public DtProponente(String nick, String correo, String pass, String nombre, String apellido, DataImagen img, String linkWeb, String direccion, String biografia, Date fecha ){
+    public DtProponente(String nick, String correo, String pass, String nombre, String apellido, String img, String linkWeb, String direccion, String biografia, Date fecha ){
         
         this.nick=nick;
         this.correo=correo;
         this.pass=pass;
         this.nombre=nombre;
         this.apellido=apellido;
-        this.imagen=img;
+        this.img=img;
         this.linkWeb=linkWeb;
         this.direccion=direccion;
         this.biografia=biografia;

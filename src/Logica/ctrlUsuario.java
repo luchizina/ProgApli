@@ -74,9 +74,9 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli\\ProgApli\\Imagenes\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
-       
+
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -92,209 +92,182 @@ public class ctrlUsuario implements IUsuario {
             return res;
         }
     }
-     @Override
-    public Colaborador traerColaborador(String f) 
-    {
-        Colaborador fa = (Colaborador)this.usuarios.get(f);
+
+    @Override
+    public Colaborador traerColaborador(String f) {
+        Colaborador fa = (Colaborador) this.usuarios.get(f);
         return fa;
     }
-    
-    
+
     @Override
-    public Proponente traerProponente(String f)
-    {
-        Proponente p = (Proponente)this.usuarios.get(f);
+    public Proponente traerProponente(String f) {
+        Proponente p = (Proponente) this.usuarios.get(f);
         return p;
     }
-    
-    
-    
-    
-    
-    
-    @Override
-    public boolean yaSigue(){
-     Usuario u= this.usuarios.get(this.usuRec);
-     Usuario aSeguir = this.usuarios.get(this.usuAseguir);
-     
-     Map<String,Usuario> listita=new HashMap<>();
-     listita = u.getUsuSeguidos();
-        if(listita.get(aSeguir.getNick())!=null){
-        return true;
-    }
-    
-     Set se=listita.entrySet();
-     Iterator it = se.iterator();
-     while(it.hasNext()){
-         Map.Entry mentry = (Map.Entry) it.next();
-         Usuario aux= (Usuario) mentry.getValue();
-         if((aSeguir.getNick().equals(aux.getSeguido()))==true){
-          return true;   
-         }
-         
-     }
-     
 
-     return false;
+    @Override
+    public boolean yaSigue() {
+        Usuario u = this.usuarios.get(this.usuRec);
+        Usuario aSeguir = this.usuarios.get(this.usuAseguir);
+
+        Map<String, Usuario> listita = new HashMap<>();
+        listita = u.getUsuSeguidos();
+        if (listita.get(aSeguir.getNick()) != null) {
+            return true;
+        }
+
+        Set se = listita.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Usuario aux = (Usuario) mentry.getValue();
+            if ((aSeguir.getNick().equals(aux.getSeguido())) == true) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
-    
-    
-    
-    
-     @Override
-    public boolean seguirUsuario(){
- 
-        Usuario u= this.usuarios.get(this.usuRec);
-        Usuario aSeguir=this.usuarios.get(this.usuAseguir);
-          
-          if(u instanceof Colaborador){
-              if(aSeguir instanceof Colaborador){
-                  this.usu.seguirCC(u.getNick(), aSeguir.getNick());
-                    u.seguirUsuario(aSeguir);
-                    return true;
-              }
-              else if(aSeguir instanceof Proponente){
-                  this.usu.seguirCP(u.getNick(), aSeguir.getNick());
-                   u.seguirUsuario(aSeguir);
-                   return true;
-              }
-              
-          }
-          
-          if(u instanceof Proponente){
-            if(aSeguir instanceof Proponente){
-                this.usu.seguirPP(u.getNick(), aSeguir.getNick());
+
+    @Override
+    public boolean seguirUsuario() {
+
+        Usuario u = this.usuarios.get(this.usuRec);
+        Usuario aSeguir = this.usuarios.get(this.usuAseguir);
+
+        if (u instanceof Colaborador) {
+            if (aSeguir instanceof Colaborador) {
+                this.usu.seguirCC(u.getNick(), aSeguir.getNick());
+                u.seguirUsuario(aSeguir);
+                return true;
+            } else if (aSeguir instanceof Proponente) {
+                this.usu.seguirCP(u.getNick(), aSeguir.getNick());
                 u.seguirUsuario(aSeguir);
                 return true;
             }
-            else if(aSeguir instanceof Colaborador){
-                this.usu.seguirPC(u.getNick(), aSeguir.getNick());
-                 u.seguirUsuario(aSeguir);
-                 return true;
-            }
-              
-          }
 
- 
-    
-         return false;       
+        }
+
+        if (u instanceof Proponente) {
+            if (aSeguir instanceof Proponente) {
+                this.usu.seguirPP(u.getNick(), aSeguir.getNick());
+                u.seguirUsuario(aSeguir);
+                return true;
+            } else if (aSeguir instanceof Colaborador) {
+                this.usu.seguirPC(u.getNick(), aSeguir.getNick());
+                u.seguirUsuario(aSeguir);
+                return true;
+            }
+
+        }
+
+        return false;
     }
-    
+
     @Override
-    public boolean dejarDeSeguir(){
-         Usuario u=this.usuarios.get(this.usuRec);
-        Usuario aSeguir=this.usuarios.get(this.usuAseguir);
-          
-          if(u instanceof Colaborador){
-              if(aSeguir instanceof Colaborador){
-                  this.usu.dejarSeguirCC(u.getNick(), aSeguir.getNick());
-                   return u.dejarDeSeguir(aSeguir);
-              }
-              else if(aSeguir instanceof Proponente){
-                  this.usu.dejarSeguirCP(u.getNick(), aSeguir.getNick());
-                   return u.dejarDeSeguir(aSeguir);
-              }
-              
-          }
-          
-          if(u instanceof Proponente){
-            if(aSeguir instanceof Proponente){
-                this.usu.dejarSeguirPP(u.getNick(), aSeguir.getNick());
+    public boolean dejarDeSeguir() {
+        Usuario u = this.usuarios.get(this.usuRec);
+        Usuario aSeguir = this.usuarios.get(this.usuAseguir);
+
+        if (u instanceof Colaborador) {
+            if (aSeguir instanceof Colaborador) {
+                this.usu.dejarSeguirCC(u.getNick(), aSeguir.getNick());
+                return u.dejarDeSeguir(aSeguir);
+            } else if (aSeguir instanceof Proponente) {
+                this.usu.dejarSeguirCP(u.getNick(), aSeguir.getNick());
                 return u.dejarDeSeguir(aSeguir);
             }
-            else if(aSeguir instanceof Colaborador){
-                this.usu.dejarSeguirPC(u.getNick(), aSeguir.getNick());
-                 return u.dejarDeSeguir(aSeguir);
-            }
-              
-          }
 
- 
-    
-         return false;  
+        }
+
+        if (u instanceof Proponente) {
+            if (aSeguir instanceof Proponente) {
+                this.usu.dejarSeguirPP(u.getNick(), aSeguir.getNick());
+                return u.dejarDeSeguir(aSeguir);
+            } else if (aSeguir instanceof Colaborador) {
+                this.usu.dejarSeguirPC(u.getNick(), aSeguir.getNick());
+                return u.dejarDeSeguir(aSeguir);
+            }
+
+        }
+
+        return false;
     }
-    
+
     @Override
-    public List<DtUsuario> traerSeguidos(String nick){
-        List<DtUsuario> usuarios=new ArrayList<>();
-       
-      
-        Usuario u=this.usuarios.get(nick);
-        Map<String, Usuario> listaSeguidos=u.getUsuSeguidos();
-       Set se= listaSeguidos.entrySet();
-       Iterator it= se.iterator();
-       while(it.hasNext()){
-           Map.Entry mentry = (Map.Entry) it.next();
-       Usuario us=(Usuario) mentry.getValue();
-       DtUsuario usuarito=this.traerDtUsuario(us.getSeguido());
-     
-       
-       usuarios.add(usuarito);
-       
-       }
+    public List<DtUsuario> traerSeguidos(String nick) {
+        List<DtUsuario> usuarios = new ArrayList<>();
+
+        Usuario u = this.usuarios.get(nick);
+        Map<String, Usuario> listaSeguidos = u.getUsuSeguidos();
+        Set se = listaSeguidos.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Usuario us = (Usuario) mentry.getValue();
+            DtUsuario usuarito = this.traerDtUsuario(us.getSeguido());
+
+            usuarios.add(usuarito);
+
+        }
         return usuarios;
-        
+
     }
-    
+
     @Override
-    public List<DtUsuario> traerSeguidores(String nick){
-        List<DtUsuario> seguidores= new ArrayList<>();
-        
-        Set se= this.usuarios.entrySet();
-        Iterator it= se.iterator();
-        while(it.hasNext()){
-            Map.Entry mentry= (Map.Entry) it.next();
-            Usuario aux=(Usuario) mentry.getValue();
-            if(!aux.getNick().equals(nick)){
-                List<DtUsuario> seguidosdeAux=this.traerSeguidos(aux.getNick());
-                for(int i=0; i<seguidosdeAux.size(); i++){
-                    DtUsuario user=seguidosdeAux.get(i);
-                    if(user.getNick().equals(nick)){
-                        DtUsuario seguidor=this.traerDtUsuario(aux.getNick());
+    public List<DtUsuario> traerSeguidores(String nick) {
+        List<DtUsuario> seguidores = new ArrayList<>();
+
+        Set se = this.usuarios.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Usuario aux = (Usuario) mentry.getValue();
+            if (!aux.getNick().equals(nick)) {
+                List<DtUsuario> seguidosdeAux = this.traerSeguidos(aux.getNick());
+                for (int i = 0; i < seguidosdeAux.size(); i++) {
+                    DtUsuario user = seguidosdeAux.get(i);
+                    if (user.getNick().equals(nick)) {
+                        DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
                         seguidores.add(seguidor);
                     }
-                    
+
                 }
-                
+
             }
-            
-            
+
         }
-        
-        
+
         return seguidores;
-        
+
     }
-    
-    
-    
 
     @Override
-     public void seleccionarUsuario(String nick){
-         this.usuRec=nick;
-     }
-     @Override
-     public void seleccionarUsuSeg(String nick){
-         this.usuAseguir=nick;
-     }
-    
+    public void seleccionarUsuario(String nick) {
+        this.usuRec = nick;
+    }
+
     @Override
-    public List<DtProponente> listarProponentes(){
-      List<DtProponente> listita = new ArrayList<>();
+    public void seleccionarUsuSeg(String nick) {
+        this.usuAseguir = nick;
+    }
+
+    @Override
+    public List<DtProponente> listarProponentes() {
+        List<DtProponente> listita = new ArrayList<>();
         Set se = usuarios.entrySet();
         Iterator iterator = se.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-            if(mentry.getValue() instanceof Proponente){
-                
-            
-            Proponente aux = (Proponente) mentry.getValue();
-            listita.add(aux.obtenerInfo());
+            if (mentry.getValue() instanceof Proponente) {
+
+                Proponente aux = (Proponente) mentry.getValue();
+                listita.add(aux.obtenerInfo());
             }
         }
         return listita;
-        
-        
+
     }
 
     @Override
@@ -305,7 +278,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "\"C:\\Users\\Documentos\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -315,7 +288,7 @@ public class ctrlUsuario implements IUsuario {
             }
             String nuevo = this.sha1(pass);
             Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo, nuevo);
-                boolean res = this.usu.agregarProponente(p);
+            boolean res = this.usu.agregarProponente(p);
             if (res) {
                 this.usuarios.put(Nick, p);
             }
@@ -341,7 +314,7 @@ public class ctrlUsuario implements IUsuario {
             File aor = new File(origen);
             File ade = new File(destino);
             ade.getParentFile().mkdirs();
-            if(ade.createNewFile()){
+            if (ade.createNewFile()) {
                 System.out.println("Se crea");
             }
             Files.copy(aor.toPath(), ade.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -356,37 +329,36 @@ public class ctrlUsuario implements IUsuario {
     @Override
     public void cargarProponentes() {
         this.usuarios = this.usu.cargarProponentes();
-       
+
     }
 
-    
-    public void borrarArch(File f){
-        File [] arch = f.listFiles();
-        if(arch.length > 0){
-        for(int i=0; i<arch.length; i++){
-            arch[i].delete();
-        }
+    public void borrarArch(File f) {
+        File[] arch = f.listFiles();
+        if (arch.length > 0) {
+            for (int i = 0; i < arch.length; i++) {
+                arch[i].delete();
+            }
         }
     }
-    
+
     @Override
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
             File borrar = new File("Imagenes/Colaborador");
-            if(borrar.exists()){
-            this.borrarArch(borrar);
-            borrar.delete();
+            if (borrar.exists()) {
+                this.borrarArch(borrar);
+                borrar.delete();
             }
             File borrar1 = new File("Imagenes/Proponente");
-            if(borrar1.exists()){
-            this.borrarArch(borrar1);
-            borrar1.delete();
+            if (borrar1.exists()) {
+                this.borrarArch(borrar1);
+                borrar1.delete();
             }
             File borrar2 = new File("Imagenes/Propuesta");
-            if(borrar2.exists()){
-            this.borrarArch(borrar2);
-            borrar2.delete();
+            if (borrar2.exists()) {
+                this.borrarArch(borrar2);
+                borrar2.delete();
             }
         } catch (SQLException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -431,46 +403,43 @@ public class ctrlUsuario implements IUsuario {
         Iterator iterator = se.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-            if(mentry.getValue() instanceof Colaborador)
-            {
-            Colaborador aux = (Colaborador) mentry.getValue();   
-            
-            listita.add(aux.obtenerInfo());
+            if (mentry.getValue() instanceof Colaborador) {
+                Colaborador aux = (Colaborador) mentry.getValue();
+
+                listita.add(aux.obtenerInfo());
             }
         }
         return listita;
     }
-    
+
     @Override
-    public List<DtUsuario> listarUsuarios(){
-        List<DtUsuario> lista=new ArrayList<>();
-        List<DtColaborador> colab=this.listarColaboradores();
-        List<DtProponente> prop=this.listarProponentes();
-        
-        boolean a= lista.addAll(colab);
-        boolean b=lista.addAll(prop);
-      
-       if(a && b) return lista;
+    public List<DtUsuario> listarUsuarios() {
+        List<DtUsuario> lista = new ArrayList<>();
+        List<DtColaborador> colab = this.listarColaboradores();
+        List<DtProponente> prop = this.listarProponentes();
+
+        boolean a = lista.addAll(colab);
+        boolean b = lista.addAll(prop);
+
+        if (a && b) {
+            return lista;
+        }
         return null;
     }
-    
 
-@Override
-public List<DtColaboracion> datosCol(Colaborador a){
-  List<DtColaboracion> listita = new ArrayList<>();
-  List<Colaboracion> listitaC = new ArrayList<>();
-           
-             listitaC = a.getColHechas();
-             for(int i=0; i<listitaC.size();i++){
-                 DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
-                 DtColaboracion cola = new DtColaboracion(prop);
-                  listita.add(cola);
+    @Override
+    public List<DtColaboracion> datosCol(Colaborador a) {
+        List<DtColaboracion> listita = new ArrayList<>();
+        List<Colaboracion> listitaC = new ArrayList<>();
+
+        listitaC = a.getColHechas();
+        for (int i = 0; i < listitaC.size(); i++) {
+            DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
+            DtColaboracion cola = new DtColaboracion(prop);
+            listita.add(cola);
         }
         return listita;
     }
-       
-    
-
 
     @Override
     public boolean escorreo(String correo) {
@@ -495,17 +464,16 @@ public List<DtColaboracion> datosCol(Colaborador a){
         }
         return true;
     }
-    
+
     @Override
-    public Usuario traerUsuario(String nick){
-         for (Usuario u : this.usuarios.values()) {
+    public Usuario traerUsuario(String nick) {
+        for (Usuario u : this.usuarios.values()) {
             if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 return u;
             }
         }
         return null;
-        
-        
+
     }
 
     @Override
@@ -515,11 +483,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
         for (Usuario u : this.usuarios.values()) {
             if (u.getNick().equalsIgnoreCase(nick) || u.getCorreo().equalsIgnoreCase(nick)) {
                 if (u instanceof Proponente) {
-                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido(), u.getImagen(), ((Proponente) u).getLinkWeb(), ((Proponente) u).getDireccion(),((Proponente) u).getBiografia(), u.getFecha());
-                   
+                    prop = new DtProponente(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getApellido(), u.getImg(), ((Proponente) u).getLinkWeb(), ((Proponente) u).getDireccion(), ((Proponente) u).getBiografia(), u.getFecha());
+
                     return prop;
                 } else if (u instanceof Colaborador) {
-                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(),u.getFecha(), u.getApellido(), u.getImagen());
+                    colab = new DtColaborador(u.getNick(), u.getCorreo(), u.getCont(), u.getNombre(), u.getFecha(), u.getApellido(), u.getImg());
                     return colab;
                 }
             }
@@ -527,22 +495,55 @@ public List<DtColaboracion> datosCol(Colaborador a){
         return null;
     }
     
+    
+    @Override
+     public List<DtPropuesta> traerPropFav(String nick){
+         List<DtPropuesta> propuestas=new ArrayList<>();
+         Usuario u= this.traerUsuario(nick);
+         Map<String, Propuesta> otras=u.getPropuFav();
+         Set se= otras.entrySet();
+         Iterator it= se.iterator();
+         while(it.hasNext()){
+             Map.Entry mentry= (Map.Entry) it.next();
+             DtPropuesta prop= (DtPropuesta) mentry.getValue();
+             propuestas.add(prop);
+         }       
+         return propuestas;
+     }
+    
+         @Override
+    public List<DtPropuesta> traerPropuestasColaboradas(String nick){
+        List<DtPropuesta> propuestas=new ArrayList<>();
+        Colaborador colab= this.traerColaborador(nick);
+        List<Colaboracion> colaboraciones= colab.getColHechas();
+        for(int i=0; i<colaboraciones.size(); i++){
+            Colaboracion col=(Colaboracion) colaboraciones.get(i);
+            Propuesta prop= col.getProp();
+            DtPropuesta pro = new DtPropuesta(prop);
+            propuestas.add(pro);
+        }
+        return propuestas;
+    }
+     
+     
+     
+     
     @Override
     public DtInfo resolverLogin(String nick, String pass) {
-        DtInfo resultado = new DtInfo(false, "algo","algo","algo");
-        String passEncriptada=sha1(pass);
+        DtInfo resultado = new DtInfo(false, "algo", "algo", "algo");
+        String passEncriptada = sha1(pass);
         DtUsuario user = this.traerDtUsuario(nick);
         DtProponente prop = null;
         DtColaborador colab = null;
-        boolean valido=false;
+        boolean valido = false;
 
         if (user instanceof DtColaborador) {
             colab = (DtColaborador) user;
-            String cadena1=colab.getNombre();
-            String cadena2=colab.getApellido();
-            String cadena3=" ";
-            String cadena4=cadena1.concat(cadena3);
-            String cadena5=cadena4.concat(cadena2);
+            String cadena1 = colab.getNombre();
+            String cadena2 = colab.getApellido();
+            String cadena3 = " ";
+            String cadena4 = cadena1.concat(cadena3);
+            String cadena5 = cadena4.concat(cadena2);
             if (this.escorreo(nick)) {
                 if (this.existeCorreo(nick)) {
                     //no existe direccion de correo en sistema
@@ -551,7 +552,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
 
                 } else {
                     if (colab.getPass().equals(passEncriptada)) {
-                        
+
                         resultado.setEstLogin(true);
                         resultado.setMensaje(cadena5);
                         resultado.setTipo("colaborador");
@@ -566,12 +567,12 @@ public List<DtColaboracion> datosCol(Colaborador a){
             } else if (this.existeNick(nick)) {
                 //no existe el usuario en el sistema con ese nick
                 resultado.setEstLogin(false);
-              
+
                 resultado.setMensaje("No existe un usuario en el sistema con ese nick");
 
             } else {
                 if (colab.getPass().equals(passEncriptada)) {
-                      
+
                     resultado.setEstLogin(true);
                     resultado.setMensaje(cadena5);
                     resultado.setNick(colab.getNick());
@@ -587,11 +588,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
 
         } else if (user instanceof DtProponente) {
             prop = (DtProponente) user;
-              String cadena1=prop.getNombre();
-            String cadena2=prop.getApellido();
-            String cadena3=" ";
-            String cadena4=cadena1.concat(cadena3);
-            String cadena5=cadena4.concat(cadena2);
+            String cadena1 = prop.getNombre();
+            String cadena2 = prop.getApellido();
+            String cadena3 = " ";
+            String cadena4 = cadena1.concat(cadena3);
+            String cadena5 = cadena4.concat(cadena2);
             if (this.escorreo(nick)) {
                 if (this.existeCorreo(nick)) {
                     //no existe la direccion de correo ingresada en el sistema
@@ -600,11 +601,11 @@ public List<DtColaboracion> datosCol(Colaborador a){
 
                 } else {
                     if (prop.getPass().equals(passEncriptada)) {
-                         
-                       resultado.setEstLogin(true);
-                       resultado.setMensaje(cadena5);
-                       resultado.setNick(prop.getNick());
-                       resultado.setTipo("proponente");
+
+                        resultado.setEstLogin(true);
+                        resultado.setMensaje(cadena5);
+                        resultado.setNick(prop.getNick());
+                        resultado.setTipo("proponente");
                     } else {
                         //la contraseña ingresada es incorrectafas
                         resultado.setEstLogin(false);
@@ -615,40 +616,33 @@ public List<DtColaboracion> datosCol(Colaborador a){
                 //No existe un usuario en el sistema con ese nick
                 resultado.setEstLogin(false);
                 resultado.setMensaje("No existe un usuario en el sistema con ese nick");
-                
 
             } else {
                 if (prop.getPass().equals(passEncriptada)) {
-                        
-                        resultado.setEstLogin(true);
-                        resultado.setMensaje(cadena5);
-                        resultado.setTipo("proponente");
-                        resultado.setNick(prop.getNick());
-                        
+
+                    resultado.setEstLogin(true);
+                    resultado.setMensaje(cadena5);
+                    resultado.setTipo("proponente");
+                    resultado.setNick(prop.getNick());
+
                 } else {
                     resultado.setEstLogin(false);
                     resultado.setMensaje("La contraseña ingresada es incorrecta");
-                    
+
                 }
             }
 
-        }
-        else{
+        } else {
             resultado.setEstLogin(false);
-            if(this.escorreo(nick)){
+            if (this.escorreo(nick)) {
                 resultado.setMensaje("El correo ingresado no existe en el sistema");
-            }
-            else{
-            resultado.setMensaje("No existe un usuario en el sistema con ese nick");
+            } else {
+                resultado.setMensaje("No existe un usuario en el sistema con ese nick");
             }
         }
 
         return resultado;
     }
-    
-    
-    
-          
 
     @Override
     public boolean existeCorreo(String correo) {
@@ -660,102 +654,85 @@ public List<DtColaboracion> datosCol(Colaborador a){
         }
         return true;
     }
-    
-    public void cargarUsuarios2()
-    {
-        Map<String,  Usuario> listita = new HashMap<>();
-        listita.putAll(this.usu.cargarColaboradores());
-        listita.putAll(this.usu.cargarProponentes());
-        
-        this.usuarios = this.cargarSeg(listita);
-    }
-    
-@Override
-public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
-    List<Usuario> usuPP= new ArrayList<>();
-     List<Usuario> usuPC= new ArrayList<>();
-                    List<Usuario> usuCC= new ArrayList<>();
-      List<Usuario> usuCP= new ArrayList<>();
-          Map<String, Usuario> nueva= new HashMap<>();
-    
-    nueva=lista;
-    usuPP=this.usu.cargarSegPP();
-       usuPC=this.usu.cargarSegPC();
-        usuCC=this.usu.cargarSegCC();
-    usuCP=this.usu.cargarSegCP();
-    
-    
-    
-    Set se=nueva.entrySet();
-   
-    Iterator it=se.iterator();
-
-
-    while (it.hasNext()) {
-        Map.Entry mentry = (Map.Entry) it.next();
-        if (mentry.getValue() instanceof Proponente) {
-            Proponente aux = (Proponente) mentry.getValue();
-
-
-    for(int i=0; i < usuPP.size(); i++){
-                 Usuario auxPP = (Usuario) usuPP.get(i);
-                if (aux.getNick().equals(auxPP.getNick()) == true) {
-                    aux.seguirUsuBD(auxPP);
-                }
-            }
-            
-  
-            
-            
-            for(int i=0; i < usuPC.size(); i++){
-                 Usuario auxPC = (Usuario) usuPC.get(i);
-                if (aux.getNick().equals(auxPC.getNick()) == true) {
-                    aux.seguirUsuBD(auxPC);
-                }
-            }
-            
-
-            
-
-        }
-        
-        else if(mentry.getValue() instanceof Colaborador){
-            Colaborador aux2 = (Colaborador) mentry.getValue();
-            
-            
-              for(int i=0; i < usuCC.size(); i++){
-                 Usuario auxCC = (Usuario) usuCC.get(i);
-                if (aux2.getNick().equals(auxCC.getNick()) == true) {
-                    aux2.seguirUsuBD(auxCC);
-                }
-            }
-            
-
-   
-              for(int i=0; i < usuCP.size(); i++){
-                 Usuario auxCP = (Usuario) usuCP.get(i);
-                if (aux2.getNick().equals(auxCP.getNick()) == true) {
-                    aux2.seguirUsuBD(auxCP);
-                }
-            }
-          
-            
-        }
-    }
-    
-    return nueva;
-}
 
     @Override
-    public void filtrarP(String campito, JList listita)
-{
+    public void cargarUsuarios2() {
+        Map<String, Usuario> listita = new HashMap<>();
+        listita.putAll(this.usu.cargarColaboradores());
+        listita.putAll(this.usu.cargarProponentes());
+
+        this.usuarios = this.cargarSeg(listita);
+    }
+
+    @Override
+    public Map<String, Usuario> cargarSeg(Map<String, Usuario> lista) {
+        List<Usuario> usuPP = new ArrayList<>();
+        List<Usuario> usuPC = new ArrayList<>();
+        List<Usuario> usuCC = new ArrayList<>();
+        List<Usuario> usuCP = new ArrayList<>();
+        Map<String, Usuario> nueva = new HashMap<>();
+
+        nueva = lista;
+        usuPP = this.usu.cargarSegPP();
+        usuPC = this.usu.cargarSegPC();
+        usuCC = this.usu.cargarSegCC();
+        usuCP = this.usu.cargarSegCP();
+
+        Set se = nueva.entrySet();
+
+        Iterator it = se.iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            if (mentry.getValue() instanceof Proponente) {
+                Proponente aux = (Proponente) mentry.getValue();
+
+                for (int i = 0; i < usuPP.size(); i++) {
+                    Usuario auxPP = (Usuario) usuPP.get(i);
+                    if (aux.getNick().equals(auxPP.getNick()) == true) {
+                        aux.seguirUsuBD(auxPP);
+                    }
+                }
+
+                for (int i = 0; i < usuPC.size(); i++) {
+                    Usuario auxPC = (Usuario) usuPC.get(i);
+                    if (aux.getNick().equals(auxPC.getNick()) == true) {
+                        aux.seguirUsuBD(auxPC);
+                    }
+                }
+
+            } else if (mentry.getValue() instanceof Colaborador) {
+                Colaborador aux2 = (Colaborador) mentry.getValue();
+
+                for (int i = 0; i < usuCC.size(); i++) {
+                    Usuario auxCC = (Usuario) usuCC.get(i);
+                    if (aux2.getNick().equals(auxCC.getNick()) == true) {
+                        aux2.seguirUsuBD(auxCC);
+                    }
+                }
+
+                for (int i = 0; i < usuCP.size(); i++) {
+                    Usuario auxCP = (Usuario) usuCP.get(i);
+                    if (aux2.getNick().equals(auxCP.getNick()) == true) {
+                        aux2.seguirUsuBD(auxCP);
+                    }
+                }
+
+            }
+        }
+
+        return nueva;
+    }
+
+    @Override
+    public void filtrarP(String campito, JList listita) {
         List<DtProponente> listita2 = this.listarProponentes();
         if (campito.equals("")) { // SI NO BUSCA
             if (!listita2.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < listita2.size(); i++) {
                     DtProponente p = (DtProponente) listita2.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                 }
                 listita.setModel(modelo);
             }
@@ -765,23 +742,22 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
                 for (int i = 0; i < listita2.size(); i++) {
                     DtProponente p = (DtProponente) listita2.get(i);
                     if (p.getNombre().contains(campito) || p.getNick().contains(campito)) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                     }
                 }
                 listita.setModel(modelo);
             }
         }
-}
-    
+    }
+
     @Override
-    public void filtrarC(String campito, JList listita, List<Colaborador> listita2)
-    {
+    public void filtrarC(String campito, JList listita, List<Colaborador> listita2) {
         if (campito.equals("")) { // SI NO BUSCA
             if (!listita2.isEmpty()) {
                 DefaultListModel modelo = new DefaultListModel();
                 for (int i = 0; i < listita2.size(); i++) {
                     Colaborador p = (Colaborador) listita2.get(i);
-                    modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                 }
                 listita.setModel(modelo);
             }
@@ -791,7 +767,7 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
                 for (int i = 0; i < listita2.size(); i++) {
                     Colaborador p = (Colaborador) listita2.get(i);
                     if (p.getNick().contains(campito) || p.getNombre().contains(campito)) {
-                        modelo.addElement(p.getNombre()+"("+p.getNick()+")");
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
                     }
                 }
                 listita.setModel(modelo);
@@ -799,56 +775,56 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         }
     }
 
-
     @Override
-    public boolean validaWeb(String algo){
-    if(algo.matches("(http://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(www\\.)(.+)(\\.)(.+)") || algo.matches("(https://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(http://)(.+)(\\.)(.+)") || algo.matches("(https://)(.+)(\\.)(.+)") || algo.equals("")){
-        return true;
-    } 
-    return false;
-}
- 
+    public boolean validaWeb(String algo) {
+        if (algo.matches("(http://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(www\\.)(.+)(\\.)(.+)") || algo.matches("(https://)(www\\.)(.+)(\\.)(.+)") || algo.matches("(http://)(.+)(\\.)(.+)") || algo.matches("(https://)(.+)(\\.)(.+)") || algo.equals("")) {
+            return true;
+        }
+        return false;
+    }
+
 //    long ini = System.currentTimeMillis();
 //    InputStream fuente = null;
-    
     @Override
-    public List<String> SeleccionarColaborante(String xNick){
+    public List<String> SeleccionarColaborante(String xNick) {
         Colaborador x = (Colaborador) usuarios.get(xNick);
         this.ColaboradorConsulta = x;
         List<String> nombresP = new ArrayList<>();
         List<Colaboracion> listitaC = new ArrayList<>();
-             listitaC = x.getColHechas();
-             for(int i=0; i<listitaC.size();i++){
-                 String name = listitaC.get(i).getProp().getTitulo();
-                  nombresP.add(name);
+        listitaC = x.getColHechas();
+        for (int i = 0; i < listitaC.size(); i++) {
+            String name = listitaC.get(i).getProp().getTitulo();
+            nombresP.add(name);
         }
-    return nombresP;
-    };
+        return nombresP;
+    }
+
+    ;
     
 
     @Override
-     public DtColaboracion SeleccionarColaboracion(String xTitulo){
-     Colaborador x = this.ColaboradorConsulta;
+    public DtColaboracion SeleccionarColaboracion(String xTitulo) {
+        Colaborador x = this.ColaboradorConsulta;
         List<Colaboracion> listitaC = new ArrayList<>();
-             listitaC = x.getColHechas();
-             for(int i=0; i<listitaC.size();i++){
-                 
-                 if(xTitulo.equals(listitaC.get(i).getProp().getTitulo()))
-                 {
-                 DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
-                 Tretorno re = new Tretorno();
-                 if(listitaC.get(i).getRetorno().equals("entrada")){
-                     re.gsetEntraada("entrada");
-                 }
-                 else {
-                     re.gsetPorcentaje("porcentaje");
-                 }
-                 DtColaboracion colad = new DtColaboracion(listitaC.get(i).getHora(),listitaC.get(i).getFecha(),listitaC.get(i).getMonto(), re, null, prop);
-                 return colad; //colad
-                 }
+        listitaC = x.getColHechas();
+        for (int i = 0; i < listitaC.size(); i++) {
+
+            if (xTitulo.equals(listitaC.get(i).getProp().getTitulo())) {
+                DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
+                Tretorno re = new Tretorno();
+                if (listitaC.get(i).getRetorno().equals("entrada")) {
+                    re.gsetEntraada("entrada");
+                } else {
+                    re.gsetPorcentaje("porcentaje");
+                }
+                DtColaboracion colad = new DtColaboracion(listitaC.get(i).getHora(), listitaC.get(i).getFecha(), listitaC.get(i).getMonto(), re, null, prop);
+                return colad; //colad
+            }
         }
-     return null;
-     };
+        return null;
+    }
+
+    ;
      
      
     @Override
@@ -876,7 +852,8 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         }
         return modelo;
     }
-;
+
+    ;
      public DefaultListModel BUSCADOR_Proponente(String palabrita) {
         DefaultListModel modelo = new DefaultListModel();
         List<DtProponente> col = this.listarProponentes();
@@ -901,14 +878,14 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
         }
         return modelo;
     }
-     
-     @Override
-     public String encripta(String pass, String type){
+
+    @Override
+    public String encripta(String pass, String type) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance(type);
-            byte [] arreglo = md.digest(pass.getBytes());
-            StringBuffer sb =new StringBuffer();
-            for(int i=0; i<arreglo.length; ++i){
+            byte[] arreglo = md.digest(pass.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < arreglo.length; ++i) {
                 sb.append(Integer.toHexString((arreglo[i] & 0xFF) | 0x100).substring(1, 3));
             }
             return sb.toString();
@@ -916,69 +893,77 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-     }
-     
-     @Override
-     public String sha1(String pass){
-         return this.encripta(pass, "SHA1");
-     }
-     String carpetaImagenes;
-     @Override
-	public void configurarParametros(String carpetaImagenes) {
-		this.carpetaImagenes = carpetaImagenes;
-		
-	}
+    }
+
+    @Override
+    public String sha1(String pass) {
+        return this.encripta(pass, "SHA1");
+    }
+    String carpetaImagenes;
+
+    @Override
+    public void configurarParametros(String carpetaImagenes) {
+        this.carpetaImagenes = carpetaImagenes;
+
+    }
+
+    private Map<String, DataImagen> imagenesMap = new HashMap<>();
+    private static Logger LOG;
+
+    @Override
+    public Path agregarImagen(final DtUsuario imagenUsuario) {
         
-        private Map<String,DataImagen> imagenesMap;
-	private static Logger LOG;
-        
-        @Override
-	public Path agregarImagen(final DtUsuario imagenUsuario){
-                this.imagenesMap = new HashMap<>();
-                LOG = Logger.getLogger(this.getClass().getPackage().getName());
-		String nick = imagenUsuario.getNick();			
-		if (this.carpetaImagenes==null){
-			LOG.log(Level.SEVERE,"carpetaImagenes is null");
-			throw new IllegalStateException("La carpeta de imagenes no fue configurada");	
-		}//if
-		final File fileImagenes = new File(this.carpetaImagenes);
-		if (!fileImagenes.isDirectory()){
-			LOG.log(Level.SEVERE,this.carpetaImagenes + "no es un directorio");
-                    try {	
-                        throw new IOException("La carpeta de imagenes no fue configurada");
-                    } catch (IOException ex) {
-                        Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-		}//if
-		String pathStr = this.carpetaImagenes + File.separatorChar + nick;
-		final File dirUsuario = new File(pathStr);
-		if (!dirUsuario.isDirectory())
-			dirUsuario.mkdirs();
-		final DataImagen imagen = imagenUsuario.getImagen();
-		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();
-		Path path = Paths.get(pathStr);
+        LOG = Logger.getLogger(this.getClass().getPackage().getName());
+        String nick = imagenUsuario.getNick();
+        if (this.carpetaImagenes == null) {
+            LOG.log(Level.SEVERE, "carpetaImagenes is null");
+            throw new IllegalStateException("La carpeta de imagenes no fue configurada");
+        }//if
+        final File fileImagenes = new File(this.carpetaImagenes);
+        if (!fileImagenes.isDirectory()) {
+            LOG.log(Level.SEVERE, this.carpetaImagenes + "no es un directorio");
+            try {
+                throw new IOException("La carpeta de imagenes no fue configurada");
+            } catch (IOException ex) {
+                Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }//if
+        String pathStr = this.carpetaImagenes + File.separatorChar + nick;
+        final File dirUsuario = new File(pathStr);
+        if (!dirUsuario.isDirectory()) {
+            dirUsuario.mkdirs();
+        }
+        final DataImagen imagen = imagenUsuario.getImagen();
+        pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();
+        Path path = Paths.get(pathStr);
         try {
             Files.write(path, imagen.getStream(), CREATE);
-            return path;
         } catch (IOException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-		LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
-                imagenesMap.put(nick, imagen);
+        LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
+        imagenesMap.put(nick, imagen);
         return path;
-	}
-          @Override
-        public BufferedImage retornarImagen(final String nick) throws IOException {
-                /*if (!this.credencialesMap.keySet().contains(email)){
-                         throw new UsuarioNoEncontradoException(email);
-                }*/ 
-                DataImagen imagen=imagenesMap.get(nick);
-                String pathStr; 
-        pathStr = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli\\ProgApli\\Imagenes\\Colaborador" + File.separatorChar + nick;
-		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();              
-                File f = new File(pathStr);
-                BufferedImage bi = ImageIO.read(f);
-                return bi;
-        }   
-}
+    }
 
+    @Override
+    public BufferedImage retornarImagen(final String nick) {
+        /*if (!this.credencialesMap.keySet().contains(email)){
+                         throw new UsuarioNoEncontradoException(email);
+                }*/
+        for(Usuario usu: usuarios.values()){
+            if(usu.getNick().equals(nick)){
+                String pat = usu.getImg();
+                File f = new File(pat);
+                BufferedImage bi = null;
+                try {
+                    bi = ImageIO.read(f);
+                } catch (IOException ex) {
+                    Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return bi;
+            }
+        }
+        return null;
+    }
+}

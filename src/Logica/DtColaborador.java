@@ -54,7 +54,18 @@ public class DtColaborador extends DtUsuario {
         this.apellido=apellido;
     }
     private DataImagen imagen;
-    public DtColaborador(String nick, String correo, String pass, String nombre,Date fecha, String apellido, final DataImagen img)
+    public DtColaborador(String nick, String correo, String pass, String nombre,Date fecha, String apellido, String img)
+    {
+        this.nick=nick;
+        this.correo=correo;
+        this.pass=pass;
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.img=img;
+        this.fecha = fecha;
+    }
+    
+        public DtColaborador(String nick, String correo, String pass, String nombre,Date fecha, String apellido, final DataImagen img)
     {
         this.nick=nick;
         this.correo=correo;
