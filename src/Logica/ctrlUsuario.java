@@ -973,7 +973,8 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
                          throw new UsuarioNoEncontradoException(email);
                 }*/ 
                 DataImagen imagen=imagenesMap.get(nick);
-                String pathStr = this.carpetaImagenes + File.separatorChar + nick; 
+                String pathStr; 
+        pathStr = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli\\ProgApli\\Imagenes\\Colaborador" + File.separatorChar + nick;
 		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();              
                 File f = new File(pathStr);
                 BufferedImage bi = ImageIO.read(f);
