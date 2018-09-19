@@ -134,12 +134,12 @@ public class ctrlUsuario implements IUsuario {
          
      }
      
-          
-//    if(u.getNick().equals(aSeguir.getNick())){
-//        return true;
-//    }
+
      return false;
     }
+    
+    
+    
     
      @Override
     public boolean seguirUsuario(){
@@ -212,6 +212,58 @@ public class ctrlUsuario implements IUsuario {
  
     
          return false;  
+    }
+    
+    @Override
+    public List<DtUsuario> traerSeguidos(String nick){
+        List<DtUsuario> usuarios=new ArrayList<>();
+       
+      
+        Usuario u=this.usuarios.get(nick);
+        Map<String, Usuario> listaSeguidos=u.getUsuSeguidos();
+       Set se= listaSeguidos.entrySet();
+       Iterator it= se.iterator();
+       while(it.hasNext()){
+           Map.Entry mentry = (Map.Entry) it.next();
+       Usuario us=(Usuario) mentry.getValue();
+       DtUsuario usuarito=this.traerDtUsuario(us.getSeguido());
+     
+       
+       usuarios.add(usuarito);
+       
+       }
+        return usuarios;
+        
+    }
+    
+    @Override
+    public List<DtUsuario> traerSeguidores(String nick){
+        List<DtUsuario> seguidores= new ArrayList<>();
+        
+        Set se= this.usuarios.entrySet();
+        Iterator it= se.iterator();
+        while(it.hasNext()){
+            Map.Entry mentry= (Map.Entry) it.next();
+            Usuario aux=(Usuario) mentry.getValue();
+            if(!aux.getNick().equals(nick)){
+                List<DtUsuario> seguidosdeAux=this.traerSeguidos(aux.getNick());
+                for(int i=0; i<seguidosdeAux.size(); i++){
+                    DtUsuario user=seguidosdeAux.get(i);
+                    if(user.getNick().equals(nick)){
+                        DtUsuario seguidor=this.traerDtUsuario(aux.getNick());
+                        seguidores.add(seguidor);
+                    }
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        
+        return seguidores;
+        
     }
     
     
