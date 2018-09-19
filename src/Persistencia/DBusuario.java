@@ -561,7 +561,7 @@ public class DBusuario {
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = imagenes[i];
-                    String destino = "Imagenes/Colaborador/" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
@@ -595,7 +595,7 @@ public class DBusuario {
 
     public Map<String, Colaborador> cargarColaboradores() {
         try {
-            Map<String, Colaborador> lista = new HashMap<String, Colaborador>();
+            Map<String, Colaborador> lista = new HashMap<>();
             try (PreparedStatement st = conexion.prepareStatement("SELECT * FROM colaborador"); ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     String nick = rs.getString("NickC");
