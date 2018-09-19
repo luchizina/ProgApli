@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import Logica.Propuesta;
+import Logica.ctrlUsuario;
 import Persistencia.DBListEstado;
 import Persistencia.DBPropuesta;
 import java.io.File;
@@ -384,7 +386,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     }
 
-    ;
+ 
     
     
     @Override
@@ -569,6 +571,9 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return listita;
     }
+    
+   
+
 
     @Override
     public List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x) {
