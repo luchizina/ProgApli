@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import Logica.Colaborador;
 import Logica.Proponente;
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -33,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -72,7 +74,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
        
                 if (this.copia(Imagen, destino) == true) {
@@ -303,7 +305,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "\"C:\\Users\\Documentos\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -1005,4 +1007,17 @@ public Map<String,Usuario> cargarSeg(Map<String,Usuario> lista){
                 imagenesMap.put(nick, imagen);
         return path;
 	}
+          @Override
+        public BufferedImage retornarImagen(final String nick) throws IOException {
+                /*if (!this.credencialesMap.keySet().contains(email)){
+                         throw new UsuarioNoEncontradoException(email);
+                }*/ 
+                DataImagen imagen=imagenesMap.get(nick);
+                String pathStr = this.carpetaImagenes + File.separatorChar + nick; 
+		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();              
+                File f = new File(pathStr);
+                BufferedImage bi = ImageIO.read(f);
+                return bi;
+        }   
 }
+

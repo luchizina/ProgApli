@@ -34,21 +34,23 @@ public class DBListEstado {
 
     public boolean agregarEstado(ListEstado p, String t) throws SQLException, ParseException {
 
-        PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
-                + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
 //                     SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 //                    java.sql.Date sqlDate = new java.sql.Date(p.getFecha().getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String fechaSt = sdf.format(p.getFecha());
-        String[] lul = fechaSt.split(" ");
-        String parte1 = lul[0];
-        String parte2 = lul[1];
-        statement.setString(1, parte1);
-        statement.setString(2, parte2);
-        statement.setString(3, t);
-        statement.setString(4, p.getEst().toString());
-        statement.executeUpdate();
-        statement.close();
+        try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
+                + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)")) {
+            //                     SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+//                    java.sql.Date sqlDate = new java.sql.Date(p.getFecha().getTime());
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+String fechaSt = sdf.format(p.getFecha());
+String[] lul = fechaSt.split(" ");
+String parte1 = lul[0];
+String parte2 = lul[1];
+statement.setString(1, parte1);
+statement.setString(2, parte2);
+statement.setString(3, t);
+statement.setString(4, p.getEst());
+statement.executeUpdate();
+        }
         return true;
     }
 
@@ -74,8 +76,7 @@ public class DBListEstado {
             }
         }
 
-    }
-    
+    } 
     public List<ListEstado> cargarListEst(){
         List<ListEstado> listita = new ArrayList<ListEstado>();
         try {
@@ -94,8 +95,7 @@ public class DBListEstado {
             Logger.getLogger(DBListEstado.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listita;
-    }
-    
+    }  
     public void SetearEstadoPropuesta(Propuesta x) {
         try {
             List<ListEstado> Lestados = new ArrayList<ListEstado>();

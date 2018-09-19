@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import Logica.*;
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -50,5 +51,7 @@ public interface IPropuesta {
     public abstract void cambiarEstadito(String p, String f);
     public abstract List<DtPropuesta> WEB_listarPropuestas_No_Ingresada();
     public abstract List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x);
-  
+
+    BufferedImage retornarImagen(final String titulo);
+
 }

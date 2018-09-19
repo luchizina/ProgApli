@@ -35,11 +35,19 @@ public class Propuesta {
             String lugar;
             String Prop;
             List<Colaboracion> colaboraciones;
+
             
             //private Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
+
+            //rivate Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
+
             private List<ListEstado> LE;
             private List<Comentario> cometarios;
 
+    public List<ListEstado> getLE() {
+        return LE;
+    }
+       
     public List<Comentario> getCometarios() {
         return cometarios;
     }

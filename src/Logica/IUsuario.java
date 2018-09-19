@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.Map;
@@ -61,4 +63,6 @@ public interface IUsuario {
      public abstract List<DtUsuario> traerSeguidores(String nick);
       public abstract List<DtPropuesta> traerPropFav(String nick);
         public abstract List<DtPropuesta> traerPropuestasColaboradas(String nick);  
+    public abstract BufferedImage retornarImagen(final String email) throws IOException;
+
 }
