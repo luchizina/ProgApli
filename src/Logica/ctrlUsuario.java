@@ -72,7 +72,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
        
                 if (this.copia(Imagen, destino) == true) {
@@ -251,7 +251,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda\\Imagenes\\Proponente\\" + Nick + "." + termina;
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -607,6 +607,7 @@ public List<DtColaboracion> datosCol(Colaborador a){
         return true;
     }
     
+    @Override
     public void cargarUsuarios2()
     {
         Map<String,  Usuario> listita = new HashMap<>();
