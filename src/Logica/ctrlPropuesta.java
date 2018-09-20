@@ -548,6 +548,13 @@ public class ctrlPropuesta implements IPropuesta {
 //    }
     }
 
+    @Override
+    public void agregarComentario(Colaborador nick, Propuesta titulo, String texto){
+        Comentario c = new Comentario(nick, titulo, texto);
+        titulo.Agregar_Comentario(c);
+        nick.Agregar_Comentario(c);
+        this.dbPropuesta.agregarComentario(c);
+    }
     ;
     
     @Override

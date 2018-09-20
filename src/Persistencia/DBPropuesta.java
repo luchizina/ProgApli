@@ -372,6 +372,22 @@ public class DBPropuesta {
             }
         }
     }
+    
+    public boolean agregarComentario(Comentario c){
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO comentarios ( Colaborador, Propuesta, Comentario) VALUES (?,?,?)");
+            statement.setString(1, c.getColaborador().getNick());
+            statement.setString(2, c.getPropuesta().getTitulo());
+            statement.setString(3, c.getTexto());
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+    }
 
     public void CargarComentarios_Memoria() {
         try {
