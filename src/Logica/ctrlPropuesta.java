@@ -148,13 +148,13 @@ public class ctrlPropuesta implements IPropuesta {
                     }
                     ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
                     System.out.println(est.getEst() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
-                    
-                     pe.addLE(est);
 
-                      for(int i = 0; i<pe.getLE().size();i++){
-                      System.out.println(pe.getLE().get(i).getEst() +" ESTOOOO"+pe.getLE().get(i).getEst() );
-                      
-                      }
+                    pe.addLE(est);
+
+                    for (int i = 0; i < pe.getLE().size(); i++) {
+                        System.out.println(pe.getLE().get(i).getEst() + " ESTOOOO" + pe.getLE().get(i).getEst());
+
+                    }
                     boolean Est = this.dbE.agregarEstado(est, titulo);
                     if (Est) {
                         System.out.println("Lo hace bien!!!");
@@ -393,9 +393,6 @@ public class ctrlPropuesta implements IPropuesta {
 
     }
 
- 
-    
-    
     @Override
     public List<String> ListarProp() {
         List<String> Nicks = new ArrayList<String>();
@@ -556,27 +553,28 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     @Override
-    public void agregarComentario(Colaborador nick, Propuesta titulo, String texto){
+    public void agregarComentario(Colaborador nick, Propuesta titulo, String texto) {
         Comentario c = new Comentario(nick, titulo, texto);
         titulo.Agregar_Comentario(c);
         nick.Agregar_Comentario(c);
         this.dbPropuesta.agregarComentario(c);
     }
+
     ;
     
  @Override
- public void agregarFavorito(Usuario usu, Propuesta prop){
-     if(usu instanceof Proponente){
-         usu.getPropuFav().put(prop.getTitulo(), prop);
-         this.dbPropuesta.favProp(usu.getNick(), prop.getTitulo());
-     } 
-     
-     if(usu instanceof Colaborador){
-         usu.getPropuFav().put(prop.getTitulo(), prop);
-         this.dbPropuesta.favCol(usu.getNick(), prop.getTitulo());
-     }
- }
- 
+    public void agregarFavorito(Usuario usu, Propuesta prop) {
+        if (usu instanceof Proponente) {
+            usu.getPropuFav().put(prop.getTitulo(), prop);
+            this.dbPropuesta.favProp(usu.getNick(), prop.getTitulo());
+        }
+
+        if (usu instanceof Colaborador) {
+            usu.getPropuFav().put(prop.getTitulo(), prop);
+            this.dbPropuesta.favCol(usu.getNick(), prop.getTitulo());
+        }
+    }
+
     @Override
     public void Cargar_Favoritos_Memoria() {
         this.dbPropuesta.CargarFavoritos_Memoria();
@@ -600,9 +598,6 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return listita;
     }
-    
-   
-
 
     @Override
     public List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x) {
@@ -612,20 +607,21 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if(aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false){
-            listita.add(aux.obtenerInfo());
+            if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false) {
+                listita.add(aux.obtenerInfo());
             }
         }
         return listita;
     }
 
     String carpetaImagenes;
-     @Override
-	public void configurarParametros(String carpetaImagenes) {
-		this.carpetaImagenes = carpetaImagenes;
-		
-	}
-        
+
+    @Override
+    public void configurarParametros(String carpetaImagenes) {
+        this.carpetaImagenes = carpetaImagenes;
+
+    }
+
     private Map<String, DataImagen> imagenesMap;
     private static Logger LOG;
 
@@ -665,52 +661,53 @@ public class ctrlPropuesta implements IPropuesta {
         imagenesMap.put(nick, imagen);
         return path;
     }
-     @Override
-        public BufferedImage retornarImagen(final String titulo)  {
-                /*if (!this.credencialesMap.keySet().contains(email)){
+
+    @Override
+    public BufferedImage retornarImagen(final String titulo) {
+        /*if (!this.credencialesMap.keySet().contains(email)){
                          throw new UsuarioNoEncontradoException(email);
-                }*/ 
-                DataImagen imagen=imagenesMap.get(titulo);
-                String pathStr = this.carpetaImagenes + File.separatorChar + titulo; 
-		pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();              
-                File f = new File(pathStr);
-                BufferedImage bi = null;
+                }*/
+        DataImagen imagen = imagenesMap.get(titulo);
+        String pathStr = this.carpetaImagenes + File.separatorChar + titulo;
+        pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();
+        File f = new File(pathStr);
+        BufferedImage bi = null;
         try {
             bi = ImageIO.read(f);
         } catch (IOException ex) {
             Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
-                return bi;
-        }   
-        
-        
-        public void ActualizarEstado(Propuesta x){
+        return bi;
+    }
+
+    public void ActualizarEstado(Propuesta x) {
         // VERIFICAR MONTO
         Calendar calendar = Calendar.getInstance();
         Date fechita = new Date();
         Date Fecha_EST_ACT = x.getFechaPub();
         boolean Recorrio = false;
         for (int i = 0; i < x.getLE().size(); i++) {
-                    ListEstado p = (ListEstado) x.getLE().get(i);
-                    if(p.getEst().equals(x.getEstActual().getEstado().toString())){
-                    Fecha_EST_ACT = p.getFecha();
-                    Recorrio = true;
-                    }
-                }
+            ListEstado p = (ListEstado) x.getLE().get(i);
+            if (p.getEst().equals(x.getEstActual().getEstado().toString())) {
+                Fecha_EST_ACT = p.getFecha();
+                Recorrio = true;
+            }
+        }
         calendar.setTime(fechita);
         calendar.add(Calendar.DAY_OF_YEAR, -30);
-        Date Hora_Public_menos30dias =  calendar.getTime();
-        
-        if(x.getMontoActual()>= x.getMontoTotal()){
-            cambiarEstadito(x.getTitulo(),"Financiada");
+        Date Hora_Public_menos30dias = calendar.getTime();
+
+        if (x.getMontoActual() >= x.getMontoTotal()) {
+            cambiarEstadito(x.getTitulo(), "Financiada");
+        } else if (Recorrio && (Hora_Public_menos30dias.before(Fecha_EST_ACT) || Hora_Public_menos30dias.equals(Fecha_EST_ACT))) {
+            cambiarEstadito(x.getTitulo(), "No_Financiada");
         }
-        else if (Recorrio && (Hora_Public_menos30dias.before(Fecha_EST_ACT) || Hora_Public_menos30dias.equals(Fecha_EST_ACT))){
-            cambiarEstadito(x.getTitulo(),"No_Financiada");
-        }   
-        };
+    }
+
+    ;
         
         
-        public void SetearPropuestas_A_Proponentes(){     
+        public void SetearPropuestas_A_Proponentes() {
         Set set = this.propuestas.entrySet();
         Iterator iteradorsito = set.iterator();
         while (iteradorsito.hasNext()) {
@@ -718,18 +715,39 @@ public class ctrlPropuesta implements IPropuesta {
             Propuesta aux = (Propuesta) mentry.getValue();
             Proponente pro = iUsu.traerProponente(aux.getPropo());
             pro.getPropuestas().put(aux.getTitulo(), aux);
-            }   
-    };
+        }
+    }
+
+    ;
         
     @Override
-        public boolean Ya_Comento_Propuesta(String c,String p){
-            Propuesta P = this.getPropPorNick(p);
-            for (int i = 0; i < P.getCometarios().size(); i++) {
-                    Comentario comentar = (Comentario) P.getCometarios().get(i);
-                    if(comentar.getColaborador().getNick().equals(c)){
+    public boolean yaFavoriteo(Usuario usu, String p) {
+            if (usu instanceof Proponente) {
+                Propuesta pro = usu.getPropuFav().get(p);
+                if(pro != null){
                     return true;
-                    }
                 }
+            }
+            
+            if (usu instanceof Colaborador) {
+                Propuesta pro = usu.getPropuFav().get(p);
+                if(pro != null){
+                    return true;
+                }
+            }
         return false;
-        };
+    }
+
+    @Override
+    public boolean Ya_Comento_Propuesta(String c, String p) {
+        Propuesta P = this.getPropPorNick(p);
+        for (int i = 0; i < P.getCometarios().size(); i++) {
+            Comentario comentar = (Comentario) P.getCometarios().get(i);
+            if (comentar.getColaborador().getNick().equals(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+;
 }
