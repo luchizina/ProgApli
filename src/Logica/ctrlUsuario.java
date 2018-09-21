@@ -278,7 +278,11 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
+
                 String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+
+  
+
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {

@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -57,6 +58,8 @@ public class ctrlPropuesta implements IPropuesta {
     private Propuesta propuestaconsulta = null;
     DBPropuesta dbPropuesta = null;
     DBListEstado dbE = null;
+    Fabrica fab = Fabrica.getInstance();    //agregado
+    IUsuario iUsu = fab.getICtrlUsuario(); //agregado
 
     public static ctrlPropuesta getInstance() {
         if (instancia == null) {
@@ -107,7 +110,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\Usuario\\Documents\\NetBeansProjects\\ProgApli1\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli1\\Imagenes\\Propuesta\\" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -325,8 +328,12 @@ public class ctrlPropuesta implements IPropuesta {
         }
     }
 
+    @Override
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+        this.SetearPropuestas_A_Proponentes();              //agregado
+        this.Cargar_Comentarios_Memoria();                  //agregado  
+        this.Cargar_Favoritos_Memoria();                    //agregado
     }
 
     @Override
@@ -574,6 +581,7 @@ public class ctrlPropuesta implements IPropuesta {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false) {
+                ActualizarEstado(aux);
                 listita.add(aux.obtenerInfo());
             }
         }
@@ -591,8 +599,8 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux.getCate().equals(x)) {
-                listita.add(aux.obtenerInfo());
+            if(aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false){
+            listita.add(aux.obtenerInfo());
             }
         }
         return listita;
@@ -661,4 +669,54 @@ public class ctrlPropuesta implements IPropuesta {
         }
                 return bi;
         }   
+        
+        
+        public void ActualizarEstado(Propuesta x){
+        // VERIFICAR MONTO
+        Calendar calendar = Calendar.getInstance();
+        Date fechita = new Date();
+        Date Fecha_EST_ACT = x.getFechaPub();
+        boolean Recorrio = false;
+        for (int i = 0; i < x.getLE().size(); i++) {
+                    ListEstado p = (ListEstado) x.getLE().get(i);
+                    if(p.getEst().equals(x.getEstActual().getEstado().toString())){
+                    Fecha_EST_ACT = p.getFecha();
+                    Recorrio = true;
+                    }
+                }
+        calendar.setTime(fechita);
+        calendar.add(Calendar.DAY_OF_YEAR, -30);
+        Date Hora_Public_menos30dias =  calendar.getTime();
+        
+        if(x.getMontoActual()>= x.getMontoTotal()){
+            cambiarEstadito(x.getTitulo(),"Financiada");
+        }
+        else if (Recorrio && (Hora_Public_menos30dias.before(Fecha_EST_ACT) || Hora_Public_menos30dias.equals(Fecha_EST_ACT))){
+            cambiarEstadito(x.getTitulo(),"No_Financiada");
+        }   
+        };
+        
+        
+        public void SetearPropuestas_A_Proponentes(){     
+        Set set = this.propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            Proponente pro = iUsu.traerProponente(aux.getPropo());
+            pro.getPropuestas().put(aux.getTitulo(), aux);
+            }   
+    };
+        
+    @Override
+        public boolean Ya_Comento_Propuesta(String c,String p){
+            Propuesta P = this.getPropPorNick(p);
+            for (int i = 0; i < P.getCometarios().size(); i++) {
+                    Comentario comentar = (Comentario) P.getCometarios().get(i);
+                    if(comentar.getColaborador().getNick().equals(c)){
+                    return true;
+                    }
+                }
+        return false;
+        };
 }

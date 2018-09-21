@@ -561,7 +561,11 @@ public class DBusuario {
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = imagenes[i];
+
                     String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
+
+       
+
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {

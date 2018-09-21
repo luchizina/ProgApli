@@ -124,7 +124,7 @@ public class DBPropuesta {
 
     public void cargarPropuestasPrueba() {
         String[] fechas = {"2018-09-16", "2018-10-07", "2018-10-19", "2018-10-21", "2018-11-18", "2018-11-16", "2018-12-03", "2018-10-12"};
-        String[] titulos = {"Cine en el Botanico", "Religiosamente", "El Pimiento Indomable", "Pilsen Rock", "Romeo y Julieta", "Un dia de Julio", "El Lazarillo de Tormes", "Durazno Rock"};
+        String[] titulos = {"Cine en el Botánico", "Religiosamente", "El Pimiento Indomable", "Pilsen Rock", "Romeo y Julieta", "Un dia de Julio", "El Lazarillo de Tormes", "Durazno Rock"};
         String[] descripciones = {"El 16 de Diciembre a la hora 20 se proyectará la película \"Clever\", en el Jardín Botánico (Av. 19 de Abril 1181)\n"
             + "en el marco de las actividades realizadas por el ciclo Cultura al Aire Libre. El largometraje uruguayo de ficción\n"
             + "Clever es dirigido por Federico Borgia y Guillermo Madeiro. Es apto para mayores de 15 años.", "MOMOSAPIENS presenta \"Religiosamente\". Mediante dos parodias y un hilo conductor que aborda la temática\n"
@@ -242,7 +242,7 @@ public class DBPropuesta {
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
                 Propuesta p = new Propuesta(lugar, titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp, precio);
                 lista.put(titulo, p);
-                
+               
             }
             rs.close();
             st.close();
@@ -279,7 +279,7 @@ public class DBPropuesta {
 
     public void colaboracionesPrueba() {
         String[] colaboradores = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano", "novick", "sergiop", "marcelot", "sergiop", "chino", "novick", "tonyp", "sergiop", "marcelot", "tonyp", "marcelot"};
-        String[] propuestas = {"Cine en el Botanico", "Cine en el Botanico", "Cine en el Botanico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio"};
+        String[] propuestas = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio"};
         String[] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-08-05", "2018-08-10", "2018-08-15", "2018-08-13", "2018-08-14", "2018-08-15", "2018-08-17"};
         String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30"};
         Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000};
@@ -357,7 +357,7 @@ public class DBPropuesta {
     // PARTE 2 DE LOS DATOS DE PRUEBA COMENTARIOS , FAVORITOS 
     public void CargarComentarios_BaseDeDatos() {
         String Colaborador[] = {"novick", "robinh", "nicoJ", "marcelot", "Mengano", "sergiop", "novick"};
-        String Propuesta[] = {"Cine en el Botanico", "Cine en el Botanico", "Cine en el Botanico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente"};
+        String Propuesta[] = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente"};
         String Comentario[] = {"Muy buena propuesta.", "Realmente una pena que la propuesta haya sido cancelada.", "No se lo pueden perder!", "Todos al teatro de verano este 7 de Octubre!", "Arriba Momosapiens!!!", "Los conmino a todos a ir!", "Excelente propuesta. Ahí estaremos."};
         for (int i = 0; i < 7; i++) {
             try {
@@ -434,7 +434,7 @@ public class DBPropuesta {
             "Perengano", "Perengano",
             "Tiajaci", "Tiajaci"};
 
-        String TituloPropuesta_Colaborador[] = {"Cine en el Botanico",
+        String TituloPropuesta_Colaborador[] = {"Cine en el Botánico",
             "Religiosamente", "El Pimiento Indomable",
             "Religiosamente", "Pilsen Rock",
             "El Pimiento Indomable", "Romeo y Julieta",
@@ -467,12 +467,12 @@ public class DBPropuesta {
             "kairoh", "kairoh",
             "durazno"};
         String TituloPropuesta_Proponente[] = {"Religiosamente", "El Pimiento Indomable", "Un dia de Julio",
-            "Cine en el Botanico", "El Pimiento Indomable", "Pilsen Rock",
+            "Cine en el Botánico", "El Pimiento Indomable", "Pilsen Rock",
             "Romeo y Julieta", "El Lazarillo de Tormes",
             "Religiosamente", "Un dia de Julio",
             "Religiosamente",
             "Romeo y Julieta", "El Lazarillo de Tormes",
-            "Cine en el Botanico", "El Lazarillo de Tormes",
+            "Cine en el Botánico", "El Lazarillo de Tormes",
             "Religiosamente", "Pilsen Rock",
             "Durazno Rock"};
         for (int i = 0; i < 18; i++) {
@@ -528,5 +528,5 @@ public class DBPropuesta {
     }
 
 ;   
-    
+ 
 }
