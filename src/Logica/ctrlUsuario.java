@@ -194,7 +194,7 @@ public class ctrlUsuario implements IUsuario {
 
         return false;
     }
-
+    
     @Override
     public List<DtUsuario> traerSeguidos(String nick) {
         List<DtUsuario> usuarios = new ArrayList<>();

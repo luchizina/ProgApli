@@ -18,36 +18,33 @@ import Logica.Comentario;
  * @author Luchi
  */
 public class Propuesta {
-    private 
-            String titulo;
-            String desc;
-            Date fecha;
-            int precioE;
-            int montoActual;
-            Date fechaPub;
-            String tipoRetorno;
-            int montoTotal;
-            Categoria cat;
-            String cate;
-            Estado estActual;
-            ListEstado listaEstados; // ?
-            String img;
-            String lugar;
-            String Prop;
-            List<Colaboracion> colaboraciones;
 
-            
-            //private Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
+    private String titulo;
+    String desc;
+    Date fecha;
+    int precioE;
+    int montoActual;
+    Date fechaPub;
+    String tipoRetorno;
+    int montoTotal;
+    Categoria cat;
+    String cate;
+    Estado estActual;
+    ListEstado listaEstados; // ?
+    String img;
+    String lugar;
+    String Prop;
+    List<Colaboracion> colaboraciones;
 
-            //rivate Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
-
-            private List<ListEstado> LE;
-            private List<Comentario> cometarios;
+    //private Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
+    //rivate Map<Testado, ListEstado> listaDeEstados; // Cambiar a lista? 
+    private List<ListEstado> LE;
+    private List<Comentario> cometarios;
 
     public List<ListEstado> getLE() {
         return LE;
     }
-       
+
     public List<Comentario> getCometarios() {
         return cometarios;
     }
@@ -55,21 +52,20 @@ public class Propuesta {
     public void setCometarios(List<Comentario> xcometarios) {
         this.cometarios = xcometarios;
     }
-            
-public Propuesta(){
 
-}
+    public Propuesta() {
 
-public void setLE(List<ListEstado>  ELX) {
+    }
+
+    public void setLE(List<ListEstado> ELX) {
         this.LE = ELX;
     }
 
-public void addLE(ListEstado estadito)
-{
-    this.LE.add(estadito);
-}
+    public void addLE(ListEstado estadito) {
+        this.LE.add(estadito);
+    }
 
-public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal,String cate, Estado estActual, String img,String lugar) {
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String tipoRetorno, int montoTotal, String cate, Estado estActual, String img, String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -86,15 +82,15 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.Prop = Prop;
         //this.listaDeEstados = listaDeEstados;
         this.LE = new ArrayList();
-        this.cometarios =  new ArrayList();
+        this.cometarios = new ArrayList();
         this.lugar = lugar;
     }
-
 
     public String getPropo() {
         return Prop;
     }
-     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate,String lugar) {
+
+    public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String lugar) {
         this.titulo = titulo;
         this.desc = desc;
         this.fecha = fecha;
@@ -105,28 +101,28 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.lugar = lugar;
         this.colaboraciones = new ArrayList<>();
         //this.listaDeEstados = new HashMap<>();
-        this.LE  = new ArrayList();
-        this.cometarios =  new ArrayList();
-     }
-     
-     public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
-     {
-         this.titulo = titulo;
-         this.desc = descripcion;
-         this.fecha = fechita;
-         this.montoActual = montoActual;
-         this.fechaPub = fechaPub;
-         this.img = url;
-         this.tipoRetorno = tipoRetorno;
-         this.montoTotal = montoTotal;
-         this.cate = categoria;
-         this.Prop = nickProp;
-         this.precioE = precioE;
-         this.colaboraciones = new ArrayList<>();
-         //this.listaDeEstados = new HashMap<>();
-          this.LE = new ArrayList();
-         this.cometarios =  new ArrayList();
-     }
+        this.LE = new ArrayList();
+        this.cometarios = new ArrayList();
+    }
+
+    public Propuesta(String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE) {
+        this.titulo = titulo;
+        this.desc = descripcion;
+        this.fecha = fechita;
+        this.montoActual = montoActual;
+        this.fechaPub = fechaPub;
+        this.img = url;
+        this.tipoRetorno = tipoRetorno;
+        this.montoTotal = montoTotal;
+        this.cate = categoria;
+        this.Prop = nickProp;
+        this.precioE = precioE;
+        this.colaboraciones = new ArrayList<>();
+        //this.listaDeEstados = new HashMap<>();
+        this.LE = new ArrayList();
+        this.cometarios = new ArrayList();
+    }
+
     public Propuesta(String titulo, String desc, Date fecha, int precioE, Date fechaPub, int montoTotal, String cate, String img, String lugar) {
         this.titulo = titulo;
         this.desc = desc;
@@ -140,40 +136,33 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.colaboraciones = new ArrayList<>();
         //this.listaDeEstados = new HashMap<>();
         this.LE = new ArrayList();
-        this.cometarios =  new ArrayList();
+        this.cometarios = new ArrayList();
     }
-    
+
     // AGREGE LUGAR 
-    public Propuesta(String xlugar,String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE)
-     {
-         this.titulo = titulo;
-         this.desc = descripcion;
-         this.fecha = fechita;
-         this.montoActual = montoActual;
-         this.fechaPub = fechaPub;
-         this.img = url;
-         this.tipoRetorno = tipoRetorno;
-         this.montoTotal = montoTotal;
-         this.cate = categoria;
-         this.Prop = nickProp;
-         this.precioE = precioE;
-         this.colaboraciones = new ArrayList<>();
-         //this.listaDeEstados = new HashMap<>();
-         this.LE = new ArrayList();
-         this.lugar = xlugar;
-         this.cometarios =  new ArrayList();
-         
-     }
-    
-    
-    
-    
-    public void addColab(Colaboracion c)
-    {
+    public Propuesta(String xlugar, String titulo, String descripcion, Date fechita, int montoActual, Date fechaPub, String url, String tipoRetorno, int montoTotal, String categoria, String nickProp, int precioE) {
+        this.titulo = titulo;
+        this.desc = descripcion;
+        this.fecha = fechita;
+        this.montoActual = montoActual;
+        this.fechaPub = fechaPub;
+        this.img = url;
+        this.tipoRetorno = tipoRetorno;
+        this.montoTotal = montoTotal;
+        this.cate = categoria;
+        this.Prop = nickProp;
+        this.precioE = precioE;
+        this.colaboraciones = new ArrayList<>();
+        //this.listaDeEstados = new HashMap<>();
+        this.LE = new ArrayList();
+        this.lugar = xlugar;
+        this.cometarios = new ArrayList();
+
+    }
+
+    public void addColab(Colaboracion c) {
         this.colaboraciones.add(c);
     }
-    
-    
 
     public String getImg() {
         return img;
@@ -186,8 +175,7 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setProp(String Prop) {
         this.Prop = Prop;
     }
-        
-    
+
     public String getTitulo() {
         return titulo;
     }
@@ -203,8 +191,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
-   
 
     public int getPrecioE() {
         return precioE;
@@ -222,7 +208,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.montoActual = montoActual;
     }
 
-    
     public String getTipoRetorno() {
         return tipoRetorno;
     }
@@ -239,10 +224,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
         this.cat = cat;
     }
 
-   
-
-   
-
     public int getMontoTotal() {
         return montoTotal;
     }
@@ -250,16 +231,14 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setMontoTotal(int montoTotal) {
         this.montoTotal = montoTotal;
     }
-    
-    public DtPropuesta obtenerInfo() 
-    {
+
+    public DtPropuesta obtenerInfo() {
         DtPropuesta retorno = new DtPropuesta(this);
         return retorno;
     }
-    
-    public void IngresarValores(DtPropuesta valor) 
-    {
-    
+
+    public void IngresarValores(DtPropuesta valor) {
+
     }
 
 //    public Map<Testado, ListEstado> getListaDeEstados() {
@@ -269,7 +248,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
 //    public void setListaDeEstados(Map<Testado, ListEstado> listaDeEstados) {
 //        this.listaDeEstados = listaDeEstados;
 //    }
-
     public Date getFecha() {
         return fecha;
     }
@@ -285,8 +263,6 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setFechaPub(Date fechaPub) {
         this.fechaPub = fechaPub;
     }
-
-
 
     public String getCate() {
         return cate;
@@ -319,57 +295,53 @@ public Propuesta(String titulo, String desc, Date fecha, int precioE, int montoA
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-    
-    
-    
-    public Map<String, DtColaborador> listarColaboradores()
-    {
-        if(this.colaboraciones != null)
-        {
-        Map<String, DtColaborador> listita = new HashMap<>();
-        for(int i = 0; i<this.colaboraciones.size(); i++)
-        {
-            DtColaborador aux;
-            Colaboracion col = this.colaboraciones.get(i);
-            aux = new DtColaborador(col.getColab().getNick(),col.getColab().getNombre(),col.getColab().getApellido(),col.getColab().getCorreo(),col.getColab().getFecha(),col.getColab().getImg());
-            listita.put(col.getColab().getNick(),aux);
+
+    public Map<String, DtColaborador> listarColaboradores() {
+        if (this.colaboraciones != null) {
+            Map<String, DtColaborador> listita = new HashMap<>();
+            for (int i = 0; i < this.colaboraciones.size(); i++) {
+                DtColaborador aux;
+                Colaboracion col = this.colaboraciones.get(i);
+                aux = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
+                listita.put(col.getColab().getNick(), aux);
+            }
+            return listita;
         }
-        return listita;
+        return null;
     }
-        return  null;
-    }
-    
-    public List<String> NombreColaborantes(){ // aborrar
-       List x =  new ArrayList<String>();
-       if(this.colaboraciones == null)
-           return null;
-       //Set set = this.colaboraciones.entrySet();
-       for(int i=0; i<this.colaboraciones.size(); i++){
-           Colaboracion aux= (Colaboracion)this.colaboraciones.get(i);
-           String N = aux.getColab().getNombre() +"("+ aux.getColab().getNick()+")";
-            x.add(N); 
-       }
-       return x;
-   };
-    
-    
-    public void actualizarMonto()
-    {
-        this.montoActual = 0;
-        for(int i = 0; i<this.colaboraciones.size(); i++)
-        {
+
+    public List<String> NombreColaborantes() { // aborrar
+        List x = new ArrayList<String>();
+        if (this.colaboraciones == null) {
+            return null;
+        }
+        //Set set = this.colaboraciones.entrySet();
+        for (int i = 0; i < this.colaboraciones.size(); i++) {
             Colaboracion aux = (Colaboracion) this.colaboraciones.get(i);
-            this.montoActual = this.montoActual+aux.getMonto();
+            String N = aux.getColab().getNombre() + "(" + aux.getColab().getNick() + ")";
+            x.add(N);
+        }
+        return x;
+    }
+
+    ;
+    
+    
+    public void actualizarMonto() {
+        this.montoActual = 0;
+        for (int i = 0; i < this.colaboraciones.size(); i++) {
+            Colaboracion aux = (Colaboracion) this.colaboraciones.get(i);
+            this.montoActual = this.montoActual + aux.getMonto();
         }
     }
 
-
-    void removeColab(Colaboracion co)
-    {
-         this.colaboraciones.remove(co);
+    void removeColab(Colaboracion co) {
+        this.colaboraciones.remove(co);
     }
-    
-    public void Agregar_Comentario(Comentario x){
+
+    public void Agregar_Comentario(Comentario x) {
         this.cometarios.add(x);
-    };
+    }
+
+    ;
 }
