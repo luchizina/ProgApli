@@ -23,6 +23,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Luchi
  */
 public interface IPropuesta {
+    public void agregarComentario(Colaborador nick, Propuesta titulo, String texto);
     public void configurarParametros(String carpetaImagenes);
     public Path agregarImagen(final DtPropuesta imagenUsuario);
     public abstract boolean existeTitulo(String titulo);
@@ -54,5 +55,6 @@ public interface IPropuesta {
 public abstract void Cargar_Favoritos_Memoria();
 public abstract void Cargar_Comentarios_Memoria();
     BufferedImage retornarImagen(final String titulo);
+    public abstract boolean Ya_Comento_Propuesta(String c,String p);
 
 }

@@ -58,6 +58,8 @@ public class ctrlPropuesta implements IPropuesta {
     private Propuesta propuestaconsulta = null;
     DBPropuesta dbPropuesta = null;
     DBListEstado dbE = null;
+    Fabrica fab = Fabrica.getInstance();    //agregado
+    IUsuario iUsu = fab.getICtrlUsuario(); //agregado
 
     public static ctrlPropuesta getInstance() {
         if (instancia == null) {
@@ -326,8 +328,12 @@ public class ctrlPropuesta implements IPropuesta {
         }
     }
 
+    @Override
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
+        this.SetearPropuestas_A_Proponentes();              //agregado
+        this.Cargar_Comentarios_Memoria();                  //agregado  
+        this.Cargar_Favoritos_Memoria();                    //agregado
     }
 
     @Override
@@ -549,6 +555,13 @@ public class ctrlPropuesta implements IPropuesta {
 //    }
     }
 
+    @Override
+    public void agregarComentario(Colaborador nick, Propuesta titulo, String texto){
+        Comentario c = new Comentario(nick, titulo, texto);
+        titulo.Agregar_Comentario(c);
+        nick.Agregar_Comentario(c);
+        this.dbPropuesta.agregarComentario(c);
+    }
     ;
     
     @Override
@@ -683,4 +696,27 @@ public class ctrlPropuesta implements IPropuesta {
         }   
         };
         
+        
+        public void SetearPropuestas_A_Proponentes(){     
+        Set set = this.propuestas.entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            Proponente pro = iUsu.traerProponente(aux.getPropo());
+            pro.getPropuestas().put(aux.getTitulo(), aux);
+            }   
+    };
+        
+    @Override
+        public boolean Ya_Comento_Propuesta(String c,String p){
+            Propuesta P = this.getPropPorNick(p);
+            for (int i = 0; i < P.getCometarios().size(); i++) {
+                    Comentario comentar = (Comentario) P.getCometarios().get(i);
+                    if(comentar.getColaborador().getNick().equals(c)){
+                    return true;
+                    }
+                }
+        return false;
+        };
 }
