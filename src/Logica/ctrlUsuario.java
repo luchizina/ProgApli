@@ -509,7 +509,7 @@ public class ctrlUsuario implements IUsuario {
          Iterator it= se.iterator();
          while(it.hasNext()){
              Map.Entry mentry= (Map.Entry) it.next();
-             DtPropuesta prop= (DtPropuesta) mentry.getValue();
+             DtPropuesta prop= new DtPropuesta ((Propuesta)mentry.getValue());
              propuestas.add(prop);
          }       
          return propuestas;
