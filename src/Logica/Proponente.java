@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,12 +18,14 @@ public class Proponente extends Usuario {
             String direccion;
             String biografia;
             String linkWeb;
+            private Map<String, Propuesta> propuestas;
 
     public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav, String cont) {
         super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav, cont);
         this.direccion = direccion;
         this.biografia = biografia;
         this.linkWeb = linkWeb;
+        this.propuestas = new HashMap<>(); // agregado
     }
 
     public Proponente(String nick) {
@@ -43,6 +46,7 @@ public class Proponente extends Usuario {
         this.direccion=dir;
         this.biografia=bio;
         this.linkWeb=link;
+        this.propuestas = new HashMap<>(); // agregado
     }
 
 
@@ -76,5 +80,13 @@ public class Proponente extends Usuario {
     public DtProponente obtenerInfo(){
         return new DtProponente(nick, img, biografia, linkWeb, direccion, nombre, Apellido, Correo);
     }         
-         
+
+    public Map<String, Propuesta> getPropuestas() {
+        return propuestas;
+    }
+
+    public void setPropuestas(Map<String, Propuesta> propuestas) {
+        this.propuestas = propuestas;
+    }
+
 }

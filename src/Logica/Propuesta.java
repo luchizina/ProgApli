@@ -341,7 +341,16 @@ public class Propuesta {
 
     public void Agregar_Comentario(Comentario x) {
         this.cometarios.add(x);
-    }
-
-    ;
+    };
+    
+    boolean Comento_Propuesta(String c){
+        for(int i = 0; i<this.cometarios.size(); i++)
+        {
+            Comentario aux = (Comentario) this.cometarios.get(i);
+            if(c.equals(aux.getColaborador().getNick()))
+                return true;
+        }
+        return false;
+    };
+    
 }
