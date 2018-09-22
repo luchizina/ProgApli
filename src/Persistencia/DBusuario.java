@@ -499,7 +499,7 @@ public class DBusuario {
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = urlImg[i];
-                    String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Aeliner\\Documents\\NetBeansProjects\\ProgApli5\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
@@ -562,7 +562,7 @@ public class DBusuario {
                     String termina = aux[1];
                     String origen = imagenes[i];
 
-                    String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Aeliner\\Documents\\NetBeansProjects\\ProgApli5\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
 
        
 
