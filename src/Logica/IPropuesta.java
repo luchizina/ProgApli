@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import Logica.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.file.Path;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -58,5 +59,5 @@ public abstract void Cargar_Favoritos_Memoria();
 public abstract void Cargar_Comentarios_Memoria();
     BufferedImage retornarImagen(final String titulo);
     public abstract boolean Ya_Comento_Propuesta(String c,String p);
-
+    public abstract BufferedImage retornarImagen_Propuesta(final String titu) throws IOException;
 }

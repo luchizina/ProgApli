@@ -739,6 +739,27 @@ public class ctrlPropuesta implements IPropuesta {
                 }
             }
         return false;
+        };
+        
+        @Override
+    public BufferedImage retornarImagen_Propuesta(final String titu) {
+        /*if (!this.credencialesMap.keySet().contains(email)){
+                         throw new UsuarioNoEncontradoException(email);
+                }*/
+        for(Propuesta pro: propuestas.values()){
+            if(pro.getTitulo().equals(titu)){
+                String pat = pro.getImg();
+                File f = new File(pat);
+                BufferedImage bi = null;
+                try {
+                    bi = ImageIO.read(f);
+                } catch (IOException ex) {
+                    Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return bi;
+            }
+        }
+        return null;
     }
 
     @Override

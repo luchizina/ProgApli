@@ -496,6 +496,7 @@ public class DBusuario {
             for (int i = 0; i < 9; i++) {
                 String Imagen = null;
                 if (urlImg[i] != null) {
+                    String ruta = "C:\\Users\\matheo\\Documents\\ProgApli\\";
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = urlImg[i];
@@ -558,6 +559,7 @@ public class DBusuario {
             for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
+                    String ruta = "C:\\Users\\matheo\\Documents\\ProgApli\\";
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = imagenes[i];

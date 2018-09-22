@@ -160,10 +160,11 @@ public class DBPropuesta {
         for (int i = 0; i < 8; i++) {
             String Imagen = null;
             if (imagenes[i] != null) {
+                String ruta = "C:\\Users\\matheo\\Documents\\ProgApli\\";
                 String[] aux = imagenes[i].split("\\.");
                 String termina = aux[1];
-                String origen = imagenes[i];
-                String destino = "Imagenes/Propuesta/" + titulos[i] + "." + termina;
+                String origen = ruta+imagenes[i];
+                String destino = "\\Imagenes\\Propuesta\\" + titulos[i] + "." + termina;
                 if (this.copia(origen, destino) == true) {
                     Imagen = destino;
                 } else {
