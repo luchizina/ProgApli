@@ -48,7 +48,6 @@ public class Principal extends javax.swing.JFrame {
                 this.IP.actualizarMontos();
                 //this.IP.cargarEstados();
                 this.IP.EstadosPropuestas(); // testear
-                lol = false;
                 System.out.println(jp.getComponentCount());
                
     }

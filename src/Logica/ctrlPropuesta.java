@@ -250,16 +250,19 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     @Override
-    public boolean altaColaboracion(Propuesta prop, Colaborador colab, String monto, String tipoR) {
+    public boolean altaColaboracion(String prop, String colab, String monto, String tipoR) {
         Date lul = new Date();
         String horita = java.time.LocalTime.now().toString();
-        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab, prop, horita);
+        Colaborador colab2 = ctrlUsuario.getInstance().traerColaborador(colab);
+        Propuesta prop2 = this.propuestas.get(prop);
+        
+        Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab2, prop2, horita);
 
         if (dbPropuesta.agregarColaboracion(c)) {
             this.colaboraciones.add(c);
-            prop.addColab(c);
-            colab.AddColab(c);
-            prop.actualizarMonto();
+            prop2.addColab(c);
+            colab2.AddColab(c);
+            prop2.actualizarMonto();
             return true;
         }
         return false;
