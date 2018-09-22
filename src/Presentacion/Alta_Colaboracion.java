@@ -535,7 +535,7 @@ public class Alta_Colaboracion extends javax.swing.JInternalFrame {
                         if (IP.existeColaboracion(nick1, titulo1)) {
                             JOptionPane.showMessageDialog(null, "El colaborador seleccionado ya ha colaborado en esta propuesta", "Error", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            boolean ok = IP.altaColaboracion(IP.getPropPorNick(titulo1), iUsu.traerColaborador(nick1), monto.getText(), tipoR1);
+                            boolean ok = IP.altaColaboracion(titulo1, nick1, monto.getText(), tipoR1);
                             if (ok) {
                                 JOptionPane.showMessageDialog(null, "La colaboración se ha registrado con éxito");
                                 this.limpiar();
