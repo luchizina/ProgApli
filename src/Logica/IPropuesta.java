@@ -24,6 +24,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Luchi
  */
 public interface IPropuesta {
+    public void agregarFavorito(Usuario usu, Propuesta prop);
     public void agregarComentario(Colaborador nick, Propuesta titulo, String texto);
     public void configurarParametros(String carpetaImagenes);
     public Path agregarImagen(final DtPropuesta imagenUsuario);

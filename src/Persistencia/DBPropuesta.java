@@ -488,6 +488,30 @@ public class DBPropuesta {
             }
         }
     }
+   
+   public void favProp(String nick, String titulo){
+       try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteapp(NickProp, TituloP) VALUES (?,?)");
+                statement.setString(1, nick);
+                statement.setString(2, titulo);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+   }
+   
+   public void favCol(String nick, String titulo){
+       try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteacp(NickColb, TituloProp) VALUES (?,?)");
+                statement.setString(1, nick);
+                statement.setString(2, titulo);
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+   }
 
     public void CargarFavoritos_Memoria() {
         try {

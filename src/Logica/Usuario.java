@@ -145,6 +145,10 @@ public class Usuario {
       //  return true;
           }
     
+    public void agregarFav(Propuesta prop){
+        this.propuFav.put(prop.getTitulo(), prop);
+    }
+    
     public void seguirUsuBD(Usuario aSeguir){
         
         this.usuSeguidos.put(aSeguir.getSeguido(), aSeguir);

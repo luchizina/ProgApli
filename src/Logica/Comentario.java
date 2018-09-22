@@ -48,5 +48,5 @@ public class Comentario {
     public String getTexto() {
         return texto;
     }
-
+    
 }

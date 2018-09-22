@@ -74,7 +74,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\matheo\\Documents\\ProgApli1\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
                 if (this.copia(Imagen, destino) == true) {
@@ -194,7 +194,7 @@ public class ctrlUsuario implements IUsuario {
 
         return false;
     }
-
+    
     @Override
     public List<DtUsuario> traerSeguidos(String nick) {
         List<DtUsuario> usuarios = new ArrayList<>();
@@ -278,7 +278,11 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\matheo\\Documents\\ProgApli1\\Imagenes\\Proponente\\" + Nick + "." + termina;
+
+                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+
+  
+
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
                 } else {
@@ -505,7 +509,7 @@ public class ctrlUsuario implements IUsuario {
          Iterator it= se.iterator();
          while(it.hasNext()){
              Map.Entry mentry= (Map.Entry) it.next();
-             DtPropuesta prop= (DtPropuesta) mentry.getValue();
+             DtPropuesta prop= new DtPropuesta ((Propuesta)mentry.getValue());
              propuestas.add(prop);
          }       
          return propuestas;

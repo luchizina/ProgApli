@@ -564,6 +564,19 @@ public class ctrlPropuesta implements IPropuesta {
     }
     ;
     
+ @Override
+ public void agregarFavorito(Usuario usu, Propuesta prop){
+     if(usu instanceof Proponente){
+         usu.getPropuFav().put(prop.getTitulo(), prop);
+         this.dbPropuesta.favProp(usu.getNick(), prop.getTitulo());
+     } 
+     
+     if(usu instanceof Colaborador){
+         usu.getPropuFav().put(prop.getTitulo(), prop);
+         this.dbPropuesta.favCol(usu.getNick(), prop.getTitulo());
+     }
+ }
+ 
     @Override
     public void Cargar_Favoritos_Memoria() {
         this.dbPropuesta.CargarFavoritos_Memoria();
