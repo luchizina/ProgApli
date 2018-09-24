@@ -913,7 +913,27 @@ public class ctrlUsuario implements IUsuario {
 
     private Map<String, DataImagen> imagenesMap = new HashMap<>();
     private static Logger LOG;
+   
+    @Override
+   public List<DtPropuesta> TraerMisPropuestasF(String nick)
+   {
+   DtUsuario user= this.traerDtUsuario(nick);
+   List<DtPropuesta> propuestas=new ArrayList<>();
 
+       
+Proponente prop= this.traerProponente(nick);
+Map<String, Propuesta> propuestasAux= prop.getPropuestas();
+Set se = propuestasAux.entrySet();
+Iterator it= se.iterator();
+while(it.hasNext()){
+    Map.Entry mentry= (Map.Entry) it.next();
+    DtPropuesta propuesta= new DtPropuesta((Propuesta) mentry.getValue());
+    if(propuesta.getEstActual().getEstado().compareTo(Testado.Financiada)==0){
+        propuestas.add(propuesta);   
+    } 
+}
+   return propuestas;
+   }
     @Override
     public Path agregarImagen(final DtUsuario imagenUsuario) {
         

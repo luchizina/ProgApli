@@ -60,4 +60,5 @@ public abstract void Cargar_Comentarios_Memoria();
     BufferedImage retornarImagen(final String titulo);
     public abstract boolean Ya_Comento_Propuesta(String c,String p);
     public abstract BufferedImage retornarImagen_Propuesta(final String titu) throws IOException;
+ 
 }

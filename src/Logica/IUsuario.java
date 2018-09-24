@@ -64,5 +64,5 @@ public interface IUsuario {
       public abstract List<DtPropuesta> traerPropFav(String nick);
         public abstract List<DtPropuesta> traerPropuestasColaboradas(String nick);  
     public abstract BufferedImage retornarImagen(final String email) throws IOException;
-
+     public abstract List<DtPropuesta> TraerMisPropuestasF(String nick);
 }
