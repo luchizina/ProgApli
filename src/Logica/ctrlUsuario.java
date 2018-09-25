@@ -228,11 +228,13 @@ public class ctrlUsuario implements IUsuario {
                 List<DtUsuario> seguidosdeAux = this.traerSeguidos(aux.getNick());
                 for (int i = 0; i < seguidosdeAux.size(); i++) {
                     DtUsuario user = seguidosdeAux.get(i);
+                    if(user!=null){
+    
                     if (user.getNick().equals(nick)) {
                         DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
                         seguidores.add(seguidor);
                     }
-
+}
                 }
 
             }
@@ -516,15 +518,17 @@ public class ctrlUsuario implements IUsuario {
      }
     
          @Override
-    public List<DtPropuesta> traerPropuestasColaboradas(String nick){
-        List<DtPropuesta> propuestas=new ArrayList<>();
+    public List<DtColaboracion> traerPropuestasColaboradas(String nick){
+        List<DtColaboracion> propuestas=new ArrayList<>();
         Colaborador colab= this.traerColaborador(nick);
         List<Colaboracion> colaboraciones= colab.getColHechas();
         for(int i=0; i<colaboraciones.size(); i++){
             Colaboracion col=(Colaboracion) colaboraciones.get(i);
             Propuesta prop= col.getProp();
             DtPropuesta pro = new DtPropuesta(prop);
-            propuestas.add(pro);
+            DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(),col.getColab().getFecha(), col.getColab().getImg());
+            DtColaboracion ma = new DtColaboracion(col.getFecha(),col.getMonto(), cola,pro);
+            propuestas.add(ma);
         }
         return propuestas;
     }
@@ -934,6 +938,43 @@ while(it.hasNext()){
 }
    return propuestas;
    }
+   @Override
+   public List<DtPropuesta> TraerTodasPropuestas(String nick)
+   {
+   DtUsuario user= this.traerDtUsuario(nick);
+   List<DtPropuesta> propuestas=new ArrayList<>();
+Proponente prop= this.traerProponente(nick);
+Map<String, Propuesta> propuestasAux= prop.getPropuestas();
+Set se = propuestasAux.entrySet();
+Iterator it= se.iterator();
+while(it.hasNext()){
+    Map.Entry mentry= (Map.Entry) it.next();
+    DtPropuesta propuesta= new DtPropuesta((Propuesta) mentry.getValue());
+    if(!(propuesta.getEstActual().getEstado().equals(Testado.Ingresada))){
+        propuestas.add(propuesta);   
+    } 
+}
+        return propuestas;
+   }
+    @Override
+  public List<DtPropuesta> TraerTodasPropuestasIng(String nick)
+   {
+   DtUsuario user= this.traerDtUsuario(nick);
+   List<DtPropuesta> propuestas=new ArrayList<>();
+Proponente prop= this.traerProponente(nick);
+Map<String, Propuesta> propuestasAux= prop.getPropuestas();
+Set se = propuestasAux.entrySet();
+Iterator it= se.iterator();
+while(it.hasNext()){
+    Map.Entry mentry= (Map.Entry) it.next();
+    DtPropuesta propuesta= new DtPropuesta((Propuesta) mentry.getValue());
+    if(propuesta.getEstActual().getEstado().equals(Testado.Ingresada)){
+        propuestas.add(propuesta);   
+    } 
+}
+   return propuestas;
+   }
+  
     @Override
     public Path agregarImagen(final DtUsuario imagenUsuario) {
         
