@@ -685,26 +685,26 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void ActualizarEstado(Propuesta x) {
         // VERIFICAR MONTO
-        Calendar calendar = Calendar.getInstance();
-        Date fechita = new Date();
-        Date Fecha_EST_ACT = x.getFechaPub();
-        boolean Recorrio = false;
-        for (int i = 0; i < x.getLE().size(); i++) {
-            ListEstado p = (ListEstado) x.getLE().get(i);
-            if (p.getEst().equals(x.getEstActual().getEstado().toString())) {
-                Fecha_EST_ACT = p.getFecha();
-                Recorrio = true;
-            }
-        }
-        calendar.setTime(fechita);
-        calendar.add(Calendar.DAY_OF_YEAR, -30);
-        Date Hora_Public_menos30dias = calendar.getTime();
-
-        if (x.getMontoActual() >= x.getMontoTotal()) {
-            cambiarEstadito(x.getTitulo(), "Financiada");
-        } else if (Recorrio && (Hora_Public_menos30dias.before(Fecha_EST_ACT) || Hora_Public_menos30dias.equals(Fecha_EST_ACT))) {
-            cambiarEstadito(x.getTitulo(), "No_Financiada");
-        }
+//        Calendar calendar = Calendar.getInstance();
+//        Date fechita = new Date();
+//        Date Fecha_EST_ACT = x.getFechaPub();
+//        boolean Recorrio = false;
+//        for (int i = 0; i < x.getLE().size(); i++) {
+//            ListEstado p = (ListEstado) x.getLE().get(i);
+//            if (p.getEst().equals(x.getEstActual().getEstado().toString())) {
+//                Fecha_EST_ACT = p.getFecha();
+//                Recorrio = true;
+//            }
+//        }
+//        calendar.setTime(fechita);
+//        calendar.add(Calendar.DAY_OF_YEAR, -30);
+//        Date Hora_Public_menos30dias = calendar.getTime();
+//
+//        if (x.getMontoActual() >= x.getMontoTotal()) {
+//            cambiarEstadito(x.getTitulo(), "Financiada");
+//        } else if (Recorrio && (Hora_Public_menos30dias.before(Fecha_EST_ACT) || Hora_Public_menos30dias.equals(Fecha_EST_ACT))) {
+//            cambiarEstadito(x.getTitulo(), "No_Financiada");
+//        }
     }
 
     ;
