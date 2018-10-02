@@ -29,6 +29,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
+import java.util.Comparator;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -428,11 +430,16 @@ public class ctrlUsuario implements IUsuario {
         boolean b = lista.addAll(prop);
 
         if (a && b) {
-            return lista;
-        }
-        return null;
+           // Collections.sort(lista, new Sortbyroll());
+            
+Collections.sort(lista, (c, d) -> {
+    return c.getNombre().compareTo(d.getNombre());
+          
+        });
+      return lista;
     }
-
+          return null;
+    }
     @Override
     public List<DtColaboracion> datosCol(Colaborador a) {
         List<DtColaboracion> listita = new ArrayList<>();
@@ -481,6 +488,8 @@ public class ctrlUsuario implements IUsuario {
         return null;
 
     }
+    
+    
 
     @Override
     public DtUsuario traerDtUsuario(String nick) {
