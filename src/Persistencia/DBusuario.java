@@ -318,7 +318,7 @@ public class DBusuario {
   public List<Usuario> cargarSegPC() {
         try {
            List<Usuario> lista = new ArrayList<>();
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM seguirpc");
+            PreparedStatement st = conexion.prepareStatement("SELECT * FROM seguirpc ");
           //  st.setString(1,nickProp);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
