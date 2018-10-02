@@ -160,7 +160,7 @@ public class DBPropuesta {
         for (int i = 0; i < 8; i++) {
             String Imagen = null;
             if (imagenes[i] != null) {
-                String ruta = "C:\\Users\\matheo\\Documents\\ProgApli\\";
+                String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\";
                 String[] aux = imagenes[i].split("\\.");
                 String termina = aux[1];
                 String origen = ruta+imagenes[i];

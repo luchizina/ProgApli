@@ -110,7 +110,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli1\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -342,8 +342,8 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public void cargarProp() {
         this.dbPropuesta.cargarPropuestasPrueba();
-        this.dbE.agregarListPrueb();
         this.cargarPropuestas();
+        this.dbE.agregarListPrueb();
         this.EstadosPropuestas();
         this.dbPropuesta.colaboracionesPrueba();
         this.cargarColaboraciones();
