@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import Logica.Comentario;
+import Persistencia.DBPropuesta;
+import java.sql.SQLException;
 
 /**
  *
@@ -161,9 +163,18 @@ public class Propuesta {
     }
 
     public void addColab(Colaboracion c) {
+        
         this.colaboraciones.add(c);
     }
-
+    
+    public boolean tieneColab()
+    {
+        if(this.colaboraciones.size() == 0)
+        {
+            return false;
+        }
+        return true;
+    }
     public String getImg() {
         return img;
     }
@@ -327,12 +338,15 @@ public class Propuesta {
     ;
     
     
-    public void actualizarMonto() {
+    public void actualizarMonto() throws SQLException {
         this.montoActual = 0;
         for (int i = 0; i < this.colaboraciones.size(); i++) {
             Colaboracion aux = (Colaboracion) this.colaboraciones.get(i);
             this.montoActual = this.montoActual + aux.getMonto();
         }
+        DBPropuesta p = new DBPropuesta();
+        p.actualizarMonto(this, this.montoActual);
+        
     }
 
     void removeColab(Colaboracion co) {

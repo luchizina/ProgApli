@@ -96,7 +96,11 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            aux.actualizarMonto();
+            try {
+                aux.actualizarMonto();
+            } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -260,9 +264,15 @@ public class ctrlPropuesta implements IPropuesta {
 
         if (dbPropuesta.agregarColaboracion(c)) {
             this.colaboraciones.add(c);
+            if(!prop2.tieneColab())
+                this.cambiarEstadito(prop2.getTitulo(), "En_Financiacion");
             prop2.addColab(c);
             colab2.AddColab(c);
-            prop2.actualizarMonto();
+            try {
+                prop2.actualizarMonto();
+            } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return true;
         }
         return false;
