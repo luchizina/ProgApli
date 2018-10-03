@@ -349,8 +349,8 @@ public class ctrlPropuesta implements IPropuesta {
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
         this.SetearPropuestas_A_Proponentes();              //agregado
-        //this.Cargar_Comentarios_Memoria();                  //agregado  
-        //this.Cargar_Favoritos_Memoria();                    //agregado
+        this.Cargar_Comentarios_Memoria();                  //agregado  
+        this.Cargar_Favoritos_Memoria();                    //agregado
     }
 
     @Override
