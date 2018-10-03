@@ -38,6 +38,11 @@ public class DBListEstado {
 //                    java.sql.Date sqlDate = new java.sql.Date(p.getFecha().getTime());
         try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
                 + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)")) {
+            if (p.getEst().equals("En_Financiacion"))
+                p.setEst("En Fincanciacion");
+            if (p.getEst().equals("No_Financiada"))
+                p.setEst("No Financiada");
+            
             //                     SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 //                    java.sql.Date sqlDate = new java.sql.Date(p.getFecha().getTime());
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
