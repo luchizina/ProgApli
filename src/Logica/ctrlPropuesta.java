@@ -614,6 +614,9 @@ public class ctrlPropuesta implements IPropuesta {
                 listita.add(aux.obtenerInfo());
             }
         }
+        Collections.sort(listita, (c, d) -> {
+        return c.getTitulo().compareTo(d.getTitulo()); 
+        });
         return listita;
     }
 
@@ -629,6 +632,9 @@ public class ctrlPropuesta implements IPropuesta {
                 listita.add(aux.obtenerInfo());
             }
         }
+        Collections.sort(listita, (c, d) -> {
+        return c.getTitulo().compareTo(d.getTitulo()); 
+        });
         return listita;
     }
 

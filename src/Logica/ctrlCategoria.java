@@ -73,7 +73,9 @@ public class ctrlCategoria implements ICategoria {
             retorna.add(aux.obtenerInfo());
         }
         //Collections.sort(retorna, new Sortbyroll());
-        
+        Collections.sort(retorna, (c, d) -> {
+        return c.getNombre().compareTo(d.getNombre()); 
+        });
         return retorna;
     }
     
