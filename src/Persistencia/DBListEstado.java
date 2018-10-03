@@ -45,6 +45,11 @@ public class DBListEstado {
             
             //                     SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 //                    java.sql.Date sqlDate = new java.sql.Date(p.getFecha().getTime());
+if(p.getEst().equals("En_Financiacion"))
+    p.setEst("En Financiacion");
+if(p.getEst().equals("No_Financiada"))
+    p.setEst("No Financiada");
+
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 String fechaSt = sdf.format(p.getFecha());
 String[] lul = fechaSt.split(" ");

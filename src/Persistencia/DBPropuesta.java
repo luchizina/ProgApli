@@ -551,6 +551,15 @@ public class DBPropuesta {
             //return null;
         }
     }
+    
+    public void actualizarMonto(Propuesta p, int montito) throws SQLException
+    {
+        try (PreparedStatement st = conexion.prepareStatement("UPDATE propuesta SET montoActual=? WHERE Titulo=?")) {
+            st.setInt(1, montito);
+            st.setString(2, p.getTitulo());
+            st.executeUpdate();
+        }
+    }
 
 ;   
  
