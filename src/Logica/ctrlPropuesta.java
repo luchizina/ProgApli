@@ -28,6 +28,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -345,8 +349,8 @@ public class ctrlPropuesta implements IPropuesta {
     public void cargarPropuestas() {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
         this.SetearPropuestas_A_Proponentes();              //agregado
-        this.Cargar_Comentarios_Memoria();                  //agregado  
-        this.Cargar_Favoritos_Memoria();                    //agregado
+        //this.Cargar_Comentarios_Memoria();                  //agregado  
+        //this.Cargar_Favoritos_Memoria();                    //agregado
     }
 
     @Override
@@ -394,6 +398,7 @@ public class ctrlPropuesta implements IPropuesta {
     public DtPropuesta SeleccionarProp(String xTitulo) // error 
     {
         Propuesta pro = this.propuestas.get(xTitulo);
+        ActualizarEstado(pro); // agregado TAREA 2
         DtPropuesta X = new DtPropuesta(pro, pro.getCate());
         this.propuestaconsulta = pro;
         return X;
@@ -605,10 +610,13 @@ public class ctrlPropuesta implements IPropuesta {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false) {
-                ActualizarEstado(aux);
+                //ActualizarEstado(aux);
                 listita.add(aux.obtenerInfo());
             }
         }
+        Collections.sort(listita, (c, d) -> {
+        return c.getTitulo().compareTo(d.getTitulo()); 
+        });
         return listita;
     }
 
@@ -624,6 +632,9 @@ public class ctrlPropuesta implements IPropuesta {
                 listita.add(aux.obtenerInfo());
             }
         }
+        Collections.sort(listita, (c, d) -> {
+        return c.getTitulo().compareTo(d.getTitulo()); 
+        });
         return listita;
     }
 
@@ -694,29 +705,33 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public void ActualizarEstado(Propuesta x) {
-        // VERIFICAR MONTO
-//        Calendar calendar = Calendar.getInstance();
-//        Date fechita = new Date();
-//        Date Fecha_EST_ACT = x.getFechaPub();
-//        boolean Recorrio = false;
-//        for (int i = 0; i < x.getLE().size(); i++) {
-//            ListEstado p = (ListEstado) x.getLE().get(i);
-//            if (p.getEst().equals(x.getEstActual().getEstado().toString())) {
-//                Fecha_EST_ACT = p.getFecha();
-//                Recorrio = true;
-//            }
-//        }
-//        calendar.setTime(fechita);
-//        calendar.add(Calendar.DAY_OF_YEAR, -30);
-//        Date Hora_Public_menos30dias = calendar.getTime();
-//
-//        if (x.getMontoActual() >= x.getMontoTotal()) {
-//            cambiarEstadito(x.getTitulo(), "Financiada");
-//        } else if (Recorrio && (Hora_Public_menos30dias.before(Fecha_EST_ACT) || Hora_Public_menos30dias.equals(Fecha_EST_ACT))) {
-//            cambiarEstadito(x.getTitulo(), "No_Financiada");
-//        }
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date g = x.getFechaPub();   // Esta fecha? vereficar 
+        Date h = new Date();     
+        String sg = myFormat.format(g);
+        String sh = myFormat.format(h);
+        LocalDate dateBefore = LocalDate.parse(sg);
+        LocalDate dateBefore2 = LocalDate.parse(sh);
+        long dias = ChronoUnit.DAYS.between(dateBefore, dateBefore2);
+        System.out.println(dias);
+        if (x.getEstActual().getEstado().toString().equals("Publicada")){
+            if (dias > 30){
+                 cambiarEstadito(x.getTitulo(), "No_Financiada");
+            }
+        }
+        if (x.getEstActual().getEstado().toString().equals("En_Financiacion")){
+            if (dias <= 30 && x.getMontoActual() >= x.getMontoTotal()){              
+                if (!x.getEstActual().getEstado().toString().equals("Financiada")){
+                    cambiarEstadito(x.getTitulo(), "Financiada");              
+                }       
+            }
+            if (dias > 30 && x.getEstActual().getEstado().toString().equals("En_Financiacion")){
+                if (x.getMontoActual() < x.getMontoTotal()) {           
+                    cambiarEstadito(x.getTitulo(), "No_Financiada");      
+                } 
+            }
+        }
     }
-
     ;
         
         
