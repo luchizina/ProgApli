@@ -263,13 +263,14 @@ public class ctrlPropuesta implements IPropuesta {
         String horita = java.time.LocalTime.now().toString();
         Colaborador colab2 = ctrlUsuario.getInstance().traerColaborador(colab);
         Propuesta prop2 = this.propuestas.get(prop);
-        
+
         Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab2, prop2, horita);
 
         if (dbPropuesta.agregarColaboracion(c)) {
             this.colaboraciones.add(c);
-            if(!prop2.tieneColab())
+            if (!prop2.tieneColab()) {
                 this.cambiarEstadito(prop2.getTitulo(), "En_Financiacion");
+            }
             prop2.addColab(c);
             colab2.AddColab(c);
             try {
@@ -615,7 +616,7 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
         Collections.sort(listita, (c, d) -> {
-        return c.getTitulo().compareTo(d.getTitulo()); 
+            return c.getTitulo().compareTo(d.getTitulo());
         });
         return listita;
     }
@@ -633,9 +634,39 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
         Collections.sort(listita, (c, d) -> {
-        return c.getTitulo().compareTo(d.getTitulo()); 
+            return c.getTitulo().compareTo(d.getTitulo());
         });
         return listita;
+    }
+
+    @Override
+    public List<DtPropuesta> listaTDL(String txt) {
+        List<DtPropuesta> prop = new ArrayList<>();
+        Set set = propuestas.entrySet();
+        Iterator it = set.iterator();
+        boolean esta = false;
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            if (aux.getTitulo().contains(txt) == true) {
+                    prop.add(aux.obtenerInfo());
+                    esta = true;
+            }
+            
+            if (aux.getLugar().contains(txt) == true && !esta) {
+                    prop.add(aux.obtenerInfo());
+                    esta = true;
+            }
+            
+            if (aux.getDesc().contains(txt) == true && !esta) {
+                prop.add(aux.obtenerInfo());
+                esta = true;
+            }
+            
+            esta = false;
+        }
+
+        return prop;
     }
 
     String carpetaImagenes;
@@ -707,31 +738,32 @@ public class ctrlPropuesta implements IPropuesta {
     public void ActualizarEstado(Propuesta x) {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date g = x.getFechaPub();   // Esta fecha? vereficar 
-        Date h = new Date();     
+        Date h = new Date();
         String sg = myFormat.format(g);
         String sh = myFormat.format(h);
         LocalDate dateBefore = LocalDate.parse(sg);
         LocalDate dateBefore2 = LocalDate.parse(sh);
         long dias = ChronoUnit.DAYS.between(dateBefore, dateBefore2);
         System.out.println(dias);
-        if (x.getEstActual().getEstado().toString().equals("Publicada")){
-            if (dias > 30){
-                 cambiarEstadito(x.getTitulo(), "No_Financiada");
+        if (x.getEstActual().getEstado().toString().equals("Publicada")) {
+            if (dias > 30) {
+                cambiarEstadito(x.getTitulo(), "No_Financiada");
             }
         }
-        if (x.getEstActual().getEstado().toString().equals("En_Financiacion")){
-            if (dias <= 30 && x.getMontoActual() >= x.getMontoTotal()){              
-                if (!x.getEstActual().getEstado().toString().equals("Financiada")){
-                    cambiarEstadito(x.getTitulo(), "Financiada");              
-                }       
+        if (x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
+            if (dias <= 30 && x.getMontoActual() >= x.getMontoTotal()) {
+                if (!x.getEstActual().getEstado().toString().equals("Financiada")) {
+                    cambiarEstadito(x.getTitulo(), "Financiada");
+                }
             }
-            if (dias > 30 && x.getEstActual().getEstado().toString().equals("En_Financiacion")){
-                if (x.getMontoActual() < x.getMontoTotal()) {           
-                    cambiarEstadito(x.getTitulo(), "No_Financiada");      
-                } 
+            if (dias > 30 && x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
+                if (x.getMontoActual() < x.getMontoTotal()) {
+                    cambiarEstadito(x.getTitulo(), "No_Financiada");
+                }
             }
         }
     }
+
     ;
         
         
@@ -750,29 +782,31 @@ public class ctrlPropuesta implements IPropuesta {
         
     @Override
     public boolean yaFavoriteo(Usuario usu, String p) {
-            if (usu instanceof Proponente) {
-                Propuesta pro = usu.getPropuFav().get(p);
-                if(pro != null){
-                    return true;
-                }
+        if (usu instanceof Proponente) {
+            Propuesta pro = usu.getPropuFav().get(p);
+            if (pro != null) {
+                return true;
             }
-            
-            if (usu instanceof Colaborador) {
-                Propuesta pro = usu.getPropuFav().get(p);
-                if(pro != null){
-                    return true;
-                }
+        }
+
+        if (usu instanceof Colaborador) {
+            Propuesta pro = usu.getPropuFav().get(p);
+            if (pro != null) {
+                return true;
             }
+        }
         return false;
-        };
+    }
+
+    ;
         
         @Override
     public BufferedImage retornarImagen_Propuesta(final String titu) {
         /*if (!this.credencialesMap.keySet().contains(email)){
                          throw new UsuarioNoEncontradoException(email);
                 }*/
-        for(Propuesta pro: propuestas.values()){
-            if(pro.getTitulo().equals(titu)){
+        for (Propuesta pro : propuestas.values()) {
+            if (pro.getTitulo().equals(titu)) {
                 String pat = pro.getImg();
                 File f = new File(pat);
                 BufferedImage bi = null;
