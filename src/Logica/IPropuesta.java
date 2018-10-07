@@ -12,6 +12,7 @@ import Logica.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Luchi
  */
 public interface IPropuesta {
+    public void extender(String tit) throws SQLException ;
     public List<DtPropuesta> listaTDL(String txt);
     public boolean yaFavoriteo(Usuario u,String p);
     public void agregarFavorito(Usuario usu, Propuesta prop);

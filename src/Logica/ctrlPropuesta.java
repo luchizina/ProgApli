@@ -182,6 +182,41 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
 
+    @Override
+    public void extender(String tit) throws SQLException {
+        Propuesta prop = this.getPropPorNick(tit);
+        Date ahora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
+        String hora = formateador.format(ahora);
+        java.sql.Time fecFormatoTime = null;
+        try {
+            SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+            fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
+            System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
+        } catch (ParseException ex) {
+            System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+        }
+        if (prop.getEstActual().getEstado().equals(Testado.Publicada)) {
+            ListEstado est = new ListEstado(ahora, fecFormatoTime, "Publicada");
+            prop.addLE(est);
+            try {
+                this.dbE.agregarEstado(est, prop.getTitulo());
+            } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (prop.getEstActual().getEstado().equals(Testado.En_Financiacion)) {
+            ListEstado est = new ListEstado(ahora, fecFormatoTime, "En Financiacion");
+            prop.addLE(est);
+            try {
+                this.dbE.agregarEstado(est, prop.getTitulo());
+            } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public DefaultTableModel BUSCADOR_Propuestas2(String palabrita, List<DtPropuesta> listita, TableModel modelito) {
         DefaultTableModel model = (DefaultTableModel) modelito;
         model.setRowCount(0);
@@ -649,20 +684,20 @@ public class ctrlPropuesta implements IPropuesta {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getTitulo().contains(txt) == true) {
-                    prop.add(aux.obtenerInfo());
-                    esta = true;
+                prop.add(aux.obtenerInfo());
+                esta = true;
             }
-            
+
             if (aux.getLugar().contains(txt) == true && !esta) {
-                    prop.add(aux.obtenerInfo());
-                    esta = true;
+                prop.add(aux.obtenerInfo());
+                esta = true;
             }
-            
+
             if (aux.getDesc().contains(txt) == true && !esta) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }
-            
+
             esta = false;
         }
 
