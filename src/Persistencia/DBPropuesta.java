@@ -161,10 +161,11 @@ public class DBPropuesta {
             String Imagen = null;
             if (imagenes[i] != null) {
                 String ruta = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\";
+              
                 String[] aux = imagenes[i].split("\\.");
                 String termina = aux[1];
                 String origen = ruta+imagenes[i];
-                String destino = "\\Imagenes\\Propuesta\\" + titulos[i] + "." + termina;
+                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli1\\Imagenes\\Propuesta\\" + titulos[i] + "." + termina;
                 if (this.copia(origen, destino) == true) {
                     Imagen = destino;
                 } else {

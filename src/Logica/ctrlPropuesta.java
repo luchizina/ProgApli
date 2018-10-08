@@ -708,6 +708,10 @@ public class ctrlPropuesta implements IPropuesta {
 
     @Override
     public void configurarParametros(String carpetaImagenes) {
+        File ade = new File(carpetaImagenes);
+        if(!ade.exists()){
+        ade.getParentFile().mkdirs();
+        }
         this.carpetaImagenes = carpetaImagenes;
 
     }

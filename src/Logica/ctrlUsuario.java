@@ -196,7 +196,7 @@ public class ctrlUsuario implements IUsuario {
 
         return false;
     }
-    
+
     @Override
     public List<DtUsuario> traerSeguidos(String nick) {
         List<DtUsuario> usuarios = new ArrayList<>();
@@ -230,13 +230,13 @@ public class ctrlUsuario implements IUsuario {
                 List<DtUsuario> seguidosdeAux = this.traerSeguidos(aux.getNick());
                 for (int i = 0; i < seguidosdeAux.size(); i++) {
                     DtUsuario user = seguidosdeAux.get(i);
-                    if(user!=null){
-    
-                    if (user.getNick().equals(nick)) {
-                        DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
-                        seguidores.add(seguidor);
+                    if (user != null) {
+
+                        if (user.getNick().equals(nick)) {
+                            DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
+                            seguidores.add(seguidor);
+                        }
                     }
-}
                 }
 
             }
@@ -353,21 +353,18 @@ public class ctrlUsuario implements IUsuario {
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
-//            File borrar = new File("Imagenes/Colaborador");
-//            if (borrar.exists()) {
-//                this.borrarArch(borrar);
-//                borrar.delete();
-//            }
-//            File borrar1 = new File("Imagenes/Proponente");
-//            if (borrar1.exists()) {
-//                this.borrarArch(borrar1);
-//                borrar1.delete();
-//            }
-//            File borrar2 = new File("Imagenes/Propuesta");
-//            if (borrar2.exists()) {
-//                this.borrarArch(borrar2);
-//                borrar2.delete();
-//            }
+            File borrar = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\");
+            if (borrar.exists()) {
+                this.borrarArch(borrar);
+            }
+            File borrar1 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\");
+            if (borrar1.exists()) {
+                this.borrarArch(borrar1);
+            }
+            File borrar2 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\");
+            if (borrar2.exists()) {
+                this.borrarArch(borrar2);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -430,16 +427,17 @@ public class ctrlUsuario implements IUsuario {
         boolean b = lista.addAll(prop);
 
         if (a && b) {
-           // Collections.sort(lista, new Sortbyroll());
-            
-Collections.sort(lista, (c, d) -> {
-    return c.getNombre().compareTo(d.getNombre());
-          
-        });
-      return lista;
+            // Collections.sort(lista, new Sortbyroll());
+
+            Collections.sort(lista, (c, d) -> {
+                return c.getNombre().compareTo(d.getNombre());
+
+            });
+            return lista;
+        }
+        return null;
     }
-          return null;
-    }
+
     @Override
     public List<DtColaboracion> datosCol(Colaborador a) {
         List<DtColaboracion> listita = new ArrayList<>();
@@ -488,8 +486,6 @@ Collections.sort(lista, (c, d) -> {
         return null;
 
     }
-    
-    
 
     @Override
     public DtUsuario traerDtUsuario(String nick) {
@@ -509,42 +505,38 @@ Collections.sort(lista, (c, d) -> {
         }
         return null;
     }
-    
-    
+
     @Override
-     public List<DtPropuesta> traerPropFav(String nick){
-         List<DtPropuesta> propuestas=new ArrayList<>();
-         Usuario u= this.traerUsuario(nick);
-         Map<String, Propuesta> otras=u.getPropuFav();
-         Set se= otras.entrySet();
-         Iterator it= se.iterator();
-         while(it.hasNext()){
-             Map.Entry mentry= (Map.Entry) it.next();
-             DtPropuesta prop= new DtPropuesta ((Propuesta)mentry.getValue());
-             propuestas.add(prop);
-         }       
-         return propuestas;
-     }
-    
-         @Override
-    public List<DtColaboracion> traerPropuestasColaboradas(String nick){
-        List<DtColaboracion> propuestas=new ArrayList<>();
-        Colaborador colab= this.traerColaborador(nick);
-        List<Colaboracion> colaboraciones= colab.getColHechas();
-        for(int i=0; i<colaboraciones.size(); i++){
-            Colaboracion col=(Colaboracion) colaboraciones.get(i);
-            Propuesta prop= col.getProp();
+    public List<DtPropuesta> traerPropFav(String nick) {
+        List<DtPropuesta> propuestas = new ArrayList<>();
+        Usuario u = this.traerUsuario(nick);
+        Map<String, Propuesta> otras = u.getPropuFav();
+        Set se = otras.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            DtPropuesta prop = new DtPropuesta((Propuesta) mentry.getValue());
+            propuestas.add(prop);
+        }
+        return propuestas;
+    }
+
+    @Override
+    public List<DtColaboracion> traerPropuestasColaboradas(String nick) {
+        List<DtColaboracion> propuestas = new ArrayList<>();
+        Colaborador colab = this.traerColaborador(nick);
+        List<Colaboracion> colaboraciones = colab.getColHechas();
+        for (int i = 0; i < colaboraciones.size(); i++) {
+            Colaboracion col = (Colaboracion) colaboraciones.get(i);
+            Propuesta prop = col.getProp();
             DtPropuesta pro = new DtPropuesta(prop);
-            DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(),col.getColab().getFecha(), col.getColab().getImg());
-            DtColaboracion ma = new DtColaboracion(col.getFecha(),col.getMonto(), cola,pro);
+            DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
+            DtColaboracion ma = new DtColaboracion(col.getFecha(), col.getMonto(), cola, pro);
             propuestas.add(ma);
         }
         return propuestas;
     }
-     
-     
-     
-     
+
     @Override
     public DtInfo resolverLogin(String nick, String pass) {
         DtInfo resultado = new DtInfo(false, "algo", "algo", "algo");
@@ -920,73 +912,74 @@ Collections.sort(lista, (c, d) -> {
 
     @Override
     public void configurarParametros(String carpetaImagenes) {
+        File ade = new File(carpetaImagenes);
+        if(!ade.exists()){
+        ade.getParentFile().mkdirs();
+        }
         this.carpetaImagenes = carpetaImagenes;
-
     }
 
     private Map<String, DataImagen> imagenesMap = new HashMap<>();
     private static Logger LOG;
-   
-    @Override
-   public List<DtPropuesta> TraerMisPropuestasF(String nick)
-   {
-   DtUsuario user= this.traerDtUsuario(nick);
-   List<DtPropuesta> propuestas=new ArrayList<>();
 
-       
-Proponente prop= this.traerProponente(nick);
-Map<String, Propuesta> propuestasAux= prop.getPropuestas();
-Set se = propuestasAux.entrySet();
-Iterator it= se.iterator();
-while(it.hasNext()){
-    Map.Entry mentry= (Map.Entry) it.next();
-    DtPropuesta propuesta= new DtPropuesta((Propuesta) mentry.getValue());
-    if(propuesta.getEstActual().getEstado().compareTo(Testado.Financiada)==0){
-        propuestas.add(propuesta);   
-    } 
-}
-   return propuestas;
-   }
-   @Override
-   public List<DtPropuesta> TraerTodasPropuestas(String nick)
-   {
-   DtUsuario user= this.traerDtUsuario(nick);
-   List<DtPropuesta> propuestas=new ArrayList<>();
-Proponente prop= this.traerProponente(nick);
-Map<String, Propuesta> propuestasAux= prop.getPropuestas();
-Set se = propuestasAux.entrySet();
-Iterator it= se.iterator();
-while(it.hasNext()){
-    Map.Entry mentry= (Map.Entry) it.next();
-    DtPropuesta propuesta= new DtPropuesta((Propuesta) mentry.getValue());
-    if(!(propuesta.getEstActual().getEstado().equals(Testado.Ingresada))){
-        propuestas.add(propuesta);   
-    } 
-}
-        return propuestas;
-   }
     @Override
-  public List<DtPropuesta> TraerTodasPropuestasIng(String nick)
-   {
-   DtUsuario user= this.traerDtUsuario(nick);
-   List<DtPropuesta> propuestas=new ArrayList<>();
-Proponente prop= this.traerProponente(nick);
-Map<String, Propuesta> propuestasAux= prop.getPropuestas();
-Set se = propuestasAux.entrySet();
-Iterator it= se.iterator();
-while(it.hasNext()){
-    Map.Entry mentry= (Map.Entry) it.next();
-    DtPropuesta propuesta= new DtPropuesta((Propuesta) mentry.getValue());
-    if(propuesta.getEstActual().getEstado().equals(Testado.Ingresada)){
-        propuestas.add(propuesta);   
-    } 
-}
-   return propuestas;
-   }
-  
+    public List<DtPropuesta> TraerMisPropuestasF(String nick) {
+        DtUsuario user = this.traerDtUsuario(nick);
+        List<DtPropuesta> propuestas = new ArrayList<>();
+
+        Proponente prop = this.traerProponente(nick);
+        Map<String, Propuesta> propuestasAux = prop.getPropuestas();
+        Set se = propuestasAux.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
+            if (propuesta.getEstActual().getEstado().compareTo(Testado.Financiada) == 0) {
+                propuestas.add(propuesta);
+            }
+        }
+        return propuestas;
+    }
+
+    @Override
+    public List<DtPropuesta> TraerTodasPropuestas(String nick) {
+        DtUsuario user = this.traerDtUsuario(nick);
+        List<DtPropuesta> propuestas = new ArrayList<>();
+        Proponente prop = this.traerProponente(nick);
+        Map<String, Propuesta> propuestasAux = prop.getPropuestas();
+        Set se = propuestasAux.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
+            if (!(propuesta.getEstActual().getEstado().equals(Testado.Ingresada))) {
+                propuestas.add(propuesta);
+            }
+        }
+        return propuestas;
+    }
+
+    @Override
+    public List<DtPropuesta> TraerTodasPropuestasIng(String nick) {
+        DtUsuario user = this.traerDtUsuario(nick);
+        List<DtPropuesta> propuestas = new ArrayList<>();
+        Proponente prop = this.traerProponente(nick);
+        Map<String, Propuesta> propuestasAux = prop.getPropuestas();
+        Set se = propuestasAux.entrySet();
+        Iterator it = se.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
+            if (propuesta.getEstActual().getEstado().equals(Testado.Ingresada)) {
+                propuestas.add(propuesta);
+            }
+        }
+        return propuestas;
+    }
+
     @Override
     public Path agregarImagen(final DtUsuario imagenUsuario) {
-        
+
         LOG = Logger.getLogger(this.getClass().getPackage().getName());
         String nick = imagenUsuario.getNick();
         if (this.carpetaImagenes == null) {
@@ -1025,8 +1018,8 @@ while(it.hasNext()){
         /*if (!this.credencialesMap.keySet().contains(email)){
                          throw new UsuarioNoEncontradoException(email);
                 }*/
-        for(Usuario usu: usuarios.values()){
-            if(usu.getNick().equals(nick)){
+        for (Usuario usu : usuarios.values()) {
+            if (usu.getNick().equals(nick)) {
                 String pat = usu.getImg();
                 File f = new File(pat);
                 BufferedImage bi = null;
