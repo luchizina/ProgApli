@@ -396,7 +396,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public DtPropuesta SeleccionarProp(String xTitulo) // error 
-    {
+    { 
         Propuesta pro = this.propuestas.get(xTitulo);
         ActualizarEstado(pro); // agregado TAREA 2
         DtPropuesta X = new DtPropuesta(pro, pro.getCate());
