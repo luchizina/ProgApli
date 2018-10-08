@@ -76,7 +76,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
                 if (this.copia(Imagen, destino) == true) {
@@ -283,7 +283,7 @@ public class ctrlUsuario implements IUsuario {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
 
-                String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + Nick + "." + termina;
 
   
 
@@ -353,21 +353,21 @@ public class ctrlUsuario implements IUsuario {
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
-            File borrar = new File("Imagenes/Colaborador");
-            if (borrar.exists()) {
-                this.borrarArch(borrar);
-                borrar.delete();
-            }
-            File borrar1 = new File("Imagenes/Proponente");
-            if (borrar1.exists()) {
-                this.borrarArch(borrar1);
-                borrar1.delete();
-            }
-            File borrar2 = new File("Imagenes/Propuesta");
-            if (borrar2.exists()) {
-                this.borrarArch(borrar2);
-                borrar2.delete();
-            }
+//            File borrar = new File("Imagenes/Colaborador");
+//            if (borrar.exists()) {
+//                this.borrarArch(borrar);
+//                borrar.delete();
+//            }
+//            File borrar1 = new File("Imagenes/Proponente");
+//            if (borrar1.exists()) {
+//                this.borrarArch(borrar1);
+//                borrar1.delete();
+//            }
+//            File borrar2 = new File("Imagenes/Propuesta");
+//            if (borrar2.exists()) {
+//                this.borrarArch(borrar2);
+//                borrar2.delete();
+//            }
         } catch (SQLException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
