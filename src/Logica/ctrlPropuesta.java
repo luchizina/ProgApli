@@ -118,7 +118,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli1\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -180,6 +180,41 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
         return false;
+    }
+
+    @Override
+    public void extender(String tit) throws SQLException {
+        Propuesta prop = this.getPropPorNick(tit);
+        Date ahora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
+        String hora = formateador.format(ahora);
+        java.sql.Time fecFormatoTime = null;
+        try {
+            SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+            fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
+            System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
+        } catch (ParseException ex) {
+            System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+        }
+        if (prop.getEstActual().getEstado().equals(Testado.Publicada)) {
+            ListEstado est = new ListEstado(ahora, fecFormatoTime, "Publicada");
+            prop.addLE(est);
+            try {
+                this.dbE.agregarEstado(est, prop.getTitulo());
+            } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (prop.getEstActual().getEstado().equals(Testado.En_Financiacion)) {
+            ListEstado est = new ListEstado(ahora, fecFormatoTime, "En Financiacion");
+            prop.addLE(est);
+            try {
+                this.dbE.agregarEstado(est, prop.getTitulo());
+            } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public DefaultTableModel BUSCADOR_Propuestas2(String palabrita, List<DtPropuesta> listita, TableModel modelito) {
@@ -263,13 +298,14 @@ public class ctrlPropuesta implements IPropuesta {
         String horita = java.time.LocalTime.now().toString();
         Colaborador colab2 = ctrlUsuario.getInstance().traerColaborador(colab);
         Propuesta prop2 = this.propuestas.get(prop);
-        
+
         Colaboracion c = new Colaboracion(lul, tipoR, Integer.parseInt(monto), colab2, prop2, horita);
 
         if (dbPropuesta.agregarColaboracion(c)) {
             this.colaboraciones.add(c);
-            if(!prop2.tieneColab())
+            if (!prop2.tieneColab()) {
                 this.cambiarEstadito(prop2.getTitulo(), "En_Financiacion");
+            }
             prop2.addColab(c);
             colab2.AddColab(c);
             try {
@@ -356,8 +392,8 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public void cargarProp() {
         this.dbPropuesta.cargarPropuestasPrueba();
-        this.dbE.agregarListPrueb();
         this.cargarPropuestas();
+        this.dbE.agregarListPrueb();
         this.EstadosPropuestas();
         this.dbPropuesta.colaboracionesPrueba();
         this.cargarColaboraciones();
@@ -615,7 +651,7 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
         Collections.sort(listita, (c, d) -> {
-        return c.getTitulo().compareTo(d.getTitulo()); 
+            return c.getTitulo().compareTo(d.getTitulo());
         });
         return listita;
     }
@@ -633,9 +669,39 @@ public class ctrlPropuesta implements IPropuesta {
             }
         }
         Collections.sort(listita, (c, d) -> {
-        return c.getTitulo().compareTo(d.getTitulo()); 
+            return c.getTitulo().compareTo(d.getTitulo());
         });
         return listita;
+    }
+
+    @Override
+    public List<DtPropuesta> listaTDL(String txt) {
+        List<DtPropuesta> prop = new ArrayList<>();
+        Set set = propuestas.entrySet();
+        Iterator it = set.iterator();
+        boolean esta = false;
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            if (aux.getTitulo().contains(txt) == true) {
+                prop.add(aux.obtenerInfo());
+                esta = true;
+            }
+
+            if (aux.getLugar().contains(txt) == true && !esta) {
+                prop.add(aux.obtenerInfo());
+                esta = true;
+            }
+
+            if (aux.getDesc().contains(txt) == true && !esta) {
+                prop.add(aux.obtenerInfo());
+                esta = true;
+            }
+
+            esta = false;
+        }
+
+        return prop;
     }
 
     String carpetaImagenes;
@@ -707,31 +773,32 @@ public class ctrlPropuesta implements IPropuesta {
     public void ActualizarEstado(Propuesta x) {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date g = x.getFechaPub();   // Esta fecha? vereficar 
-        Date h = new Date();     
+        Date h = new Date();
         String sg = myFormat.format(g);
         String sh = myFormat.format(h);
         LocalDate dateBefore = LocalDate.parse(sg);
         LocalDate dateBefore2 = LocalDate.parse(sh);
         long dias = ChronoUnit.DAYS.between(dateBefore, dateBefore2);
         System.out.println(dias);
-        if (x.getEstActual().getEstado().toString().equals("Publicada")){
-            if (dias > 30){
-                 cambiarEstadito(x.getTitulo(), "No_Financiada");
+        if (x.getEstActual().getEstado().toString().equals("Publicada")) {
+            if (dias > 30) {
+                cambiarEstadito(x.getTitulo(), "No_Financiada");
             }
         }
-        if (x.getEstActual().getEstado().toString().equals("En_Financiacion")){
-            if (dias <= 30 && x.getMontoActual() >= x.getMontoTotal()){              
-                if (!x.getEstActual().getEstado().toString().equals("Financiada")){
-                    cambiarEstadito(x.getTitulo(), "Financiada");              
-                }       
+        if (x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
+            if (dias <= 30 && x.getMontoActual() >= x.getMontoTotal()) {
+                if (!x.getEstActual().getEstado().toString().equals("Financiada")) {
+                    cambiarEstadito(x.getTitulo(), "Financiada");
+                }
             }
-            if (dias > 30 && x.getEstActual().getEstado().toString().equals("En_Financiacion")){
-                if (x.getMontoActual() < x.getMontoTotal()) {           
-                    cambiarEstadito(x.getTitulo(), "No_Financiada");      
-                } 
+            if (dias > 30 && x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
+                if (x.getMontoActual() < x.getMontoTotal()) {
+                    cambiarEstadito(x.getTitulo(), "No_Financiada");
+                }
             }
         }
     }
+
     ;
         
         
@@ -750,29 +817,31 @@ public class ctrlPropuesta implements IPropuesta {
         
     @Override
     public boolean yaFavoriteo(Usuario usu, String p) {
-            if (usu instanceof Proponente) {
-                Propuesta pro = usu.getPropuFav().get(p);
-                if(pro != null){
-                    return true;
-                }
+        if (usu instanceof Proponente) {
+            Propuesta pro = usu.getPropuFav().get(p);
+            if (pro != null) {
+                return true;
             }
-            
-            if (usu instanceof Colaborador) {
-                Propuesta pro = usu.getPropuFav().get(p);
-                if(pro != null){
-                    return true;
-                }
+        }
+
+        if (usu instanceof Colaborador) {
+            Propuesta pro = usu.getPropuFav().get(p);
+            if (pro != null) {
+                return true;
             }
+        }
         return false;
-        };
+    }
+
+    ;
         
         @Override
     public BufferedImage retornarImagen_Propuesta(final String titu) {
         /*if (!this.credencialesMap.keySet().contains(email)){
                          throw new UsuarioNoEncontradoException(email);
                 }*/
-        for(Propuesta pro: propuestas.values()){
-            if(pro.getTitulo().equals(titu)){
+        for (Propuesta pro : propuestas.values()) {
+            if (pro.getTitulo().equals(titu)) {
                 String pat = pro.getImg();
                 File f = new File(pat);
                 BufferedImage bi = null;

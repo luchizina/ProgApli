@@ -496,11 +496,11 @@ public class DBusuario {
             for (int i = 0; i < 9; i++) {
                 String Imagen = null;
                 if (urlImg[i] != null) {
-                    String ruta = "C:\\Users\\matheo\\Documents\\ProgApli\\";
+                    String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\";
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+urlImg[i];
-                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
@@ -559,11 +559,11 @@ public class DBusuario {
             for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
-                    String ruta = "C:\\Users\\matheo\\Documents\\ProgApli\\";
+                    String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\";
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+imagenes[i];
-                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
