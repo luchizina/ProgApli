@@ -369,7 +369,7 @@ public class Propuesta {
     };
     
     
-    public Date sacaFecha(){
+    public Date sacaFechaPub(){
         Date act = new Date();
         List estados = new ArrayList<ListEstado>();
         for(int i=0; i<this.getLE().size(); i++){
@@ -379,6 +379,20 @@ public class Propuesta {
                     estados.add(p);
                 }
             }
+        }
+        Collections.sort(estados, (ListEstado dt1, ListEstado dt2) -> dt1.getFecha().compareTo(dt2.getFecha()));
+        ListEstado est = (ListEstado) estados.get(estados.size()-1);
+        return est.getFecha();
+    }
+    
+     public Date sacaFechaFin(){
+        Date act = new Date();
+        List estados = new ArrayList<ListEstado>();
+        for(int i=0; i<this.getLE().size(); i++){
+                ListEstado p = (ListEstado) this.getLE().get(i);
+                if(p.getEst().equals("En_Financiacion")){
+                    estados.add(p);
+                }
         }
         Collections.sort(estados, (ListEstado dt1, ListEstado dt2) -> dt1.getFecha().compareTo(dt2.getFecha()));
         ListEstado est = (ListEstado) estados.get(estados.size()-1);
