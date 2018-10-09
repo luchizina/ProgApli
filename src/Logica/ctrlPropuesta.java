@@ -432,7 +432,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public DtPropuesta SeleccionarProp(String xTitulo) // error 
-    { 
+    {
         Propuesta pro = this.propuestas.get(xTitulo);
         ActualizarEstado(pro); // agregado TAREA 2
         DtPropuesta X = new DtPropuesta(pro, pro.getCate());
@@ -709,8 +709,8 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public void configurarParametros(String carpetaImagenes) {
         File ade = new File(carpetaImagenes);
-        if(!ade.exists()){
-        ade.getParentFile().mkdirs();
+        if (!ade.exists()) {
+            ade.getParentFile().mkdirs();
         }
         this.carpetaImagenes = carpetaImagenes;
 
@@ -776,7 +776,12 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void ActualizarEstado(Propuesta x) {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date g = x.getFechaPub();   // Esta fecha? vereficar 
+        Date g = null;
+        if (x.getEstActual().getEstado().equals(Testado.Publicada)) {
+            g = x.sacaFechaPub();
+        } else if (x.getEstActual().getEstado().equals(Testado.En_Financiacion)){
+            g = x.sacaFechaFin();
+        }
         Date h = new Date();
         String sg = myFormat.format(g);
         String sh = myFormat.format(h);
