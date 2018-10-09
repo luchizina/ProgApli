@@ -432,7 +432,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public DtPropuesta SeleccionarProp(String xTitulo) // error 
-    {
+    { 
         Propuesta pro = this.propuestas.get(xTitulo);
         ActualizarEstado(pro); // agregado TAREA 2
         DtPropuesta X = new DtPropuesta(pro, pro.getCate());
@@ -683,17 +683,17 @@ public class ctrlPropuesta implements IPropuesta {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux.getTitulo().contains(txt) == true) {
+            if (aux.getTitulo().contains(txt) == true && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }
 
-            if (aux.getLugar().contains(txt) == true && !esta) {
+            if (aux.getLugar().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }
 
-            if (aux.getDesc().contains(txt) == true && !esta) {
+            if (aux.getDesc().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }

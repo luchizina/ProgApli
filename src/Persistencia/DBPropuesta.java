@@ -280,13 +280,13 @@ public class DBPropuesta {
     }
 
     public void colaboracionesPrueba() {
-        String[] colaboradores = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano", "novick", "sergiop", "marcelot", "sergiop", "chino", "novick", "tonyp", "sergiop", "marcelot", "tonyp", "marcelot"};
-        String[] propuestas = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio"};
-        String[] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-08-05", "2018-08-10", "2018-08-15", "2018-08-13", "2018-08-14", "2018-08-15", "2018-08-17"};
-        String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30"};
-        Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000};
-        String[] retornos = {"porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "entrada", "porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "porcentaje", "entrada", "porcentaje", "porcentaje", "entrada", "porcentaje"};
-        for (int i = 0; i < 17; i++) {
+        String[] colaboradores = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano", "novick", "sergiop", "marcelot", "sergiop", "chino", "novick", "tonyp", "sergiop", "marcelot", "tonyp", "marcelot", "chino"};
+        String[] propuestas = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio", "Un dia de Julio"};
+        String[] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-08-05", "2018-08-10", "2018-08-15", "2018-08-13", "2018-08-14", "2018-08-15", "2018-08-17", "2018-08-24"};
+        String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30", "01:58"};
+        Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000, 120000};
+        String[] retornos = {"porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "entrada", "porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "porcentaje", "entrada", "porcentaje", "porcentaje", "entrada", "porcentaje", "porcentaje"};
+        for (int i = 0; i < 18; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
                 statement.setString(1, fechas[i]);
