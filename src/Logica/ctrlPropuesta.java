@@ -776,7 +776,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void ActualizarEstado(Propuesta x) {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date g = x.getFechaPub();   // Esta fecha? vereficar 
+        Date g = x.sacaFecha();   // Esta fecha? vereficar 
         Date h = new Date();
         String sg = myFormat.format(g);
         String sh = myFormat.format(h);

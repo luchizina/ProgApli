@@ -14,6 +14,7 @@ import java.util.Iterator;
 import Logica.Comentario;
 import Persistencia.DBPropuesta;
 import java.sql.SQLException;
+import java.util.Collections;
 
 /**
  *
@@ -366,5 +367,22 @@ public class Propuesta {
         }
         return false;
     };
+    
+    
+    public Date sacaFecha(){
+        Date act = new Date();
+        List estados = new ArrayList<ListEstado>();
+        for(int i=0; i<this.getLE().size(); i++){
+            if(this.estActual.getEstado().equals(Testado.Publicada)){
+                ListEstado p = (ListEstado) this.getLE().get(i);
+                if(p.getEst().equals("Publicada")){
+                    estados.add(p);
+                }
+            }
+        }
+        Collections.sort(estados, (ListEstado dt1, ListEstado dt2) -> dt1.getFecha().compareTo(dt2.getFecha()));
+        ListEstado est = (ListEstado) estados.get(estados.size()-1);
+        return est.getFecha();
+    }
     
 }
