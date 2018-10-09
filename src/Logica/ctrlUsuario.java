@@ -106,19 +106,18 @@ public List<DtUsuario> listaNC(String txt) {
             Map.Entry mentry = (Map.Entry) it.next();
             Usuario aux = (Usuario) mentry.getValue();
             if (aux.getNick().contains(txt) == true) {
-                DtUsuario da = this.traerDtUsuario(txt);
+                DtUsuario da = this.traerDtUsuario(aux.getNick());
                 prop.add(da);
                 esta = true;
             }
 
             if (aux.getCorreo().contains(txt) == true && !esta) {
-                 DtUsuario da = this.traerDtUsuario(txt);
+                 DtUsuario da = this.traerDtUsuario(aux.getNick());
                 prop.add(da);
                 esta = true;
             }
             esta = false;
         }
-
         return prop;
     }
     @Override
