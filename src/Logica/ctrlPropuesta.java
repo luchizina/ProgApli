@@ -804,6 +804,10 @@ public class ctrlPropuesta implements IPropuesta {
                 if (x.getMontoActual() < x.getMontoTotal()) {
                     cambiarEstadito(x.getTitulo(), "No_Financiada");
                 }
+                int hola = x.MontoA30();
+                if(x.MontoA30() >= x.getMontoTotal()){
+                    cambiarEstadito(x.getTitulo(), "Financiada");
+                }
             }
         }
     }

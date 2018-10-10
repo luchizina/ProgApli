@@ -14,6 +14,7 @@ import java.util.Iterator;
 import Logica.Comentario;
 import Persistencia.DBPropuesta;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Collections;
 
 /**
@@ -397,6 +398,22 @@ public class Propuesta {
         Collections.sort(estados, (ListEstado dt1, ListEstado dt2) -> dt1.getFecha().compareTo(dt2.getFecha()));
         ListEstado est = (ListEstado) estados.get(estados.size()-1);
         return est.getFecha();
+    }
+     
+     public int MontoA30(){
+        int monto = 0;
+        Date fech = this.sacaFechaFin();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fech);
+        calendar.add(Calendar.DAY_OF_YEAR, 30);
+        Date comp = calendar.getTime();
+        for (int i = 0; i < this.colaboraciones.size(); i++) {
+            Colaboracion aux = (Colaboracion) this.colaboraciones.get(i);
+            if(aux.getFecha().before(comp)){
+                monto = monto + aux.getMonto();
+            }
+        }
+        return monto;
     }
     
 }
