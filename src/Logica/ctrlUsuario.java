@@ -351,15 +351,15 @@ public class ctrlUsuario implements IUsuario {
     public void limpiarUsuarios() {
         try {
             this.usu.limpiarBase();
-            File borrar = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\");
+            File borrar = new File("C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Colaborador\\");
             if (borrar.exists()) {
                 this.borrarArch(borrar);
             }
-            File borrar1 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\");
+            File borrar1 = new File("C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Proponente\\");
             if (borrar1.exists()) {
                 this.borrarArch(borrar1);
             }
-            File borrar2 = new File("C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\");
+            File borrar2 = new File("C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Propuesta\\");
             if (borrar2.exists()) {
                 this.borrarArch(borrar2);
             }

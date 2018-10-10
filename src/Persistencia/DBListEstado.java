@@ -39,7 +39,7 @@ public class DBListEstado {
         try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
                 + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)")) {
             if (p.getEst().equals("En_Financiacion"))
-                p.setEst("En Fincanciacion");
+                p.setEst("En Financiacion");
             if (p.getEst().equals("No_Financiada"))
                 p.setEst("No Financiada");
             

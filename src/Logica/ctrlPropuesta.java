@@ -783,10 +783,13 @@ public class ctrlPropuesta implements IPropuesta {
         LocalDate dateBefore = LocalDate.parse(sg);
         LocalDate dateBefore2 = LocalDate.parse(sh);
         long dias = ChronoUnit.DAYS.between(dateBefore, dateBefore2);
-        System.out.println(dias);
+        //System.out.println(dias);
         if (x.getEstActual().getEstado().toString().equals("Publicada")) {
             if (dias > 30) {
                 cambiarEstadito(x.getTitulo(), "No_Financiada");
+            }
+            if(x.getMontoActual()>0 && !x.getEstActual().getEstado().toString().equals("En_Financiacion")){
+                 cambiarEstadito(x.getTitulo(), "En_Financiacion");
             }
         }
         if (x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
