@@ -25,6 +25,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Luchi
  */
 public interface IPropuesta {
+    public List<DtComentarios> traerComentarios(String prop);
     public void extender(String tit) throws SQLException ;
     public List<DtPropuesta> listaTDL(String txt);
     public boolean yaFavoriteo(Usuario u,String p);
