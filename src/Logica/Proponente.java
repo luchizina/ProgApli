@@ -19,6 +19,8 @@ public class Proponente extends Usuario {
             String biografia;
             String linkWeb;
             private Map<String, Propuesta> propuestas;
+            Boolean activo;
+            Date fecha_des;
 
     public Proponente(String direccion, String biografia, String linkWeb, String nick, String nombre, String Apellido, String Correo, Date fecha, String img, Map<String, Usuario> usuSeguidos, Map<String, Propuesta> propuFav, String cont) {
         super(nick, nombre, Apellido, Correo, fecha, img, usuSeguidos, propuFav, cont);
@@ -41,12 +43,22 @@ public class Proponente extends Usuario {
         super(nick, nombre, Apellido, Correo, fecha, img, Tipo, cont);
     }
 
-    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo, String cont) {
+    public Proponente(String nick, String nombre, String Apellido, String Correo, Date fecha, String img, String dir, String bio, String link, String tipo, String cont, boolean act, Date fecha_desac) {
         super(nick, nombre, Apellido, Correo, fecha, img, tipo, cont);
         this.direccion=dir;
         this.biografia=bio;
         this.linkWeb=link;
         this.propuestas = new HashMap<>(); // agregado
+        this.activo=act;
+        this.fecha_des=fecha_desac;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public Date getFecha_des() {
+        return fecha_des;
     }
 
 

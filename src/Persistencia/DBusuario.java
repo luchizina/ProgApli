@@ -65,7 +65,7 @@ public class DBusuario {
     public boolean agregarProponente(Proponente u) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
-                    + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb, pass) values(?,?,?,?,?,?,?,?,?,?)");
+                    + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb, pass, activo, fecha_desactivado) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, u.getNick());
             statement.setString(2, u.getCorreo());
             statement.setString(3, u.getNombre());
@@ -79,6 +79,8 @@ public class DBusuario {
             statement.setString(8, u.getBiografia());
             statement.setString(9, u.getLinkWeb());
             statement.setString(10, u.getCont());
+            statement.setInt(11, 1);
+            statement.setString(12, null);
             statement.executeUpdate();
             statement.close();
             return true;
@@ -384,7 +386,7 @@ public class DBusuario {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 String nick = rs.getString("NickP");
-                Proponente p = new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente", rs.getString("pass"));
+                Proponente p = new Proponente(nick, rs.getString("NombreP"), rs.getString("ApellidoP"), rs.getString("CorreoP"), rs.getDate("FechaNac"), rs.getString("ImagenUrlP"), rs.getString("Direccion"), rs.getString("Biografia"), rs.getString("linkWeb"), "Proponente", rs.getString("pass"), rs.getBoolean("activo"), rs.getDate("fecha_desactivado"));
                 lista.put(nick, p);
             }
             rs.close();
@@ -496,12 +498,12 @@ public class DBusuario {
             for (int i = 0; i < 9; i++) {
                 String Imagen = null;
                 if (urlImg[i] != null) {
-                    String ruta = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\";
+                    String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\";
                     
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+urlImg[i];
-                    String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
@@ -510,7 +512,7 @@ public class DBusuario {
                 }
                 try {
                     PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente "
-                            + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb, pass) values(?,?,?,?,?,?,?,?,?,?)");
+                            + "(NickP, CorreoP, NombreP, ApellidoP, FechaNac, ImagenUrlP, Direccion, Biografia, linkweb, pass, activo, fecha_desactivado) values(?,?,?,?,?,?,?,?,?,?,?,?)");
                     statement.setString(1, nick[i]);
                     statement.setString(2, correo[i]);
                     statement.setString(3, nombre[i]);
@@ -524,6 +526,8 @@ public class DBusuario {
                     statement.setString(8, biografias[i]);
                     statement.setString(9, link[i]);
                     statement.setString(10, sha1(pass[i])); // encrip
+                    statement.setInt(11, 1);
+                    statement.setString(12, null);
                     statement.executeUpdate();
                     statement.close();
                 } catch (SQLException ex) {
@@ -560,11 +564,11 @@ public class DBusuario {
             for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
-                    String ruta = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\";
+                    String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\";
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+imagenes[i];
-                    String destino = "C:\\Users\\nambr\\Documents\\NetBeansProjects\\ProgApli\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
+                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
