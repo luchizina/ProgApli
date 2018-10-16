@@ -133,8 +133,7 @@ public class ctrlPropuesta implements IPropuesta {
                 //  public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String Lugar) {
                 fechaPub = new Date();
                 Propuesta pe;
-                int x = 200000;
-                pe = new Propuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, x, cate, estActual, img, Lugar);
+                pe = new Propuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, estActual, img, Lugar);
                 pe.setProp(nickP);
                 pe.setEstActual(estActual);
 
