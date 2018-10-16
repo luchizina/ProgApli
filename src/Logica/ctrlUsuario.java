@@ -68,6 +68,7 @@ public class ctrlUsuario implements IUsuario {
         this.usu = new DBusuario();
     }
 
+  
     @Override
     public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass) {
         if (this.existe(Nick, Correo) == false) {
@@ -76,7 +77,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
                 if (this.copia(Imagen, destino) == true) {
@@ -94,7 +95,31 @@ public class ctrlUsuario implements IUsuario {
             return res;
         }
     }
+    
+    @Override
+public List<DtUsuario> listaNC(String txt) {
+        List<DtUsuario> prop = new ArrayList<>();
+        Set set = usuarios.entrySet();
+        Iterator it = set.iterator();
+        boolean esta = false;
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Usuario aux = (Usuario) mentry.getValue();
+            if (aux.getNick().contains(txt) == true) {
+                DtUsuario da = this.traerDtUsuario(aux.getNick());
+                prop.add(da);
+                esta = true;
+            }
 
+            if (aux.getCorreo().contains(txt) == true && !esta) {
+                 DtUsuario da = this.traerDtUsuario(aux.getNick());
+                prop.add(da);
+                esta = true;
+            }
+            esta = false;
+        }
+        return prop;
+    }
     @Override
     public Colaborador traerColaborador(String f) {
         Colaborador fa = (Colaborador) this.usuarios.get(f);
@@ -283,7 +308,9 @@ public class ctrlUsuario implements IUsuario {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
 
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Proponente\\" + Nick + "." + termina;
+                String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+
+  
 
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;

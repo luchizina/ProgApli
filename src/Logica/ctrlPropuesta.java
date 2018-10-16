@@ -118,7 +118,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -133,7 +133,8 @@ public class ctrlPropuesta implements IPropuesta {
                 //  public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String Lugar) {
                 fechaPub = new Date();
                 Propuesta pe;
-                pe = new Propuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, estActual, img, Lugar);
+                int x = 200000;
+                pe = new Propuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, x, cate, estActual, img, Lugar);
                 pe.setProp(nickP);
                 pe.setEstActual(estActual);
 
@@ -386,7 +387,7 @@ public class ctrlPropuesta implements IPropuesta {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
         this.SetearPropuestas_A_Proponentes();              //agregado
         this.Cargar_Comentarios_Memoria();                  //agregado  
-        this.Cargar_Favoritos_Memoria();                    //agregado
+       this.Cargar_Favoritos_Memoria();                    //agregado
     }
 
     @Override
@@ -432,9 +433,11 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public DtPropuesta SeleccionarProp(String xTitulo) // error 
-    { 
+    {
         Propuesta pro = this.propuestas.get(xTitulo);
+        if(pro.getEstActual().getEstado().equals(Testado.Publicada) || pro.getEstActual().getEstado().equals(Testado.En_Financiacion)){
         ActualizarEstado(pro); // agregado TAREA 2
+        }
         DtPropuesta X = new DtPropuesta(pro, pro.getCate());
         this.propuestaconsulta = pro;
         return X;
@@ -683,17 +686,17 @@ public class ctrlPropuesta implements IPropuesta {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux.getTitulo().contains(txt) == true) {
+            if (aux.getTitulo().contains(txt) == true && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }
 
-            if (aux.getLugar().contains(txt) == true && !esta) {
+            if (aux.getLugar().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }
 
-            if (aux.getDesc().contains(txt) == true && !esta) {
+            if (aux.getDesc().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
             }
@@ -709,8 +712,8 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public void configurarParametros(String carpetaImagenes) {
         File ade = new File(carpetaImagenes);
-        if(!ade.exists()){
-        ade.getParentFile().mkdirs();
+        if (!ade.exists()) {
+            ade.getParentFile().mkdirs();
         }
         this.carpetaImagenes = carpetaImagenes;
 
@@ -776,7 +779,12 @@ public class ctrlPropuesta implements IPropuesta {
 
     public void ActualizarEstado(Propuesta x) {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date g = x.getFechaPub();   // Esta fecha? vereficar 
+        Date g = null;
+        if (x.getEstActual().getEstado().equals(Testado.Publicada)) {
+            g = x.sacaFechaPub();
+        } else if (x.getEstActual().getEstado().equals(Testado.En_Financiacion)){
+            g = x.sacaFechaFin();
+        }
         Date h = new Date();
         String sg = myFormat.format(g);
         String sh = myFormat.format(h);
@@ -801,6 +809,10 @@ public class ctrlPropuesta implements IPropuesta {
             if (dias > 30 && x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
                 if (x.getMontoActual() < x.getMontoTotal()) {
                     cambiarEstadito(x.getTitulo(), "No_Financiada");
+                }
+                int hola = x.MontoA30();
+                if(x.MontoA30() >= x.getMontoTotal()){
+                    cambiarEstadito(x.getTitulo(), "Financiada");
                 }
             }
         }

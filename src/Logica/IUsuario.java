@@ -67,4 +67,5 @@ public interface IUsuario {
      public abstract List<DtPropuesta> TraerMisPropuestasF(String nick);
      public abstract List<DtPropuesta> TraerTodasPropuestas(String nick);
       public abstract List<DtPropuesta> TraerTodasPropuestasIng(String nick);
+ public abstract List<DtUsuario> listaNC(String txt);
 }
