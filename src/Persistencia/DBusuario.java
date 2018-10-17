@@ -438,6 +438,15 @@ public class DBusuario {
             PreparedStatement Fav_Proponente = conexion.prepareStatement("Delete FROM favoriteapp");    // agregado
             Fav_Proponente.executeUpdate();
             Fav_Proponente.close();
+            PreparedStatement tar = conexion.prepareStatement("Delete FROM tarjeta");    // agregado
+            tar.executeUpdate();
+            tar.close();
+            PreparedStatement trans = conexion.prepareStatement("Delete FROM transferencia");    // agregado
+            trans.executeUpdate();
+            trans.close();
+            PreparedStatement pay = conexion.prepareStatement("Delete FROM paypal");    // agregado
+            pay.executeUpdate();
+            pay.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

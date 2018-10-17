@@ -387,6 +387,13 @@ public class ctrlPropuesta implements IPropuesta {
         this.SetearPropuestas_A_Proponentes();              //agregado
         this.Cargar_Comentarios_Memoria();                  //agregado  
         this.Cargar_Favoritos_Memoria();                    //agregado
+        this.dbPropuesta.cargarPaypal();
+        try {
+            this.dbPropuesta.cargarTar();
+        } catch (ParseException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dbPropuesta.cargarTrans();
     }
 
     @Override

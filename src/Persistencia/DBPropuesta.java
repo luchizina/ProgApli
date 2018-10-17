@@ -497,7 +497,7 @@ public class DBPropuesta {
         IUsuario iUsu = fab.getICtrlUsuario();
         PreparedStatement st;
         try {
-            st = conexion.prepareStatement("SELECT * FROM trasnferencia");
+            st = conexion.prepareStatement("SELECT * FROM transferencia");
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 String prop=rs.getString("Propuesta");
