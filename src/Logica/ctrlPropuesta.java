@@ -402,6 +402,19 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.CargarFavoritos_BaseDeDatos();     //agregado
         this.Cargar_Comentarios_Memoria();                  //agregado  
         this.Cargar_Favoritos_Memoria();                    //agregado
+        try {
+            this.dbPropuesta.pagosPayPal();
+            this.dbPropuesta.pagosTarjeta();
+            this.dbPropuesta.pagosTransferencia();
+            this.dbPropuesta.cargarPaypal();
+            this.dbPropuesta.cargarTar();
+            this.dbPropuesta.cargarTrans();
+        } catch (SQLException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void cargarColaboraciones() {
