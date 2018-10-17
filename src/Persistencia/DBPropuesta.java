@@ -288,7 +288,7 @@ public class DBPropuesta {
         String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30", "01:58"};
         Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000, 120000};
         String[] retornos = {"porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "entrada", "porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "porcentaje", "entrada", "porcentaje", "porcentaje", "entrada", "porcentaje", "porcentaje"};
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < propuestas.length; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
                 statement.setString(1, fechas[i]);
