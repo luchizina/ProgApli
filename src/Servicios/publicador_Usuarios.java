@@ -144,117 +144,117 @@ public class publicador_Usuarios {
     {
         return xD.listarUsuario2();
     }
-    
+    @WebMethod
     public dataListColaboradores listarColaboradores()
     {
        return xD.listarColaboradores2();
     }
-    
+    @WebMethod
     public dataListUsuarios listarUsuarios()
     {
         return xD.listarUsuarios2();
     }
-    
+    @WebMethod
     public dataListColaboraciones datosCol(Colaborador a)
     {
         return xD.datosCol2(a);
     }
-    
+    @WebMethod
     public boolean escorreo(String correo)
     {
         return xD.escorreo(correo);
     }
-    
+    @WebMethod
      public boolean existeNick(String nick)
      {
          return xD.existeNick(nick);
      }
-     
+     @WebMethod
      public DtUsuario traerDtUsuario(String nick)
      {
          return xD.traerDtUsuario(nick);
      }
-     
+     @WebMethod
      public dataListPropuestas traerPropFav(String nick)
      {
          return xD.traerPropFav2(nick);
      }
-     
+     @WebMethod
      public dataListColaboraciones traerPropuestasColaboradas(String nick)
     {
         return xD.traerPropuestasColaboradas2(nick);
     }
-     
+     @WebMethod
       public DtInfo resolverLogin(String nick, String pass)
      {
          return xD.resolverLogin(nick, pass);
      }
-     
+     @WebMethod
      public boolean existeCorreo(String correo)
      {
          return xD.existe(correo, correo);
      }
-     
+     @WebMethod
      public void cargarUsuarios2()
      {
          xD.cargarUsuarios2();
      }
-     
-     public Map<String, Usuario> cargarSeg(Map<String, Usuario> lista)
-     {
-         return xD.cargarSeg(lista);
-     }
-     
+//     @WebMethod
+//     public Map<String, Usuario> cargarSeg(Map<String, Usuario> lista)
+//     {
+//         return xD.cargarSeg(lista);
+//     }
+     @WebMethod
      public boolean validaWeb(String algo)
      {
          return xD.validaWeb(algo);
      }
-     
+     @WebMethod
      public dataListStrings seleccionarColaborante(String nick)
      {
          return xD.seleccionarColaborante2(nick);
      }
-     
+     @WebMethod
      public DtColaboracion SeleccionarColaboracion(String xTitulo)
      {
          return xD.SeleccionarColaboracion(xTitulo);
      }
-     
+     @WebMethod
      public String encripta(String pass, String type)
      {
          return xD.encripta(pass, type);
      }
-     
+     @WebMethod
      public String sha1(String pass)
      {
          return xD.sha1(pass);
      }
-     
+     @WebMethod
      public void configurarParametros(String carpetaImagenes)
      {
          xD.configurarParametros(carpetaImagenes);
      }
-     
+     @WebMethod
      public dataListPropuestas traerMisPropuestasF(String nick)
      {
          return xD.traerMisPropuestasF2(nick);
      }
-     
+     @WebMethod
      public dataListPropuestas TraerTodasPropuestas(String nick)
      {
          return xD.TraerTodasPropuestas2(nick);
      }
-     
+     @WebMethod
      public dataListPropuestas TraerTodasPropuestasIng(String nick)
      {
          return xD.TraerTodasPropuestasIng2(nick);
      }
-     
-     public Path agregarImagen(final DtUsuario imagenUsuario)
-     {
-         return xD.agregarImagen(imagenUsuario);
-     }
-     
+//     @WebMethod
+////     public Path agregarImagen(final DtUsuario imagenUsuario)
+////     {
+////         return xD.agregarImagen(imagenUsuario);
+////     }
+     @WebMethod
      public BufferedImage retornarImagen(final String nick) throws IOException
      {
          return xD.retornarImagen(nick);
