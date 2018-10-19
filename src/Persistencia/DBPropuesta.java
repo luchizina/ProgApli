@@ -156,7 +156,7 @@ public class DBPropuesta {
         String[] imagenes = {null, "Prueba\\Propuesta\\mom.jpg", "Prueba\\Propuesta\\pim.jpg", "Prueba\\Propuesta\\pil.jpg", "Prueba\\Propuesta\\ryj.jpg", "Prueba\\Propuesta\\udj.jpg", null, null};
         String[] proponente = {"diegop", "hrubino", "mbusca", "kairoh", "juliob", "tabarec", "hectorg", "durazno"};
         String[] lugares = {"Jardín Botánico", "Teatro de Verano", "Teatro Solís", "Rural de Prado", "Auditorio Nacional del Sodre", "Landia", "Teatro el Galpón", "Durazno"};
-        String[] fechitap = {"2018-05-15", "2018-06-18", "2017-07-17", "2018-07-30", "2018-08-04", "2018-08-06", "2018-08-18", "2018-08-23"};
+        String[] fechitap = {"2018-05-16", "2018-06-18", "2017-07-26", "2018-11-15", "2018-11-05", "2018-11-16", "2018-03-12", "2018-12-10"};
         for (int i = 0; i < 8; i++) {
             String Imagen = null;
             if (imagenes[i] != null) {
@@ -281,11 +281,11 @@ public class DBPropuesta {
     public void colaboracionesPrueba() {
         String[] colaboradores = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano", "novick", "sergiop", "marcelot", "sergiop", "chino", "novick", "tonyp", "sergiop", "marcelot", "tonyp", "marcelot", "chino"};
         String[] propuestas = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Un dia de Julio", "Un dia de Julio", "Un dia de Julio"};
-        String[] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-08-05", "2018-08-10", "2018-08-15", "2018-08-13", "2018-08-14", "2018-08-15", "2018-08-17", "2018-08-24"};
+        String[] fechas = {"2018-05-20", "2018-05-24", "2018-05-30", "2018-06-30", "2018-07-01", "2018-07-07", "2018-07-10", "2018-07-15", "2018-08-01", "2018-08-03", "2018-11-25", "2018-11-30", "2018-12-05", "2018-11-08", "2018-11-09", "2018-11-08", "2018-11-09", "2018-08-24"};
         String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30", "01:58"};
         Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000, 120000};
         String[] retornos = {"porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "entrada", "porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "porcentaje", "entrada", "porcentaje", "porcentaje", "entrada", "porcentaje", "porcentaje"};
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 17; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
                 statement.setString(1, fechas[i]);

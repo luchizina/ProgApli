@@ -386,7 +386,7 @@ public class ctrlPropuesta implements IPropuesta {
         this.propuestas = this.dbPropuesta.cargarPropuestas();
         this.SetearPropuestas_A_Proponentes();              //agregado
         this.Cargar_Comentarios_Memoria();                  //agregado  
-       this.Cargar_Favoritos_Memoria();                    //agregado
+        this.Cargar_Favoritos_Memoria();                    //agregado
     }
 
     @Override
@@ -434,8 +434,8 @@ public class ctrlPropuesta implements IPropuesta {
     public DtPropuesta SeleccionarProp(String xTitulo) // error 
     {
         Propuesta pro = this.propuestas.get(xTitulo);
-        if(pro.getEstActual().getEstado().equals(Testado.Publicada) || pro.getEstActual().getEstado().equals(Testado.En_Financiacion)){
-        ActualizarEstado(pro); // agregado TAREA 2
+        if (pro.getEstActual().getEstado().equals(Testado.Publicada) || pro.getEstActual().getEstado().equals(Testado.En_Financiacion)) {
+            ActualizarEstado(pro); // agregado TAREA 2
         }
         DtPropuesta X = new DtPropuesta(pro, pro.getCate());
         this.propuestaconsulta = pro;
@@ -473,7 +473,7 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Colaboracion aux = (Colaboracion) iteradorsito.next();
             if (aux.getProp().getTitulo().equals(this.propuestaconsulta.getTitulo())) {
-                String N = aux.getColab().getNombre() + "(" + aux.getColab().getNick() + ")";
+                String N = aux.getColab().getNombre() + " " + aux.getColab().getApellido() + "(" + aux.getColab().getNick() + ")";
                 Nicks.add(N);
             }
         }
@@ -616,6 +616,19 @@ public class ctrlPropuesta implements IPropuesta {
         this.dbPropuesta.agregarComentario(c);
     }
 
+    public List<DtComentarios> traerComentarios(String prop) {
+        Propuesta propu = this.getPropPorNick(prop);
+        List<DtComentarios> com = new ArrayList<>();
+        for (Comentario aux : propu.getCometarios()) {
+            String col = aux.getColaborador().getNick();
+            String p = aux.getPropuesta().getTitulo();
+            String txt = aux.getTexto();
+            DtComentarios coment = new DtComentarios(col, p, txt);
+            com.add(coment);
+        }
+        return com;
+    }
+
     ;
     
  @Override
@@ -695,9 +708,8 @@ public class ctrlPropuesta implements IPropuesta {
                 esta = true;
             }
 
-            if (aux.getDesc().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
+            if (aux.getDesc().contains(txt) && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
-                esta = true;
             }
 
             esta = false;
@@ -781,7 +793,7 @@ public class ctrlPropuesta implements IPropuesta {
         Date g = null;
         if (x.getEstActual().getEstado().equals(Testado.Publicada)) {
             g = x.sacaFechaPub();
-        } else if (x.getEstActual().getEstado().equals(Testado.En_Financiacion)){
+        } else if (x.getEstActual().getEstado().equals(Testado.En_Financiacion)) {
             g = x.sacaFechaFin();
         }
         Date h = new Date();
@@ -810,7 +822,7 @@ public class ctrlPropuesta implements IPropuesta {
                     cambiarEstadito(x.getTitulo(), "No_Financiada");
                 }
                 int hola = x.MontoA30();
-                if(x.MontoA30() >= x.getMontoTotal()){
+                if (x.MontoA30() >= x.getMontoTotal()) {
                     cambiarEstadito(x.getTitulo(), "Financiada");
                 }
             }
@@ -886,4 +898,16 @@ public class ctrlPropuesta implements IPropuesta {
         return false;
     }
 ;
+    
+    @Override
+    public Lista_DtPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts){
+        Lista_DtPropuestas lista = new Lista_DtPropuestas(dts);
+        return lista;
+    };
+    
+    @Override
+    public Lista_DtString ListString_A_DT(List<String> dts){
+        Lista_DtString lista = new Lista_DtString(dts);
+        return lista;
+    };
 }

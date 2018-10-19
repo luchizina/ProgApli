@@ -25,6 +25,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Luchi
  */
 public interface IPropuesta {
+    public List<DtComentarios> traerComentarios(String prop);
     public void extender(String tit) throws SQLException ;
     public List<DtPropuesta> listaTDL(String txt);
     public boolean yaFavoriteo(Usuario u,String p);
@@ -58,10 +59,12 @@ public interface IPropuesta {
     public abstract void cambiarEstadito(String p, String f);
     public abstract List<DtPropuesta> WEB_listarPropuestas_No_Ingresada();
     public abstract List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x);
-public abstract void Cargar_Favoritos_Memoria();
-public abstract void Cargar_Comentarios_Memoria();
+    public abstract void Cargar_Favoritos_Memoria();
+    public abstract void Cargar_Comentarios_Memoria();
     BufferedImage retornarImagen(final String titulo);
     public abstract boolean Ya_Comento_Propuesta(String c,String p);
     public abstract BufferedImage retornarImagen_Propuesta(final String titu) throws IOException;
- 
+    public abstract Lista_DtPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts);
+    public abstract Lista_DtString ListString_A_DT(List<String> dts);
+    
 }

@@ -320,7 +320,7 @@ public List<DtUsuario> listaNC(String txt) {
 
             }
             String nuevo = this.sha1(pass);
-            Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo, nuevo);
+            Proponente p = new Proponente(Nick, Nombre, Apellido, Correo, fecha, Imagen, direccion, biografia, web, tipo, nuevo, true, null);
             boolean res = this.usu.agregarProponente(p);
             if (res) {
                 this.usuarios.put(Nick, p);
