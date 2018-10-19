@@ -34,7 +34,10 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import Logica.Comentario;
+import Logica.PayPal;
 import Logica.Proponente;
+import Logica.Tarjeta;
+import Logica.Transferencia;
 
 /**
  *
@@ -105,16 +108,15 @@ public class DBPropuesta {
             }
         }
     }
-    
-    public boolean eliminarColaboracion(Colaboracion co) throws SQLException
-    {
+
+    public boolean eliminarColaboracion(Colaboracion co) throws SQLException {
         //        try {
-                PreparedStatement statement = conexion.prepareStatement("DELETE FROM colaboracion WHERE "
-                        + "colaboracion.NickCol = '"+co.getColab().getNick()+"' AND colaboracion.TituloP = '"+co.getProp().getTitulo()+"'");
+        PreparedStatement statement = conexion.prepareStatement("DELETE FROM colaboracion WHERE "
+                + "colaboracion.NickCol = '" + co.getColab().getNick() + "' AND colaboracion.TituloP = '" + co.getProp().getTitulo() + "'");
 //            statement.setString(1, co.getColab().getNick());
 //            statement.setString(2, co.getProp().getTitulo());
-            statement.executeUpdate();
-            statement.close();
+        statement.executeUpdate();
+        statement.close();
         return true;
 //    } catch (SQLException ex) {
 //                Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -243,7 +245,7 @@ public class DBPropuesta {
                 SimpleDateFormat da2 = new SimpleDateFormat("yyyy-MM-dd");
                 Propuesta p = new Propuesta(lugar, titulo, descripcion, fechita, montoActual, fechaPub, url, tipoRetorno, montoTotal, categoria, nickProp, precio);
                 lista.put(titulo, p);
-               
+
             }
             rs.close();
             st.close();
@@ -285,7 +287,7 @@ public class DBPropuesta {
         String[] horas = {"14:30", "17:25", "18:30", "14:25", "18:05", "17:45", "14:35", "09:45", "07:40", "09:25", "16:50", "15:50", "19:30", "04:58", "11:25", "04:48", "15:30", "01:58"};
         Integer[] montos = {50000, 50000, 50000, 200000, 500, 600, 50000, 50000, 200000, 80000, 50000, 120000, 120000, 100000, 200000, 30000, 150000, 120000};
         String[] retornos = {"porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "entrada", "porcentaje", "porcentaje", "porcentaje", "porcentaje", "entrada", "porcentaje", "entrada", "porcentaje", "porcentaje", "entrada", "porcentaje", "porcentaje"};
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < propuestas.length; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(Fecha, Retorno, Monto, NickCol, TituloP, Hora) VALUES (?,?,?,?,?,?)");
                 statement.setString(1, fechas[i]);
@@ -299,6 +301,56 @@ public class DBPropuesta {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+        }
+    }
+
+    public void pagosPayPal() throws SQLException {
+        String[] col = {"tonyp", "marcelot"};
+        String[] prop = {"Un dia de Julio", "Un dia de Julio"};
+        String[] nro = {"4567890123", "5678901234"};
+        for (int i = 0; i < 2; i++) {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO paypal " + "(Nro, TituloProp, Colaborador) VALUES (?,?,?)");
+            statement.setString(1, nro[i]);
+            statement.setString(2, prop[i]);
+            statement.setString(3, col[i]);
+            statement.executeUpdate();
+            statement.close();
+        }
+    }
+
+    public void pagosTarjeta() throws SQLException {
+        String[] col = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano"};
+        String[] prop = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente"};
+        String[] nro = {"1234 5678 1234 2017", "1234 5678 2345 2017", "1234 5678 3456 2017", "1234 5678 4567 2017", "1234 5678 5678 2017", "1234 5678 6789 2017"};
+        Integer[] CVC = {123, 123, 123, 123, 123, 123};
+        String[] tipo = {"Oca", "Oca", "Visa", "Visa", "Master", "Master"};
+        String[] fechas = {"2018-07-30", "2018-08-30", "2018-09-30", "2018-10-30", "2018-11-30", "2018-12-30"};
+        for (int i = 0; i < col.length; i++) {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO tarjeta " + "(Nro, Tipo, Fecha, CVC, Propuesta, Colaborador) VALUES (?,?,?,?,?,?)");
+            statement.setString(1, nro[i]);
+            statement.setString(2, tipo[i]);
+            statement.setString(3, fechas[i]);
+            statement.setInt(4, CVC[i]);
+            statement.setString(5, prop[i]);
+            statement.setString(6, col[i]);
+            statement.executeUpdate();
+            statement.close();
+        }
+    }
+
+    public void pagosTransferencia() throws SQLException {
+        String[] nro = {"1234567890", "2345678901", "3456789012", "4567890123", "5678901234", "6789012345"};
+        String[] banco = {"BROU", "BROU", "Santander", "Santander", "HSBC", "HSBC"};
+        String[] prop = {"Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock"};
+        String[] col = {"novick", "sergiop", "marcelot", "sergiop", "chino", "novick"};
+        for (int i = 0; i < col.length; i++) {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO transferencia " + "(Nro, Banco, Propuesta, Colaborador) VALUES (?,?,?,?)");
+            statement.setString(1, nro[i]);
+            statement.setString(2, banco[i]);
+            statement.setString(3, prop[i]);
+            statement.setString(4, col[i]);
+            statement.executeUpdate();
+            statement.close();;
         }
     }
 
@@ -354,7 +406,7 @@ public class DBPropuesta {
             return false;
         }
     }
-    
+
     // PARTE 2 DE LOS DATOS DE PRUEBA COMENTARIOS , FAVORITOS 
     public void CargarComentarios_BaseDeDatos() {
         String Colaborador[] = {"novick", "robinh", "nicoJ", "marcelot", "Mengano", "sergiop", "novick"};
@@ -373,8 +425,8 @@ public class DBPropuesta {
             }
         }
     }
-    
-    public boolean agregarComentario(Comentario c){
+
+    public boolean agregarComentario(Comentario c) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO comentarios ( Colaborador, Propuesta, Comentario) VALUES (?,?,?)");
             statement.setString(1, c.getColaborador().getNick());
@@ -387,7 +439,7 @@ public class DBPropuesta {
             Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
 
     public void CargarComentarios_Memoria() {
@@ -415,6 +467,75 @@ public class DBPropuesta {
         } catch (SQLException ex) {
             ex.printStackTrace();
             //return null;
+        }
+    }
+
+    public void cargarPaypal() {
+        IPropuesta IP = fab.getICtrlPropuesta();
+        IUsuario iUsu = fab.getICtrlUsuario();
+        PreparedStatement st;
+        try {
+            st = conexion.prepareStatement("SELECT * FROM paypal");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                String prop=rs.getString("TituloProp");
+                String col=rs.getString("Colaborador");
+                String nro=rs.getString("Nro");
+                Propuesta p=IP.getPropPorNick(prop);
+                Colaborador usu = iUsu.traerColaborador(col);
+                Colaboracion c=p.traerSegunCol(usu);
+                PayPal pag = new PayPal(nro, c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cargarTrans(){
+        IPropuesta IP = fab.getICtrlPropuesta();
+        IUsuario iUsu = fab.getICtrlUsuario();
+        PreparedStatement st;
+        try {
+            st = conexion.prepareStatement("SELECT * FROM transferencia");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                String prop=rs.getString("Propuesta");
+                String col=rs.getString("Colaborador");
+                String nro=rs.getString("Nro");
+                String banco=rs.getString("Banco");
+                Propuesta p=IP.getPropPorNick(prop);
+                Colaborador usu = iUsu.traerColaborador(col);
+                Colaboracion c=p.traerSegunCol(usu);
+                Transferencia pag = new Transferencia(nro, c, banco);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cargarTar() throws ParseException{
+        IPropuesta IP = fab.getICtrlPropuesta();
+        IUsuario iUsu = fab.getICtrlUsuario();
+        PreparedStatement st;
+        try {
+            st = conexion.prepareStatement("SELECT * FROM tarjeta");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                String prop=rs.getString("Propuesta");
+                String col=rs.getString("Colaborador");
+                String nro=rs.getString("Nro");
+                String tipo=rs.getString("Tipo");
+                int cvc=rs.getInt("CVC");
+                String fecha=rs.getString("Fecha");
+                Propuesta p=IP.getPropPorNick(prop);
+                Colaborador usu = iUsu.traerColaborador(col);
+                Colaboracion c=p.traerSegunCol(usu);
+                SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+                Date fechita = form.parse(fecha);
+                Tarjeta pag = new Tarjeta(nro, c, tipo, fechita ,cvc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -488,30 +609,30 @@ public class DBPropuesta {
             }
         }
     }
-   
-   public void favProp(String nick, String titulo){
-       try {
-                PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteapp(NickProp, TituloP) VALUES (?,?)");
-                statement.setString(1, nick);
-                statement.setString(2, titulo);
-                statement.executeUpdate();
-                statement.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-   }
-   
-   public void favCol(String nick, String titulo){
-       try {
-                PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteacp(NickColb, TituloProp) VALUES (?,?)");
-                statement.setString(1, nick);
-                statement.setString(2, titulo);
-                statement.executeUpdate();
-                statement.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-   }
+
+    public void favProp(String nick, String titulo) {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteapp(NickProp, TituloP) VALUES (?,?)");
+            statement.setString(1, nick);
+            statement.setString(2, titulo);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void favCol(String nick, String titulo) {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO favoriteacp(NickColb, TituloProp) VALUES (?,?)");
+            statement.setString(1, nick);
+            statement.setString(2, titulo);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void CargarFavoritos_Memoria() {
         try {
@@ -551,9 +672,8 @@ public class DBPropuesta {
             //return null;
         }
     }
-    
-    public void actualizarMonto(Propuesta p, int montito) throws SQLException
-    {
+
+    public void actualizarMonto(Propuesta p, int montito) throws SQLException {
         try (PreparedStatement st = conexion.prepareStatement("UPDATE propuesta SET montoActual=? WHERE Titulo=?")) {
             st.setInt(1, montito);
             st.setString(2, p.getTitulo());
@@ -561,6 +681,6 @@ public class DBPropuesta {
         }
     }
 
-;   
- 
+;
+
 }

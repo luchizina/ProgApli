@@ -8,6 +8,8 @@ import Logica.ICategoria;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
+import Servicios.publicador_Usuarios;
+import Servicios.Publicador_Propuesta;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.text.ParseException;
@@ -49,7 +51,10 @@ public class Principal extends javax.swing.JFrame {
                 //this.IP.cargarEstados();
                 this.IP.EstadosPropuestas(); // testear
                 System.out.println(jp.getComponentCount());
-               
+               publicador_Usuarios p = new publicador_Usuarios();
+               p.publicar();
+               Publicador_Propuesta p_p = new Publicador_Propuesta();
+               p_p.publicar();
     }
 
     @SuppressWarnings("unchecked")

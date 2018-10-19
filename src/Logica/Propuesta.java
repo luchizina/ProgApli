@@ -285,6 +285,19 @@ public class Propuesta {
         this.cate = cate;
     }
 
+    public List<Colaboracion> getColaboraciones() {
+        return colaboraciones;
+    }
+    
+    public Colaboracion traerSegunCol(Colaborador usu){
+        for(Colaboracion colab : colaboraciones){
+            if(colab.getColab().equals(usu)){
+                return colab;
+            }
+        }
+        return null;
+    }
+
     public Estado getEstActual() {
         return estActual;
     }

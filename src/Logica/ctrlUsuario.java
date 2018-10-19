@@ -1058,4 +1058,94 @@ public List<DtUsuario> listaNC(String txt) {
         }
         return null;
     }
+    
+    @Override
+    public dataListUsuarios listaNC2(String txt)
+    {
+        dataListUsuarios datatype = new dataListUsuarios(listaNC(txt));
+        return datatype;
+    }
+    
+    @Override
+    public dataListUsuarios traerSeguidos2(String nick)
+    {
+        dataListUsuarios datatype = new dataListUsuarios(traerSeguidores(nick));
+        return datatype;
+    }
+    
+    @Override
+    public dataListUsuarios traerSeguidores2(String nick)
+    {
+        dataListUsuarios datatype = new dataListUsuarios(traerSeguidores(nick));
+        return datatype;
+    }
+    
+    @Override
+    public dataListProponentes listarProponentes2()
+    {
+        dataListProponentes datatype = new dataListProponentes(listarProponentes());
+        return datatype;
+    }
+    
+    @Override
+    public dataListProponentes listarUsuario2()
+    {
+        dataListProponentes datatype = new dataListProponentes(listarUsuario());
+        return datatype;
+    }
+    
+    @Override
+    public dataListColaboradores listarColaboradores2()
+    {
+        dataListColaboradores datatype = new dataListColaboradores(listarColaboradores());
+        return datatype;
+    }
+    
+    public dataListUsuarios listarUsuarios2()
+    {
+        dataListUsuarios datatype = new dataListUsuarios(listarUsuarios());
+        return datatype;
+    }
+    
+    public dataListColaboraciones datosCol2(Colaborador a)
+    {
+        dataListColaboraciones datatype = new dataListColaboraciones(datosCol(a));
+        return datatype;
+    }
+    
+    public dataListPropuestas traerPropFav2(String nick)
+    {
+        dataListPropuestas datatype = new dataListPropuestas(traerPropFav(nick));
+        return datatype;
+    }
+    
+    public dataListColaboraciones traerPropuestasColaboradas2(String nick)
+    {
+        dataListColaboraciones datatype = new dataListColaboraciones(traerPropuestasColaboradas(nick));
+        return datatype;
+    }
+    
+    public dataListStrings seleccionarColaborante2(String nick)
+    {
+        dataListStrings datatype = new dataListStrings(SeleccionarColaborante(nick));
+        return datatype;
+    }
+    
+    public dataListPropuestas traerMisPropuestasF2(String nick)
+    {
+        dataListPropuestas datatype = new dataListPropuestas(TraerMisPropuestasF(nick));
+        return datatype;
+    }
+    
+    public dataListPropuestas TraerTodasPropuestas2(String nick)
+    {
+        dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestas(nick));
+        return datatype;
+    }
+    
+    public dataListPropuestas TraerTodasPropuestasIng2(String nick)
+    {
+        dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestasIng(nick));
+        return datatype;
+    }
 }

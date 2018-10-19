@@ -65,6 +65,7 @@ public interface IPropuesta {
     public abstract boolean Ya_Comento_Propuesta(String c,String p);
     public abstract BufferedImage retornarImagen_Propuesta(final String titu) throws IOException;
     public abstract Lista_DtPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts);
-    public abstract Lista_DtString ListString_A_DT(List<String> dts);
+    public abstract dataListStrings ListString_A_DT(List<String> dts);
+    public abstract DataList_Comentario ListComentario_A_DT(List<DtComentarios> dts);
     
 }
