@@ -68,4 +68,18 @@ public interface IUsuario {
      public abstract List<DtPropuesta> TraerTodasPropuestas(String nick);
       public abstract List<DtPropuesta> TraerTodasPropuestasIng(String nick);
  public abstract List<DtUsuario> listaNC(String txt);
+ public abstract dataListUsuarios listaNC2(String txt);
+ public abstract dataListUsuarios traerSeguidos2(String nick);
+ public abstract dataListUsuarios traerSeguidores2(String nick);
+ public abstract dataListProponentes listarProponentes2();
+ public abstract dataListProponentes listarUsuario2();
+ public abstract dataListColaboradores listarColaboradores2();
+ public abstract dataListUsuarios listarUsuarios2();
+ public abstract dataListColaboraciones datosCol2(Colaborador a);
+public abstract dataListPropuestas traerPropFav2(String nick); 
+public abstract dataListColaboraciones traerPropuestasColaboradas2(String nick);
+public abstract dataListStrings seleccionarColaborante2(String nick);
+public abstract dataListPropuestas traerMisPropuestasF2(String nick);
+public abstract dataListPropuestas TraerTodasPropuestas2(String nick);
+public abstract dataListPropuestas TraerTodasPropuestasIng2(String nick);
 }
