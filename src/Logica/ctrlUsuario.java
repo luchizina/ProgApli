@@ -1148,4 +1148,36 @@ public List<DtUsuario> listaNC(String txt) {
         dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestasIng(nick));
         return datatype;
     }
+    
+    public void desactivarProp(String nick)
+    {
+        Usuario nuevo = this.usuarios.get(nick);
+        if(nuevo instanceof Proponente)
+        {
+            Date nueva_fecha = new Date();
+            Proponente prop = (Proponente) nuevo;
+            prop.setActivo(false);
+            prop.setFecha_des(nueva_fecha);
+             this.usu.desactivarProponente(nick, nueva_fecha);
+        }
+       
+    }
+    
+    public int contarSeguidores(String nick)
+    {
+        return this.traerSeguidores(nick).size();
+    }
+    
+    public List<DtUsuario> rankingUser()
+    {
+        List<DtUsuario>lista = this.listarUsuarios();
+        Collections.sort(lista, (DtUsuario dt1, DtUsuario dt2) -> this.contarSeguidores(dt2.getNick()) - this.contarSeguidores(dt1.getNick()));
+        return lista;
+    }
+    
+    public dataListUsuarios rankingUser2()
+    {
+        dataListUsuarios datatype = new dataListUsuarios(rankingUser());
+        return datatype;
+    }
 }
