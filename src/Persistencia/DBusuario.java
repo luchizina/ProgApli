@@ -658,4 +658,22 @@ public class DBusuario {
      public String sha1(String pass){
          return this.encripta(pass, "SHA1");
      }
+     
+     public boolean desactivarProponente(String nick, Date fecha)
+     {
+         try{
+             PreparedStatement st = conexion.prepareStatement("UPDATE proponente set activo=?, fecha_desactivado=? WHERE NickP=?");
+             st.setBoolean(1, false);
+             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+             String fechaSt = sdf.format(fecha);
+             st.setString(2, fechaSt);
+             st.setString(3, nick);
+             st.executeUpdate();
+             st.close();
+             return true;
+         } catch(SQLException ex){
+             Logger.getLogger(DBusuario.class.getName()).log(Level.SEVERE, null, ex);
+             return false;
+         }
+     }
 }

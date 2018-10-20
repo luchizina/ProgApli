@@ -82,4 +82,8 @@ public abstract dataListStrings seleccionarColaborante2(String nick);
 public abstract dataListPropuestas traerMisPropuestasF2(String nick);
 public abstract dataListPropuestas TraerTodasPropuestas2(String nick);
 public abstract dataListPropuestas TraerTodasPropuestasIng2(String nick);
+public abstract void desactivarProp(String nick);
+public abstract int contarSeguidores(String nick);
+public List<DtUsuario> rankingUser();
+public dataListUsuarios rankingUser2();
 }

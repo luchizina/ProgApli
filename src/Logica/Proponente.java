@@ -100,5 +100,15 @@ public class Proponente extends Usuario {
     public void setPropuestas(Map<String, Propuesta> propuestas) {
         this.propuestas = propuestas;
     }
+    
+    public void setActivo(boolean activo)
+    {
+        this.activo = activo;
+    }
+    
+    public void setFecha_des(Date nueva_fechita)
+    {
+        this.fecha_des = nueva_fechita;
+    }
 
 }
