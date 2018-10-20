@@ -1060,92 +1060,92 @@ public List<DtUsuario> listaNC(String txt) {
     }
     
     @Override
-    public dataListUsuarios listaNC2(String txt)
+    public DataListUsuarios listaNC2(String txt)
     {
-        dataListUsuarios datatype = new dataListUsuarios(listaNC(txt));
+        DataListUsuarios datatype = new DataListUsuarios(listaNC(txt));
         return datatype;
     }
     
     @Override
-    public dataListUsuarios traerSeguidos2(String nick)
+    public DataListUsuarios traerSeguidos2(String nick)
     {
-        dataListUsuarios datatype = new dataListUsuarios(traerSeguidores(nick));
+        DataListUsuarios datatype = new DataListUsuarios(traerSeguidores(nick));
         return datatype;
     }
     
     @Override
-    public dataListUsuarios traerSeguidores2(String nick)
+    public DataListUsuarios traerSeguidores2(String nick)
     {
-        dataListUsuarios datatype = new dataListUsuarios(traerSeguidores(nick));
+        DataListUsuarios datatype = new DataListUsuarios(traerSeguidores(nick));
         return datatype;
     }
     
     @Override
-    public dataListProponentes listarProponentes2()
+    public DataListProponentes listarProponentes2()
     {
-        dataListProponentes datatype = new dataListProponentes(listarProponentes());
+        DataListProponentes datatype = new DataListProponentes(listarProponentes());
         return datatype;
     }
     
     @Override
-    public dataListProponentes listarUsuario2()
+    public DataListProponentes listarUsuario2()
     {
-        dataListProponentes datatype = new dataListProponentes(listarUsuario());
+        DataListProponentes datatype = new DataListProponentes(listarUsuario());
         return datatype;
     }
     
     @Override
-    public dataListColaboradores listarColaboradores2()
+    public DataListColaboradores listarColaboradores2()
     {
-        dataListColaboradores datatype = new dataListColaboradores(listarColaboradores());
+        DataListColaboradores datatype = new DataListColaboradores(listarColaboradores());
         return datatype;
     }
     
-    public dataListUsuarios listarUsuarios2()
+    public DataListUsuarios listarUsuarios2()
     {
-        dataListUsuarios datatype = new dataListUsuarios(listarUsuarios());
+        DataListUsuarios datatype = new DataListUsuarios(listarUsuarios());
         return datatype;
     }
     
-    public dataListColaboraciones datosCol2(Colaborador a)
+    public DataListColaboraciones datosCol2(Colaborador a)
     {
-        dataListColaboraciones datatype = new dataListColaboraciones(datosCol(a));
+        DataListColaboraciones datatype = new DataListColaboraciones(datosCol(a));
         return datatype;
     }
     
-    public dataListPropuestas traerPropFav2(String nick)
+    public DataListPropuestas traerPropFav2(String nick)
     {
-        dataListPropuestas datatype = new dataListPropuestas(traerPropFav(nick));
+        DataListPropuestas datatype = new DataListPropuestas(traerPropFav(nick));
         return datatype;
     }
     
-    public dataListColaboraciones traerPropuestasColaboradas2(String nick)
+    public DataListColaboraciones traerPropuestasColaboradas2(String nick)
     {
-        dataListColaboraciones datatype = new dataListColaboraciones(traerPropuestasColaboradas(nick));
+        DataListColaboraciones datatype = new DataListColaboraciones(traerPropuestasColaboradas(nick));
         return datatype;
     }
     
-    public dataListStrings seleccionarColaborante2(String nick)
+    public DataListStrings seleccionarColaborante2(String nick)
     {
-        dataListStrings datatype = new dataListStrings(SeleccionarColaborante(nick));
+        DataListStrings datatype = new DataListStrings(SeleccionarColaborante(nick));
         return datatype;
     }
     
-    public dataListPropuestas traerMisPropuestasF2(String nick)
+    public DataListPropuestas traerMisPropuestasF2(String nick)
     {
-        dataListPropuestas datatype = new dataListPropuestas(TraerMisPropuestasF(nick));
+        DataListPropuestas datatype = new DataListPropuestas(TraerMisPropuestasF(nick));
         return datatype;
     }
     
-    public dataListPropuestas TraerTodasPropuestas2(String nick)
+    public DataListPropuestas TraerTodasPropuestas2(String nick)
     {
-        dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestas(nick));
+        DataListPropuestas datatype = new DataListPropuestas(TraerTodasPropuestas(nick));
         return datatype;
     }
     
-    public dataListPropuestas TraerTodasPropuestasIng2(String nick)
+    public DataListPropuestas TraerTodasPropuestasIng2(String nick)
     {
-        dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestasIng(nick));
+        DataListPropuestas datatype = new DataListPropuestas(TraerTodasPropuestasIng(nick));
         return datatype;
     }
     
@@ -1175,9 +1175,16 @@ public List<DtUsuario> listaNC(String txt) {
         return lista;
     }
     
-    public dataListUsuarios rankingUser2()
+    public DataListUsuarios rankingUser2()
     {
-        dataListUsuarios datatype = new dataListUsuarios(rankingUser());
+        DataListUsuarios datatype = new DataListUsuarios(rankingUser());
         return datatype;
+    }
+    
+    public DtProponente traerDtProponente(String nick)
+    {
+        Proponente p = (Proponente) this.usuarios.get(nick);
+        DtProponente xD = new DtProponente(p.getNick(), p.getCorreo(), p.getCont(), p.getNombre(), p.getApellido(), p.getImg(),p.getLinkWeb(), p.getDireccion(), p.getBiografia(), p.getFecha());
+        return xD;
     }
 }

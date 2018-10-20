@@ -10,8 +10,7 @@ import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
 import Logica.ICategoria;
-import Logica.dataListPropuestas;
-import Logica.dataListCategoria;
+import Logica.DataListCategoria;
 import java.sql.SQLException;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -42,7 +41,7 @@ public class Publicador_Categoria {
     
     // Listar propuestas
     @WebMethod
-    public dataListCategoria Listar_Categorias_Web()throws SQLException {
+    public DataListCategoria Listar_Categorias_Web()throws SQLException {
            return IC.ListCategoria_A_DT(IC.listarCategorias());
     } 
     

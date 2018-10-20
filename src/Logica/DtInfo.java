@@ -5,10 +5,14 @@
  */
 package Logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author nambr
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtInfo {
     boolean estLogin;
     String mensaje;

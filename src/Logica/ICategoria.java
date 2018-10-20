@@ -24,5 +24,5 @@ public abstract void cargaCatPrueb();
 public abstract void cargar();
 public abstract DefaultTreeModel construirArbolito(List<DtCategoria> catego, DefaultMutableTreeNode raiz);
 public abstract DefaultTreeModel imprimirArbol(DtCategoria catego, DefaultMutableTreeNode raiz);
-public abstract dataListCategoria ListCategoria_A_DT(List<DtCategoria> dts);
+public abstract DataListCategoria ListCategoria_A_DT(List<DtCategoria> dts);
 }

@@ -5,25 +5,20 @@
  */
 package Servicios;
 
-import Logica.Colaborador;
 import Logica.DataList_Comentario;
 import Logica.DtPropuesta;
 import Logica.Estado;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
-import Logica.Lista_DtPropuestas;
+import Logica.DataListPropuestas;
+import Logica.DataListStrings;
 import Logica.Propuesta;
-import Logica.dataListPropuestas;
-import Logica.dataListStrings;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
@@ -50,12 +45,12 @@ public class Publicador_Propuesta {
     
     // Listar propuestas
     @WebMethod
-    public dataListPropuestas Listar_Propuestas_Web()throws SQLException {
+    public DataListPropuestas Listar_Propuestas_Web()throws SQLException {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_No_Ingresada());
     } 
     
     @WebMethod
-    public dataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
+    public DataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_X_Categoria(nombre_categoria));
     }
     
@@ -65,7 +60,7 @@ public class Publicador_Propuesta {
     }
     
     @WebMethod
-    public dataListStrings Colaboradores_De_Propuesta( String nombre_p)  throws SQLException {
+    public DataListStrings Colaboradores_De_Propuesta( String nombre_p)  throws SQLException {
             return IP.ListString_A_DT(IP.ColaborantesDePro());
     }
     @WebMethod
@@ -105,7 +100,7 @@ public class Publicador_Propuesta {
         IP.cambiarEstadito(propuesta, estado);
     }
     @WebMethod
-    public dataListPropuestas Buscardor_Web_ListaTDL(String texto){
+    public DataListPropuestas Buscardor_Web_ListaTDL(String texto){
         return IP.ListPropuesta_A_DT(IP.listaTDL(texto));
     }
     @WebMethod
@@ -119,7 +114,7 @@ public class Publicador_Propuesta {
         IP.EstadosPropuestas();
     }
     @WebMethod
-    public void Exterder(String nombre_propuesta) throws IOException, SQLException{
+    public void extender(String nombre_propuesta) throws IOException, SQLException{
         IP.extender(nombre_propuesta); 
     }
     @WebMethod
@@ -150,5 +145,9 @@ public class Publicador_Propuesta {
     @WebMethod
     public void EstadosPropuestas() {
         IP.EstadosPropuestas();
+    }
+    @WebMethod
+    public Propuesta getPropPorNick(String nick) {
+        return IP.getPropPorNick(nick);
     }
 }
