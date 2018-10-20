@@ -45,7 +45,7 @@ public class Publicador_Propuesta {
     
     //@WebMethod(exclude = true)
     public void publicar() {
-            endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio", this);
+            endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio2", this);
     }  
     
     // Listar propuestas
@@ -68,66 +68,87 @@ public class Publicador_Propuesta {
     public dataListStrings Colaboradores_De_Propuesta( String nombre_p)  throws SQLException {
             return IP.ListString_A_DT(IP.ColaborantesDePro());
     }
-    
+    @WebMethod
     public boolean Ya_Comento( String nombre_propuesta, String nombre_colaborador)  throws SQLException {
             return IP.Ya_Comento_Propuesta(nombre_colaborador, nombre_propuesta);
     }
-    
+    @WebMethod
     public boolean Ya_Favoritio( String nombre_propuesta, String nombre_colaborador)  throws SQLException {
             return IP.yaFavoriteo(IU.traerUsuario(nombre_colaborador), nombre_propuesta);
     }
-    
+    @WebMethod
     public boolean Existe_Propuesta( String nombre_propuesta)  throws SQLException {
             return IP.existeTitulo(nombre_propuesta);
     }
-    
+    @WebMethod
     public DtPropuesta Traer_Propuesta( String nombre_p)  throws SQLException {
             return IP.traerPropuesta(nombre_p);
     }
-    
+    @WebMethod
     public void Alta_Colaboracion( String titulo, String nick, String monto, String tipoR)  throws SQLException {
             IP.altaColaboracion(titulo, nick, monto, tipoR);
     }
-    
+    @WebMethod
     public BufferedImage Retornar_Imagen_Propuesta(final String titulo) throws IOException{
         return IP.retornarImagen_Propuesta(titulo);
     }
-    
+    @WebMethod
     public void Configurar_Parametros(String imagen){
         IP.configurarParametros(imagen);
     }
-    
+    @WebMethod
     public boolean Agregar_Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img, String nickP, String hora, String Lugar){
         return IP.AgregarPropuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, estActual, img, nickP, hora, Lugar);
     }
-    
+    @WebMethod
     public void Cambiar_Estado(String propuesta, String estado){
         IP.cambiarEstadito(propuesta, estado);
     }
-    
+    @WebMethod
     public dataListPropuestas Buscardor_Web_ListaTDL(String texto){
         return IP.ListPropuesta_A_DT(IP.listaTDL(texto));
     }
-    
+    @WebMethod
     public void Agregar_Comentario(String nick, String titulo, String texto){
         IP.agregarComentario(IU.traerColaborador(nick), IP.getPropPorNick(titulo), texto);
     }
-    
+    @WebMethod
     public void Cargar_Pro_Col_Est(){ 
         IP.cargarPropuestas();
         IP.cargarColaboraciones();
         IP.EstadosPropuestas();
     }
-    
+    @WebMethod
     public void Exterder(String nombre_propuesta) throws IOException, SQLException{
         IP.extender(nombre_propuesta); 
     }
-    
+    @WebMethod
     public void Agregar_Favorito(String nick,String prop){
         IP.agregarFavorito(IU.traerUsuario(nick), IP.getPropPorNick(prop));
     }
-
+@WebMethod
     public DataList_Comentario Traer_Comentarios(String titulo_propuesta){
         return IP.ListComentario_A_DT(IP.traerComentarios(titulo_propuesta));
+    }
+    
+    @WebMethod
+    public void cargarPropuestas() {
+        IP.cargarPropuestas();
+    }
+    @WebMethod
+    public void Cargar_Favoritos_Memoria() {
+        IP.Cargar_Favoritos_Memoria();
+    }
+    @WebMethod
+    public void cargarColaboraciones() {
+        IP.cargarColaboraciones();
+    }
+    @WebMethod
+    public void actualizarMontos() {
+        IP.actualizarMontos();
+    }
+    @WebMethod
+    public void EstadosPropuestas() {
+        IP.EstadosPropuestas();
     }
 }

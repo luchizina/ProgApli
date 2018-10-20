@@ -19,4 +19,9 @@ public class dataListPropuestas {
     {
         this.listita = listita;
     }
+    
+    List<DtPropuesta> getListita()
+    {
+        return this.listita;
+    }
 }

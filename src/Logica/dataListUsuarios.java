@@ -20,4 +20,9 @@ public class dataListUsuarios {
     {
         this.listita = listita;
     }
+    
+    List<DtUsuario> getListita()
+    {
+        return this.listita;
+    }
 }

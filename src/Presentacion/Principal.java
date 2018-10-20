@@ -8,6 +8,7 @@ import Logica.ICategoria;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
+import Servicios.Publicador_Categoria;
 import Servicios.publicador_Usuarios;
 import Servicios.Publicador_Propuesta;
 import java.awt.BorderLayout;
@@ -55,6 +56,8 @@ public class Principal extends javax.swing.JFrame {
                p.publicar();
                Publicador_Propuesta p_p = new Publicador_Propuesta();
                p_p.publicar();
+               Publicador_Categoria p_c = new Publicador_Categoria();
+               p_c.publicar();
     }
 
     @SuppressWarnings("unchecked")

@@ -19,4 +19,9 @@ public class dataListColaboradores {
     {
         this.listita = listita;
     }
+    
+    List<DtColaborador> getListita()
+    {
+        return this.listita;
+    }
 }

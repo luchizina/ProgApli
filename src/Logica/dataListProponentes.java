@@ -19,4 +19,9 @@ public class dataListProponentes {
     {
         this.listita = listita;
     }
+    
+    List<DtProponente> getListita()
+    {
+        return this.listita;
+    }
 }

@@ -19,4 +19,9 @@ public class dataListStrings {
     {
         this.listita = listita;
     }
+    
+    List<String> getListita()
+    {
+        return this.listita;
+    }
 }

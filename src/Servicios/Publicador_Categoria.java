@@ -5,11 +5,12 @@
  */
 package Servicios;
 
+import Logica.DtCategoria;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
 import Logica.ICategoria;
-import Logica.Lista_DtPropuestas;
+import Logica.dataListPropuestas;
 import Logica.dataListCategoria;
 import java.sql.SQLException;
 import javax.jws.WebMethod;
@@ -36,7 +37,7 @@ public class Publicador_Categoria {
     
     //@WebMethod(exclude = true)
     public void publicar() {
-            endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio", this);
+            endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio3", this);
     }  
     
     // Listar propuestas
@@ -49,5 +50,30 @@ public class Publicador_Categoria {
     public boolean Existe_Categoria(String Nombre_categoria)throws SQLException {
            return IC.existecat(Nombre_categoria);
     } 
+    @WebMethod
+    public void cargar(){
+        IC.cargar();
+    }
+    @WebMethod
+    public void cargarCategorias() {
+        IC.cargarCategorias();
+    }
+    @WebMethod
+    public void cargaCatPrueb() {
+        IC.cargaCatPrueb();
+    }
+    @WebMethod
+    public boolean ingresarCat(DtCategoria datos) {
+        return IC.ingresarCat(datos);
+    }
+    @WebMethod
+    public boolean existecat(String nom){
+        return IC.existecat(nom);
+    }
+        
+    public int traerProfu(String nombre){
+        return IC.traerProfu(nombre);
+    }
+    
     
 }
