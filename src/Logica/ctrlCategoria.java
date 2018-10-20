@@ -151,5 +151,9 @@ public class ctrlCategoria implements ICategoria {
         return p;
     }
 
-
+    @Override
+    public dataListCategoria ListCategoria_A_DT(List<DtCategoria> dts){
+        dataListCategoria lista = new dataListCategoria(dts);
+        return lista;
+    };
 }
