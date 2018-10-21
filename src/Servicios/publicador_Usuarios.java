@@ -266,4 +266,9 @@ public class publicador_Usuarios {
      public Usuario traerUsuario(String nick) {
          return xD.traerUsuario(nick);
      }
+     @WebMethod
+     public DataListUsuarios rankingUser()
+     {
+         return xD.rankingUser2();
+     }
 }
