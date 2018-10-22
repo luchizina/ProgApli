@@ -6,15 +6,19 @@
 package Logica;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author matheo
  */
+ 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataList_Comentario {
      private List<DtComentarios> comentario;
     
-    public DataList_Comentario(List<DtComentarios> comentarios){
+    DataList_Comentario(List<DtComentarios> comentarios){
         this.comentario=comentarios;
     }  
     

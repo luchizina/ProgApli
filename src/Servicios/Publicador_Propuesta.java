@@ -13,6 +13,7 @@ import Logica.IPropuesta;
 import Logica.IUsuario;
 import Logica.DataListPropuestas;
 import Logica.DataListStrings;
+import Logica.DtComentarios;
 import Logica.Propuesta;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -45,42 +46,42 @@ public class Publicador_Propuesta {
     
     // Listar propuestas
     @WebMethod
-    public DataListPropuestas Listar_Propuestas_Web()throws SQLException {
+    public DataListPropuestas Listar_Propuestas_Web(){
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_No_Ingresada());
     } 
     
     @WebMethod
-    public DataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
+    public DataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria){
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_X_Categoria(nombre_categoria));
     }
     
     @WebMethod
-    public DtPropuesta Selccionar_Propuesta( String nombre_p)  throws SQLException {
+    public DtPropuesta Selccionar_Propuesta( String nombre_p)  {
             return IP.SeleccionarProp(nombre_p);
     }
     
     @WebMethod
-    public DataListStrings Colaboradores_De_Propuesta( String nombre_p)  throws SQLException {
+    public DataListStrings Colaboradores_De_Propuesta() {
             return IP.ListString_A_DT(IP.ColaborantesDePro());
     }
     @WebMethod
-    public boolean Ya_Comento( String nombre_propuesta, String nombre_colaborador)  throws SQLException {
+    public boolean Ya_Comento( String nombre_propuesta, String nombre_colaborador){
             return IP.Ya_Comento_Propuesta(nombre_colaborador, nombre_propuesta);
     }
     @WebMethod
-    public boolean Ya_Favoritio( String nombre_propuesta, String nombre_colaborador)  throws SQLException {
+    public boolean Ya_Favoritio( String nombre_propuesta, String nombre_colaborador){
             return IP.yaFavoriteo(IU.traerUsuario(nombre_colaborador), nombre_propuesta);
     }
     @WebMethod
-    public boolean Existe_Propuesta( String nombre_propuesta)  throws SQLException {
+    public boolean Existe_Propuesta( String nombre_propuesta){
             return IP.existeTitulo(nombre_propuesta);
     }
     @WebMethod
-    public DtPropuesta Traer_Propuesta( String nombre_p)  throws SQLException {
+    public DtPropuesta Traer_Propuesta( String nombre_p) {
             return IP.traerPropuesta(nombre_p);
     }
     @WebMethod
-    public void Alta_Colaboracion( String titulo, String nick, String monto, String tipoR)  throws SQLException {
+    public void Alta_Colaboracion( String titulo, String nick, String monto, String tipoR){
             IP.altaColaboracion(titulo, nick, monto, tipoR);
     }
     @WebMethod
