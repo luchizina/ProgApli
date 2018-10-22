@@ -152,8 +152,8 @@ public class ctrlCategoria implements ICategoria {
     }
 
     @Override
-    public DataListCategoria ListCategoria_A_DT(List<DtCategoria> dts){
-        DataListCategoria lista = new DataListCategoria(dts);
+    public dataListCategoria ListCategoria_A_DT(List<DtCategoria> dts){
+        dataListCategoria lista = new dataListCategoria(dts);
         return lista;
     };
 }

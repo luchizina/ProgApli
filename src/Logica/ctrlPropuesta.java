@@ -920,14 +920,14 @@ public class ctrlPropuesta implements IPropuesta {
 ;
     
     @Override
-    public DataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts){
-        DataListPropuestas lista = new DataListPropuestas(dts);
+    public dataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts){
+        dataListPropuestas lista = new dataListPropuestas(dts);
         return lista;
     };
     
     @Override
-    public DataListStrings ListString_A_DT(List<String> dts){
-        DataListStrings lista = new DataListStrings(dts);
+    public dataListStrings ListString_A_DT(List<String> dts){
+        dataListStrings lista = new dataListStrings(dts);
         return lista;
     };
     

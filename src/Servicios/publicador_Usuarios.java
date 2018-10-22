@@ -12,12 +12,12 @@ import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IUsuario;
 import Logica.Proponente;
-import Logica.DataListColaboraciones;
-import Logica.DataListColaboradores;
-import Logica.DataListProponentes;
-import Logica.DataListPropuestas;
-import Logica.DataListStrings;
-import Logica.DataListUsuarios;
+import Logica.dataListColaboraciones;
+import Logica.dataListColaboradores;
+import Logica.dataListProponentes;
+import Logica.dataListPropuestas;
+import Logica.dataListStrings;
+import Logica.dataListUsuarios;
 import Logica.DtProponente;
 import Logica.Usuario;
 import java.awt.image.BufferedImage;
@@ -48,7 +48,7 @@ public class publicador_Usuarios {
         return lol;
     }
     @WebMethod
-    public DataListUsuarios listaNC(String txt)
+    public dataListUsuarios listaNC(String txt)
     {
         return xD.listaNC2(txt);
     }
@@ -78,12 +78,12 @@ public class publicador_Usuarios {
         return xD.dejarDeSeguir();
     }
     @WebMethod
-    public DataListUsuarios traerSeguidos(String nick)
+    public dataListUsuarios traerSeguidos(String nick)
     {
         return xD.traerSeguidos2(nick);
     }
     @WebMethod
-    public DataListUsuarios traerSeguidores(String nick)
+    public dataListUsuarios traerSeguidores(String nick)
     {
         return xD.traerSeguidores2(nick);
     }
@@ -99,7 +99,7 @@ public class publicador_Usuarios {
         xD.seleccionarUsuSeg(nick);
     }
     @WebMethod
-    public DataListProponentes listarProponentes()
+    public dataListProponentes listarProponentes()
     {
         return xD.listarProponentes2();
     }
@@ -133,22 +133,22 @@ public class publicador_Usuarios {
         xD.cargarPropPrueba();
     }
     @WebMethod
-    public DataListProponentes listarUsuario()
+    public dataListProponentes listarUsuario()
     {
         return xD.listarUsuario2();
     }
     @WebMethod
-    public DataListColaboradores listarColaboradores()
+    public dataListColaboradores listarColaboradores()
     {
        return xD.listarColaboradores2();
     }
     @WebMethod
-    public DataListUsuarios listarUsuarios()
+    public dataListUsuarios listarUsuarios()
     {
         return xD.listarUsuarios2();
     }
     @WebMethod
-    public DataListColaboraciones datosCol(Colaborador a)
+    public dataListColaboraciones datosCol(Colaborador a)
     {
         return xD.datosCol2(a);
     }
@@ -168,12 +168,12 @@ public class publicador_Usuarios {
          return xD.traerDtUsuario(nick);
      }
      @WebMethod
-     public DataListPropuestas traerPropFav(String nick)
+     public dataListPropuestas traerPropFav(String nick)
      {
          return xD.traerPropFav2(nick);
      }
      @WebMethod
-     public DataListColaboraciones traerPropuestasColaboradas(String nick)
+     public dataListColaboraciones traerPropuestasColaboradas(String nick)
     {
         return xD.traerPropuestasColaboradas2(nick);
     }
@@ -203,7 +203,7 @@ public class publicador_Usuarios {
          return xD.validaWeb(algo);
      }
      @WebMethod
-     public DataListStrings seleccionarColaborante(String nick)
+     public dataListStrings seleccionarColaborante(String nick)
      {
          return xD.seleccionarColaborante2(nick);
      }
@@ -228,17 +228,17 @@ public class publicador_Usuarios {
          xD.configurarParametros(carpetaImagenes);
      }
      @WebMethod
-     public DataListPropuestas traerMisPropuestasF(String nick)
+     public dataListPropuestas traerMisPropuestasF(String nick)
      {
          return xD.traerMisPropuestasF2(nick);
      }
      @WebMethod
-     public DataListPropuestas TraerTodasPropuestas(String nick)
+     public dataListPropuestas TraerTodasPropuestas(String nick)
      {
          return xD.TraerTodasPropuestas2(nick);
      }
      @WebMethod
-     public DataListPropuestas TraerTodasPropuestasIng(String nick)
+     public dataListPropuestas TraerTodasPropuestasIng(String nick)
      {
          return xD.TraerTodasPropuestasIng2(nick);
      }
@@ -267,7 +267,7 @@ public class publicador_Usuarios {
          return xD.traerUsuario(nick);
      }
      @WebMethod
-     public DataListUsuarios rankingUser2()
+     public dataListUsuarios rankingUser2()
     {
         return xD.rankingUser2();
     }

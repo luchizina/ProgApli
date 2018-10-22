@@ -5,24 +5,25 @@
  */
 package Logica;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
- * @author Aeliner
+ * @author Nazareno
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class dataListUsuarios {
-    private List<DtUsuario> listita;
-    
-    
-    dataListUsuarios(List<DtUsuario> listita)
+ 
+     private List<DtUsuario> listita;
+     
+     dataListUsuarios(List<DtUsuario> listita)
     {
         this.listita = listita;
     }
     
-    List<DtUsuario> getListita()
-    {
+    public List<DtUsuario> getListita(){
         return this.listita;
-    }
+    };
 }

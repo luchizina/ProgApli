@@ -11,8 +11,8 @@ import Logica.Estado;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
-import Logica.DataListPropuestas;
-import Logica.DataListStrings;
+import Logica.dataListPropuestas;
+import Logica.dataListStrings;
 import Logica.Propuesta;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -45,12 +45,12 @@ public class Publicador_Propuesta {
     
     // Listar propuestas
     @WebMethod
-    public DataListPropuestas Listar_Propuestas_Web()throws SQLException {
+    public dataListPropuestas Listar_Propuestas_Web()throws SQLException {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_No_Ingresada());
     } 
     
     @WebMethod
-    public DataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
+    public dataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_X_Categoria(nombre_categoria));
     }
     
@@ -60,7 +60,7 @@ public class Publicador_Propuesta {
     }
     
     @WebMethod
-    public DataListStrings Colaboradores_De_Propuesta( String nombre_p)  throws SQLException {
+    public dataListStrings Colaboradores_De_Propuesta( String nombre_p)  throws SQLException {
             return IP.ListString_A_DT(IP.ColaborantesDePro());
     }
     @WebMethod
@@ -100,7 +100,7 @@ public class Publicador_Propuesta {
         IP.cambiarEstadito(propuesta, estado);
     }
     @WebMethod
-    public DataListPropuestas Buscardor_Web_ListaTDL(String texto){
+    public dataListPropuestas Buscardor_Web_ListaTDL(String texto){
         return IP.ListPropuesta_A_DT(IP.listaTDL(texto));
     }
     @WebMethod
