@@ -24,14 +24,18 @@ import Logica.dataListUsuarios;
 import Logica.DtProponente;
 import Logica.Usuario;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Date;
+import java.util.Properties;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import config.*;
 
 /**
  *
@@ -42,9 +46,14 @@ import javax.xml.ws.Endpoint;
 public class publicador_Usuarios {
     private Endpoint endpoint = null;
     IUsuario xD = Fabrica.getInstance().getICtrlUsuario();
+    
+    
+    
     @WebMethod
     public void publicar() {
-            endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio", this);
+      Properties p= Utils.getPropiedades();
+            endpoint = Endpoint.publish(p.getProperty("servicio1"), this);
+            
     }
     @WebMethod
     public boolean altaColaborador(String Nick,String Correo, String Nombre,String Apellido,Date fecha, String Imagen, String tipo, String pass){

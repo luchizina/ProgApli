@@ -16,6 +16,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import config.Utils;
+import java.util.Properties;
 
 /**
  *
@@ -36,7 +38,9 @@ public class Publicador_Categoria {
     
     //@WebMethod(exclude = true)
     public void publicar() {
-            endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio3", this);
+        Properties p= Utils.getPropiedades();
+        
+            endpoint = Endpoint.publish(p.getProperty("servicio3"), this);
     }  
     
     // Listar propuestas
