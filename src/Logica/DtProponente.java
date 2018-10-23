@@ -8,82 +8,61 @@ package Logica;
 
 import Logica.*;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author Luchi
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtProponente  extends DtUsuario  {
     private
-            String nick;
-            String img;
+            
             String biografia;
             String linkWeb;
             String direccion;
-            String nombre;
-            String apellido;
-            String correo;
-            Date fecha;
-            String pass;
 
     public DtProponente(String nick, String img, String biografia, String linkWeb, String direccion, String nombre, String apellido, String correo) {
-        this.nick = nick;
-        this.img = img;
+        super (nick, correo, nombre, apellido, img);
         this.biografia = biografia;
         this.linkWeb = linkWeb;
         this.direccion = direccion;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.correo = correo;
+      
 
     }
-    private DataImagen imagen;
+    
+    
     public DtProponente(String nick,  final DataImagen img, String pass) {
-        this.nick = nick;
-        this.imagen = img;
-        this.pass=pass;
+        super (nick,img,pass);
     }
     
     
 
-    public DataImagen getImagen() {
-        return imagen;
-    }
-
-    public DtProponente(String nick) {
-        this.nick = nick;
-    }
     
-    public DtProponente(String nick, String correo, String pass, String nombre, String apellido, String img, String linkWeb, String direccion, String biografia, Date fecha ){
+
+  
+    
+    public DtProponente(String nick, String correo, String pass, String nombre, String apellido, String img, String linkWeb, String direccion, String biografia, Date fecha){
+        super (nick,correo, pass,nombre,apellido,img,fecha);
         
-        this.nick=nick;
-        this.correo=correo;
-        this.pass=pass;
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.img=img;
         this.linkWeb=linkWeb;
         this.direccion=direccion;
         this.biografia=biografia;
-        this.fecha=fecha;
+        
     }
     
 
-    public String getNick() {
-        return nick;
-    }
+//    public String getNick() {
+//        return nick;
+//    }
+//
+//    public void setNick(String nick) {
+//        this.nick = nick;
+//    }
 
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
+    
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 
     public String getBiografia() {
         return biografia;
@@ -113,37 +92,37 @@ public class DtProponente  extends DtUsuario  {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+//    public void setNombre(String nombre) {
+//        this.nombre = nombre;
+//    }
+//
+//    public String getApellido() {
+//        return apellido;
+//    }
+//
+//    public void setApellido(String apellido) {
+//        this.apellido = apellido;
+//    }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    
-    public String getPass(){
-        return pass;
-    }
+//    public String getCorreo() {
+//        return correo;
+//    }
+//
+//    public void setCorreo(String correo) {
+//        this.correo = correo;
+//    }
+//
+//    public Date getFecha() {
+//        return fecha;
+//    }
+//
+//    public void setFecha(Date fecha) {
+//        this.fecha = fecha;
+//    }
+//    
+//    public String getPass(){
+//        return pass;
+//    }
     
     
             

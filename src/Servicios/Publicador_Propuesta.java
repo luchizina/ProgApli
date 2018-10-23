@@ -5,15 +5,15 @@
  */
 package Servicios;
 
+import Logica.DataImagen;
 import Logica.DataList_Comentario;
 import Logica.DtPropuesta;
 import Logica.Estado;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
-import Logica.DataListPropuestas;
-import Logica.DataListStrings;
-import Logica.DtComentarios;
+import Logica.dataListPropuestas;
+import Logica.dataListStrings;
 import Logica.Propuesta;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -46,12 +46,12 @@ public class Publicador_Propuesta {
     
     // Listar propuestas
     @WebMethod
-    public DataListPropuestas Listar_Propuestas_Web(){
+    public dataListPropuestas Listar_Propuestas_Web()throws SQLException {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_No_Ingresada());
     } 
     
     @WebMethod
-    public DataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria){
+    public dataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_X_Categoria(nombre_categoria));
     }
     
@@ -61,15 +61,15 @@ public class Publicador_Propuesta {
     }
     
     @WebMethod
-    public DataListStrings Colaboradores_De_Propuesta() {
+    public dataListStrings Colaboradores_De_Propuesta()  throws SQLException {
             return IP.ListString_A_DT(IP.ColaborantesDePro());
     }
     @WebMethod
-    public boolean Ya_Comento( String nombre_propuesta, String nombre_colaborador){
+    public boolean Ya_Comento(String nombre_colaborador, String nombre_propuesta){
             return IP.Ya_Comento_Propuesta(nombre_colaborador, nombre_propuesta);
     }
     @WebMethod
-    public boolean Ya_Favoritio( String nombre_propuesta, String nombre_colaborador){
+    public boolean Ya_Favoritio(String nombre_colaborador, String nombre_propuesta ){
             return IP.yaFavoriteo(IU.traerUsuario(nombre_colaborador), nombre_propuesta);
     }
     @WebMethod
@@ -101,7 +101,7 @@ public class Publicador_Propuesta {
         IP.cambiarEstadito(propuesta, estado);
     }
     @WebMethod
-    public DataListPropuestas Buscardor_Web_ListaTDL(String texto){
+    public dataListPropuestas Buscardor_Web_ListaTDL(String texto){
         return IP.ListPropuesta_A_DT(IP.listaTDL(texto));
     }
     @WebMethod
@@ -150,5 +150,17 @@ public class Publicador_Propuesta {
     @WebMethod
     public Propuesta getPropPorNick(String nick) {
         return IP.getPropPorNick(nick);
+    }
+    
+    public String AgregarImagen_Propuesta(String titulo_propuesta, DataImagen imagen){
+        return IP.agregarImagen(titulo_propuesta, imagen);
+    }
+    
+    public DataImagen Crear_DataImagen_Publicador(final byte[] stream, final String nombreArchivo, final String extensionArchivo){  
+        return IP.Crear_DataImagen_Propuesta(stream, nombreArchivo, extensionArchivo);
+    }
+    
+    public Estado Crear_Estado(){
+        return IP.Crear_Esatado_Ingresada();
     }
 }

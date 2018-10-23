@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
  *
  * @author matheo
  */
- 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DataList_Comentario {
      private List<DtComentarios> comentario;
