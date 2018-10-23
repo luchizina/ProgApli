@@ -53,7 +53,7 @@ public class publicador_Usuarios {
     public void publicar() {
       Properties p= Utils.getPropiedades();
       String servicio1=p.getProperty("http")+p.getProperty("ipServices")+p.getProperty("puertoServ")+p.getProperty("serv1");
-            endpoint = Endpoint.publish(p.getProperty(servicio1), this);
+            endpoint = Endpoint.publish(servicio1, this);
             
     }
     @WebMethod
