@@ -6,22 +6,26 @@
 package Servicios;
 
 import Logica.Colaborador;
+import Logica.DataImagen;
 import Logica.DtColaboracion;
+import Logica.DtPropuesta;
 import Logica.DtInfo;
+import Logica.DtPath;
 import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IUsuario;
 import Logica.Proponente;
-import Logica.DataListColaboraciones;
-import Logica.DataListColaboradores;
-import Logica.DataListProponentes;
-import Logica.DataListPropuestas;
-import Logica.DataListStrings;
-import Logica.DataListUsuarios;
+import Logica.dataListColaboraciones;
+import Logica.dataListColaboradores;
+import Logica.dataListProponentes;
+import Logica.dataListPropuestas;
+import Logica.dataListStrings;
+import Logica.dataListUsuarios;
 import Logica.DtProponente;
 import Logica.Usuario;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Date;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -43,12 +47,12 @@ public class publicador_Usuarios {
             endpoint = Endpoint.publish("http://127.0.0.1:8280/servicio", this);
     }
     @WebMethod
-    public boolean altaColaborador(@WebParam(name = "Nick") String Nick, @WebParam(name = "Correo ")String Correo, @WebParam(name = "Nombre") String Nombre, @WebParam(name = "Apellido") String Apellido, @WebParam(name = "fecha") Date fecha, @WebParam(name = "Imagen") String Imagen,@WebParam(name = "tipo") String tipo,@WebParam(name = "pass") String pass){
+    public boolean altaColaborador(String Nick,String Correo, String Nombre,String Apellido,Date fecha, String Imagen, String tipo, String pass){
         boolean lol = xD.altaColaborador(Nick, Correo, Nombre, Apellido, fecha, Imagen, tipo, pass);
         return lol;
     }
     @WebMethod
-    public DataListUsuarios listaNC(String txt)
+    public dataListUsuarios listaNC(String txt)
     {
         return xD.listaNC2(txt);
     }
@@ -78,12 +82,12 @@ public class publicador_Usuarios {
         return xD.dejarDeSeguir();
     }
     @WebMethod
-    public DataListUsuarios traerSeguidos(String nick)
+    public dataListUsuarios traerSeguidos(String nick)
     {
         return xD.traerSeguidos2(nick);
     }
     @WebMethod
-    public DataListUsuarios traerSeguidores(String nick)
+    public dataListUsuarios traerSeguidores(String nick)
     {
         return xD.traerSeguidores2(nick);
     }
@@ -99,7 +103,7 @@ public class publicador_Usuarios {
         xD.seleccionarUsuSeg(nick);
     }
     @WebMethod
-    public DataListProponentes listarProponentes()
+    public dataListProponentes listarProponentes()
     {
         return xD.listarProponentes2();
     }
@@ -133,22 +137,22 @@ public class publicador_Usuarios {
         xD.cargarPropPrueba();
     }
     @WebMethod
-    public DataListProponentes listarUsuario()
+    public dataListProponentes listarUsuario()
     {
         return xD.listarUsuario2();
     }
     @WebMethod
-    public DataListColaboradores listarColaboradores()
+    public dataListColaboradores listarColaboradores()
     {
        return xD.listarColaboradores2();
     }
     @WebMethod
-    public DataListUsuarios listarUsuarios()
+    public dataListUsuarios listarUsuarios()
     {
         return xD.listarUsuarios2();
     }
     @WebMethod
-    public DataListColaboraciones datosCol(Colaborador a)
+    public dataListColaboraciones datosCol(Colaborador a)
     {
         return xD.datosCol2(a);
     }
@@ -168,12 +172,12 @@ public class publicador_Usuarios {
          return xD.traerDtUsuario(nick);
      }
      @WebMethod
-     public DataListPropuestas traerPropFav(String nick)
+     public dataListPropuestas traerPropFav(String nick)
      {
          return xD.traerPropFav2(nick);
      }
      @WebMethod
-     public DataListColaboraciones traerPropuestasColaboradas(String nick)
+     public dataListColaboraciones traerPropuestasColaboradas(String nick)
     {
         return xD.traerPropuestasColaboradas2(nick);
     }
@@ -203,7 +207,7 @@ public class publicador_Usuarios {
          return xD.validaWeb(algo);
      }
      @WebMethod
-     public DataListStrings seleccionarColaborante(String nick)
+     public dataListStrings seleccionarColaborante(String nick)
      {
          return xD.seleccionarColaborante2(nick);
      }
@@ -228,25 +232,25 @@ public class publicador_Usuarios {
          xD.configurarParametros(carpetaImagenes);
      }
      @WebMethod
-     public DataListPropuestas traerMisPropuestasF(String nick)
+     public dataListPropuestas traerMisPropuestasF(String nick)
      {
          return xD.traerMisPropuestasF2(nick);
      }
      @WebMethod
-     public DataListPropuestas TraerTodasPropuestas(String nick)
+     public dataListPropuestas TraerTodasPropuestas(String nick)
      {
          return xD.TraerTodasPropuestas2(nick);
      }
      @WebMethod
-     public DataListPropuestas TraerTodasPropuestasIng(String nick)
+     public dataListPropuestas TraerTodasPropuestasIng(String nick)
      {
          return xD.TraerTodasPropuestasIng2(nick);
      }
-//     @WebMethod
-////     public Path agregarImagen(final DtUsuario imagenUsuario)
-////     {
-////         return xD.agregarImagen(imagenUsuario);
-////     }
+     @WebMethod
+     public String agregarImagen(String nick1, DataImagen img, String pass)
+     {
+         return xD.agregarImagen(nick1, img, pass);
+     }
      @WebMethod
      public BufferedImage retornarImagen(final String nick) throws IOException
      {
@@ -266,4 +270,16 @@ public class publicador_Usuarios {
      public Usuario traerUsuario(String nick) {
          return xD.traerUsuario(nick);
      }
+     @WebMethod
+     public dataListUsuarios rankingUser2()
+    {
+        return xD.rankingUser2();
+    }
+    
+    public DataImagen Crear_DataImagen_Publicador(final byte[] stream, final String nombreArchivo, final String extensionArchivo){  
+        return xD.Crear_DataImagen(stream, nombreArchivo, extensionArchivo);
+    }
+     
+    
+    
 }

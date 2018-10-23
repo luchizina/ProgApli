@@ -8,11 +8,14 @@ package Logica;
 
 import Logica.*;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author Luchi
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DtColaboracion {
     private
             Date fecha;

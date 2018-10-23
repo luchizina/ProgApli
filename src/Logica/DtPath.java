@@ -5,25 +5,24 @@
  */
 package Logica;
 
-import java.util.List;
+import java.nio.file.Path;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
- * @author Nazareno
+ * @author matheo
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class dataListUsuarios {
- 
-     private List<DtUsuario> listita;
-     
-     dataListUsuarios(List<DtUsuario> listita)
-    {
-        this.listita = listita;
+public class DtPath {
+    private Path url;
+    
+    DtPath(Path xurl){
+        this.url = xurl;
     }
     
-    public List<DtUsuario> getListita(){
-        return this.listita;
-    };
+    Path getPath(){
+        return this.url;
+    }
+    
 }

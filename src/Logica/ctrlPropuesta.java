@@ -754,7 +754,8 @@ public class ctrlPropuesta implements IPropuesta {
     private static Logger LOG;
 
     @Override
-    public Path agregarImagen(final DtPropuesta imagenP) {
+    public String agregarImagen(String titulo_propuesta, DataImagen ximagen) {
+        final DtPropuesta imagenP = new DtPropuesta(titulo_propuesta, ximagen);
         this.imagenesMap = new HashMap<>();
         LOG = Logger.getLogger(this.getClass().getPackage().getName());
         String nick = imagenP.getTitulo();
@@ -781,13 +782,13 @@ public class ctrlPropuesta implements IPropuesta {
         Path path = Paths.get(pathStr);
         try {
             Files.write(path, imagen.getStream(), CREATE);
-            return path;
+            return path.toString(); // agrege el to string
         } catch (IOException ex) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
         imagenesMap.put(nick, imagen);
-        return path;
+        return path.toString(); // agrege el toString
     }
 
     @Override
@@ -920,14 +921,14 @@ public class ctrlPropuesta implements IPropuesta {
 ;
     
     @Override
-    public DataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts){
-        DataListPropuestas lista = new DataListPropuestas(dts);
+    public dataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts){
+        dataListPropuestas lista = new dataListPropuestas(dts);
         return lista;
     };
     
     @Override
-    public DataListStrings ListString_A_DT(List<String> dts){
-        DataListStrings lista = new DataListStrings(dts);
+    public dataListStrings ListString_A_DT(List<String> dts){
+        dataListStrings lista = new dataListStrings(dts);
         return lista;
     };
     
@@ -936,4 +937,17 @@ public class ctrlPropuesta implements IPropuesta {
         DataList_Comentario lista = new DataList_Comentario(dts);
         return lista;
     };
+    
+    @Override
+    public DataImagen Crear_DataImagen_Propuesta(final byte[] stream, final String nombreArchivo, final String extensionArchivo){
+        DataImagen imagen = new DataImagen(stream, nombreArchivo, extensionArchivo);
+        return imagen;
+    };
+    
+    @Override
+    public Estado Crear_Esatado_Ingresada(){
+    Estado e = new Estado(Testado.Ingresada);
+    return e;
+    };
+    
 }

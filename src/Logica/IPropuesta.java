@@ -32,7 +32,8 @@ public interface IPropuesta {
     public void agregarFavorito(Usuario usu, Propuesta prop);
     public void agregarComentario(Colaborador nick, Propuesta titulo, String texto);
     public void configurarParametros(String carpetaImagenes);
-    public Path agregarImagen(final DtPropuesta imagenUsuario);
+    //public Path agregarImagen(final DtPropuesta imagenUsuario);
+    public String agregarImagen(String titulo_propuesta, DataImagen imagen);
     public abstract boolean existeTitulo(String titulo);
     public abstract void cargarPropuestas();
     public abstract List<DtPropuesta> listarPropuestas();
@@ -64,7 +65,9 @@ public interface IPropuesta {
     BufferedImage retornarImagen(final String titulo);
     public abstract boolean Ya_Comento_Propuesta(String c,String p);
     public abstract BufferedImage retornarImagen_Propuesta(final String titu) throws IOException;
-    public abstract DataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts);
-    public abstract DataListStrings ListString_A_DT(List<String> dts);
+    public abstract dataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts);
+    public abstract dataListStrings ListString_A_DT(List<String> dts);
     public abstract DataList_Comentario ListComentario_A_DT(List<DtComentarios> dts);
+    public abstract DataImagen Crear_DataImagen_Propuesta(final byte[] stream, final String nombreArchivo, final String extensionArchivo);
+    public abstract Estado Crear_Esatado_Ingresada();
 }
