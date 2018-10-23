@@ -45,8 +45,8 @@ public class Publicador_Propuesta {
     public void publicar() {
         
         Properties p= Utils.getPropiedades();
-        
-            endpoint = Endpoint.publish(p.getProperty("servicio2"), this);
+         String servicio2=p.getProperty("http")+p.getProperty("ipServices")+p.getProperty("puertoServ")+p.getProperty("serv2");
+            endpoint = Endpoint.publish(servicio2, this);
     }  
     
     // Listar propuestas

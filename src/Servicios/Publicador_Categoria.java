@@ -39,8 +39,8 @@ public class Publicador_Categoria {
     //@WebMethod(exclude = true)
     public void publicar() {
         Properties p= Utils.getPropiedades();
-        
-            endpoint = Endpoint.publish(p.getProperty("servicio3"), this);
+         String servicio3=p.getProperty("http")+p.getProperty("ipServices")+p.getProperty("puertoServ")+p.getProperty("serv3");
+            endpoint = Endpoint.publish(servicio3, this);
     }  
     
     // Listar propuestas
