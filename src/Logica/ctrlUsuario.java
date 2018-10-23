@@ -556,7 +556,7 @@ public List<DtUsuario> listaNC(String txt) {
             Propuesta prop = col.getProp();
             DtPropuesta pro = new DtPropuesta(prop);
             DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
-            DtColaboracion ma = new DtColaboracion(col.getFecha(), col.getMonto(), cola, pro);
+            DtColaboracion ma = new DtColaboracion(col.getHora(), col.getFecha(), col.getMonto(),cola, pro);
             propuestas.add(ma);
         }
         return propuestas;

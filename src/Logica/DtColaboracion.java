@@ -48,6 +48,13 @@ public class DtColaboracion {
         this.propuesta = propuesta;
     }
     
+    public DtColaboracion(String xHora,Date fecha, int monto, DtColaborador colaborador, DtPropuesta propuesta) {
+        this.Hora = xHora;
+        this.fecha = fecha;
+        this.monto = monto;
+        this.colaborador = colaborador;
+        this.propuesta = propuesta;
+    }
     
     public DtColaboracion(DtPropuesta propuesta) {
               this.propuesta = propuesta;
