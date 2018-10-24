@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+X-COMMENT: Main-Class will be added automatically by build
+Main-Class: Presentacion.Principal
+Class-Path: ./build/Culturarte/ ./lib/jcalendar-1.4.jar ./lib/mysql-connector-java-5.1.23-bin.jar
+
+
+
+
+
+
