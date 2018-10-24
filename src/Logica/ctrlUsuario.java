@@ -550,7 +550,7 @@ public List<DtUsuario> listaNC(String txt) {
     public List<DtColaboracion> traerPropuestasColaboradas(String nick) {
         List<DtColaboracion> propuestas = new ArrayList<>();
         Colaborador colab = this.traerColaborador(nick);
-        List<Colaboracion> colaboraciones = colab.getColHechas();
+        List<Colaboracion> colaboraciones = colab.getColHechas(); 
         for (int i = 0; i < colaboraciones.size(); i++) {
             Colaboracion col = (Colaboracion) colaboraciones.get(i);
             Propuesta prop = col.getProp();
