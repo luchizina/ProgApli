@@ -70,4 +70,5 @@ public interface IPropuesta {
     public abstract DataList_Comentario ListComentario_A_DT(List<DtComentarios> dts);
     public abstract DataImagen Crear_DataImagen_Propuesta(final byte[] stream, final String nombreArchivo, final String extensionArchivo);
     public abstract Estado Crear_Esatado_Ingresada();
+    public abstract boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar);
 }

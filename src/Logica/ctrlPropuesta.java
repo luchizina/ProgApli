@@ -945,9 +945,86 @@ public class ctrlPropuesta implements IPropuesta {
     };
     
     @Override
-    public Estado Crear_Esatado_Ingresada(){
+    public Estado Crear_Esatado_Ingresada(){  // NO sirve para el autogenerado 
     Estado e = new Estado(Testado.Ingresada);
     return e;
     };
+ 
+    
+    @Override
+    public boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar) {
+        if (this.propuestas.get(titulo) != null) {
+            return false;
+        } else {
+            try {
+                if (img.equals("") == false) {
+                    String[] aux = img.split("\\.");
+                    String termina = aux[1];
+                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    try {
+                        if (this.copy(img, destino) == true) {
+                            img = destino;
+                        } else {
+                            img = null;
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+                //  public Propuesta(String titulo, String desc, Date fecha, int precioE, String fechaPub, int montoTotal, String cate,String Lugar) {
+                fechaPub = new Date();
+                Propuesta pe;
+                Estado estA2 = new Estado(Testado.Ingresada);
+                pe = new Propuesta(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, estA2, img, Lugar);
+                pe.setProp(nickP);
+                pe.setEstActual(estA2);
+
+                boolean res;
+                res = this.dbPropuesta.agregarPropuesta(pe);
+                if (res) {
+
+                    //Colección genérica común
+                    //this.personas.add(p);
+                    this.propuestas.put(titulo, pe);
+                    pe.setCate(cate);
+
+                    java.sql.Time fecFormatoTime = null;
+                    try {
+                        SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
+                        fecFormatoTime = new java.sql.Time(sdf.parse(hora).getTime());
+                        System.out.println("Fecha con el formato java.sql.Time: " + fecFormatoTime);
+                    } catch (ParseException ex) {
+                        System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+                    }
+                    ListEstado est = new ListEstado(fechaPub, fecFormatoTime, "Ingresada");
+                    System.out.println(est.getEst() + est.getFecha().toString() + est.getHora().toString() + " ESTOOOOOOOOOOOoo");
+
+                    pe.addLE(est);
+
+                    for (int i = 0; i < pe.getLE().size(); i++) {
+                        System.out.println(pe.getLE().get(i).getEst() + " ESTOOOO" + pe.getLE().get(i).getEst());
+
+                    }
+                    boolean Est = this.dbE.agregarEstado(est, titulo);
+                    if (Est) {
+                        System.out.println("Lo hace bien!!!");
+                    } else {
+                        System.out.println("Lo hace mal!!!");
+                    }
+                    return res;
+
+                }
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+    
+    
     
 }

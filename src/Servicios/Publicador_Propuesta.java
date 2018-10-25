@@ -168,4 +168,9 @@ public class Publicador_Propuesta {
     public Estado Crear_Estado(){
         return IP.Crear_Esatado_Ingresada();
     }
+    
+    @WebMethod
+    public boolean Agregar_Propuesta_web(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar){
+        return IP.AgregarPropuesta_WEB(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, img, nickP, hora, Lugar);
+    }
 }
