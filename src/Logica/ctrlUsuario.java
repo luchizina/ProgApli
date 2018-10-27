@@ -25,6 +25,9 @@ import java.util.Set;
 import Logica.Colaborador;
 import Logica.Proponente;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -1034,12 +1037,11 @@ public List<DtUsuario> listaNC(String txt) {
             Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         LOG.log(Level.INFO, "Archivo guardado:{0}", pathStr);
-        imagenesMap.put(nick, imagen);
-        return path.toString();
+        return pathStr;
     }
 
     @Override
-    public BufferedImage retornarImagen(final String nick) {
+    public byte[] retornarImagen(final String nick) {
         /*if (!this.credencialesMap.keySet().contains(email)){
                          throw new UsuarioNoEncontradoException(email);
                 }*/
@@ -1047,13 +1049,22 @@ public List<DtUsuario> listaNC(String txt) {
             if (usu.getNick().equals(nick)) {
                 String pat = usu.getImg();
                 File f = new File(pat);
-                BufferedImage bi = null;
                 try {
-                    bi = ImageIO.read(f);
-                } catch (IOException ex) {
-                    Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    FileInputStream fis = new FileInputStream(f);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    byte[] buf = new byte[1024];
+                    try {
+                        for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                            bos.write(buf, 0, readNum);
+                        }
+                        byte[] bytes = bos.toByteArray();
+                        return bytes;
+                    } catch (IOException ex) {
+                        Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                return bi;
             }
         }
         return null;

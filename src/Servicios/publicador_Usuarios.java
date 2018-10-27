@@ -262,7 +262,7 @@ public class publicador_Usuarios {
          return xD.agregarImagen(nick1, img, pass);
      }
      @WebMethod
-     public BufferedImage retornarImagen(final String nick) throws IOException
+     public byte[] retornarImagen(final String nick) throws IOException
      {
          return xD.retornarImagen(nick);
      }
