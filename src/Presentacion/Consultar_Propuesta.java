@@ -162,7 +162,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
         TxtMontoActual.setEditable(false);
         TxtMontoActual.setText(" ");
 
-        jLabel8.setText("Fecha de Publicacion:");
+        jLabel8.setText("Fecha de Ingreso:");
 
         TxtFPublica.setEditable(false);
         TxtFPublica.setText(" ");
@@ -265,7 +265,7 @@ public class Consultar_Propuesta extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel7)
                                             .addComponent(jLabel10)
                                             .addComponent(jLabel5))
-                                        .addGap(0, 47, Short.MAX_VALUE))
+                                        .addGap(0, 62, Short.MAX_VALUE))
                                     .addComponent(TxtPrecio))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

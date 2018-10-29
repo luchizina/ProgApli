@@ -95,7 +95,7 @@
                                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="47" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="TxtPrecio" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -370,7 +370,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha de Publicacion:"/>
+        <Property name="text" type="java.lang.String" value="Fecha de Ingreso:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtFPublica">
