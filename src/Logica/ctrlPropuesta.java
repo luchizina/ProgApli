@@ -151,7 +151,8 @@ public class ctrlPropuesta implements IPropuesta {
                     //this.personas.add(p);
                     this.propuestas.put(titulo, pe);
                     pe.setCate(cate);
-
+                    Proponente p = ctrlUsuario.getInstance().traerProponente(nickP);
+                    p.getPropuestas().put(titulo, pe);
                     java.sql.Time fecFormatoTime = null;
                     try {
                         SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm:ss", new Locale("es", "ES"));
@@ -189,7 +190,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     @Override
-    public void extender(String tit) throws SQLException {
+    public void extender(String tit)  {
         Propuesta prop = this.getPropPorNick(tit);
         Date ahora = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
@@ -206,8 +207,10 @@ public class ctrlPropuesta implements IPropuesta {
             ListEstado est = new ListEstado(ahora, fecFormatoTime, "Publicada");
             prop.addLE(est);
             try {
-                this.dbE.agregarEstado(est, prop.getTitulo());
+                boolean agregarEstado = this.dbE.agregarEstado(est, prop.getTitulo());
             } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -218,6 +221,8 @@ public class ctrlPropuesta implements IPropuesta {
             try {
                 this.dbE.agregarEstado(est, prop.getTitulo());
             } catch (ParseException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -998,6 +1003,8 @@ public class ctrlPropuesta implements IPropuesta {
                     //Colección genérica común
                     //this.personas.add(p);
                     this.propuestas.put(titulo, pe);
+                    Proponente p = ctrlUsuario.getInstance().traerProponente(nickP);
+                    p.getPropuestas().put(titulo, pe);
                     pe.setCate(cate);
 
                     java.sql.Time fecFormatoTime = null;
@@ -1041,10 +1048,10 @@ public class ctrlPropuesta implements IPropuesta {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public dataRenderedImag traerImagensitaPropuesta(String titulo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    //@Override
+    //public dataRenderedImag traerImagensitaPropuesta(String titulo) {
+    //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //}
 
  
 

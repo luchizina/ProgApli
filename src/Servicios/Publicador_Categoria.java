@@ -11,7 +11,6 @@ import Logica.IPropuesta;
 import Logica.IUsuario;
 import Logica.ICategoria;
 import Logica.dataListCategoria;
-import java.sql.SQLException;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -45,12 +44,12 @@ public class Publicador_Categoria {
     
     // Listar propuestas
     @WebMethod
-    public dataListCategoria Listar_Categorias_Web()throws SQLException {
+    public dataListCategoria Listar_Categorias_Web(){
            return IC.ListCategoria_A_DT(IC.listarCategorias());
     } 
     
     @WebMethod
-    public boolean Existe_Categoria(String Nombre_categoria)throws SQLException {
+    public boolean Existe_Categoria(String Nombre_categoria) {
            return IC.existecat(Nombre_categoria);
     } 
     @WebMethod

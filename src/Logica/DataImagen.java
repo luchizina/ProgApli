@@ -13,6 +13,13 @@ public class DataImagen {
                 this.nombreArchivo = nombreArchivo;
                 this.extensionArchivo = extensionArchivo;
 	}
+        
+        public DataImagen()
+        {
+            this.stream = null;
+            this.nombreArchivo = null;
+            this.extensionArchivo = null;
+        }
 
 	public byte[] getStream() {
 		byte [] result = Arrays.copyOf(this.stream, this.stream.length);

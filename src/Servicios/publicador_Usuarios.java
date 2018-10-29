@@ -8,9 +8,7 @@ package Servicios;
 import Logica.Colaborador;
 import Logica.DataImagen;
 import Logica.DtColaboracion;
-import Logica.DtPropuesta;
 import Logica.DtInfo;
-import Logica.DtPath;
 import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IUsuario;
@@ -23,19 +21,16 @@ import Logica.dataListStrings;
 import Logica.dataListUsuarios;
 import Logica.DtProponente;
 import Logica.Usuario;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Date;
 import java.util.Properties;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
 import config.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -262,9 +257,14 @@ public class publicador_Usuarios {
          return xD.agregarImagen(nick1, img, pass);
      }
      @WebMethod
-     public byte[] retornarImagen(final String nick) throws IOException
+     public byte[] retornarImagen(final String nick)
      {
-         return xD.retornarImagen(nick);
+        try {
+            return xD.retornarImagen(nick);
+        } catch (IOException ex) {
+            Logger.getLogger(publicador_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
      }
      @WebMethod
      public DtProponente traerDtProponente(String nick)

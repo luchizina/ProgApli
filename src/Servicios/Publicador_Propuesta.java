@@ -15,17 +15,17 @@ import Logica.IUsuario;
 import Logica.dataListPropuestas;
 import Logica.dataListStrings;
 import Logica.Propuesta;
-import Logica.dataRenderedImag;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.sql.SQLException;
+//import Logica.dataRenderedImag;
 import java.util.Date;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
 import config.Utils;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,12 +52,12 @@ public class Publicador_Propuesta {
     
     // Listar propuestas
     @WebMethod
-    public dataListPropuestas Listar_Propuestas_Web()throws SQLException {
+    public dataListPropuestas Listar_Propuestas_Web() {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_No_Ingresada());
     } 
     
     @WebMethod
-    public dataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria)throws SQLException {
+    public dataListPropuestas Listar_Propuestas_X_Categoria_Web(String nombre_categoria) {
            return IP.ListPropuesta_A_DT(IP.WEB_listarPropuestas_X_Categoria(nombre_categoria));
     }
     
@@ -67,7 +67,7 @@ public class Publicador_Propuesta {
     }
     
     @WebMethod
-    public dataListStrings Colaboradores_De_Propuesta()  throws SQLException {
+    public dataListStrings Colaboradores_De_Propuesta() {
             return IP.ListString_A_DT(IP.ColaborantesDePro());
     }
     @WebMethod
@@ -91,7 +91,7 @@ public class Publicador_Propuesta {
             IP.altaColaboracion(titulo, nick, monto, tipoR);
     }
     @WebMethod
-    public byte[] Retornar_Imagen_Propuesta(final String titulo) throws IOException{
+    public byte[] Retornar_Imagen_Propuesta(final String titulo){
         return IP.retornarImagen(titulo);
     }
     @WebMethod
@@ -121,8 +121,13 @@ public class Publicador_Propuesta {
         IP.EstadosPropuestas();
     }
     @WebMethod
-    public void extender(String nombre_propuesta) throws IOException, SQLException{
-        IP.extender(nombre_propuesta); 
+    public void extender(String nombre_propuesta) {
+        try {
+            IP.extender(nombre_propuesta);
+        } catch (SQLException ex) {
+            Logger.getLogger(Publicador_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     @WebMethod
     public void Agregar_Favorito(String nick,String prop){

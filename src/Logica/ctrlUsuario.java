@@ -432,7 +432,7 @@ public List<DtUsuario> listaNC(String txt) {
     @Override
     public List<DtColaborador> listarColaboradores() {
         List<DtColaborador> listita = new ArrayList<>();
-        Set se = usuarios.entrySet();
+        Set se = this.usuarios.entrySet();
         Iterator iterator = se.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
@@ -450,7 +450,6 @@ public List<DtUsuario> listaNC(String txt) {
         List<DtUsuario> lista = new ArrayList<>();
         List<DtColaborador> colab = this.listarColaboradores();
         List<DtProponente> prop = this.listarProponentes();
-
         boolean a = lista.addAll(colab);
         boolean b = lista.addAll(prop);
 
@@ -463,7 +462,7 @@ public List<DtUsuario> listaNC(String txt) {
             });
             return lista;
         }
-        return null;
+        return lista;
     }
 
     @Override
@@ -1101,6 +1100,7 @@ public List<DtUsuario> listaNC(String txt) {
     @Override
     public dataListProponentes listarUsuario2()
     {
+        
         dataListProponentes datatype = new dataListProponentes(listarUsuario());
         return datatype;
     }
@@ -1112,9 +1112,39 @@ public List<DtUsuario> listaNC(String txt) {
         return datatype;
     }
     
+    @Override
     public dataListUsuarios listarUsuarios2()
     {
-        dataListUsuarios datatype = new dataListUsuarios(listarUsuarios());
+        List<DtUsuario> listita = new ArrayList<>();
+        if(this.usuarios.isEmpty())
+        {
+            DtColaborador prueba = new DtColaborador("xD3", "xDD3", "xDDD3", "xDDDD3", "xDDDDD3");
+        listita.add(prueba);
+        }
+        else
+        {
+        Set se = this.usuarios.entrySet();
+        Iterator iterator = se.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Proponente) {
+
+                Proponente aux = (Proponente) mentry.getValue();
+                DtProponente lol = new DtProponente(aux.getNick(), aux.getImg() ,aux.getBiografia() ,aux.getLinkWeb(), aux.getDireccion(),aux.getNombre(),aux.getApellido(), aux.getCorreo());
+                listita.add(lol);
+            }
+            else
+            {
+                Colaborador aux = (Colaborador) mentry.getValue();
+                DtColaborador lol = new DtColaborador(aux.getNick(), aux.getCorreo(), aux.getCont(), aux.getNombre(),aux.getApellido());
+                listita.add(lol);
+            }
+        }
+        }
+        Collections.sort(listita, (c, d) -> {
+        return c.getNombre().compareTo(d.getNombre());
+            });
+        dataListUsuarios datatype = new dataListUsuarios(listita);
         return datatype;
     }
     
