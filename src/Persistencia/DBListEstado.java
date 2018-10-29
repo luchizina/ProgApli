@@ -65,18 +65,16 @@ statement.executeUpdate();
     }
 
     public void agregarListPrueb() {
-        String[] fechas = {"2017-05-16 15:30", "2017-05-17 08:30", "2018-05-20 14:30", "2017-06-16 08:30", "2017-06-20 14:50", "2017-06-18 4:28", "2017-06-20 4:56", "2017-06-30 14:25", "2017-07-20 04:56", "2017-07-26 15:30", "2017-07-31 08:30", "2017-08-01 07:40","2017-08-30 08:30", "2017-11-15 15:40", "2017-11-20 14:30", "2017-11-20 16:50", "2017-11-05 12:20", "2017-11-06 10:25", "2017-11-08 04:58", "2017-11-16 02:00", "2017-11-17 04:50", "2017-11-18 04:48", "2017-12-03 02:40", "2017-12-09 21:58", "2017-12-10 2:12"};
-        String[] estado = {"Ingresada", "Publicada", "En Financiacion", "Financiada", "Cancelada", "Ingresada", "Publicada", "En Financiacion", "Financiada", "Ingresada", "Publicada", "En Financiacion", "Ingresada", "Publicada", "En Financiacion", "No Financiada", "Ingresada", "Publicada", "En Financiacion", "Ingresada", "Publicada", "En Financiacion", "Ingresada", "Publicada", "Ingresada"};
+        String[] fechas = {"2017-05-16", "2017-05-17", "2018-05-20", "2017-06-16", "2017-06-20", "2017-06-18", "2017-06-20", "2017-06-30", "2017-07-20", "2017-07-26", "2017-07-31", "2017-08-01","2017-08-30", "2017-11-15", "2017-11-20", "2017-11-20", "2017-11-05", "2017-11-06", "2017-11-08", "2017-11-16", "2017-11-17", "2017-11-18", "2017-12-03", "2017-12-09", "2017-12-10"};
+        String[] horas = {"15:30", "08:30", "14:30", "08:30", "14:50", "4:28", "4:56", "14:25", "04:56","15:30","08:30","07:40","08:30", "15:40", "14:30", "16:50", "12:20", "10:25", "04:58", "02:00", "04:50", "04:48", "02:40", "21:58", "2:12"};
+        String[] estado = {"Ingresada", "Publicada", "En Financiacion", "Financiada", "Cancelada", "Ingresada", "Publicada", "En Financiacion", "Financiada", "Ingresada", "Publicada", "En Financiacion","No Financiada", "Ingresada", "Publicada", "En Financiacion", "No Financiada", "Ingresada", "Publicada", "En Financiacion", "Ingresada", "Publicada", "En Financiacion", "Ingresada", "Publicada", "Ingresada"};
         String[] referencias = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente", "Religiosamente", "El Pimiento Indomable", "El Pimiento Indomable", "El Pimiento Indomable", "El Pimiento Indomable", "Pilsen Rock", "Pilsen Rock", "Pilsen Rock", "Romeo y Julieta", "Romeo y Julieta", "Romeo y Julieta", "Un día de Julio", "Un día de Julio", "Un día de Julio", "El Lazarillo de Tormes", "El Lazarillo de Tormes", "Durazno Rock"};
-        for (int i = 0; i < estado.length; i++) {
+        for (int i = 0; i < 25; i++) {
             try {
                 PreparedStatement statement = conexion.prepareStatement("INSERT INTO listestado "
                         + "(Fecha,Hora,TituloP,Estado) values(?,?,?,?)");
-                String[] lul = fechas[i].split(" ");
-                String parte1 = lul[0];
-                String parte2 = lul[1];
-                statement.setString(1, parte1);
-                statement.setString(2, parte2);
+                statement.setString(1, fechas[i]);
+                statement.setString(2, horas[i]);
                 statement.setString(3, referencias[i]);
                 statement.setString(4, estado[i]);
                 statement.executeUpdate();

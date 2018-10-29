@@ -62,13 +62,14 @@ public interface IPropuesta {
     public abstract List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x);
     public abstract void Cargar_Favoritos_Memoria();
     public abstract void Cargar_Comentarios_Memoria();
-    BufferedImage retornarImagen(final String titulo);
+    byte[] retornarImagen(final String titulo);
     public abstract boolean Ya_Comento_Propuesta(String c,String p);
-    public abstract BufferedImage retornarImagen_Propuesta(final String titu) throws IOException;
+    public abstract byte[] retornarImagen_Propuesta(final String titu) throws IOException;
     public abstract dataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts);
     public abstract dataListStrings ListString_A_DT(List<String> dts);
     public abstract DataList_Comentario ListComentario_A_DT(List<DtComentarios> dts);
     public abstract DataImagen Crear_DataImagen_Propuesta(final byte[] stream, final String nombreArchivo, final String extensionArchivo);
     public abstract Estado Crear_Esatado_Ingresada();
+    public abstract dataRenderedImag traerImagensitaPropuesta(String titulo);
     public abstract boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar);
 }

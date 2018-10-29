@@ -18,6 +18,12 @@ import java.sql.Time;
 import java.text.DateFormat;
 import static Logica.Testado.Publicada;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.RenderedImage;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -792,21 +798,34 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     @Override
-    public BufferedImage retornarImagen(final String titulo) {
+    public byte[] retornarImagen(final String titulo) {
         /*if (!this.credencialesMap.keySet().contains(email)){
                          throw new UsuarioNoEncontradoException(email);
                 }*/
-        DataImagen imagen = imagenesMap.get(titulo);
-        String pathStr = this.carpetaImagenes + File.separatorChar + titulo;
-        pathStr = pathStr + File.separatorChar + imagen.getNombreArchivo() + "." + imagen.getExtensionArchivo();
-        File f = new File(pathStr);
-        BufferedImage bi = null;
-        try {
-            bi = ImageIO.read(f);
-        } catch (IOException ex) {
-            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        for (Propuesta pro : propuestas.values()) {
+            if (pro.getTitulo().equals(titulo)) {
+                String pat = pro.getImg();
+                File f = new File(pat);
+                try {
+                    FileInputStream fis = new FileInputStream(f);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    byte[] buf = new byte[1024];
+                    try {
+                        for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                            bos.write(buf, 0, readNum);
+                        }
+                        byte[] bytes = bos.toByteArray();
+                        return bytes;
+                    } catch (IOException ex) {
+                        Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
-        return bi;
+        return null;
     }
 
     public void ActualizarEstado(Propuesta x) {
@@ -828,8 +847,8 @@ public class ctrlPropuesta implements IPropuesta {
             if (dias > 30) {
                 cambiarEstadito(x.getTitulo(), "No_Financiada");
             }
-            if(x.getMontoActual()>0 && !x.getEstActual().getEstado().toString().equals("En_Financiacion")){
-                 cambiarEstadito(x.getTitulo(), "En_Financiacion");
+            if (x.getMontoActual() > 0 && !x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
+                cambiarEstadito(x.getTitulo(), "En_Financiacion");
             }
         }
         if (x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
@@ -886,26 +905,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     ;
         
-        @Override
-    public BufferedImage retornarImagen_Propuesta(final String titu) {
-        /*if (!this.credencialesMap.keySet().contains(email)){
-                         throw new UsuarioNoEncontradoException(email);
-                }*/
-        for (Propuesta pro : propuestas.values()) {
-            if (pro.getTitulo().equals(titu)) {
-                String pat = pro.getImg();
-                File f = new File(pat);
-                BufferedImage bi = null;
-                try {
-                    bi = ImageIO.read(f);
-                } catch (IOException ex) {
-                    Logger.getLogger(ctrlUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return bi;
-            }
-        }
-        return null;
-    }
+
 
     @Override
     public boolean Ya_Comento_Propuesta(String c, String p) {
@@ -918,37 +918,48 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return false;
     }
-;
+
+    ;
     
     @Override
-    public dataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts){
+    public dataListPropuestas ListPropuesta_A_DT(List<DtPropuesta> dts) {
         dataListPropuestas lista = new dataListPropuestas(dts);
         return lista;
-    };
+    }
+
+    ;
     
     @Override
-    public dataListStrings ListString_A_DT(List<String> dts){
+    public dataListStrings ListString_A_DT(List<String> dts) {
         dataListStrings lista = new dataListStrings(dts);
         return lista;
-    };
+    }
+
+    ;
     
     @Override
-    public DataList_Comentario ListComentario_A_DT(List<DtComentarios> dts){
+    public DataList_Comentario ListComentario_A_DT(List<DtComentarios> dts) {
         DataList_Comentario lista = new DataList_Comentario(dts);
         return lista;
-    };
+    }
+
+    ;
     
     @Override
-    public DataImagen Crear_DataImagen_Propuesta(final byte[] stream, final String nombreArchivo, final String extensionArchivo){
+    public DataImagen Crear_DataImagen_Propuesta(final byte[] stream, final String nombreArchivo, final String extensionArchivo) {
         DataImagen imagen = new DataImagen(stream, nombreArchivo, extensionArchivo);
         return imagen;
-    };
+    }
+
+    ;
     
     @Override
-    public Estado Crear_Esatado_Ingresada(){  // NO sirve para el autogenerado 
-    Estado e = new Estado(Testado.Ingresada);
-    return e;
-    };
+    public Estado Crear_Esatado_Ingresada() {  // NO sirve para el autogenerado 
+        Estado e = new Estado(Testado.Ingresada);
+        return e;
+    }
+
+    ;
  
     
     @Override
@@ -1024,7 +1035,17 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return false;
     }
-    
-    
-    
+
+    @Override
+    public byte[] retornarImagen_Propuesta(String titu) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public dataRenderedImag traerImagensitaPropuesta(String titulo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
+
 }

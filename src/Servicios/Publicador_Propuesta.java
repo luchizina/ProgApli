@@ -15,6 +15,7 @@ import Logica.IUsuario;
 import Logica.dataListPropuestas;
 import Logica.dataListStrings;
 import Logica.Propuesta;
+import Logica.dataRenderedImag;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -90,8 +91,8 @@ public class Publicador_Propuesta {
             IP.altaColaboracion(titulo, nick, monto, tipoR);
     }
     @WebMethod
-    public BufferedImage Retornar_Imagen_Propuesta(final String titulo) throws IOException{
-        return IP.retornarImagen_Propuesta(titulo);
+    public byte[] Retornar_Imagen_Propuesta(final String titulo) throws IOException{
+        return IP.retornarImagen(titulo);
     }
     @WebMethod
     public void Configurar_Parametros(String imagen){

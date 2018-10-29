@@ -19,6 +19,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DtUsuario {
 
+    public String getLink() {
+        return link;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
     String nick;
     String nombre;
     String apellido;
