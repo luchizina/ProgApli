@@ -42,6 +42,8 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import config.Utils;
+import java.util.Properties;
 
 /**
  *
@@ -74,13 +76,17 @@ public class ctrlUsuario implements IUsuario {
   
     @Override
     public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass) {
+     Properties pr= Utils.getPropiedades();
+        
+        
         if (this.existe(Nick, Correo) == false) {
             return false;
         } else {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Colaborador\\" + Nick + "." + termina;
+                String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
+                String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
                 if (this.copia(Imagen, destino) == true) {
@@ -304,14 +310,16 @@ public List<DtUsuario> listaNC(String txt) {
 
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo, String pass) {
+      Properties pr= Utils.getPropiedades();
+        
         if (this.existe(Nick, Correo) == false) {
             return false;
         } else {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-
-                String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Proponente\\" + Nick + "." + termina;
+String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProperty("proponente");
+                String destino = dest + Nick + "." + termina;
 
   
 
@@ -379,17 +387,25 @@ public List<DtUsuario> listaNC(String txt) {
 
     @Override
     public void limpiarUsuarios() {
+        
+        Properties p=Utils.getPropiedades();
+        String ruta= p.getProperty("rutaNahuel");
+        String img=p.getProperty("imagenes");
+        String colab=p.getProperty("colaborador");
+        String propu=p.getProperty("propuesta");
+        String propo=p.getProperty("proponente");
+        
         try {
             this.usu.limpiarBase();
-            File borrar = new File("C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Colaborador\\");
+            File borrar = new File(ruta+img+colab);
             if (borrar.exists()) {
                 this.borrarArch(borrar);
             }
-            File borrar1 = new File("C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Proponente\\");
+            File borrar1 = new File(ruta+img+propo);
             if (borrar1.exists()) {
                 this.borrarArch(borrar1);
             }
-            File borrar2 = new File("C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Propuesta\\");
+            File borrar2 = new File(ruta+img+propu);
             if (borrar2.exists()) {
                 this.borrarArch(borrar2);
             }

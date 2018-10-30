@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import config.Utils;
+import java.util.Properties;
 /**
  *
  * @author Nuevo
@@ -504,14 +505,18 @@ public class DBusuario {
                 + "el festival de la música tropical. La fiesta de los jóvenes, donde miles de ellos disfrutan de\n"
                 + "variados espectáculos al aire libre y se confunden para vivir tres días inolvidables,\n"
                 + "convocados por diversos géneros, como rock, tropical, murga y tango. "};
+           
+            Properties p=Utils.getPropiedades();
+
             for (int i = 0; i < 9; i++) {
                 String Imagen = null;
                 if (urlImg[i] != null) {
-                    String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\otro\\";
+                    String ruta = p.getProperty("rutaNahuel");
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+urlImg[i];
-                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\otro\\Imagenes\\Proponente\\" + nick[i] + "." + termina;
+                      String dest1=ruta+p.getProperty("imagenes")+p.getProperty("proponente");
+                    String destino = dest1 + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {
@@ -569,14 +574,19 @@ public class DBusuario {
             String[] pass = {"pass1","pass2","pass3","pass4","pass5","pass6","pass7","pass8","pass9","pass10","pass11"};
             Date[] fechasN = {rh, mt, en, sp, ar, ap, nj, jp, mg, pl, tj};
             String[] imagenes = {null, "Prueba\\Colaborador\\mt.jpg", "Prueba\\Colaborador\\en.jpg", "Prueba\\Colaborador\\sp.jpg", null, "Prueba\\Colaborador\\ap.jpg", "Prueba\\Colaborador\\nj.jpg", null, null, null, null};
+          
+             Properties p=Utils.getPropiedades();
+            
+            
             for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
-                    String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\otro\\";
+                  String ruta = p.getProperty("rutaNahuel");
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+imagenes[i];
-                    String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\otro\\Imagenes\\Colaborador\\" + nick[i] + "." + termina;
+                      String dest1=ruta+p.getProperty("imagenes")+p.getProperty("colaborador");
+                    String destino = dest1 + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
                     } else {

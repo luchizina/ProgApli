@@ -38,12 +38,14 @@ import Logica.PayPal;
 import Logica.Proponente;
 import Logica.Tarjeta;
 import Logica.Transferencia;
+import config.Utils;
 
 /**
  *
  * @author apias
  */
 import java.util.Date;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -159,14 +161,19 @@ public class DBPropuesta {
         String[] proponente = {"diegop", "hrubino", "mbusca", "kairoh", "juliob", "tabarec", "hectorg", "durazno"};
         String[] lugares = {"Jardín Botánico", "Teatro de Verano", "Teatro Solís", "Rural de Prado", "Auditorio Nacional del Sodre", "Landia", "Teatro el Galpón", "Durazno"};
         String[] fechitap = {"2018-05-16", "2018-06-18", "2017-07-26", "2018-11-15", "2018-11-05", "2018-11-16", "2018-03-12", "2018-12-10"};
+        
+        
+        Properties p= Utils.getPropiedades();
+        
         for (int i = 0; i < 8; i++) {
             String Imagen = null;
             if (imagenes[i] != null) {
-                String ruta = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\otro\\";
+                String ruta = p.getProperty("rutaNahuel");
                 String[] aux = imagenes[i].split("\\.");
                 String termina = aux[1];
                 String origen = ruta+imagenes[i];
-                String destino = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\otro\\Imagenes\\Propuesta\\" + titulos[i] + "." + termina;
+                String dest1=ruta+p.getProperty("imagenes")+p.getProperty("propuesta");
+                String destino = dest1 + titulos[i] + "." + termina;
                 if (this.copia(origen, destino) == true) {
                     Imagen = destino;
                 } else {

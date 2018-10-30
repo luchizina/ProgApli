@@ -11,18 +11,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import config.Utils;
+import java.util.Properties;
  
 /**
  *
  * @author apias
  */
 public class ConexionDB {
-    private final String host="localhost";
-    private final String port="3306";
-    private final String db="culturarte";
-    private final String user="root";
-    private final String pass="hola";
 
+
+    //Para hacer ConexionDB singleton descomentar
+    //Para hacer ConexionDB singleton descomentar
     //Para hacer ConexionDB singleton descomentar
     //private static Connection conexion=null;
     private Connection conexion=null;
@@ -32,6 +32,13 @@ public class ConexionDB {
     //Para hacer ConexionDB singleton descomentar
     //public static Connection getConexion() {
     public Connection getConexion() {
+        Properties p= Utils.getPropiedades();
+        String host= p.getProperty("hostDB");
+        String port = p.getProperty("portDB");
+        String db= p.getProperty("db");
+        String user= p.getProperty("userDB");
+        String pass= p.getProperty("passDB");
+        
         if (conexion == null) {
             try {
                 Driver driver = new com.mysql.jdbc.Driver();

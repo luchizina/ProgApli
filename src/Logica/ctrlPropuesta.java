@@ -55,6 +55,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import config.Utils;
+import java.util.Properties;
 
 /**
  *
@@ -117,6 +119,9 @@ public class ctrlPropuesta implements IPropuesta {
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
     @Override
     public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img, String nickP, String hora, String Lugar) {
+       
+        
+       Properties pr= Utils.getPropiedades();
         if (this.propuestas.get(titulo) != null) {
             return false;
         } else {
@@ -124,7 +129,8 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProperty("propuesta");
+                    String destino = dest + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
@@ -969,6 +975,8 @@ public class ctrlPropuesta implements IPropuesta {
     
     @Override
     public boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar) {
+       
+        Properties pr = Utils.getPropiedades();
         if (this.propuestas.get(titulo) != null) {
             return false;
         } else {
@@ -976,7 +984,8 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String destino = "C:\\Users\\matheo\\Documents\\ProgApli\\Imagenes\\Propuesta\\" + titulo + "." + termina;
+                    String dest= pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProperty("propuesta");
+                    String destino = dest + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
                             img = destino;
