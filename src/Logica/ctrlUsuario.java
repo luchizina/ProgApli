@@ -85,7 +85,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
+                String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
@@ -234,7 +234,6 @@ public List<DtUsuario> listaNC(String txt) {
     @Override
     public List<DtUsuario> traerSeguidos(String nick) {
         List<DtUsuario> usuarios = new ArrayList<>();
-
         Usuario u = this.usuarios.get(nick);
         Map<String, Usuario> listaSeguidos = u.getUsuSeguidos();
         Set se = listaSeguidos.entrySet();
@@ -242,7 +241,8 @@ public List<DtUsuario> listaNC(String txt) {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Usuario us = (Usuario) mentry.getValue();
-            DtUsuario usuarito = this.traerDtUsuario(us.getSeguido());
+            System.out.println(us.getNick());
+            DtUsuario usuarito = this.traerDtUsuario(us.getNick());
 
             usuarios.add(usuarito);
 
@@ -254,7 +254,6 @@ public List<DtUsuario> listaNC(String txt) {
     @Override
     public List<DtUsuario> traerSeguidores(String nick) {
         List<DtUsuario> seguidores = new ArrayList<>();
-
         Set se = this.usuarios.entrySet();
         Iterator it = se.iterator();
         while (it.hasNext()) {
@@ -318,7 +317,7 @@ public List<DtUsuario> listaNC(String txt) {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProperty("proponente");
+String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("proponente");
                 String destino = dest + Nick + "." + termina;
 
   
@@ -389,7 +388,7 @@ String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProper
     public void limpiarUsuarios() {
         
         Properties p=Utils.getPropiedades();
-        String ruta= p.getProperty("rutaNahuel");
+        String ruta= p.getProperty("rutaNazarenoC");
         String img=p.getProperty("imagenes");
         String colab=p.getProperty("colaborador");
         String propu=p.getProperty("propuesta");
@@ -712,7 +711,7 @@ String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProper
         Map<String, Usuario> listita = new HashMap<>();
         listita.putAll(this.usu.cargarColaboradores());
         listita.putAll(this.usu.cargarProponentes());
-
+        this.usuarios = listita;
         this.usuarios = this.cargarSeg(listita);
     }
 
@@ -740,15 +739,15 @@ String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProper
                 Proponente aux = (Proponente) mentry.getValue();
 
                 for (int i = 0; i < usuPP.size(); i++) {
-                    Usuario auxPP = (Usuario) usuPP.get(i);
-                    if (aux.getNick().equals(auxPP.getNick()) == true) {
+                    Usuario auxPP = traerUsuario(usuPP.get(i).getSeguido()) ;
+                    if (aux.getNick().equals(usuPP.get(i).getNick()) == true) {
                         aux.seguirUsuBD(auxPP);
                     }
                 }
 
                 for (int i = 0; i < usuPC.size(); i++) {
-                    Usuario auxPC = (Usuario) usuPC.get(i);
-                    if (aux.getNick().equals(auxPC.getNick()) == true) {
+                    Usuario auxPC = traerUsuario(usuPC.get(i).getSeguido());
+                    if (aux.getNick().equals(usuPC.get(i).getNick()) == true) {
                         aux.seguirUsuBD(auxPC);
                     }
                 }
@@ -757,15 +756,15 @@ String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProper
                 Colaborador aux2 = (Colaborador) mentry.getValue();
 
                 for (int i = 0; i < usuCC.size(); i++) {
-                    Usuario auxCC = (Usuario) usuCC.get(i);
-                    if (aux2.getNick().equals(auxCC.getNick()) == true) {
+                    Usuario auxCC = traerUsuario(usuCC.get(i).getSeguido());
+                    if (aux2.getNick().equals(usuCC.get(i).getNick()) == true) {
                         aux2.seguirUsuBD(auxCC);
                     }
                 }
 
                 for (int i = 0; i < usuCP.size(); i++) {
-                    Usuario auxCP = (Usuario) usuCP.get(i);
-                    if (aux2.getNick().equals(auxCP.getNick()) == true) {
+                    Usuario auxCP = traerUsuario(usuCP.get(i).getSeguido());
+                    if (aux2.getNick().equals(usuCP.get(i).getNick()) == true) {
                         aux2.seguirUsuBD(auxCP);
                     }
                 }
@@ -1095,7 +1094,7 @@ String dest=pr.getProperty("rutaNahuel")+pr.getProperty("imagenes")+pr.getProper
     @Override
     public dataListUsuarios traerSeguidos2(String nick)
     {
-        dataListUsuarios datatype = new dataListUsuarios(traerSeguidores(nick));
+        dataListUsuarios datatype = new dataListUsuarios(traerSeguidos(nick));
         return datatype;
     }
     

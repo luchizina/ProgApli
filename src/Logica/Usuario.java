@@ -151,7 +151,7 @@ public class Usuario {
     
     public void seguirUsuBD(Usuario aSeguir){
         
-        this.usuSeguidos.put(aSeguir.getSeguido(), aSeguir);
+        this.usuSeguidos.put(aSeguir.getNick(), aSeguir);
     }
     
     

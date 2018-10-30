@@ -622,6 +622,10 @@ this.prop = p;
     public void buscarPorEstadito(String lul)
     {
          String estadoSelec = lul;
+         if(lul.equalsIgnoreCase("En Financiación"))
+         estadoSelec = Testado.En_Financiacion.toString();
+         if(lul.equalsIgnoreCase("No Financiada"))
+             estadoSelec = Testado.No_Financiada.toString();
             List<DtPropuesta> listita = IP.listarPropuestas();
                 DefaultListModel dlm = new DefaultListModel();
     for(int b = 0; b<listita.size(); b++)

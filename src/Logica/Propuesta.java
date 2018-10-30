@@ -404,7 +404,7 @@ public class Propuesta {
         List estados = new ArrayList<ListEstado>();
         for(int i=0; i<this.getLE().size(); i++){
                 ListEstado p = (ListEstado) this.getLE().get(i);
-                if(p.getEst().equals("En_Financiacion")){
+                if(p.getEst().equals("En_Financiacion") || p.getEst().equals("En Financiacion")){
                     estados.add(p);
                 }
         }

@@ -511,7 +511,7 @@ public class DBusuario {
             for (int i = 0; i < 9; i++) {
                 String Imagen = null;
                 if (urlImg[i] != null) {
-                    String ruta = p.getProperty("rutaNahuel");
+                    String ruta = p.getProperty("rutaNazarenoC");
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+urlImg[i];
@@ -581,7 +581,7 @@ public class DBusuario {
             for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
-                  String ruta = p.getProperty("rutaNahuel");
+                  String ruta = p.getProperty("rutaNazarenoC");
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
                     String origen = ruta+imagenes[i];
