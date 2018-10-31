@@ -1226,7 +1226,7 @@ String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getPro
     
     public List<DtUsuario> rankingUser()
     {
-        List<DtUsuario>lista = this.listarUsuarios();
+        List<DtUsuario>lista =this.listarUsuarios2().getListita();
         Collections.sort(lista, (DtUsuario dt1, DtUsuario dt2) -> this.contarSeguidores(dt2.getNick()) - this.contarSeguidores(dt1.getNick()));
         return lista;
     }
