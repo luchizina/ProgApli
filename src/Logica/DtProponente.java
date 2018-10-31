@@ -22,19 +22,21 @@ public class DtProponente  extends DtUsuario  {
             String biografia;
             String linkWeb;
             String direccion;
+            boolean activo;
 
     public DtProponente(String nick, String img, String biografia, String linkWeb, String direccion, String nombre, String apellido, String correo) {
         super (nick, correo, nombre, apellido, img);
         this.biografia = biografia;
         this.linkWeb = linkWeb;
         this.direccion = direccion;
-      
+        this.activo = true;
 
     }
     
     
     public DtProponente(String nick,  final DataImagen img, String pass) {
         super (nick,img,pass);
+        this.activo = true;
     }
     
     
@@ -49,7 +51,7 @@ public class DtProponente  extends DtUsuario  {
         this.linkWeb=linkWeb;
         this.direccion=direccion;
         this.biografia=biografia;
-        
+        this.activo = true;
     }
     
 
@@ -124,7 +126,11 @@ public class DtProponente  extends DtUsuario  {
 //        return pass;
 //    }
     
-    
-            
-     
+      public boolean getActivo(){
+          return this.activo;
+      };  
+      
+      public void setActivo(boolean x){
+          this.activo=x;
+      };
 }

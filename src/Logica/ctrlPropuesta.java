@@ -692,12 +692,14 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public List<DtPropuesta> WEB_listarPropuestas_No_Ingresada() {
         List<DtPropuesta> listita = new ArrayList<>();
+        Fabrica fabrica = Fabrica.getInstance();    //agregado
+        IUsuario IU = fabrica.getICtrlUsuario();    //agregado
         Set set = propuestas.entrySet();
         Iterator iteradorsito = set.iterator();
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false) {
+            if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
                 //ActualizarEstado(aux);
                 listita.add(aux.obtenerInfo());
             }
@@ -711,12 +713,14 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public List<DtPropuesta> WEB_listarPropuestas_X_Categoria(String x) {
         List<DtPropuesta> listita = new ArrayList<>();
+        Fabrica fabrica = Fabrica.getInstance();    //agregado
+        IUsuario IU = fabrica.getICtrlUsuario();    //agregado
         Set set = propuestas.entrySet();
         Iterator iteradorsito = set.iterator();
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false) {
+            if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
                 listita.add(aux.obtenerInfo());
             }
         }

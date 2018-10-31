@@ -134,7 +134,7 @@ public class Cancelar_Colaboracion extends javax.swing.JInternalFrame {
     {
         Colaboracion p = (Colaboracion) listita.get(i);
         String horita = p.getFecha().toString();
-        Object[] dat={p.getColab().getNombre()+"("+p.getColab().getNick()+")", p.getProp().getTitulo(), p.getFecha(), p.getFecha(), p.getMonto(), p.getRetorno()};
+        Object[] dat={p.getColab().getNombre()+"("+p.getColab().getNick()+")", p.getProp().getTitulo(), p.getFecha(), p.getHora(), p.getMonto(), p.getRetorno()};
         model.addRow(dat);
     }
     }
