@@ -241,7 +241,7 @@ public List<DtUsuario> listaNC(String txt) {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Usuario us = (Usuario) mentry.getValue();
-            System.out.println(us.getNick());
+           
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
 
             usuarios.add(usuarito);
