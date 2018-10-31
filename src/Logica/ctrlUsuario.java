@@ -85,7 +85,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
+                String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
@@ -317,7 +317,7 @@ public List<DtUsuario> listaNC(String txt) {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("proponente");
+String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProperty("proponente");
                 String destino = dest + Nick + "." + termina;
 
   
@@ -388,7 +388,7 @@ String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getPro
     public void limpiarUsuarios() {
         
         Properties p=Utils.getPropiedades();
-        String ruta= p.getProperty("rutaNazarenoC");
+        String ruta= p.getProperty("rutaLuciaA");
         String img=p.getProperty("imagenes");
         String colab=p.getProperty("colaborador");
         String propu=p.getProperty("propuesta");
