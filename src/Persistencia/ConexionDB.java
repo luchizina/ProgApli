@@ -37,7 +37,7 @@ public class ConexionDB {
         String port = p.getProperty("portDB");
         String db= p.getProperty("db");
         String user= p.getProperty("userDB");
-        String pass= p.getProperty("passDB");
+        String pass= p.getProperty("passDBlucia");
         
         if (conexion == null) {
             try {
