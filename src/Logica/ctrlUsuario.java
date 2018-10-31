@@ -243,9 +243,11 @@ public List<DtUsuario> listaNC(String txt) {
             Usuario us = (Usuario) mentry.getValue();
             System.out.println(us.getNick());
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
-
-            usuarios.add(usuarito);
-
+            if (usuarito instanceof DtProponente){          // agregado
+                if(((DtProponente) usuarito).getActivo()){  // agregado
+                usuarios.add(usuarito);
+                }
+            }
         }
         return usuarios;
 
@@ -267,7 +269,12 @@ public List<DtUsuario> listaNC(String txt) {
 
                         if (user.getNick().equals(nick)) {
                             DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
-                            seguidores.add(seguidor);
+                            //seguidores.add(seguidor);
+                            if (seguidor instanceof DtProponente) {             // agregado
+                                if (((DtProponente) seguidor).getActivo()) {    // agregado
+                                    seguidores.add(seguidor);
+                                }
+                            }
                         }
                     }
                 }
@@ -275,9 +282,7 @@ public List<DtUsuario> listaNC(String txt) {
             }
 
         }
-
         return seguidores;
-
     }
 
     @Override
