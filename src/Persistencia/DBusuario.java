@@ -511,11 +511,11 @@ public class DBusuario {
             for (int i = 0; i < 9; i++) {
                 String Imagen = null;
                 if (urlImg[i] != null) {
-                    String ruta = p.getProperty("rutaLuciaA");
+                    String rutaSistema= System.getProperty("user.dir")+"\\";
                     String[] aux = urlImg[i].split("\\.");
                     String termina = aux[1];
-                    String origen = ruta+urlImg[i];
-                      String dest1=ruta+p.getProperty("imagenes")+p.getProperty("proponente");
+                    String origen = rutaSistema+urlImg[i];
+                      String dest1=rutaSistema+p.getProperty("imagenes")+p.getProperty("proponente");
                     String destino = dest1 + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
@@ -581,11 +581,11 @@ public class DBusuario {
             for (int i = 0; i < 11; i++) {
                 String Imagen = null;
                 if (imagenes[i] != null) {
-                  String ruta = p.getProperty("rutaLuciaA");
+                 String rutaSistema= System.getProperty("user.dir")+"\\";
                     String[] aux = imagenes[i].split("\\.");
                     String termina = aux[1];
-                    String origen = ruta+imagenes[i];
-                      String dest1=ruta+p.getProperty("imagenes")+p.getProperty("colaborador");
+                    String origen = rutaSistema+imagenes[i];
+                      String dest1=rutaSistema+p.getProperty("imagenes")+p.getProperty("colaborador");
                     String destino = dest1 + nick[i] + "." + termina;
                     if (this.copia(origen, destino) == true) {
                         Imagen = destino;
