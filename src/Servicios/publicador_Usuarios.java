@@ -289,6 +289,11 @@ public class publicador_Usuarios {
     public DataImagen Crear_DataImagen_Publicador(final byte[] stream, final String nombreArchivo, final String extensionArchivo){  
         return xD.Crear_DataImagen(stream, nombreArchivo, extensionArchivo);
     }
+    
+    @WebMethod
+    public int contarSeguidores(String nick){
+        return xD.contarSeguidores(nick);
+    }
      
     
     
