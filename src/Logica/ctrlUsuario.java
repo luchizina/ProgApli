@@ -654,12 +654,17 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
 
                 } else {
                     if (prop.getPass().equals(passEncriptada)) {
+ Usuario nuevo=this.traerUsuario(nick);             
 
+Proponente nuevito=(Proponente) nuevo;
+if(nuevito.getActivo()==false){
+      resultado.setEstLogin(false);
+}else{
                         resultado.setEstLogin(true);
                         resultado.setMensaje(cadena5);
                         resultado.setNick(prop.getNick());
                         resultado.setTipo("proponente");
-                    } else {
+}   } else {
                         //la contraseña ingresada es incorrectafas
                         resultado.setEstLogin(false);
                         resultado.setMensaje("La contraseña ingresada es incorrecta");
@@ -672,13 +677,20 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
 
             } else {
                 if (prop.getPass().equals(passEncriptada)) {
+       Usuario nuevo=this.traerUsuario(nick);             
+
+Proponente nuevito=(Proponente) nuevo;
+if(nuevito.getActivo()==false){
+      resultado.setEstLogin(false);
+}else{
+    
 
                     resultado.setEstLogin(true);
                     resultado.setMensaje(cadena5);
                     resultado.setTipo("proponente");
                     resultado.setNick(prop.getNick());
 
-                } else {
+               } } else {
                     resultado.setEstLogin(false);
                     resultado.setMensaje("La contraseña ingresada es incorrecta");
 
