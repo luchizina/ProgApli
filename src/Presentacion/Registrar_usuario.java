@@ -36,6 +36,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     public Registrar_usuario(IUsuario usu) throws ParseException {
         initComponents();
         Jp2.setVisible(false);
+        urlimagen.setVisible(false);
         this.usuario = usu;
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         Date hasta = new Date();
