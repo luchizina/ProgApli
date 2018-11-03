@@ -85,7 +85,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
+                String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
@@ -240,11 +240,10 @@ public List<DtUsuario> listaNC(String txt) {
         Iterator it = se.iterator();
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
-            Usuario us = (Usuario) mentry.getValue();
-            System.out.println(us.getNick());
+            Usuario us = (Usuario) mentry.getValue();         
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
-            if (usuarito instanceof DtProponente){          // agregado
-                if(((DtProponente) usuarito).getActivo()){  // agregado
+            if (us instanceof Proponente){          // agregado
+                if(((Proponente) us).getActivo()){  // agregado
                 usuarios.add(usuarito);
                 }
             }
@@ -270,8 +269,8 @@ public List<DtUsuario> listaNC(String txt) {
                         if (user.getNick().equals(nick)) {
                             DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
                             //seguidores.add(seguidor);
-                            if (seguidor instanceof DtProponente) {             // agregado
-                                if (((DtProponente) seguidor).getActivo()) {    // agregado
+                            if (aux instanceof Proponente) {             // agregado
+                                if (((Proponente) aux).getActivo()) {    // agregado
                                     seguidores.add(seguidor);
                                 }
                             }
@@ -322,7 +321,7 @@ public List<DtUsuario> listaNC(String txt) {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("proponente");
+String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProperty("proponente");
                 String destino = dest + Nick + "." + termina;
 
   
@@ -393,7 +392,7 @@ String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getPro
     public void limpiarUsuarios() {
         
         Properties p=Utils.getPropiedades();
-        String ruta= p.getProperty("rutaNazarenoC");
+        String ruta= p.getProperty("rutaLuciaA");
         String img=p.getProperty("imagenes");
         String colab=p.getProperty("colaborador");
         String propu=p.getProperty("propuesta");
