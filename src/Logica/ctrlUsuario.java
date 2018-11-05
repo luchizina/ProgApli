@@ -1292,22 +1292,24 @@ if(nuevito.getActivo()==false){
     
     @Override
     public List<DtProponente> List_DtProponente_Eliminar_Desactivado(List<DtProponente> lista){
-        
-        for (int i = 0; i < lista.size(); i++) {
+        int x = lista.size();
+        List<DtProponente> aux = lista;
+        for (int i = 0; i < x; i++) {
             //if (this.Existe_Proponente(lista.get(i).getNick())){ // Todos deberian de ser proponentes
+                int c = lista.size();
                 Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
                 if (!P.getActivo()) {                                           // Si esta desactivado 
-                    lista.remove(lista.get(i));                                 // lo saco de la lista
+                    aux.remove(lista.get(i));                                 // lo saco de la lista
                 }
             //}
         }
-    return lista;
+    return aux;
     };
     
     @Override
     public List<DtColaboracion> List_DtColaboracio_Eliminar_Desactivado(List<DtColaboracion> lista){
-   
-        for (int i = 0; i < lista.size(); i++){
+        int x = lista.size();
+        for (int i = 0; i < x; i++){
             if(!this.traerProponente(lista.get(i).getPropuesta().getPropo()).getActivo()){
                 lista.remove(i);
             }
@@ -1317,8 +1319,8 @@ if(nuevito.getActivo()==false){
     
     
     public List<DtUsuario> List_DtUsuario_Eliminar_Desactivado(List<DtUsuario> lista){
-        
-        for (int i = 0; i < lista.size(); i++) {
+        int x = lista.size();
+        for (int i = 0; i < x; i++) {
             if (this.Existe_Proponente(lista.get(i).getNick())){ 
                 Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
                 if (!P.getActivo()) {                                           // Si esta desactivado 

@@ -1073,8 +1073,8 @@ public class ctrlPropuesta implements IPropuesta {
 
     @Override
     public List<String> List_String_Eliminar_Desactivado(List<String> lista){
-    
-    for (int i = 0; i < lista.size(); i++) {
+    int x = lista.size();
+    for (int i = 0; i < x; i++) {
             Propuesta P = (Propuesta) this.getPropPorNick(lista.get(i));
             if (!iUsu.traerProponente(P.getPropo()).getActivo()) {              // Si esta desactivado 
                 lista.remove(lista.get(i));                                     // lo saco de la lista
@@ -1086,8 +1086,8 @@ public class ctrlPropuesta implements IPropuesta {
     
     @Override
     public List<DtPropuesta> List_DtPropuesta_Eliminar_Desactivado(List<DtPropuesta> lista){
-  
-         for (int i = 0; i < lista.size(); i++) {
+        int x = lista.size();
+         for (int i = 0; i < x; i++) {
             Propuesta P = (Propuesta) this.getPropPorNick(lista.get(i).getTitulo());
             if (!iUsu.traerProponente(P.getPropo()).getActivo()) {              // Si esta desactivado 
                 lista.remove(lista.get(i));                                     // lo saco de la lista
@@ -1109,7 +1109,8 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public List<Colaboracion> List_Colaboracion_Eliminar_Desactivado(List<Colaboracion> lista){
         
-    for (int i = 0; i < lista.size(); i++) {
+    int x = lista.size();    
+    for (int i = 0; i < x; i++) {
             //Colaboracion C = this.Traer_Colboracion(lista.get(i).,);
             if (!iUsu.traerProponente(lista.get(i).getProp().getPropo()).getActivo()) { // Si esta desactivado 
                 lista.remove(lista.get(i));                                             // lo saco de la lista
