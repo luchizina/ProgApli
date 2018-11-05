@@ -85,7 +85,8 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProperty("colaborador");
+                String rutaSistema= System.getProperty("user.dir")+"\\";
+                String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
@@ -240,7 +241,8 @@ public List<DtUsuario> listaNC(String txt) {
         Iterator it = se.iterator();
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
-            Usuario us = (Usuario) mentry.getValue();         
+            Usuario us = (Usuario) mentry.getValue();
+            System.out.println(us.getNick());
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
             if (us instanceof Proponente){          // agregado
                 if(((Proponente) us).getActivo()){  // agregado
@@ -307,8 +309,8 @@ public List<DtUsuario> listaNC(String txt) {
                 listita.add(aux.obtenerInfo());
             }
         }
-        return listita;
-
+        //return listita;
+        return this.List_DtProponente_Eliminar_Desactivado(listita);
     }
 
     @Override
@@ -321,7 +323,8 @@ public List<DtUsuario> listaNC(String txt) {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProperty("proponente");
+                String rutaSistema= System.getProperty("user.dir")+"\\";
+String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
                 String destino = dest + Nick + "." + termina;
 
   
@@ -392,7 +395,7 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
     public void limpiarUsuarios() {
         
         Properties p=Utils.getPropiedades();
-        String ruta= p.getProperty("rutaLuciaA");
+      String rutaSistema= System.getProperty("user.dir")+"\\";
         String img=p.getProperty("imagenes");
         String colab=p.getProperty("colaborador");
         String propu=p.getProperty("propuesta");
@@ -400,15 +403,15 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
         
         try {
             this.usu.limpiarBase();
-            File borrar = new File(ruta+img+colab);
+            File borrar = new File(rutaSistema+img+colab);
             if (borrar.exists()) {
                 this.borrarArch(borrar);
             }
-            File borrar1 = new File(ruta+img+propo);
+            File borrar1 = new File(rutaSistema+img+propo);
             if (borrar1.exists()) {
                 this.borrarArch(borrar1);
             }
-            File borrar2 = new File(ruta+img+propu);
+            File borrar2 = new File(rutaSistema+img+propu);
             if (borrar2.exists()) {
                 this.borrarArch(borrar2);
             }
@@ -495,7 +498,8 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
             DtColaboracion cola = new DtColaboracion(prop);
             listita.add(cola);
         }
-        return listita;
+        //return listita;
+        return this.List_DtColaboracio_Eliminar_Desactivado(listita);
     }
 
     @Override
@@ -656,12 +660,17 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
 
                 } else {
                     if (prop.getPass().equals(passEncriptada)) {
+ Usuario nuevo=this.traerUsuario(nick);             
 
+Proponente nuevito=(Proponente) nuevo;
+if(nuevito.getActivo()==false){
+      resultado.setEstLogin(false);
+}else{
                         resultado.setEstLogin(true);
                         resultado.setMensaje(cadena5);
                         resultado.setNick(prop.getNick());
                         resultado.setTipo("proponente");
-                    } else {
+}   } else {
                         //la contraseña ingresada es incorrectafas
                         resultado.setEstLogin(false);
                         resultado.setMensaje("La contraseña ingresada es incorrecta");
@@ -674,13 +683,20 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
 
             } else {
                 if (prop.getPass().equals(passEncriptada)) {
+       Usuario nuevo=this.traerUsuario(nick);             
+
+Proponente nuevito=(Proponente) nuevo;
+if(nuevito.getActivo()==false){
+      resultado.setEstLogin(false);
+}else{
+    
 
                     resultado.setEstLogin(true);
                     resultado.setMensaje(cadena5);
                     resultado.setTipo("proponente");
                     resultado.setNick(prop.getNick());
 
-                } else {
+               } } else {
                     resultado.setEstLogin(false);
                     resultado.setMensaje("La contraseña ingresada es incorrecta");
 
@@ -1230,7 +1246,7 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
     
     public List<DtUsuario> rankingUser()
     {
-        List<DtUsuario>lista =this.listarUsuarios2().getListita();
+        List<DtUsuario>lista = this.listarUsuarios2().getListita();
         Collections.sort(lista, (DtUsuario dt1, DtUsuario dt2) -> this.contarSeguidores(dt2.getNick()) - this.contarSeguidores(dt1.getNick()));
         return lista;
     }
@@ -1261,4 +1277,37 @@ String dest=pr.getProperty("rutaLuciaA")+pr.getProperty("imagenes")+pr.getProper
         return imagen;
     };
     
+    public boolean Existe_Proponente (String nick){ 
+        Usuario A = usuarios.get(nick);
+        if (A instanceof Proponente){
+            return true;
+        }
+        else 
+            return false;
+    }; 
+    
+    @Override
+    public List<DtProponente> List_DtProponente_Eliminar_Desactivado(List<DtProponente> lista){
+        
+        for (int i = 0; i < lista.size(); i++) {
+            //if (this.Existe_Proponente(lista.get(i).getNick())){ // Todos deberian de ser proponentes
+                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
+                if (!P.getActivo()) {                                           // Si esta desactivado 
+                    lista.remove(lista.get(i));                                 // lo saco de la lista
+                }
+            //}
+        }
+    return lista;
+    };
+    
+    @Override
+    public List<DtColaboracion> List_DtColaboracio_Eliminar_Desactivado(List<DtColaboracion> lista){
+   
+        for (int i = 0; i < lista.size(); i++){
+            if(!this.traerProponente(lista.get(i).getPropuesta().getPropo()).getActivo()){
+                lista.remove(i);
+            }
+        }
+        return lista;
+    };
 }

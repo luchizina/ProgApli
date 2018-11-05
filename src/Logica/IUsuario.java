@@ -90,4 +90,6 @@ public interface IUsuario {
     public abstract DtPath Path_A_DT(Path dts);
     
     public abstract DataImagen Crear_DataImagen(final byte[] stream, final String nombreArchivo, final String extensionArchivo);
+    public abstract List<DtProponente> List_DtProponente_Eliminar_Desactivado(List<DtProponente> lista);
+    public abstract List<DtColaboracion> List_DtColaboracio_Eliminar_Desactivado(List<DtColaboracion> lista);
 }

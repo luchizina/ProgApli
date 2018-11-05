@@ -164,15 +164,15 @@ public class DBPropuesta {
         
         
         Properties p= Utils.getPropiedades();
-        
+      String rutaSistema= System.getProperty("user.dir")+"\\";
         for (int i = 0; i < 8; i++) {
             String Imagen = null;
             if (imagenes[i] != null) {
-                String ruta = p.getProperty("rutaJorge");
+               
                 String[] aux = imagenes[i].split("\\.");
                 String termina = aux[1];
-                String origen = ruta+imagenes[i];
-                String dest1=ruta+p.getProperty("imagenes")+p.getProperty("propuesta");
+                String origen = rutaSistema+imagenes[i];
+                String dest1=rutaSistema+p.getProperty("imagenes")+p.getProperty("propuesta");
                 String destino = dest1 + titulos[i] + "." + termina;
                 if (this.copia(origen, destino) == true) {
                     Imagen = destino;
