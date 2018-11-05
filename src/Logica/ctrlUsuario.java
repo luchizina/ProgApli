@@ -244,13 +244,13 @@ public List<DtUsuario> listaNC(String txt) {
             Usuario us = (Usuario) mentry.getValue();
             System.out.println(us.getNick());
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
-            if (us instanceof Proponente){          // agregado
-                if(((Proponente) us).getActivo()){  // agregado
+            //if (us instanceof Proponente){          // agregado
+            //    if(((Proponente) us).getActivo()){  // agregado
                 usuarios.add(usuarito);
-                }
-            }
+            //    }
+            //}
         }
-        return usuarios;
+        return this.List_DtUsuario_Eliminar_Desactivado(usuarios);
 
     }
 
@@ -271,11 +271,11 @@ public List<DtUsuario> listaNC(String txt) {
                         if (user.getNick().equals(nick)) {
                             DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
                             //seguidores.add(seguidor);
-                            if (aux instanceof Proponente) {             // agregado
-                                if (((Proponente) aux).getActivo()) {    // agregado
+                            //if (aux instanceof Proponente) {             // agregado
+                            //    if (((Proponente) aux).getActivo()) {    // agregado
                                     seguidores.add(seguidor);
-                                }
-                            }
+                            //    }
+                            //}
                         }
                     }
                 }
@@ -283,7 +283,8 @@ public List<DtUsuario> listaNC(String txt) {
             }
 
         }
-        return seguidores;
+        //return seguidores;
+        return this.List_DtUsuario_Eliminar_Desactivado(seguidores);
     }
 
     @Override
@@ -864,10 +865,13 @@ if(nuevito.getActivo()==false){
         List<Colaboracion> listitaC = new ArrayList<>();
         listitaC = x.getColHechas();
         for (int i = 0; i < listitaC.size(); i++) {
+            // filtro aca
+            if(this.traerProponente(listitaC.get(i).getProp().getPropo()).getActivo()){
             String name = listitaC.get(i).getProp().getTitulo();
             nombresP.add(name);
+            }
         }
-        return nombresP;
+        return nombresP; 
     }
 
     ;
@@ -1309,5 +1313,19 @@ if(nuevito.getActivo()==false){
             }
         }
         return lista;
+    };
+    
+    
+    public List<DtUsuario> List_DtUsuario_Eliminar_Desactivado(List<DtUsuario> lista){
+        
+        for (int i = 0; i < lista.size(); i++) {
+            if (this.Existe_Proponente(lista.get(i).getNick())){ 
+                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
+                if (!P.getActivo()) {                                           // Si esta desactivado 
+                    lista.remove(lista.get(i));                                 // lo saco de la lista
+                }
+            }
+        }
+    return lista;
     };
 }
