@@ -292,8 +292,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public List<Colaboracion> listarColaboraciones() {
-        //return this.colaboraciones;
-        return this.List_Colaboracion_Eliminar_Desactivado(this.colaboraciones);
+        return this.colaboraciones;
     }
 
     @Override
@@ -458,10 +457,11 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
+            if(iUsu.traerProponente(aux.getPropo()).getActivo()){ //agregado 
             listita.add(aux.obtenerInfo());
+            }
         }
-        //return listita;
-        return this.List_DtPropuesta_Eliminar_Desactivado(listita);
+        return listita;
     }
 
     public DtPropuesta traerPropuesta(String titulo) {
@@ -496,12 +496,11 @@ public class ctrlPropuesta implements IPropuesta {
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux != null) {
+            if (aux != null && iUsu.traerProponente(aux.getPropo()).getActivo()) { // midificado
                 Nicks.add(aux.getTitulo());
             }
         }
-        //return Nicks;
-        return this.List_String_Eliminar_Desactivado(Nicks);
+        return Nicks;
     }
 
     ;
@@ -701,7 +700,7 @@ public class ctrlPropuesta implements IPropuesta {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             //if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
-            if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false ) {
+            if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false && iUsu.traerProponente(aux.getPropo()).getActivo()) { // agregado
             //ActualizarEstado(aux);
                 listita.add(aux.obtenerInfo());
             }
@@ -709,8 +708,7 @@ public class ctrlPropuesta implements IPropuesta {
         Collections.sort(listita, (c, d) -> {
             return c.getTitulo().compareTo(d.getTitulo());
         });
-        //return listita;
-        return this.List_DtPropuesta_Eliminar_Desactivado(listita);
+        return listita;
     }
 
     @Override
@@ -724,15 +722,14 @@ public class ctrlPropuesta implements IPropuesta {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             //if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
-            if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false) {
+            if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false && iUsu.traerProponente(aux.getPropo()).getActivo()) {
             listita.add(aux.obtenerInfo());
             }
         }
         Collections.sort(listita, (c, d) -> {
             return c.getTitulo().compareTo(d.getTitulo());
         });
-        //return listita;
-        return this.List_DtPropuesta_Eliminar_Desactivado(listita);
+        return listita;
     }
 
     @Override
@@ -1071,30 +1068,30 @@ public class ctrlPropuesta implements IPropuesta {
     //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     //}
 
-    @Override
-    public List<String> List_String_Eliminar_Desactivado(List<String> lista){
-    int x = lista.size();
-    for (int i = 0; i < x; i++) {
-            Propuesta P = (Propuesta) this.getPropPorNick(lista.get(i));
-            if (!iUsu.traerProponente(P.getPropo()).getActivo()) {              // Si esta desactivado 
-                lista.remove(lista.get(i));                                     // lo saco de la lista
-            }
-        }
-    return lista;
-    }
+//    @Override
+//    public List<String> List_String_Eliminar_Desactivado(List<String> lista){
+//    int x = lista.size();
+//    for (int i = 0; i < x; i++) {
+//            Propuesta P = (Propuesta) this.getPropPorNick(lista.get(i));
+//            if (!iUsu.traerProponente(P.getPropo()).getActivo()) {              // Si esta desactivado 
+//                lista.remove(lista.get(i));                                     // lo saco de la lista
+//            }
+//        }
+//    return lista;
+//    }
     
     
-    @Override
-    public List<DtPropuesta> List_DtPropuesta_Eliminar_Desactivado(List<DtPropuesta> lista){
-        int x = lista.size();
-         for (int i = 0; i < x; i++) {
-            Propuesta P = (Propuesta) this.getPropPorNick(lista.get(i).getTitulo());
-            if (!iUsu.traerProponente(P.getPropo()).getActivo()) {              // Si esta desactivado 
-                lista.remove(lista.get(i));                                     // lo saco de la lista
-            }
-        }
-    return lista;
-    };
+//    @Override
+//    public List<DtPropuesta> List_DtPropuesta_Eliminar_Desactivado(List<DtPropuesta> lista){
+//        int x = lista.size();
+//         for (int i = 0; i < x; i++) {
+//            Propuesta P = (Propuesta) this.getPropPorNick(lista.get(i).getTitulo());
+//            if (!iUsu.traerProponente(P.getPropo()).getActivo()) {              // Si esta desactivado 
+//                lista.remove(lista.get(i));                                     // lo saco de la lista
+//            }
+//        }
+//    return lista;
+//    };
     
     public Colaboracion Traer_Colboracion(String nick_colaborador, String titulo_propuesta){
         for (int i = 0; i < this.colaboraciones.size(); i++) {
@@ -1106,16 +1103,16 @@ public class ctrlPropuesta implements IPropuesta {
         return null; 
     };
     
-    @Override
-    public List<Colaboracion> List_Colaboracion_Eliminar_Desactivado(List<Colaboracion> lista){
-        
-    int x = lista.size();    
-    for (int i = 0; i < x; i++) {
-            //Colaboracion C = this.Traer_Colboracion(lista.get(i).,);
-            if (!iUsu.traerProponente(lista.get(i).getProp().getPropo()).getActivo()) { // Si esta desactivado 
-                lista.remove(lista.get(i));                                             // lo saco de la lista
-            }
-        }
-    return lista;
-    };
+//    @Override
+//    public List<Colaboracion> List_Colaboracion_Eliminar_Desactivado(List<Colaboracion> lista){
+//        
+//    int x = lista.size();    
+//    for (int i = 0; i < x; i++) {
+//            //Colaboracion C = this.Traer_Colboracion(lista.get(i).,);
+//            if (!iUsu.traerProponente(lista.get(i).getProp().getPropo()).getActivo()) { // Si esta desactivado 
+//                lista.remove(lista.get(i));                                             // lo saco de la lista
+//            }
+//        }
+//    return lista;
+//    };
 }
