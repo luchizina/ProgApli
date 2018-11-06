@@ -8,6 +8,3 @@ Class-Path: ./lib/jcalendar-1.4.jar ./lib/mysql-connector-java-5.1.23-bin.jar
 
 
 
-
-
-

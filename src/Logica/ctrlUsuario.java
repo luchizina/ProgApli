@@ -85,7 +85,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String rutaSistema= System.getProperty("user.dir")+"\\";
+               String rutaSistema= System.getProperty("user.dir")+"\\";          
                 String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
@@ -244,14 +244,13 @@ public List<DtUsuario> listaNC(String txt) {
             Usuario us = (Usuario) mentry.getValue();
             System.out.println(us.getNick());
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
-            //if (us instanceof Proponente){          // agregado
-            //    if(((Proponente) us).getActivo()){  // agregado
+            if (us instanceof Proponente){          // agregado
+                if(((Proponente) us).getActivo()){  // agregado
                 usuarios.add(usuarito);
-            //    }
-            //}
+                }
+            }
         }
-        return this.List_DtUsuario_Eliminar_Desactivado(usuarios);
-
+        return usuarios;
     }
 
     @Override
@@ -271,11 +270,11 @@ public List<DtUsuario> listaNC(String txt) {
                         if (user.getNick().equals(nick)) {
                             DtUsuario seguidor = this.traerDtUsuario(aux.getNick());
                             //seguidores.add(seguidor);
-                            //if (aux instanceof Proponente) {             // agregado
-                            //    if (((Proponente) aux).getActivo()) {    // agregado
+                            if (aux instanceof Proponente) {             // agregado
+                                if (((Proponente) aux).getActivo()) {    // agregado
                                     seguidores.add(seguidor);
-                            //    }
-                            //}
+                                }
+                            }
                         }
                     }
                 }
@@ -283,8 +282,7 @@ public List<DtUsuario> listaNC(String txt) {
             }
 
         }
-        //return seguidores;
-        return this.List_DtUsuario_Eliminar_Desactivado(seguidores);
+        return seguidores;
     }
 
     @Override
@@ -307,11 +305,13 @@ public List<DtUsuario> listaNC(String txt) {
             if (mentry.getValue() instanceof Proponente) {
 
                 Proponente aux = (Proponente) mentry.getValue();
+                if (aux.getActivo()){   //agregado
                 listita.add(aux.obtenerInfo());
             }
+            }
         }
-        //return listita;
-        return this.List_DtProponente_Eliminar_Desactivado(listita);
+        return listita;
+        //return this.List_DtProponente_Eliminar_Desactivado(listita);
     }
 
     @Override
@@ -497,10 +497,11 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
         for (int i = 0; i < listitaC.size(); i++) {
             DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
             DtColaboracion cola = new DtColaboracion(prop);
+            if(this.traerProponente(listitaC.get(i).getProp().getPropo()).getActivo()){ // agregado
             listita.add(cola);
+            }
         }
-        //return listita;
-        return this.List_DtColaboracio_Eliminar_Desactivado(listita);
+        return listita;
     }
 
     @Override
@@ -977,12 +978,13 @@ if(nuevito.getActivo()==false){
     String carpetaImagenes;
 
     @Override
-    public void configurarParametros(String carpetaImagenes) {
-        File ade = new File(carpetaImagenes);
+    public void configurarParametros() {
+         String tara2vos= System.getProperty("user.dir")+"\\"+"web";
+        File ade = new File(tara2vos);
         if(!ade.exists()){
         ade.getParentFile().mkdirs();
         }
-        this.carpetaImagenes = carpetaImagenes;
+        this.carpetaImagenes = tara2vos;
     }
 
     private Map<String, DataImagen> imagenesMap = new HashMap<>();
@@ -1290,42 +1292,44 @@ if(nuevito.getActivo()==false){
             return false;
     }; 
     
-    @Override
-    public List<DtProponente> List_DtProponente_Eliminar_Desactivado(List<DtProponente> lista){
-        
-        for (int i = 0; i < lista.size(); i++) {
-            //if (this.Existe_Proponente(lista.get(i).getNick())){ // Todos deberian de ser proponentes
-                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
-                if (!P.getActivo()) {                                           // Si esta desactivado 
-                    lista.remove(lista.get(i));                                 // lo saco de la lista
-                }
-            //}
-        }
-    return lista;
-    };
+//    @Override
+//    public List<DtProponente> List_DtProponente_Eliminar_Desactivado(List<DtProponente> lista){
+//        int x = lista.size();
+//        List<DtProponente> aux = lista;
+//        for (int i = 0; i < x; i++) {
+//            //if (this.Existe_Proponente(lista.get(i).getNick())){ // Todos deberian de ser proponentes
+//                int c = lista.size();
+//                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
+//                if (!P.getActivo()) {                                           // Si esta desactivado 
+//                    aux.remove(lista.get(i));                                 // lo saco de la lista
+//                }
+//            //}
+//        }
+//    return aux;
+//    };
     
-    @Override
-    public List<DtColaboracion> List_DtColaboracio_Eliminar_Desactivado(List<DtColaboracion> lista){
-   
-        for (int i = 0; i < lista.size(); i++){
-            if(!this.traerProponente(lista.get(i).getPropuesta().getPropo()).getActivo()){
-                lista.remove(i);
-            }
-        }
-        return lista;
-    };
+//    @Override
+//    public List<DtColaboracion> List_DtColaboracio_Eliminar_Desactivado(List<DtColaboracion> lista){
+//        int x = lista.size();
+//        for (int i = 0; i < x; i++){
+//            if(!this.traerProponente(lista.get(i).getPropuesta().getPropo()).getActivo()){
+//                lista.remove(i);
+//            }
+//        }
+//        return lista;
+//    };
     
     
-    public List<DtUsuario> List_DtUsuario_Eliminar_Desactivado(List<DtUsuario> lista){
-        
-        for (int i = 0; i < lista.size(); i++) {
-            if (this.Existe_Proponente(lista.get(i).getNick())){ 
-                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
-                if (!P.getActivo()) {                                           // Si esta desactivado 
-                    lista.remove(lista.get(i));                                 // lo saco de la lista
-                }
-            }
-        }
-    return lista;
-    };
+//    public List<DtUsuario> List_DtUsuario_Eliminar_Desactivado(List<DtUsuario> lista){
+//        int x = lista.size();
+//        for (int i = 0; i < x; i++) {
+//            if (this.Existe_Proponente(lista.get(i).getNick())){ 
+//                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
+//                if (!P.getActivo()) {                                           // Si esta desactivado 
+//                    lista.remove(lista.get(i));                                 // lo saco de la lista
+//                }
+//            }
+//        }
+//    return lista;
+//    };
 }

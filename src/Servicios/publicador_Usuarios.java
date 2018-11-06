@@ -232,9 +232,9 @@ public class publicador_Usuarios {
          return xD.sha1(pass);
      }
      @WebMethod
-     public void configurarParametros(String carpetaImagenes)
+     public void configurarParametros()
      {
-         xD.configurarParametros(carpetaImagenes);
+         xD.configurarParametros();
      }
      @WebMethod
      public dataListPropuestas traerMisPropuestasF(String nick)

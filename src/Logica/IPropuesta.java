@@ -31,7 +31,7 @@ public interface IPropuesta {
     public boolean yaFavoriteo(Usuario u,String p);
     public void agregarFavorito(Usuario usu, Propuesta prop);
     public void agregarComentario(Colaborador nick, Propuesta titulo, String texto);
-    public void configurarParametros(String carpetaImagenes);
+    public void configurarParametros();
     //public Path agregarImagen(final DtPropuesta imagenUsuario);
     public String agregarImagen(String titulo_propuesta, DataImagen imagen);
     public abstract boolean existeTitulo(String titulo);
@@ -72,7 +72,4 @@ public interface IPropuesta {
     public abstract Estado Crear_Esatado_Ingresada();
     //public abstract dataRenderedImag traerImagensitaPropuesta(String titulo);
     public abstract boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar);
-    public abstract List<String> List_String_Eliminar_Desactivado(List<String> lista);
-    public abstract List<DtPropuesta> List_DtPropuesta_Eliminar_Desactivado(List<DtPropuesta> lista);
-    public abstract List<Colaboracion> List_Colaboracion_Eliminar_Desactivado(List<Colaboracion> lista);
 }
