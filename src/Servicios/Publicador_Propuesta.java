@@ -95,8 +95,8 @@ public class Publicador_Propuesta {
         return IP.retornarImagen(titulo);
     }
     @WebMethod
-    public void Configurar_Parametros(String imagen){
-        IP.configurarParametros(imagen);
+    public void Configurar_Parametros(){
+        IP.configurarParametros();
     }
     @WebMethod
     public boolean Agregar_Propuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img, String nickP, String hora, String Lugar){

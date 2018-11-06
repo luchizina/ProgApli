@@ -129,7 +129,8 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String dest=pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("propuesta");
+                     String rutaSistema= System.getProperty("user.dir")+"\\";    
+                    String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("propuesta");
                     String destino = dest + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
@@ -767,12 +768,13 @@ public class ctrlPropuesta implements IPropuesta {
     String carpetaImagenes;
 
     @Override
-    public void configurarParametros(String carpetaImagenes) {
-        File ade = new File(carpetaImagenes);
+    public void configurarParametros() {
+        String tara2vos= System.getProperty("user.dir")+"\\"+"web";
+        File ade = new File(tara2vos);
         if (!ade.exists()) {
             ade.getParentFile().mkdirs();
         }
-        this.carpetaImagenes = carpetaImagenes;
+        this.carpetaImagenes = tara2vos;
 
     }
 

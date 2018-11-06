@@ -31,7 +31,7 @@ public interface IPropuesta {
     public boolean yaFavoriteo(Usuario u,String p);
     public void agregarFavorito(Usuario usu, Propuesta prop);
     public void agregarComentario(Colaborador nick, Propuesta titulo, String texto);
-    public void configurarParametros(String carpetaImagenes);
+    public void configurarParametros();
     //public Path agregarImagen(final DtPropuesta imagenUsuario);
     public String agregarImagen(String titulo_propuesta, DataImagen imagen);
     public abstract boolean existeTitulo(String titulo);

@@ -85,7 +85,7 @@ public class ctrlUsuario implements IUsuario {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String rutaSistema= System.getProperty("user.dir")+"\\";
+               String rutaSistema= System.getProperty("user.dir")+"\\";          
                 String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
@@ -977,12 +977,13 @@ if(nuevito.getActivo()==false){
     String carpetaImagenes;
 
     @Override
-    public void configurarParametros(String carpetaImagenes) {
-        File ade = new File(carpetaImagenes);
+    public void configurarParametros() {
+         String tara2vos= System.getProperty("user.dir")+"\\"+"web";
+        File ade = new File(tara2vos);
         if(!ade.exists()){
         ade.getParentFile().mkdirs();
         }
-        this.carpetaImagenes = carpetaImagenes;
+        this.carpetaImagenes = tara2vos;
     }
 
     private Map<String, DataImagen> imagenesMap = new HashMap<>();

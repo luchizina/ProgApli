@@ -20,7 +20,7 @@ import Logica.dataListUsuarios;
  * @author Luchi
  */
 public interface IUsuario {
-    void configurarParametros(final String carpetaImagenes);
+    void configurarParametros();
     String agregarImagen(String nick,  final DataImagen img, String pass); // Cambiado de Path a String
     public abstract boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass);
     public abstract boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo, String pass);
