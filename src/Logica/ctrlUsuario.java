@@ -115,7 +115,27 @@ public List<DtUsuario> listaNC(String txt) {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Usuario aux = (Usuario) mentry.getValue();
-            if (aux.getNick().contains(txt) == true) {
+            
+            if(aux instanceof Proponente){
+            Proponente propo = (Proponente) aux;        
+            if(propo.getActivo()==true){
+                
+          
+            if (propo.getNick().contains(txt) == true) {
+                DtUsuario da = this.traerDtUsuario(propo.getNick());
+                prop.add(da);
+                esta = true;
+            }
+
+            if (propo.getCorreo().contains(txt) == true && !esta) {
+                 DtUsuario da = this.traerDtUsuario(propo.getNick());
+                prop.add(da);
+                esta = true;
+            }
+            esta = false;
+              }
+             }else{
+               if (aux.getNick().contains(txt) == true) {
                 DtUsuario da = this.traerDtUsuario(aux.getNick());
                 prop.add(da);
                 esta = true;
@@ -125,8 +145,8 @@ public List<DtUsuario> listaNC(String txt) {
                  DtUsuario da = this.traerDtUsuario(aux.getNick());
                 prop.add(da);
                 esta = true;
+            }  
             }
-            esta = false;
         }
         return prop;
     }
@@ -1183,9 +1203,12 @@ if(nuevito.getActivo()==false){
             if (mentry.getValue() instanceof Proponente) {
 
                 Proponente aux = (Proponente) mentry.getValue();
+                if(aux.getActivo()==true){
+                    
+               
                 DtProponente lol = new DtProponente(aux.getNick(), aux.getImg() ,aux.getBiografia() ,aux.getLinkWeb(), aux.getDireccion(),aux.getNombre(),aux.getApellido(), aux.getCorreo());
                 listita.add(lol);
-            }
+            } }
             else
             {
                 Colaborador aux = (Colaborador) mentry.getValue();
