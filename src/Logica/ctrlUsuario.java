@@ -568,7 +568,11 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             DtPropuesta prop = new DtPropuesta((Propuesta) mentry.getValue());
+         Usuario propoACargo= this.traerUsuario(prop.getPropo());
+         Proponente propon = (Proponente) propoACargo;
+         if(propon.getActivo()==true){
             propuestas.add(prop);
+             }
         }
         return propuestas;
     }
@@ -1014,6 +1018,9 @@ if(nuevito.getActivo()==false){
         DtUsuario user = this.traerDtUsuario(nick);
         List<DtPropuesta> propuestas = new ArrayList<>();
         Proponente prop = this.traerProponente(nick);
+        if(prop.getActivo()==true){
+            
+        
         Map<String, Propuesta> propuestasAux = prop.getPropuestas();
         Set se = propuestasAux.entrySet();
         Iterator it = se.iterator();
@@ -1024,6 +1031,7 @@ if(nuevito.getActivo()==false){
                 propuestas.add(propuesta);
             }
         }
+        }
         return propuestas;
     }
 
@@ -1032,6 +1040,9 @@ if(nuevito.getActivo()==false){
         DtUsuario user = this.traerDtUsuario(nick);
         List<DtPropuesta> propuestas = new ArrayList<>();
         Proponente prop = this.traerProponente(nick);
+        if(prop.getActivo()==true){
+            
+        
         Map<String, Propuesta> propuestasAux = prop.getPropuestas();
         Set se = propuestasAux.entrySet();
         Iterator it = se.iterator();
@@ -1041,6 +1052,7 @@ if(nuevito.getActivo()==false){
             if (propuesta.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 propuestas.add(propuesta);
             }
+        }
         }
         return propuestas;
     }
