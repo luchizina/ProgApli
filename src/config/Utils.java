@@ -12,7 +12,7 @@ public class Utils {
            
            Properties p= new Properties();
         try{
-            FileInputStream in = new FileInputStream("Configuraciones/propiedades.properties");
+            FileInputStream in = new FileInputStream("Configuraciones/propiedades1.properties");
             p.load(in);
         }catch(IOException ex){  
         }

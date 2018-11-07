@@ -752,6 +752,12 @@ public class ctrlPropuesta implements IPropuesta {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta aux = (Propuesta) mentry.getValue();
+        Usuario propo = this.iUsu.traerUsuario(aux.getPropo());
+        Proponente propone = (Proponente) propo;
+        if(propone.getActivo()==true){
+            
+        
+            
             if (aux.getTitulo().contains(txt) == true && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
                 prop.add(aux.obtenerInfo());
                 esta = true;
@@ -767,6 +773,7 @@ public class ctrlPropuesta implements IPropuesta {
             }
 
             esta = false;
+            }
         }
 
         return prop;
