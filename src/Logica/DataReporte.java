@@ -12,6 +12,70 @@ package Logica;
 public class DataReporte {
     String nick;
     String nombre;
+
+    public String getNick() {
+        return nick;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getFechaNac() {
+        return fechaNac;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getEmision() {
+        return emision;
+    }
+
+    public String getPropuesta() {
+        return propuesta;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public int getMonto() {
+        return monto;
+    }
+
+    public String getRetorno() {
+        return retorno;
+    }
+
+    public int getCvc() {
+        return cvc;
+    }
+
+    public String getVenc() {
+        return venc;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public String getTipoT() {
+        return tipoT;
+    }
+
+    public String getBanco() {
+        return banco;
+    }
     String apellido;
     String fechaNac;
     String correo;

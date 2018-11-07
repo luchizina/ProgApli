@@ -1254,6 +1254,16 @@ public class ctrlPropuesta implements IPropuesta {
         if(this.pago(prop, usu)){
             if(pag instanceof PayPal){
                 DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero());
+                return data;
+            }
+            if(pag instanceof Transferencia){
+                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero(),((Transferencia) pag).getBanco());
+                return data;
+            }
+            if(pag instanceof Tarjeta){
+                String vencimiento = lala.format(((Tarjeta) pag).getFecha());
+                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero(),((Tarjeta) pag).getCvc(),vencimiento,((Tarjeta) pag).getTipo());
+                return data;
             }
         }
         return null;
