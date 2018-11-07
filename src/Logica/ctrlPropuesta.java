@@ -621,17 +621,18 @@ public class ctrlPropuesta implements IPropuesta {
     @Override
     public DefaultListModel BUSCADOR_Propuestas(String Palabra) {
         DefaultListModel modelo = new DefaultListModel();
+        List<String> lista_propuestas = this.ListarProp();
         if (Palabra.equals("")) {                      // SI NO BUSCA
             if (!this.ListarProp().isEmpty()) {
-                for (int i = 0; i < propuestas.size(); i++) {
-                    String p = (String) this.ListarProp().get(i);
+                for (int i = 0; i < lista_propuestas.size(); i++) {
+                    String p = (String) lista_propuestas.get(i);
                     modelo.addElement(p);
                 }
             }
         } else {                                    // SI BUSCA
             if (!this.ListarProp().isEmpty()) {
-                for (int i = 0; i < propuestas.size(); i++) {
-                    String p = (String) this.ListarProp().get(i);
+                for (int i = 0; i < lista_propuestas.size(); i++) {
+                    String p = (String) lista_propuestas.get(i);
                     if (p.contains(Palabra)) {
                         modelo.addElement(p);
                     }
@@ -1268,4 +1269,34 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return null;
     }
+    
+    
+    @Override
+    public DefaultListModel Propuestas_Desactivadas(String proponente_nick){
+        DefaultListModel modelo = new DefaultListModel();
+        Proponente P = iUsu.traerProponente(proponente_nick);
+        Set set = P.getPropuestas().entrySet();
+        Iterator iteradorsito = set.iterator();
+        while (iteradorsito.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iteradorsito.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            //if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
+            modelo.addElement(aux.getTitulo());
+        }
+        return modelo;
+    };
+    
+    
+    @Override
+    public TableModel Listar_Colaboracines_tabla(String titulo_propuesta){
+    String columnas [] = {"Colaborador","Monto"};
+     DefaultTableModel model = new DefaultTableModel(null,columnas);
+    Propuesta P = this.getPropPorNick(titulo_propuesta);
+    for (int i = 0; i < P.getColaboraciones().size(); i++){
+        Colaboracion C = P.getColaboraciones().get(i);
+        Object[] dat={C.getColab().getNombre()+"("+C.getColab().getNick()+")",C.getMonto()};
+        model.addRow(dat);
+    }
+    return model;
+    };
 }

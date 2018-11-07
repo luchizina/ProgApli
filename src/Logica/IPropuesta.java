@@ -76,4 +76,6 @@ public interface IPropuesta {
     public abstract Estado Crear_Esatado_Ingresada();
     //public abstract dataRenderedImag traerImagensitaPropuesta(String titulo);
     public abstract boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar);
+    public abstract DefaultListModel Propuestas_Desactivadas(String proponente_nick);
+    public abstract TableModel Listar_Colaboracines_tabla(String titulo_propuesta);
 }
