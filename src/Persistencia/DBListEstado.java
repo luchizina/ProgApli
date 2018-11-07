@@ -59,8 +59,9 @@ statement.setString(1, parte1);
 statement.setString(2, parte2);
 statement.setString(3, t);
 statement.setString(4, p.getEst());
+//System.out.println(parte1+" "+parte2+" "+t+" "+ p.getEst());
 statement.executeUpdate();
-        }
+            }
         return true;
     }
 
