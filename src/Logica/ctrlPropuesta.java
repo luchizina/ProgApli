@@ -17,6 +17,15 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import static Logica.Testado.Publicada;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.RenderedImage;
@@ -56,6 +65,7 @@ import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import config.Utils;
+import java.io.FileOutputStream;
 import java.util.Properties;
 
 /**
@@ -67,6 +77,7 @@ public class ctrlPropuesta implements IPropuesta {
     private Map<String, Propuesta> propuestas;
     private static ctrlPropuesta instancia;
     private List<Colaboracion> colaboraciones;
+    private List<pagos> pagos;
     private Propuesta propuestaconsulta = null;
     DBPropuesta dbPropuesta = null;
     DBListEstado dbE = null;
@@ -119,9 +130,8 @@ public class ctrlPropuesta implements IPropuesta {
 //(String titulo, String desc, String fecha, int precioE, String fechaPub, int montoTotal, String cate,String img)
     @Override
     public boolean AgregarPropuesta(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, Estado estActual, String img, String nickP, String hora, String Lugar) {
-       
-        
-       Properties pr= Utils.getPropiedades();
+
+        Properties pr = Utils.getPropiedades();
         if (this.propuestas.get(titulo) != null) {
             return false;
         } else {
@@ -129,8 +139,8 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                     String rutaSistema= System.getProperty("user.dir")+"\\";    
-                    String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("propuesta");
+                    String rutaSistema = System.getProperty("user.dir") + "\\";
+                    String dest = rutaSistema + pr.getProperty("imagenes") + pr.getProperty("propuesta");
                     String destino = dest + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
@@ -197,7 +207,7 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     @Override
-    public void extender(String tit)  {
+    public void extender(String tit) {
         Propuesta prop = this.getPropPorNick(tit);
         Date ahora = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
@@ -458,8 +468,8 @@ public class ctrlPropuesta implements IPropuesta {
         while (iteradorsito.hasNext()) {
             Map.Entry mentry = (Map.Entry) iteradorsito.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if(iUsu.traerProponente(aux.getPropo()).getActivo()){ //agregado 
-            listita.add(aux.obtenerInfo());
+            if (iUsu.traerProponente(aux.getPropo()).getActivo()) { //agregado 
+                listita.add(aux.obtenerInfo());
             }
         }
         return listita;
@@ -694,7 +704,7 @@ public class ctrlPropuesta implements IPropuesta {
     
     @Override
     public List<DtPropuesta> WEB_listarPropuestas_No_Ingresada() {
-        List<DtPropuesta> listita = new ArrayList<>();    
+        List<DtPropuesta> listita = new ArrayList<>();
         Set set = propuestas.entrySet();
         Iterator iteradorsito = set.iterator();
         while (iteradorsito.hasNext()) {
@@ -702,7 +712,7 @@ public class ctrlPropuesta implements IPropuesta {
             Propuesta aux = (Propuesta) mentry.getValue();
             //if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
             if (aux.getEstActual().getEstado().toString().equals("Ingresada") == false && iUsu.traerProponente(aux.getPropo()).getActivo()) { // agregado
-            //ActualizarEstado(aux);
+                //ActualizarEstado(aux);
                 listita.add(aux.obtenerInfo());
             }
         }
@@ -724,7 +734,7 @@ public class ctrlPropuesta implements IPropuesta {
             Propuesta aux = (Propuesta) mentry.getValue();
             //if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false && IU.traerProponente(aux.getPropo()).getActivo()) {
             if (aux.getCate().equals(x) && aux.getEstActual().getEstado().toString().equals("Ingresada") == false && iUsu.traerProponente(aux.getPropo()).getActivo()) {
-            listita.add(aux.obtenerInfo());
+                listita.add(aux.obtenerInfo());
             }
         }
         Collections.sort(listita, (c, d) -> {
@@ -766,7 +776,7 @@ public class ctrlPropuesta implements IPropuesta {
 
     @Override
     public void configurarParametros() {
-        String tara2vos= System.getProperty("user.dir")+"\\"+"web";
+        String tara2vos = System.getProperty("user.dir") + "\\" + "web";
         File ade = new File(tara2vos);
         if (!ade.exists()) {
             ade.getParentFile().mkdirs();
@@ -983,7 +993,7 @@ public class ctrlPropuesta implements IPropuesta {
     
     @Override
     public boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar) {
-       
+
         Properties pr = Utils.getPropiedades();
         if (this.propuestas.get(titulo) != null) {
             return false;
@@ -992,7 +1002,7 @@ public class ctrlPropuesta implements IPropuesta {
                 if (img.equals("") == false) {
                     String[] aux = img.split("\\.");
                     String termina = aux[1];
-                    String dest= pr.getProperty("rutaNazarenoC")+pr.getProperty("imagenes")+pr.getProperty("propuesta");
+                    String dest = pr.getProperty("rutaNazarenoC") + pr.getProperty("imagenes") + pr.getProperty("propuesta");
                     String destino = dest + titulo + "." + termina;
                     try {
                         if (this.copy(img, destino) == true) {
@@ -1069,7 +1079,6 @@ public class ctrlPropuesta implements IPropuesta {
     //public dataRenderedImag traerImagensitaPropuesta(String titulo) {
     //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     //}
-
 //    @Override
 //    public List<String> List_String_Eliminar_Desactivado(List<String> lista){
 //    int x = lista.size();
@@ -1081,8 +1090,6 @@ public class ctrlPropuesta implements IPropuesta {
 //        }
 //    return lista;
 //    }
-    
-    
 //    @Override
 //    public List<DtPropuesta> List_DtPropuesta_Eliminar_Desactivado(List<DtPropuesta> lista){
 //        int x = lista.size();
@@ -1094,16 +1101,17 @@ public class ctrlPropuesta implements IPropuesta {
 //        }
 //    return lista;
 //    };
-    
-    public Colaboracion Traer_Colboracion(String nick_colaborador, String titulo_propuesta){
+    public Colaboracion Traer_Colboracion(String nick_colaborador, String titulo_propuesta) {
         for (int i = 0; i < this.colaboraciones.size(); i++) {
             Colaboracion C = (Colaboracion) this.colaboraciones.get(i);
-            if (C.getColab().getNick().equals(nick_colaborador) && C.getProp().getTitulo().equals(titulo_propuesta)){
+            if (C.getColab().getNick().equals(nick_colaborador) && C.getProp().getTitulo().equals(titulo_propuesta)) {
                 return C;
             }
         }
-        return null; 
-    };
+        return null;
+    }
+
+    ;
     
 //    @Override
 //    public List<Colaboracion> List_Colaboracion_Eliminar_Desactivado(List<Colaboracion> lista){
@@ -1117,4 +1125,130 @@ public class ctrlPropuesta implements IPropuesta {
 //        }
 //    return lista;
 //    };
+
+  
+    @Override
+    public void cargarPag() {
+        List<pagos> pag = new ArrayList<>();
+        try {
+            pag.addAll(this.dbPropuesta.cargarTar());
+        } catch (ParseException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pag.addAll(this.dbPropuesta.cargarTrans());
+        pag.addAll(this.dbPropuesta.cargarPaypal());
+        this.pagos = pag;
+    }
+
+    public Boolean pago(String prop, String usu) {
+        Colaboracion col = this.Traer_Colboracion(usu, prop);
+        for (pagos p : this.pagos) {
+            if (p.getColab().equals(col)) {
+                System.out.println("Colaboracion pagada");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public pagos buscarPago(String prop, String usu) {
+        Colaboracion col = this.Traer_Colboracion(usu, prop);
+        for (pagos p : this.pagos) {
+            if (p.getColab().equals(col)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void crearReporte(String prop, String usu) {
+        Propuesta p = this.getPropPorNick(prop);
+        Colaboracion col = this.Traer_Colboracion(usu, prop);
+        Date hoy = new Date();
+        SimpleDateFormat lala = new SimpleDateFormat("dd/MM/yyyy");
+        String emision = lala.format(hoy);
+        String nacimiento = lala.format(col.getColab().getFecha());
+        String fechaCol = lala.format(col.getFecha());
+        pagos pag = this.buscarPago(prop, usu);
+        int cvc;
+        Date fechaVen = null;
+        String numero;
+        String tipo;
+        String banco;
+        if (this.pago(prop, usu)) {
+            Document nuevo = new Document();
+            try {
+                FileOutputStream fichero = new FileOutputStream("EmisionDePagoCulturarte.pdf");
+                PdfWriter writer = PdfWriter.getInstance(nuevo, fichero);
+                nuevo.open();
+                try {
+                    Image imagen = Image.getInstance("Imagenes/logo.png");
+                    imagen.setAlignment(Element.ALIGN_CENTER);
+                    imagen.scaleToFit(100, 100);
+                    nuevo.add(imagen);
+                    Paragraph p1 = new Paragraph();
+                    p1.add(new Phrase("Fecha de emision: " + emision+"\n"));
+                    p1.add(new Phrase("Nick del usuario: " + usu+"\n"));
+                    p1.add(new Phrase("Correo: " + col.getColab().getCorreo()+"\n"));
+                    p1.add(new Phrase("Nombre del usuario: " + col.getColab().getNombre()+"\n"));
+                    p1.add(new Phrase("Apellido del usuario: " + col.getColab().getApellido()+"\n"));
+                    p1.add(new Phrase("Fecha de nacimiento: " + nacimiento+"\n"));
+                    p1.add(new Phrase("Propuesta: " + prop+"\n"));
+                    p1.add(new Phrase("Fecha: " + fechaCol+"\n"));
+                    p1.add(new Phrase("Hora: " + col.getHora()+"\n"));
+                    p1.add(new Phrase("Monto: " + col.getMonto()+"\n"));
+                    p1.add(new Phrase("Retorno elegido " + col.getRetorno()+"\n"));
+                    if (pag instanceof Tarjeta) {
+                        cvc = ((Tarjeta) pag).getCvc();
+                        fechaVen = ((Tarjeta) pag).getFecha();
+                        String vencimiento = lala.format(fechaVen);
+                        numero = pag.getNumero();
+                        tipo = ((Tarjeta) pag).getTipo();
+                        p1.add(new Phrase("Pago por tarjeta"+"\n"));
+                        p1.add(new Phrase("CVC: "+cvc+"\n"));
+                        p1.add(new Phrase("Fecha: "+vencimiento+"\n"));
+                        p1.add(new Phrase("Numero: "+numero+"\n"));
+                        p1.add(new Phrase("Tipo de tarjeta: "+tipo+"\n"));
+                    }
+                    if (pag instanceof PayPal) {
+                        numero = pag.getNumero();
+                        p1.add(new Phrase("Pago por PayPal"+"\n"));
+                        p1.add(new Phrase("Numero: "+numero+"\n"));
+                    }
+
+                    if (pag instanceof Transferencia) {
+                        banco = ((Transferencia) pag).getBanco();
+                        numero = pag.getNumero();
+                        p1.add(new Phrase("Pago por Transferencia"+"\n"));
+                        p1.add(new Phrase("Banco: "+banco+"\n"));
+                        p1.add(new Phrase("Numero: "+numero+"\n"));
+                    }
+                    nuevo.add(p1);
+                    nuevo.close();
+                } catch (BadElementException | IOException ex) {
+                    Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (FileNotFoundException | DocumentException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+    
+    public DataReporte traerRep(String prop, String usu){
+        Propuesta p = this.getPropPorNick(prop);
+        Colaboracion col = this.Traer_Colboracion(usu, prop);
+        Date hoy = new Date();
+        SimpleDateFormat lala = new SimpleDateFormat("dd/MM/yyyy");
+        String emision = lala.format(hoy);
+        String nacimiento = lala.format(col.getColab().getFecha());
+        String fechaCol = lala.format(col.getFecha());
+        pagos pag = this.buscarPago(prop, usu);
+        if(this.pago(prop, usu)){
+            if(pag instanceof PayPal){
+                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero());
+            }
+        }
+        return null;
+    }
 }

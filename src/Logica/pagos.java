@@ -5,15 +5,26 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author Nuevo
  */
 public class pagos {
     String numero;
-
+    private List<pagos> pagos;
+    
     public String getNumero() {
         return numero;
+    }
+
+    public List<pagos> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<pagos> pagos) {
+        this.pagos = pagos;
     }
 
     public void setNumero(String numero) {
@@ -31,5 +42,13 @@ public class pagos {
     public pagos(String num, Colaboracion col){
         this.numero=num;
         this.colab=col;
+    }
+    
+    public pagos(){
+        
+    }
+    
+    public void AgregarPago(pagos p){
+        this.pagos.add(p);
     }
 }

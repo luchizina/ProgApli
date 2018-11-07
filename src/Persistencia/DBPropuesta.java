@@ -38,6 +38,7 @@ import Logica.PayPal;
 import Logica.Proponente;
 import Logica.Tarjeta;
 import Logica.Transferencia;
+import Logica.pagos;
 import config.Utils;
 
 /**
@@ -477,9 +478,10 @@ public class DBPropuesta {
         }
     }
 
-    public void cargarPaypal() {
+    public List<pagos> cargarPaypal() {
         IPropuesta IP = fab.getICtrlPropuesta();
         IUsuario iUsu = fab.getICtrlUsuario();
+        List<pagos> listita = new ArrayList<>();
         PreparedStatement st;
         try {
             st = conexion.prepareStatement("SELECT * FROM paypal");
@@ -492,15 +494,18 @@ public class DBPropuesta {
                 Colaborador usu = iUsu.traerColaborador(col);
                 Colaboracion c=p.traerSegunCol(usu);
                 PayPal pag = new PayPal(nro, c);
+                listita.add(pag);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return listita;
     }
     
-    public void cargarTrans(){
+    public List<pagos> cargarTrans(){
         IPropuesta IP = fab.getICtrlPropuesta();
         IUsuario iUsu = fab.getICtrlUsuario();
+        List<pagos> listita = new ArrayList<>();
         PreparedStatement st;
         try {
             st = conexion.prepareStatement("SELECT * FROM transferencia");
@@ -514,15 +519,18 @@ public class DBPropuesta {
                 Colaborador usu = iUsu.traerColaborador(col);
                 Colaboracion c=p.traerSegunCol(usu);
                 Transferencia pag = new Transferencia(nro, c, banco);
+                listita.add(pag);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return listita;
     }
     
-    public void cargarTar() throws ParseException{
+    public List<pagos> cargarTar() throws ParseException{
         IPropuesta IP = fab.getICtrlPropuesta();
         IUsuario iUsu = fab.getICtrlUsuario();
+        List<pagos> listita = new ArrayList<>();
         PreparedStatement st;
         try {
             st = conexion.prepareStatement("SELECT * FROM tarjeta");
@@ -540,10 +548,12 @@ public class DBPropuesta {
                 SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechita = form.parse(fecha);
                 Tarjeta pag = new Tarjeta(nro, c, tipo, fechita ,cvc);
+                listita.add(pag);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return listita;
     }
 
     ;   
