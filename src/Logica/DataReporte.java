@@ -143,4 +143,6 @@ public class DataReporte {
         this.venc=ven;
         this.tipoT=tipoT;
     }
+    
+    public DataReporte(){}
 }

@@ -1170,112 +1170,114 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public void crearReporte(String prop, String usu) {
-        Propuesta p = this.getPropPorNick(prop);
-        Colaboracion col = this.Traer_Colboracion(usu, prop);
-        Date hoy = new Date();
-        SimpleDateFormat lala = new SimpleDateFormat("dd/MM/yyyy");
-        String emision = lala.format(hoy);
-        String nacimiento = lala.format(col.getColab().getFecha());
-        String fechaCol = lala.format(col.getFecha());
-        pagos pag = this.buscarPago(prop, usu);
-        int cvc;
-        Date fechaVen = null;
-        String numero;
-        String tipo;
-        String banco;
-        if (this.pago(prop, usu)) {
-            Document nuevo = new Document();
-            try {
-                FileOutputStream fichero = new FileOutputStream("pdfs/EmisionPago" + usu + prop + ".pdf");
-                PdfWriter writer = PdfWriter.getInstance(nuevo, fichero);
-                nuevo.open();
+        DataReporte dat = this.traerRep(prop, usu);
+        if (dat != null) {
+            Propuesta p = this.getPropPorNick(prop);
+            Colaboracion col = this.Traer_Colboracion(usu, prop);
+            Date hoy = new Date();
+            SimpleDateFormat lala = new SimpleDateFormat("dd/MM/yyyy");
+            String emision = lala.format(hoy);
+            String nacimiento = lala.format(col.getColab().getFecha());
+            String fechaCol = lala.format(col.getFecha());
+            pagos pag = this.buscarPago(prop, usu);
+            int cvc;
+            Date fechaVen = null;
+            String numero;
+            String tipo;
+            String banco;
+            if (this.pago(prop, usu)) {
+                Document nuevo = new Document();
                 try {
-                    Font titulos = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD,BaseColor.PINK);
-                    Font sub = new Font(Font.FontFamily.TIMES_ROMAN,12,Font.NORMAL,BaseColor.GREEN);
-                    Font todo = new Font(Font.FontFamily.TIMES_ROMAN,12,Font.NORMAL,BaseColor.BLACK);
-                    Paragraph par = new Paragraph();
-                    par.add(new Phrase("Fecha de emision: " + emision + "\n", sub));
-                    par.setAlignment(Element.ALIGN_RIGHT);
-                    nuevo.add(par);
-                    Image imagen = Image.getInstance("Imagenes/logo.png");
-                    imagen.setAlignment(Element.ALIGN_CENTER);
-                    imagen.scaleToFit(200, 200);
-                    nuevo.add(imagen);
-                    Paragraph usua = new Paragraph();
-                    usua.add(new Phrase("Datos del usuario:",titulos));
-                    nuevo.add(usua);
-                    Paragraph p1 = new Paragraph();
-                    p1.add(new Phrase("Nick del usuario: ",sub));
-                    p1.add(new Phrase(usu + "\n", todo));
-                    p1.add(new Phrase("Correo: ", sub));
-                    p1.add(new Phrase(col.getColab().getCorreo() + "\n", todo));
-                    p1.add(new Phrase("Nombre del usuario: ", sub));
-                    p1.add(new Phrase(col.getColab().getNombre() + "\n", todo));
-                    p1.add(new Phrase("Apellido del usuario: ", sub));
-                    p1.add(new Phrase(col.getColab().getApellido() + "\n", todo));
-                    p1.add(new Phrase("Fecha de nacimiento: ",sub));
-                    p1.add(new Phrase(nacimiento + "\n\n",todo));
-                    nuevo.add(p1);
-                    Paragraph colab = new Paragraph();
-                    colab.add(new Phrase("Datos de la colaboracion:",titulos));
-                    nuevo.add(colab);
-                    Paragraph p2 = new Paragraph();
-                    p2.add(new Phrase("Propuesta: ",sub));
-                    p2.add(new Phrase(prop + "\n", todo));
-                    p2.add(new Phrase("Fecha: ",sub));
-                    p2.add(new Phrase(fechaCol + "\n",todo));
-                    p2.add(new Phrase("Hora: ",sub));
-                    p2.add(new Phrase(col.getHora() + "\n",todo));
-                    p2.add(new Phrase("Monto: ",sub));
-                    p2.add(new Phrase(col.getMonto() + "\n",todo));
-                    p2.add(new Phrase("Retorno elegido: ",sub));
-                    p2.add(new Phrase(col.getRetorno() + "\n\n",todo));
-                    nuevo.add(p2);
-                    Paragraph tit = new Paragraph();
-                    tit.add(new Phrase("Datos del pago",titulos));
-                    nuevo.add(tit);
-                    Paragraph p3 = new Paragraph();
-                    if (pag instanceof Tarjeta) {
-                        cvc = ((Tarjeta) pag).getCvc();
-                        fechaVen = ((Tarjeta) pag).getFecha();
-                        String vencimiento = lala.format(fechaVen);
-                        numero = pag.getNumero();
-                        tipo = ((Tarjeta) pag).getTipo();
-                        p3.add(new Phrase("Pago por tarjeta" + "\n\n",sub));
-                        p3.add(new Phrase("CVC: ",sub));
-                        p3.add(new Phrase(cvc + "\n",todo));
-                        p3.add(new Phrase("Fecha de vencimiento: ",sub));
-                        p3.add(new Phrase(vencimiento + "\n",todo));
-                        p3.add(new Phrase("Numero: ",sub));
-                        p3.add(new Phrase(numero + "\n",todo));
-                        p3.add(new Phrase("Tipo de tarjeta: ",sub));
-                        p3.add(new Phrase(tipo + "\n",todo));
-                    }
-                    if (pag instanceof PayPal) {
-                        numero = pag.getNumero();
-                        p3.add(new Phrase("Pago por PayPal" + "\n\n",sub));
-                        p3.add(new Phrase("Numero: ",sub));
-                        p3.add(new Phrase(numero + "\n",todo));
-                    }
+                    FileOutputStream fichero = new FileOutputStream("pdfs/EmisionPago" + usu + prop + ".pdf");
+                    PdfWriter writer = PdfWriter.getInstance(nuevo, fichero);
+                    nuevo.open();
+                    try {
+                        Font titulos = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, BaseColor.PINK.darker());
+                        Font sub = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.GREEN.darker());
+                        Font todo = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
+                        Paragraph par = new Paragraph();
+                        par.add(new Phrase("Fecha de emision: " + emision + "\n", sub));
+                        par.setAlignment(Element.ALIGN_RIGHT);
+                        nuevo.add(par);
+                        Image imagen = Image.getInstance("Imagenes/logo.png");
+                        imagen.setAlignment(Element.ALIGN_CENTER);
+                        imagen.scaleToFit(200, 200);
+                        nuevo.add(imagen);
+                        Paragraph usua = new Paragraph();
+                        usua.add(new Phrase("Datos del usuario:", titulos));
+                        nuevo.add(usua);
+                        Paragraph p1 = new Paragraph();
+                        p1.add(new Phrase("Nick del usuario: ", sub));
+                        p1.add(new Phrase(usu + "\n", todo));
+                        p1.add(new Phrase("Correo: ", sub));
+                        p1.add(new Phrase(col.getColab().getCorreo() + "\n", todo));
+                        p1.add(new Phrase("Nombre del usuario: ", sub));
+                        p1.add(new Phrase(col.getColab().getNombre() + "\n", todo));
+                        p1.add(new Phrase("Apellido del usuario: ", sub));
+                        p1.add(new Phrase(col.getColab().getApellido() + "\n", todo));
+                        p1.add(new Phrase("Fecha de nacimiento: ", sub));
+                        p1.add(new Phrase(nacimiento + "\n\n", todo));
+                        nuevo.add(p1);
+                        Paragraph colab = new Paragraph();
+                        colab.add(new Phrase("Datos de la colaboracion:", titulos));
+                        nuevo.add(colab);
+                        Paragraph p2 = new Paragraph();
+                        p2.add(new Phrase("Propuesta: ", sub));
+                        p2.add(new Phrase(prop + "\n", todo));
+                        p2.add(new Phrase("Fecha: ", sub));
+                        p2.add(new Phrase(fechaCol + "\n", todo));
+                        p2.add(new Phrase("Hora: ", sub));
+                        p2.add(new Phrase(col.getHora() + "\n", todo));
+                        p2.add(new Phrase("Monto: ", sub));
+                        p2.add(new Phrase(col.getMonto() + "\n", todo));
+                        p2.add(new Phrase("Retorno elegido: ", sub));
+                        p2.add(new Phrase(col.getRetorno() + "\n\n", todo));
+                        nuevo.add(p2);
+                        Paragraph tit = new Paragraph();
+                        tit.add(new Phrase("Datos del pago", titulos));
+                        nuevo.add(tit);
+                        Paragraph p3 = new Paragraph();
+                        if (pag instanceof Tarjeta) {
+                            cvc = ((Tarjeta) pag).getCvc();
+                            fechaVen = ((Tarjeta) pag).getFecha();
+                            String vencimiento = lala.format(fechaVen);
+                            numero = pag.getNumero();
+                            tipo = ((Tarjeta) pag).getTipo();
+                            p3.add(new Phrase("Pago por tarjeta" + "\n\n", sub));
+                            p3.add(new Phrase("CVC: ", sub));
+                            p3.add(new Phrase(cvc + "\n", todo));
+                            p3.add(new Phrase("Fecha de vencimiento: ", sub));
+                            p3.add(new Phrase(vencimiento + "\n", todo));
+                            p3.add(new Phrase("Numero: ", sub));
+                            p3.add(new Phrase(numero + "\n", todo));
+                            p3.add(new Phrase("Tipo de tarjeta: ", sub));
+                            p3.add(new Phrase(tipo + "\n", todo));
+                        }
+                        if (pag instanceof PayPal) {
+                            numero = pag.getNumero();
+                            p3.add(new Phrase("Pago por PayPal" + "\n\n", sub));
+                            p3.add(new Phrase("Numero: ", sub));
+                            p3.add(new Phrase(numero + "\n", todo));
+                        }
 
-                    if (pag instanceof Transferencia) {
-                        banco = ((Transferencia) pag).getBanco();
-                        numero = pag.getNumero();
-                        p3.add(new Phrase("Pago por Transferencia" + "\n\n",sub));
-                        p3.add(new Phrase("Banco: ",sub));
-                        p3.add(new Phrase(banco + "\n",todo));
-                        p3.add(new Phrase("Numero: ",sub));
-                        p3.add(new Phrase(numero + "\n",todo));
+                        if (pag instanceof Transferencia) {
+                            banco = ((Transferencia) pag).getBanco();
+                            numero = pag.getNumero();
+                            p3.add(new Phrase("Pago por Transferencia" + "\n\n", sub));
+                            p3.add(new Phrase("Banco: ", sub));
+                            p3.add(new Phrase(banco + "\n", todo));
+                            p3.add(new Phrase("Numero: ", sub));
+                            p3.add(new Phrase(numero + "\n", todo));
+                        }
+                        nuevo.add(p3);
+                        nuevo.close();
+                    } catch (BadElementException | IOException ex) {
+                        Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    nuevo.add(p3);
-                    nuevo.close();
-                } catch (BadElementException | IOException ex) {
+                } catch (FileNotFoundException | DocumentException ex) {
                     Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (FileNotFoundException | DocumentException ex) {
-                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
     }
 
@@ -1294,7 +1296,7 @@ public class ctrlPropuesta implements IPropuesta {
                 }
                 byte[] bytes = bos.toByteArray();
                 return bytes;
-            }  catch (IOException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (FileNotFoundException ex) {
@@ -1302,11 +1304,6 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return null;
     }
-
-    
-    
-
-    
 
     public DataReporte traerRep(String prop, String usu) {
         Propuesta p = this.getPropPorNick(prop);
@@ -1332,12 +1329,12 @@ public class ctrlPropuesta implements IPropuesta {
                 return data;
             }
         }
-        return null;
+        DataReporte rep = new DataReporte();
+        return rep;
     }
-    
-    
+
     @Override
-    public DefaultListModel Propuestas_Desactivadas(String proponente_nick){
+    public DefaultListModel Propuestas_Desactivadas(String proponente_nick) {
         DefaultListModel modelo = new DefaultListModel();
         Proponente P = iUsu.traerProponente(proponente_nick);
         Set set = P.getPropuestas().entrySet();
@@ -1349,19 +1346,22 @@ public class ctrlPropuesta implements IPropuesta {
             modelo.addElement(aux.getTitulo());
         }
         return modelo;
-    };
+    }
+
+    ;
     
     
     @Override
-    public TableModel Listar_Colaboracines_tabla(String titulo_propuesta){
-    String columnas [] = {"Colaborador","Monto"};
-     DefaultTableModel model = new DefaultTableModel(null,columnas);
-    Propuesta P = this.getPropPorNick(titulo_propuesta);
-    for (int i = 0; i < P.getColaboraciones().size(); i++){
-        Colaboracion C = P.getColaboraciones().get(i);
-        Object[] dat={C.getColab().getNombre()+"("+C.getColab().getNick()+")",C.getMonto()};
-        model.addRow(dat);
+    public TableModel Listar_Colaboracines_tabla(String titulo_propuesta) {
+        String columnas[] = {"Colaborador", "Monto"};
+        DefaultTableModel model = new DefaultTableModel(null, columnas);
+        Propuesta P = this.getPropPorNick(titulo_propuesta);
+        for (int i = 0; i < P.getColaboraciones().size(); i++) {
+            Colaboracion C = P.getColaboraciones().get(i);
+            Object[] dat = {C.getColab().getNombre() + "(" + C.getColab().getNick() + ")", C.getMonto()};
+            model.addRow(dat);
+        }
+        return model;
     }
-    return model;
-    };
+;
 }
