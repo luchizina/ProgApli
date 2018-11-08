@@ -52,8 +52,6 @@ public class Principal extends javax.swing.JFrame {
                 //this.IP.cargarEstados();
                 this.IP.EstadosPropuestas(); // testear
                 this.IP.cargarPag();
-                this.IP.pago("Religiosamente", "novick");
-                this.IP.crearReporte("Religiosamente", "novick");
                 System.out.println(jp.getComponentCount());
                publicador_Usuarios p = new publicador_Usuarios();
                p.publicar();

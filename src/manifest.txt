@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 X-COMMENT: Main-Class will be added automatically by build
 Main-Class: Presentacion/Principal
-Class-Path: ./lib/jcalendar-1.4.jar ./lib/mysql-connector-java-5.1.23-bin.jar
+Class-Path: ./lib/jcalendar-1.4.jar ./lib/mysql-connector-java-5.1.23-bin.jar ./lib/itextpdf-5.5.9.jar
 
 
 

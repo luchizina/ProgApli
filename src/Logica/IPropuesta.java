@@ -26,6 +26,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public interface IPropuesta {
     public void cargarPag();
+    public byte[] crearDescarga(String prop, String usu);
     public DataReporte traerRep(String prop, String usu);
     public void crearReporte(String prop, String usu);
     public Boolean pago(String prop, String usu);

@@ -5,10 +5,14 @@
  */
 package Logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author Nuevo
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DataReporte {
     String nick;
     String nombre;

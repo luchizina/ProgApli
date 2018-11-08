@@ -10,5 +10,5 @@ SET /p nana=< hola.txt
 cd %nana%
 chdir
 pause
-java -jar .\hola22\Cultu.jar
+java -jar .\bin\Cultu.jar
 pause

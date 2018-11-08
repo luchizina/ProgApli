@@ -18,9 +18,11 @@ import java.sql.Time;
 import java.text.DateFormat;
 import static Logica.Testado.Publicada;
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -752,27 +754,25 @@ public class ctrlPropuesta implements IPropuesta {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-        Usuario propo = this.iUsu.traerUsuario(aux.getPropo());
-        Proponente propone = (Proponente) propo;
-        if(propone.getActivo()==true){
-            
-        
-            
-            if (aux.getTitulo().contains(txt) == true && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
-                prop.add(aux.obtenerInfo());
-                esta = true;
-            }
+            Usuario propo = this.iUsu.traerUsuario(aux.getPropo());
+            Proponente propone = (Proponente) propo;
+            if (propone.getActivo() == true) {
 
-            if (aux.getLugar().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
-                prop.add(aux.obtenerInfo());
-                esta = true;
-            }
+                if (aux.getTitulo().contains(txt) == true && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
+                    prop.add(aux.obtenerInfo());
+                    esta = true;
+                }
 
-            if (aux.getDesc().contains(txt) && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
-                prop.add(aux.obtenerInfo());
-            }
+                if (aux.getLugar().contains(txt) == true && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
+                    prop.add(aux.obtenerInfo());
+                    esta = true;
+                }
 
-            esta = false;
+                if (aux.getDesc().contains(txt) && !esta && !aux.getEstActual().getEstado().equals(Testado.Ingresada)) {
+                    prop.add(aux.obtenerInfo());
+                }
+
+                esta = false;
             }
         }
 
@@ -1185,52 +1185,88 @@ public class ctrlPropuesta implements IPropuesta {
         if (this.pago(prop, usu)) {
             Document nuevo = new Document();
             try {
-                FileOutputStream fichero = new FileOutputStream("EmisionDePagoCulturarte.pdf");
+                FileOutputStream fichero = new FileOutputStream("pdfs/EmisionPago" + usu + prop + ".pdf");
                 PdfWriter writer = PdfWriter.getInstance(nuevo, fichero);
                 nuevo.open();
                 try {
+                    Font titulos = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD,BaseColor.PINK);
+                    Font sub = new Font(Font.FontFamily.TIMES_ROMAN,12,Font.NORMAL,BaseColor.GREEN);
+                    Font todo = new Font(Font.FontFamily.TIMES_ROMAN,12,Font.NORMAL,BaseColor.BLACK);
+                    Paragraph par = new Paragraph();
+                    par.add(new Phrase("Fecha de emision: " + emision + "\n", sub));
+                    par.setAlignment(Element.ALIGN_RIGHT);
+                    nuevo.add(par);
                     Image imagen = Image.getInstance("Imagenes/logo.png");
                     imagen.setAlignment(Element.ALIGN_CENTER);
-                    imagen.scaleToFit(100, 100);
+                    imagen.scaleToFit(200, 200);
                     nuevo.add(imagen);
+                    Paragraph usua = new Paragraph();
+                    usua.add(new Phrase("Datos del usuario:",titulos));
+                    nuevo.add(usua);
                     Paragraph p1 = new Paragraph();
-                    p1.add(new Phrase("Fecha de emision: " + emision+"\n"));
-                    p1.add(new Phrase("Nick del usuario: " + usu+"\n"));
-                    p1.add(new Phrase("Correo: " + col.getColab().getCorreo()+"\n"));
-                    p1.add(new Phrase("Nombre del usuario: " + col.getColab().getNombre()+"\n"));
-                    p1.add(new Phrase("Apellido del usuario: " + col.getColab().getApellido()+"\n"));
-                    p1.add(new Phrase("Fecha de nacimiento: " + nacimiento+"\n"));
-                    p1.add(new Phrase("Propuesta: " + prop+"\n"));
-                    p1.add(new Phrase("Fecha: " + fechaCol+"\n"));
-                    p1.add(new Phrase("Hora: " + col.getHora()+"\n"));
-                    p1.add(new Phrase("Monto: " + col.getMonto()+"\n"));
-                    p1.add(new Phrase("Retorno elegido " + col.getRetorno()+"\n"));
+                    p1.add(new Phrase("Nick del usuario: ",sub));
+                    p1.add(new Phrase(usu + "\n", todo));
+                    p1.add(new Phrase("Correo: ", sub));
+                    p1.add(new Phrase(col.getColab().getCorreo() + "\n", todo));
+                    p1.add(new Phrase("Nombre del usuario: ", sub));
+                    p1.add(new Phrase(col.getColab().getNombre() + "\n", todo));
+                    p1.add(new Phrase("Apellido del usuario: ", sub));
+                    p1.add(new Phrase(col.getColab().getApellido() + "\n", todo));
+                    p1.add(new Phrase("Fecha de nacimiento: ",sub));
+                    p1.add(new Phrase(nacimiento + "\n\n",todo));
+                    nuevo.add(p1);
+                    Paragraph colab = new Paragraph();
+                    colab.add(new Phrase("Datos de la colaboracion:",titulos));
+                    nuevo.add(colab);
+                    Paragraph p2 = new Paragraph();
+                    p2.add(new Phrase("Propuesta: ",sub));
+                    p2.add(new Phrase(prop + "\n", todo));
+                    p2.add(new Phrase("Fecha: ",sub));
+                    p2.add(new Phrase(fechaCol + "\n",todo));
+                    p2.add(new Phrase("Hora: ",sub));
+                    p2.add(new Phrase(col.getHora() + "\n",todo));
+                    p2.add(new Phrase("Monto: ",sub));
+                    p2.add(new Phrase(col.getMonto() + "\n",todo));
+                    p2.add(new Phrase("Retorno elegido: ",sub));
+                    p2.add(new Phrase(col.getRetorno() + "\n\n",todo));
+                    nuevo.add(p2);
+                    Paragraph tit = new Paragraph();
+                    tit.add(new Phrase("Datos del pago",titulos));
+                    nuevo.add(tit);
+                    Paragraph p3 = new Paragraph();
                     if (pag instanceof Tarjeta) {
                         cvc = ((Tarjeta) pag).getCvc();
                         fechaVen = ((Tarjeta) pag).getFecha();
                         String vencimiento = lala.format(fechaVen);
                         numero = pag.getNumero();
                         tipo = ((Tarjeta) pag).getTipo();
-                        p1.add(new Phrase("Pago por tarjeta"+"\n"));
-                        p1.add(new Phrase("CVC: "+cvc+"\n"));
-                        p1.add(new Phrase("Fecha: "+vencimiento+"\n"));
-                        p1.add(new Phrase("Numero: "+numero+"\n"));
-                        p1.add(new Phrase("Tipo de tarjeta: "+tipo+"\n"));
+                        p3.add(new Phrase("Pago por tarjeta" + "\n\n",sub));
+                        p3.add(new Phrase("CVC: ",sub));
+                        p3.add(new Phrase(cvc + "\n",todo));
+                        p3.add(new Phrase("Fecha de vencimiento: ",sub));
+                        p3.add(new Phrase(vencimiento + "\n",todo));
+                        p3.add(new Phrase("Numero: ",sub));
+                        p3.add(new Phrase(numero + "\n",todo));
+                        p3.add(new Phrase("Tipo de tarjeta: ",sub));
+                        p3.add(new Phrase(tipo + "\n",todo));
                     }
                     if (pag instanceof PayPal) {
                         numero = pag.getNumero();
-                        p1.add(new Phrase("Pago por PayPal"+"\n"));
-                        p1.add(new Phrase("Numero: "+numero+"\n"));
+                        p3.add(new Phrase("Pago por PayPal" + "\n\n",sub));
+                        p3.add(new Phrase("Numero: ",sub));
+                        p3.add(new Phrase(numero + "\n",todo));
                     }
 
                     if (pag instanceof Transferencia) {
                         banco = ((Transferencia) pag).getBanco();
                         numero = pag.getNumero();
-                        p1.add(new Phrase("Pago por Transferencia"+"\n"));
-                        p1.add(new Phrase("Banco: "+banco+"\n"));
-                        p1.add(new Phrase("Numero: "+numero+"\n"));
+                        p3.add(new Phrase("Pago por Transferencia" + "\n\n",sub));
+                        p3.add(new Phrase("Banco: ",sub));
+                        p3.add(new Phrase(banco + "\n",todo));
+                        p3.add(new Phrase("Numero: ",sub));
+                        p3.add(new Phrase(numero + "\n",todo));
                     }
-                    nuevo.add(p1);
+                    nuevo.add(p3);
                     nuevo.close();
                 } catch (BadElementException | IOException ex) {
                     Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -1241,8 +1277,37 @@ public class ctrlPropuesta implements IPropuesta {
 
         }
     }
+
+    public byte[] crearDescarga(String prop, String usu) {
+        Properties p = Utils.getPropiedades();
+        String rutaSistema = System.getProperty("user.dir") + "\\";
+        String rutaArch = rutaSistema + "pdfs\\" + "EmisionPago" + usu + prop + ".pdf";
+        File pdf = new File(rutaArch);
+        try {
+            FileInputStream fis = new FileInputStream(pdf);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            try {
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
+                }
+                byte[] bytes = bos.toByteArray();
+                return bytes;
+            }  catch (IOException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     
-    public DataReporte traerRep(String prop, String usu){
+    
+
+    
+
+    public DataReporte traerRep(String prop, String usu) {
         Propuesta p = this.getPropPorNick(prop);
         Colaboracion col = this.Traer_Colboracion(usu, prop);
         Date hoy = new Date();
@@ -1251,18 +1316,18 @@ public class ctrlPropuesta implements IPropuesta {
         String nacimiento = lala.format(col.getColab().getFecha());
         String fechaCol = lala.format(col.getFecha());
         pagos pag = this.buscarPago(prop, usu);
-        if(this.pago(prop, usu)){
-            if(pag instanceof PayPal){
-                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero());
+        if (this.pago(prop, usu)) {
+            if (pag instanceof PayPal) {
+                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(), nacimiento, col.getColab().getCorreo(), emision, prop, fechaCol, col.getHora(), col.getMonto(), col.getRetorno(), pag.getNumero());
                 return data;
             }
-            if(pag instanceof Transferencia){
-                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero(),((Transferencia) pag).getBanco());
+            if (pag instanceof Transferencia) {
+                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(), nacimiento, col.getColab().getCorreo(), emision, prop, fechaCol, col.getHora(), col.getMonto(), col.getRetorno(), pag.getNumero(), ((Transferencia) pag).getBanco());
                 return data;
             }
-            if(pag instanceof Tarjeta){
+            if (pag instanceof Tarjeta) {
                 String vencimiento = lala.format(((Tarjeta) pag).getFecha());
-                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(),nacimiento,col.getColab().getCorreo(),emision,prop,fechaCol,col.getHora(),col.getMonto(),col.getRetorno(),pag.getNumero(),((Tarjeta) pag).getCvc(),vencimiento,((Tarjeta) pag).getTipo());
+                DataReporte data = new DataReporte(usu, col.getColab().getNombre(), col.getColab().getApellido(), nacimiento, col.getColab().getCorreo(), emision, prop, fechaCol, col.getHora(), col.getMonto(), col.getRetorno(), pag.getNumero(), ((Tarjeta) pag).getCvc(), vencimiento, ((Tarjeta) pag).getTipo());
                 return data;
             }
         }
