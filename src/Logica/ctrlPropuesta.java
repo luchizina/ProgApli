@@ -417,13 +417,6 @@ public class ctrlPropuesta implements IPropuesta {
         this.SetearPropuestas_A_Proponentes();              //agregado
         this.Cargar_Comentarios_Memoria();                  //agregado  
         this.Cargar_Favoritos_Memoria();                    //agregado
-        this.dbPropuesta.cargarPaypal();
-        try {
-            this.dbPropuesta.cargarTar();
-        } catch (ParseException ex) {
-            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dbPropuesta.cargarTrans();
     }
 
     @Override
@@ -443,12 +436,8 @@ public class ctrlPropuesta implements IPropuesta {
             this.dbPropuesta.pagosPayPal();
             this.dbPropuesta.pagosTarjeta();
             this.dbPropuesta.pagosTransferencia();
-            this.dbPropuesta.cargarPaypal();
-            this.dbPropuesta.cargarTar();
-            this.dbPropuesta.cargarTrans();
+            this.cargarPag();
         } catch (SQLException ex) {
-            Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
             Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
