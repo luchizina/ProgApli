@@ -472,7 +472,7 @@ public class ctrlPropuesta implements IPropuesta {
         return q;
     }
 
-    public DtPropuesta SeleccionarProp(String xTitulo) // error 
+    public DtPropuesta SeleccionarProp(String xTitulo)  
     {
         Propuesta pro = this.propuestas.get(xTitulo);
         if (pro.getEstActual().getEstado().equals(Testado.Publicada) || pro.getEstActual().getEstado().equals(Testado.En_Financiacion)) {
@@ -873,7 +873,7 @@ public class ctrlPropuesta implements IPropuesta {
             if (dias > 30) {
                 cambiarEstadito(x.getTitulo(), "No_Financiada");
             }
-            if (x.getMontoActual() > 0 && !x.getEstActual().getEstado().toString().equals("En_Financiacion")) {
+            if (x.getMontoActual() > 0 && x.getEstActual().getEstado().toString().equals("Publicada")) { // cambiado
                 cambiarEstadito(x.getTitulo(), "En_Financiacion");
             }
         }
