@@ -403,7 +403,7 @@ public class ctrlPropuesta implements IPropuesta {
     return false;
     }
      @Override 
-    public boolean pagarPayPal(String Nro, String Banco, String Propuesta, String Colaborador)
+    public boolean pagarPayPal(String Nro, String Propuesta, String Colaborador)
             {
         Colaborador colab = ctrlUsuario.getInstance().traerColaborador(Colaborador);
         Propuesta prop2 = this.propuestas.get(Propuesta);
