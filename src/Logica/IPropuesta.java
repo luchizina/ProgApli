@@ -74,7 +74,7 @@ public interface IPropuesta {
     public abstract boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar);
     public boolean pagarTarjeta(String Nro, String Tipo, Date Fecha, String CVC, String Propuesta, String Colaborador);
    public boolean pagarTrans(String Nro, String Banco, String Propuesta, String Colaborador);
-   public boolean pagarPayPal(String Nro, String Banco, String Propuesta, String Colaborador);
+   public boolean pagarPayPal(String Nro, String Propuesta, String Colaborador);
     
     public abstract DefaultListModel Propuestas_Desactivadas(String proponente_nick);
     public abstract TableModel Listar_Colaboracines_tabla(String titulo_propuesta);
