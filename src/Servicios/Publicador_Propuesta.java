@@ -179,4 +179,21 @@ public class Publicador_Propuesta {
     public boolean Agregar_Propuesta_web(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar){
         return IP.AgregarPropuesta_WEB(titulo, desc, fecha, precioE, montoActual, fechaPub, Retorno, montoTotal, cate, img, nickP, hora, Lugar);
     }
+    
+    @WebMethod
+    public boolean pagarTarjeta2(String Nro, String Tipo, Date Fecha, String CVC, String Propuesta, String Colaborador)
+   {
+        return IP.pagarTarjeta( Nro,  Tipo,  Fecha, CVC,  Propuesta, Colaborador);
+    }
+     @WebMethod
+    public boolean pagarTrans2(String Nro, String Banco, String Propuesta, String Colaborador)
+   {
+        return IP.pagarTrans(Nro, Banco, Propuesta, Colaborador);
+    } 
+    @WebMethod
+    public boolean pagarPayPal2(String Nro, String Banco, String Propuesta, String Colaborador)
+    {
+        return IP.pagarPayPal(Nro, Banco,Propuesta, Colaborador);
+   
+    } 
 }

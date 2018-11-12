@@ -7,18 +7,13 @@ package Logica;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import Logica.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -76,4 +71,8 @@ public interface IPropuesta {
     public abstract Estado Crear_Esatado_Ingresada();
     //public abstract dataRenderedImag traerImagensitaPropuesta(String titulo);
     public abstract boolean AgregarPropuesta_WEB(String titulo, String desc, Date fecha, int precioE, int montoActual, Date fechaPub, String Retorno, int montoTotal, String cate, String img, String nickP, String hora, String Lugar);
+    public boolean pagarTarjeta(String Nro, String Tipo, Date Fecha, String CVC, String Propuesta, String Colaborador);
+   public boolean pagarTrans(String Nro, String Banco, String Propuesta, String Colaborador);
+   public boolean pagarPayPal(String Nro, String Banco, String Propuesta, String Colaborador);
+    
 }

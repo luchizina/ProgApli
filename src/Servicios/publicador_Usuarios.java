@@ -186,6 +186,11 @@ public class publicador_Usuarios {
     {
         return xD.traerPropuestasColaboradas2(nick);
     }
+       @WebMethod
+     public dataListColaboraciones traerPropuestasColaboradasNoPagas2(String nick)
+    {
+        return xD.traerPropuestasColaboradasNoPagas2(nick);
+    }
      @WebMethod
       public DtInfo resolverLogin(String nick, String pass)
      {

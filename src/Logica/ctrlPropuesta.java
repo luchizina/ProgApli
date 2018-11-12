@@ -345,7 +345,89 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return false;
     }
-
+    @Override
+    public boolean pagarTarjeta(String Nro, String Tipo, Date Fecha, String CVC, String Propuesta, String Colaborador)
+            
+    {
+         Date lul = new Date();
+        String horita = java.time.LocalTime.now().toString();
+        Colaborador colab = ctrlUsuario.getInstance().traerColaborador(Colaborador);
+        Propuesta prop2 = this.propuestas.get(Propuesta);
+     List<Colaboracion> col = colab.getColHechas();
+      for (int i = 0; i < col.size(); i++) {
+        Colaboracion co = (Colaboracion) col.get(i);
+        if(co.getColab().getNick().equals(Colaborador))
+        {
+            try {
+                Tarjeta c = new Tarjeta(Nro,co, Tipo,lul, Integer.parseInt(CVC));
+                if (dbPropuesta.pagosTarjeta2(c,prop2,Colaborador)) {
+                    this.pagos.add(c);
+                    return true;
+                }
+                else{
+                    return false;
+                }  } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
+      }
+    return false;
+    }
+    @Override 
+    public boolean pagarTrans(String Nro, String Banco, String Propuesta, String Colaborador)
+            {
+        Colaborador colab = ctrlUsuario.getInstance().traerColaborador(Colaborador);
+        Propuesta prop2 = this.propuestas.get(Propuesta);
+     List<Colaboracion> col = colab.getColHechas();
+      for (int i = 0; i < col.size(); i++) {
+        Colaboracion co = (Colaboracion) col.get(i);
+        if(co.getColab().getNick().equals(Colaborador))
+        {
+            try {
+                Transferencia c = new Transferencia(Nro,co,Banco );
+                if (dbPropuesta.pagosTransferencia2(c,prop2.getTitulo(),Colaborador)) {
+                    this.pagos.add(c);
+                    return true;
+                }
+                
+                else{
+                    return false;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
+      }
+    return false;
+    }
+     @Override 
+    public boolean pagarPayPal(String Nro, String Banco, String Propuesta, String Colaborador)
+            {
+        Colaborador colab = ctrlUsuario.getInstance().traerColaborador(Colaborador);
+        Propuesta prop2 = this.propuestas.get(Propuesta);
+     List<Colaboracion> col = colab.getColHechas();
+      for (int i = 0; i < col.size(); i++) {
+        Colaboracion co = (Colaboracion) col.get(i);
+        if(co.getColab().getNick().equals(Colaborador))
+        {
+            try {
+                PayPal c = new PayPal(Nro,co );
+                if (dbPropuesta.pagosPayPal2(c,prop2.getTitulo(),Colaborador)) {
+                    this.pagos.add(c);
+                    return true;
+                }
+                
+                else{
+                    return false;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ctrlPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
+      }
+    return false;
+    }
+    
     private String getCurrentTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("kkmmss");
         String currentTime = dateFormat.format(System.currentTimeMillis());
@@ -1268,4 +1350,5 @@ public class ctrlPropuesta implements IPropuesta {
         }
         return null;
     }
+    
 }

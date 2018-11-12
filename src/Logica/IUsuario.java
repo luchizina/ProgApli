@@ -88,6 +88,6 @@ public interface IUsuario {
     public dataListUsuarios rankingUser2();
     public DtProponente traerDtProponente(String nick);
     public abstract DtPath Path_A_DT(Path dts);
-    
+     public dataListColaboraciones traerPropuestasColaboradasNoPagas2(String nick);
     public abstract DataImagen Crear_DataImagen(final byte[] stream, final String nombreArchivo, final String extensionArchivo);
 }

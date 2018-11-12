@@ -325,25 +325,48 @@ public class DBPropuesta {
             statement.close();
         }
     }
-
+ public boolean pagosPayPal2(PayPal c, String prop, String cola) throws SQLException {
+      
+        try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO paypal " + "(Nro, TituloProp, Colaborador) VALUES (?,?,?)")) {
+            statement.setString(1,"1" );
+            statement.setString(2, "1");
+            statement.setString(3, "1");
+            statement.executeUpdate();
+        }
+        return false;
+    }
+  public boolean pagosTarjeta2(Tarjeta c,Propuesta prop2, String Colaborador) throws SQLException {
+      try{
+          try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO tarjeta " + "(Nro, Tipo, Fecha, CVC, Propuesta, Colaborador) VALUES (?,?,?,?,?,?)")) {
+              statement.setString(1, c.getNumero());
+              statement.setString(2, c.getTipo());
+              SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+              String fechaSt = sdf.format(c.getFecha());
+              statement.setString(3, fechaSt);
+              statement.setInt(4, c.getCvc());
+              statement.setString(5,prop2.getTitulo());
+              statement.setString(6, Colaborador);
+              statement.executeUpdate();
+                statement.close();
+          }
+        return true;
+           } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        
+    }
     public void pagosTarjeta() throws SQLException {
-        String[] col = {"novick", "robinh", "nicoJ", "marcelot", "Tiajaci", "Mengano"};
-        String[] prop = {"Cine en el Botánico", "Cine en el Botánico", "Cine en el Botánico", "Religiosamente", "Religiosamente", "Religiosamente"};
-        String[] nro = {"1234 5678 1234 2017", "1234 5678 2345 2017", "1234 5678 3456 2017", "1234 5678 4567 2017", "1234 5678 5678 2017", "1234 5678 6789 2017"};
-        Integer[] CVC = {123, 123, 123, 123, 123, 123};
-        String[] tipo = {"Oca", "Oca", "Visa", "Visa", "Master", "Master"};
-        String[] fechas = {"2018-07-30", "2018-08-30", "2018-09-30", "2018-10-30", "2018-11-30", "2018-12-30"};
-        for (int i = 0; i < col.length; i++) {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO tarjeta " + "(Nro, Tipo, Fecha, CVC, Propuesta, Colaborador) VALUES (?,?,?,?,?,?)");
-            statement.setString(1, nro[i]);
-            statement.setString(2, tipo[i]);
-            statement.setString(3, fechas[i]);
-            statement.setInt(4, CVC[i]);
-            statement.setString(5, prop[i]);
-            statement.setString(6, col[i]);
+           PreparedStatement statement = conexion.prepareStatement("INSERT INTO tarjeta " + "(Nro, Tipo, Fecha, CVC, Propuesta, Colaborador) VALUES (?,?,?,?,?,?)");
+            statement.setString(1, "");
+            statement.setString(2, "");
+            statement.setString(3, "");
+            statement.setInt(4, 2);
+            statement.setString(5, "");
+            statement.setString(6, "");
             statement.executeUpdate();
             statement.close();
-        }
+        
     }
 
     public void pagosTransferencia() throws SQLException {
@@ -362,6 +385,23 @@ public class DBPropuesta {
         }
     }
 
+    public boolean pagosTransferencia2(Transferencia c, String prop, String cola) throws SQLException {
+        try{
+        try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO transferencia " + "(Nro, Banco, Propuesta, Colaborador) VALUES (?,?,?,?)")) {
+            statement.setString(1, c.getNumero());
+            statement.setString(2, c.getBanco());
+            statement.setString(3, prop);
+            statement.setString(4, cola);
+            statement.executeUpdate();
+              statement.close();
+           
+        }
+         return true;
+          } catch (SQLException ex) {
+            return false;
+        }
+    }
+    
     public List<Colaboracion> cargarColaboraciones() {
         try {
             IUsuario iUsu = fab.getICtrlUsuario();
