@@ -43,6 +43,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import config.Utils;
+import java.text.DateFormat;
 import java.util.Properties;
 
 /**
@@ -1349,44 +1350,73 @@ if(nuevito.getActivo()==false){
             return false;
     }; 
     
-//    @Override
-//    public List<DtProponente> List_DtProponente_Eliminar_Desactivado(List<DtProponente> lista){
-//        int x = lista.size();
-//        List<DtProponente> aux = lista;
-//        for (int i = 0; i < x; i++) {
-//            //if (this.Existe_Proponente(lista.get(i).getNick())){ // Todos deberian de ser proponentes
-//                int c = lista.size();
-//                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
-//                if (!P.getActivo()) {                                           // Si esta desactivado 
-//                    aux.remove(lista.get(i));                                 // lo saco de la lista
-//                }
-//            //}
-//        }
-//    return aux;
-//    };
+    @Override
+    public DefaultListModel Listar_Proponentes_desactivados(){
+        DefaultListModel modelo = new DefaultListModel();
+        Set se = usuarios.entrySet();
+        Iterator iterator = se.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Proponente) {
+                Proponente aux = (Proponente) mentry.getValue();
+                if (!aux.getActivo()){  
+                modelo.addElement(aux.getNombre()+"("+aux.getNick()+")");
+            }
+            }
+        }
+        return modelo;
+    };
     
-//    @Override
-//    public List<DtColaboracion> List_DtColaboracio_Eliminar_Desactivado(List<DtColaboracion> lista){
-//        int x = lista.size();
-//        for (int i = 0; i < x; i++){
-//            if(!this.traerProponente(lista.get(i).getPropuesta().getPropo()).getActivo()){
-//                lista.remove(i);
-//            }
-//        }
-//        return lista;
-//    };
+    @Override
+    public DefaultListModel BUSCADOR_Proponente_Descativado(String palabrita) {
+        DefaultListModel modelo = new DefaultListModel();
+        List<DtProponente> col = this.listarProponentes_desactivados(); 
+        if (palabrita.equals("")) { // SI NO BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtProponente p = (DtProponente) col.get(i);
+                    modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                }
+            }
+        } else {                                // SI BUSCA
+            if (!col.isEmpty()) {
+
+                for (int i = 0; i < col.size(); i++) {
+                    DtProponente p = (DtProponente) col.get(i);
+                    if (p.getNick().contains(palabrita) || p.getNombre().contains(palabrita)) {
+                        modelo.addElement(p.getNombre() + "(" + p.getNick() + ")");
+                    }
+                }
+            }
+        }
+        return modelo;
+    }
     
+    public List<DtProponente> listarProponentes_desactivados() {
+        List<DtProponente> listita = new ArrayList<>();
+        Set se = usuarios.entrySet();
+        Iterator iterator = se.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Proponente) {
+
+                Proponente aux = (Proponente) mentry.getValue();
+                if (!aux.getActivo()){   //agregado
+                listita.add(aux.obtenerInfo());
+            }
+            }
+        }
+        return listita;
+        //return this.List_DtProponente_Eliminar_Desactivado(listita);
+    }
     
-//    public List<DtUsuario> List_DtUsuario_Eliminar_Desactivado(List<DtUsuario> lista){
-//        int x = lista.size();
-//        for (int i = 0; i < x; i++) {
-//            if (this.Existe_Proponente(lista.get(i).getNick())){ 
-//                Proponente P = (Proponente) this.traerProponente(lista.get(i).getNick());
-//                if (!P.getActivo()) {                                           // Si esta desactivado 
-//                    lista.remove(lista.get(i));                                 // lo saco de la lista
-//                }
-//            }
-//        }
-//    return lista;
-//    };
+    @Override
+    public String TraerFecha_desactivado(String nick_proponente){
+    Proponente P = this.traerProponente(nick_proponente);
+    Date F = P.getFecha_des();
+    DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
+    String F_String = fecha.format(F);
+    return F_String;
+    };
 }

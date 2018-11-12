@@ -90,4 +90,7 @@ public interface IUsuario {
     public abstract DtPath Path_A_DT(Path dts);
      public dataListColaboraciones traerPropuestasColaboradasNoPagas2(String nick);
     public abstract DataImagen Crear_DataImagen(final byte[] stream, final String nombreArchivo, final String extensionArchivo);
+    public abstract DefaultListModel Listar_Proponentes_desactivados();
+    public abstract String TraerFecha_desactivado(String nick_proponente);
+    public abstract DefaultListModel BUSCADOR_Proponente_Descativado(String palabrita);
 }

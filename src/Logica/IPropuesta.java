@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
  */
 public interface IPropuesta {
     public void cargarPag();
+    public byte[] crearDescarga(String prop, String usu);
     public DataReporte traerRep(String prop, String usu);
     public void crearReporte(String prop, String usu);
     public Boolean pago(String prop, String usu);
@@ -75,4 +76,6 @@ public interface IPropuesta {
    public boolean pagarTrans(String Nro, String Banco, String Propuesta, String Colaborador);
    public boolean pagarPayPal(String Nro, String Banco, String Propuesta, String Colaborador);
     
+    public abstract DefaultListModel Propuestas_Desactivadas(String proponente_nick);
+    public abstract TableModel Listar_Colaboracines_tabla(String titulo_propuesta);
 }

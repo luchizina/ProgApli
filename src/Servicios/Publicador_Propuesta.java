@@ -7,6 +7,7 @@ package Servicios;
 
 import Logica.DataImagen;
 import Logica.DataList_Comentario;
+import Logica.DataReporte;
 import Logica.DtPropuesta;
 import Logica.Estado;
 import Logica.Fabrica;
@@ -181,6 +182,24 @@ public class Publicador_Propuesta {
     }
     
     @WebMethod
+    public DataReporte traerReporte(String prop, String usu){
+        return IP.traerRep(prop, usu);
+    }
+    
+    @WebMethod
+    public Boolean SaberSiPago(String prop, String usu){
+        return IP.pago(prop, usu);
+    }
+    
+    @WebMethod
+    public void GenerarReporte(String prop, String usu){
+        IP.crearReporte(prop, usu);
+    }
+    
+    @WebMethod
+    public byte[] generaDescarga(String prop, String usu){
+        return IP.crearDescarga(prop, usu);
+    }
     public boolean pagarTarjeta2(String Nro, String Tipo, Date Fecha, String CVC, String Propuesta, String Colaborador)
    {
         return IP.pagarTarjeta( Nro,  Tipo,  Fecha, CVC,  Propuesta, Colaborador);
