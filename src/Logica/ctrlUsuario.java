@@ -58,6 +58,7 @@ public class ctrlUsuario implements IUsuario {
     private String usuRec;
     private String usuAseguir;
     private Colaborador ColaboradorConsulta = null;
+   
 
     private DBusuario usu = null;
 
@@ -613,8 +614,25 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
         }
         return propuestas;
     }
+        public List<DtColaboracion> traerPropuestasColaboradasNoPagas(String nick) {
+        List<DtColaboracion> propuestas = new ArrayList<>();
+        Colaborador colab = this.traerColaborador(nick);
+        List<Colaboracion> colaboraciones = colab.getColHechas(); 
+        for (int i = 0; i < colaboraciones.size(); i++) {
+         
+            Colaboracion col = (Colaboracion) colaboraciones.get(i);
+               if(!(ctrlPropuesta.getInstance().pago(col.getProp().getTitulo(),col.getColab().getNick()))){
+            Propuesta prop = col.getProp();
+            DtPropuesta pro = new DtPropuesta(prop);
+            DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
+            DtColaboracion ma = new DtColaboracion(col.getHora(), col.getFecha(), col.getMonto(),cola, pro);
+            propuestas.add(ma);
+               }
+        }
+        return propuestas;
+    }
 
-    @Override
+
     public DtInfo resolverLogin(String nick, String pass) {
         DtInfo resultado = new DtInfo(false, "algo", "algo", "algo");
         String passEncriptada = sha1(pass);
@@ -1242,7 +1260,11 @@ if(nuevito.getActivo()==false){
         dataListColaboraciones datatype = new dataListColaboraciones(traerPropuestasColaboradas(nick));
         return datatype;
     }
-    
+     public dataListColaboraciones traerPropuestasColaboradasNoPagas2(String nick)
+    {
+        dataListColaboraciones datatype = new dataListColaboraciones(traerPropuestasColaboradasNoPagas(nick));
+        return datatype;
+    }
     public dataListStrings seleccionarColaborante2(String nick)
     {
         dataListStrings datatype = new dataListStrings(SeleccionarColaborante(nick));

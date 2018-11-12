@@ -200,4 +200,19 @@ public class Publicador_Propuesta {
     public byte[] generaDescarga(String prop, String usu){
         return IP.crearDescarga(prop, usu);
     }
+    public boolean pagarTarjeta2(String Nro, String Tipo, Date Fecha, String CVC, String Propuesta, String Colaborador)
+   {
+        return IP.pagarTarjeta( Nro,  Tipo,  Fecha, CVC,  Propuesta, Colaborador);
+    }
+     @WebMethod
+    public boolean pagarTrans2(String Nro, String Banco, String Propuesta, String Colaborador)
+   {
+        return IP.pagarTrans(Nro, Banco, Propuesta, Colaborador);
+    } 
+    @WebMethod
+    public boolean pagarPayPal2(String Nro, String Banco, String Propuesta, String Colaborador)
+    {
+        return IP.pagarPayPal(Nro, Banco,Propuesta, Colaborador);
+   
+    } 
 }
