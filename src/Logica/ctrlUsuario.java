@@ -270,6 +270,8 @@ public List<DtUsuario> listaNC(String txt) {
                 if(((Proponente) us).getActivo()){  // agregado
                 usuarios.add(usuarito);
                 }
+            }else{
+                usuarios.add(usuarito);
             }
         }
         return usuarios;
@@ -296,6 +298,8 @@ public List<DtUsuario> listaNC(String txt) {
                                 if (((Proponente) aux).getActivo()) {    // agregado
                                     seguidores.add(seguidor);
                                 }
+                            } else{
+                                seguidores.add(seguidor);
                             }
                         }
                     }
