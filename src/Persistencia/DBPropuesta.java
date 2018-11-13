@@ -328,11 +328,16 @@ public class DBPropuesta {
  public boolean pagosPayPal2(PayPal c, String prop, String cola) throws SQLException {
       
         try (PreparedStatement statement = conexion.prepareStatement("INSERT INTO paypal " + "(Nro, TituloProp, Colaborador) VALUES (?,?,?)")) {
-            statement.setString(1,"1" );
-            statement.setString(2, "1");
-            statement.setString(3, "1");
+            statement.setString(1,c.getNumero() );
+            statement.setString(2, prop);
+            statement.setString(3, cola);
             statement.executeUpdate();
-        }
+             statement.close();
+            return true;
+        
+            } catch (SQLException ex) {
+            }
+        
         return false;
     }
   public boolean pagosTarjeta2(Tarjeta c,Propuesta prop2, String Colaborador) throws SQLException {

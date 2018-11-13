@@ -210,9 +210,8 @@ public class Publicador_Propuesta {
         return IP.pagarTrans(Nro, Banco, Propuesta, Colaborador);
     } 
     @WebMethod
-    public boolean pagarPayPal2(String Nro, String Banco, String Propuesta, String Colaborador)
+    public boolean pagarPayPal2(String Nro,  String Propuesta, String Colaborador)
     {
-        return IP.pagarPayPal(Nro, Banco,Propuesta, Colaborador);
-   
+        return IP.pagarPayPal(Nro,Propuesta, Colaborador); 
     } 
 }
