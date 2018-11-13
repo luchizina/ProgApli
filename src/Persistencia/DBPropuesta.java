@@ -362,16 +362,23 @@ public class DBPropuesta {
         
     }
     public void pagosTarjeta() throws SQLException {
+        String [] numero = {"1234 5678 1234 2017", "1234 5678 2345 2017", "1234 5678 3456 2017", "1234 5678 4567 2017", "1234 5678 5678 2017", "1234 5678 6789 2017"};
+        String [] tipo={"Oca", "Oca", "Visa", "Visa", "Master", "Master"};
+        String [] fechas={"2018-07-30", "2018-08-30", "2018-09-30", "2018-10-30","2018-11-30","2018-12-30"};
+        Integer [] cvc={123,123,123,123,123,123};
+        String [] prop={"Cine en el Botánico","Cine en el Botánico","Cine en el Botánico","Religiosamente","Religiosamente","Religiosamente"};
+        String[] colab={"novick", "robinh","nicoJ", "marcelot", "Tiajaci", "Mengano"};
+        for (int i = 0; i < numero.length; i++) {
            PreparedStatement statement = conexion.prepareStatement("INSERT INTO tarjeta " + "(Nro, Tipo, Fecha, CVC, Propuesta, Colaborador) VALUES (?,?,?,?,?,?)");
-            statement.setString(1, "");
-            statement.setString(2, "");
-            statement.setString(3, "");
-            statement.setInt(4, 2);
-            statement.setString(5, "");
-            statement.setString(6, "");
+            statement.setString(1, numero[i]);
+            statement.setString(2, tipo[i]);
+            statement.setString(3, fechas[i]);
+            statement.setInt(4, cvc[i]);
+            statement.setString(5, prop[i]);
+            statement.setString(6, colab[i]);
             statement.executeUpdate();
             statement.close();
-        
+        }
     }
 
     public void pagosTransferencia() throws SQLException {
