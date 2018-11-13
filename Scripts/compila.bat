@@ -1,14 +1,10 @@
 @echo OFF
 echo aqui compilando
 pause 
-SET hola=%~dp0
-echo %hola%
 cd ..
 pause
-chdir>hola.txt
-SET /p nana=< hola.txt
-echo %nana%
-cd %nana%
+chdir
+MD pdfs
 MD .\build\Culturarte
 pause
 javac -encoding UTF-8 -d .\build\Culturarte -cp .\lib\* .\src\Persistencia\*.java .\src\Presentacion\*.java .\src\Logica\*.java .\src\Servicios\*.java .\src\Config\*.java 
