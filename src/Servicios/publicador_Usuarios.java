@@ -169,7 +169,7 @@ public class publicador_Usuarios {
     @WebMethod
      public boolean existeNick(String nick)
      {
-         return xD.existeNick2(nick);
+         return xD.existeNick(nick);
      }
      @WebMethod
      public DtUsuario traerDtUsuario(String nick)
