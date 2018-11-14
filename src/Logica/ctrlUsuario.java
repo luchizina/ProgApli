@@ -552,6 +552,15 @@ public class ctrlUsuario implements IUsuario {
         return true;
     }
 
+    public boolean existeNick2(String nick) {
+        for (Usuario u : this.usuarios.values()) {
+            if (u.getNick().equalsIgnoreCase(nick)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public Usuario traerUsuario(String nick) {
         for (Usuario u : this.usuarios.values()) {

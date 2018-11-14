@@ -477,7 +477,7 @@ public class Registrar_usuario extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 if (jRadioButton1.isSelected() == true || jRadioButton2.isSelected() == true) {
         if (jRadioButton1.isSelected() == true) {
-            if (usuario.existeNick(nickname.getText()) == true) {
+            if (usuario.existeNick2(nickname.getText()) == true) {
                 if (this.vacios() == false) {
                     if (usuario.escorreo(email.getText()) == true && usuario.existeCorreo(email.getText()) == true) {
                         if(pass.getText().equals(confpass.getText())){
