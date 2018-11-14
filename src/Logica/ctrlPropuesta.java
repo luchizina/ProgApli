@@ -366,7 +366,7 @@ public class ctrlPropuesta implements IPropuesta {
      List<Colaboracion> col = colab.getColHechas();
       for (int i = 0; i < col.size(); i++) {
         Colaboracion co = (Colaboracion) col.get(i);
-        if(co.getColab().getNick().equals(Colaborador))
+        if(co.getColab().getNick().equals(Colaborador) && co.getProp().getTitulo().equals(Propuesta))
         {
             try {
                 Tarjeta c = new Tarjeta(Nro,co, Tipo,lul, Integer.parseInt(CVC));
@@ -391,7 +391,7 @@ public class ctrlPropuesta implements IPropuesta {
      List<Colaboracion> col = colab.getColHechas();
       for (int i = 0; i < col.size(); i++) {
         Colaboracion co = (Colaboracion) col.get(i);
-        if(co.getColab().getNick().equals(Colaborador))
+        if(co.getColab().getNick().equals(Colaborador) && co.getProp().getTitulo().equals(Propuesta))
         {
             try {
                 Transferencia c = new Transferencia(Nro,co,Banco );
@@ -418,7 +418,7 @@ public class ctrlPropuesta implements IPropuesta {
      List<Colaboracion> col = colab.getColHechas();
       for (int i = 0; i < col.size(); i++) {
         Colaboracion co = (Colaboracion) col.get(i);
-        if(co.getColab().getNick().equals(Colaborador))
+        if(co.getColab().getNick().equals(Colaborador) && co.getProp().getTitulo().equals(Propuesta))
         {
             try {
                 PayPal c = new PayPal(Nro,co );
