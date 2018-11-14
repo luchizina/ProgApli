@@ -305,7 +305,15 @@ public class ctrlPropuesta implements IPropuesta {
     }
 
     public List<Colaboracion> listarColaboraciones() {
-        return this.colaboraciones;
+        //return this.colaboraciones;
+        List<Colaboracion> x = new ArrayList<>();
+        for(int i = 0; i<colaboraciones.size();i++){
+            Colaboracion aux = (Colaboracion) colaboraciones.get(i);
+            if(iUsu.traerProponente(aux.getProp().getPropo()).getActivo()){
+                x.add(aux);
+            }    
+        }
+        return x;
     }
 
     @Override
