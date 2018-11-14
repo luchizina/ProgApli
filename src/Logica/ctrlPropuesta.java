@@ -341,7 +341,7 @@ public class ctrlPropuesta implements IPropuesta {
 
         if (dbPropuesta.agregarColaboracion(c)) {
             this.colaboraciones.add(c);
-            if (!prop2.tieneColab()) {
+            if (!prop2.tieneColab() && !prop2.estActual.getEstado().equals(Testado.Cancelada)) {
                 this.cambiarEstadito(prop2.getTitulo(), "En_Financiacion");
             }
             prop2.addColab(c);
@@ -1230,7 +1230,7 @@ public class ctrlPropuesta implements IPropuesta {
     public Boolean pago(String prop, String usu) {
         Colaboracion col = this.Traer_Colboracion(usu, prop);
         for (pagos p : this.pagos) {
-            if (p.getColab().equals(col)) {
+            if (p.getColab().getColab().getNick().equals(col.getColab().getNick()) && p.getColab().getProp().getTitulo().equals(col.getProp().getTitulo())) {
                 System.out.println("Colaboracion pagada");
                 return true;
             }
