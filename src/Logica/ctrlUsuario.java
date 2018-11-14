@@ -58,7 +58,6 @@ public class ctrlUsuario implements IUsuario {
     private String usuRec;
     private String usuAseguir;
     private Colaborador ColaboradorConsulta = null;
-   
 
     private DBusuario usu = null;
 
@@ -75,20 +74,18 @@ public class ctrlUsuario implements IUsuario {
         this.usu = new DBusuario();
     }
 
-  
     @Override
     public boolean altaColaborador(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String tipo, String pass) {
-     Properties pr= Utils.getPropiedades();
-        
-        
+        Properties pr = Utils.getPropiedades();
+
         if (this.existe(Nick, Correo) == false) {
             return false;
         } else {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-               String rutaSistema= System.getProperty("user.dir")+"\\";          
-                String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("colaborador");
+                String rutaSistema = System.getProperty("user.dir") + "\\";
+                String dest = rutaSistema + pr.getProperty("imagenes") + pr.getProperty("colaborador");
                 String destino = dest + Nick + "." + termina;
                 //String destino = "Imagenes/Colaborador/" + Nick + "." + termina;
 
@@ -107,9 +104,9 @@ public class ctrlUsuario implements IUsuario {
             return res;
         }
     }
-    
+
     @Override
-public List<DtUsuario> listaNC(String txt) {
+    public List<DtUsuario> listaNC(String txt) {
         List<DtUsuario> prop = new ArrayList<>();
         Set set = usuarios.entrySet();
         Iterator it = set.iterator();
@@ -117,41 +114,41 @@ public List<DtUsuario> listaNC(String txt) {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Usuario aux = (Usuario) mentry.getValue();
-            
-            if(aux instanceof Proponente){
-            Proponente propo = (Proponente) aux;        
-            if(propo.getActivo()==true){
-                
-          
-            if (propo.getNick().contains(txt) == true) {
-                DtUsuario da = this.traerDtUsuario(propo.getNick());
-                prop.add(da);
-                esta = true;
-            }
 
-            if (propo.getCorreo().contains(txt) == true && !esta) {
-                 DtUsuario da = this.traerDtUsuario(propo.getNick());
-                prop.add(da);
-                esta = true;
-            }
-            esta = false;
-              }
-             }else{
-               if (aux.getNick().contains(txt) == true) {
-                DtUsuario da = this.traerDtUsuario(aux.getNick());
-                prop.add(da);
-                esta = true;
-            }
+            if (aux instanceof Proponente) {
+                Proponente propo = (Proponente) aux;
+                if (propo.getActivo() == true) {
 
-            if (aux.getCorreo().contains(txt) == true && !esta) {
-                 DtUsuario da = this.traerDtUsuario(aux.getNick());
-                prop.add(da);
-                esta = true;
-            }  
+                    if (propo.getNick().contains(txt) == true) {
+                        DtUsuario da = this.traerDtUsuario(propo.getNick());
+                        prop.add(da);
+                        esta = true;
+                    }
+
+                    if (propo.getCorreo().contains(txt) == true && !esta) {
+                        DtUsuario da = this.traerDtUsuario(propo.getNick());
+                        prop.add(da);
+                        esta = true;
+                    }
+                    esta = false;
+                }
+            } else {
+                if (aux.getNick().contains(txt) == true) {
+                    DtUsuario da = this.traerDtUsuario(aux.getNick());
+                    prop.add(da);
+                    esta = true;
+                }
+
+                if (aux.getCorreo().contains(txt) == true && !esta) {
+                    DtUsuario da = this.traerDtUsuario(aux.getNick());
+                    prop.add(da);
+                    esta = true;
+                }
             }
         }
         return prop;
     }
+
     @Override
     public Colaborador traerColaborador(String f) {
         Colaborador fa = (Colaborador) this.usuarios.get(f);
@@ -266,11 +263,11 @@ public List<DtUsuario> listaNC(String txt) {
             Usuario us = (Usuario) mentry.getValue();
             System.out.println(us.getNick());
             DtUsuario usuarito = this.traerDtUsuario(us.getNick());
-            if (us instanceof Proponente){          // agregado
-                if(((Proponente) us).getActivo()){  // agregado
-                usuarios.add(usuarito);
+            if (us instanceof Proponente) {          // agregado
+                if (((Proponente) us).getActivo()) {  // agregado
+                    usuarios.add(usuarito);
                 }
-            }else{
+            } else {
                 usuarios.add(usuarito);
             }
         }
@@ -298,7 +295,7 @@ public List<DtUsuario> listaNC(String txt) {
                                 if (((Proponente) aux).getActivo()) {    // agregado
                                     seguidores.add(seguidor);
                                 }
-                            } else{
+                            } else {
                                 seguidores.add(seguidor);
                             }
                         }
@@ -331,9 +328,9 @@ public List<DtUsuario> listaNC(String txt) {
             if (mentry.getValue() instanceof Proponente) {
 
                 Proponente aux = (Proponente) mentry.getValue();
-                if (aux.getActivo()){   //agregado
-                listita.add(aux.obtenerInfo());
-            }
+                if (aux.getActivo()) {   //agregado
+                    listita.add(aux.obtenerInfo());
+                }
             }
         }
         return listita;
@@ -342,19 +339,17 @@ public List<DtUsuario> listaNC(String txt) {
 
     @Override
     public boolean altaProponente(String Nick, String Correo, String Nombre, String Apellido, Date fecha, String Imagen, String direccion, String biografia, String web, String tipo, String pass) {
-      Properties pr= Utils.getPropiedades();
-        
+        Properties pr = Utils.getPropiedades();
+
         if (this.existe(Nick, Correo) == false) {
             return false;
         } else {
             if (Imagen.equals("") == false) {
                 String[] aux = Imagen.split("\\.");
                 String termina = aux[1];
-                String rutaSistema= System.getProperty("user.dir")+"\\";
-String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
+                String rutaSistema = System.getProperty("user.dir") + "\\";
+                String dest = rutaSistema + pr.getProperty("imagenes") + pr.getProperty("proponente");
                 String destino = dest + Nick + "." + termina;
-
-  
 
                 if (this.copia(Imagen, destino) == true) {
                     Imagen = destino;
@@ -420,25 +415,25 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
 
     @Override
     public void limpiarUsuarios() {
-        
-        Properties p=Utils.getPropiedades();
-      String rutaSistema= System.getProperty("user.dir")+"\\";
-        String img=p.getProperty("imagenes");
-        String colab=p.getProperty("colaborador");
-        String propu=p.getProperty("propuesta");
-        String propo=p.getProperty("proponente");
-        
+
+        Properties p = Utils.getPropiedades();
+        String rutaSistema = System.getProperty("user.dir") + "\\";
+        String img = p.getProperty("imagenes");
+        String colab = p.getProperty("colaborador");
+        String propu = p.getProperty("propuesta");
+        String propo = p.getProperty("proponente");
+
         try {
             this.usu.limpiarBase();
-            File borrar = new File(rutaSistema+img+colab);
+            File borrar = new File(rutaSistema + img + colab);
             if (borrar.exists()) {
                 this.borrarArch(borrar);
             }
-            File borrar1 = new File(rutaSistema+img+propo);
+            File borrar1 = new File(rutaSistema + img + propo);
             if (borrar1.exists()) {
                 this.borrarArch(borrar1);
             }
-            File borrar2 = new File(rutaSistema+img+propu);
+            File borrar2 = new File(rutaSistema + img + propu);
             if (borrar2.exists()) {
                 this.borrarArch(borrar2);
             }
@@ -523,8 +518,8 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
         for (int i = 0; i < listitaC.size(); i++) {
             DtPropuesta prop = new DtPropuesta(listitaC.get(i).getProp());
             DtColaboracion cola = new DtColaboracion(prop);
-            if(this.traerProponente(listitaC.get(i).getProp().getPropo()).getActivo()){ // agregado
-            listita.add(cola);
+            if (this.traerProponente(listitaC.get(i).getProp().getPropo()).getActivo()) { // agregado
+                listita.add(cola);
             }
         }
         return listita;
@@ -547,7 +542,10 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
     public boolean existeNick(String nick) {
 
         for (Usuario u : this.usuarios.values()) {
-            if (u.getNick().equalsIgnoreCase(nick)) {
+            if (u instanceof Colaborador && u.getNick().equalsIgnoreCase(nick)) {
+                return false;
+            }
+            if (u instanceof Proponente && u.getNick().equalsIgnoreCase(nick) && this.traerProponente(nick).getActivo()) {
                 return false;
             }
         }
@@ -594,11 +592,11 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             DtPropuesta prop = new DtPropuesta((Propuesta) mentry.getValue());
-         Usuario propoACargo= this.traerUsuario(prop.getPropo());
-         Proponente propon = (Proponente) propoACargo;
-         if(propon.getActivo()==true){
-            propuestas.add(prop);
-             }
+            Usuario propoACargo = this.traerUsuario(prop.getPropo());
+            Proponente propon = (Proponente) propoACargo;
+            if (propon.getActivo() == true) {
+                propuestas.add(prop);
+            }
         }
         return propuestas;
     }
@@ -607,35 +605,39 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
     public List<DtColaboracion> traerPropuestasColaboradas(String nick) {
         List<DtColaboracion> propuestas = new ArrayList<>();
         Colaborador colab = this.traerColaborador(nick);
-        List<Colaboracion> colaboraciones = colab.getColHechas(); 
+        List<Colaboracion> colaboraciones = colab.getColHechas();
         for (int i = 0; i < colaboraciones.size(); i++) {
             Colaboracion col = (Colaboracion) colaboraciones.get(i);
             Propuesta prop = col.getProp();
             DtPropuesta pro = new DtPropuesta(prop);
             DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
-            DtColaboracion ma = new DtColaboracion(col.getHora(), col.getFecha(), col.getMonto(),cola, pro);
-            propuestas.add(ma);
-        }
-        return propuestas;
-    }
-        public List<DtColaboracion> traerPropuestasColaboradasNoPagas(String nick) {
-        List<DtColaboracion> propuestas = new ArrayList<>();
-        Colaborador colab = this.traerColaborador(nick);
-        List<Colaboracion> colaboraciones = colab.getColHechas(); 
-        for (int i = 0; i < colaboraciones.size(); i++) {
-         
-            Colaboracion col = (Colaboracion) colaboraciones.get(i);
-               if(!(ctrlPropuesta.getInstance().pago(col.getProp().getTitulo(),col.getColab().getNick()))){
-            Propuesta prop = col.getProp();
-            DtPropuesta pro = new DtPropuesta(prop);
-            DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
-            DtColaboracion ma = new DtColaboracion(col.getHora(), col.getFecha(), col.getMonto(),cola, pro);
-            propuestas.add(ma);
-               }
+            DtColaboracion ma = new DtColaboracion(col.getHora(), col.getFecha(), col.getMonto(), cola, pro);
+            if (this.traerProponente(prop.getPropo()).getActivo()) {
+                propuestas.add(ma);
+            }
         }
         return propuestas;
     }
 
+    public List<DtColaboracion> traerPropuestasColaboradasNoPagas(String nick) {
+        List<DtColaboracion> propuestas = new ArrayList<>();
+        Colaborador colab = this.traerColaborador(nick);
+        List<Colaboracion> colaboraciones = colab.getColHechas();
+        for (int i = 0; i < colaboraciones.size(); i++) {
+
+            Colaboracion col = (Colaboracion) colaboraciones.get(i);
+            if (!(ctrlPropuesta.getInstance().pago(col.getProp().getTitulo(), col.getColab().getNick()))) {
+                Propuesta prop = col.getProp();
+                DtPropuesta pro = new DtPropuesta(prop);
+                DtColaborador cola = new DtColaborador(col.getColab().getNick(), col.getColab().getNombre(), col.getColab().getApellido(), col.getColab().getCorreo(), col.getColab().getFecha(), col.getColab().getImg());
+                DtColaboracion ma = new DtColaboracion(col.getHora(), col.getFecha(), col.getMonto(), cola, pro);
+                if (this.traerProponente(prop.getPropo()).getActivo()) {
+                    propuestas.add(ma);
+                }
+            }
+        }
+        return propuestas;
+    }
 
     public DtInfo resolverLogin(String nick, String pass) {
         DtInfo resultado = new DtInfo(false, "algo", "algo", "algo");
@@ -709,17 +711,18 @@ String dest=rutaSistema+pr.getProperty("imagenes")+pr.getProperty("proponente");
 
                 } else {
                     if (prop.getPass().equals(passEncriptada)) {
- Usuario nuevo=this.traerUsuario(nick);             
+                        Usuario nuevo = this.traerUsuario(nick);
 
-Proponente nuevito=(Proponente) nuevo;
-if(nuevito.getActivo()==false){
-      resultado.setEstLogin(false);
-}else{
-                        resultado.setEstLogin(true);
-                        resultado.setMensaje(cadena5);
-                        resultado.setNick(prop.getNick());
-                        resultado.setTipo("proponente");
-}   } else {
+                        Proponente nuevito = (Proponente) nuevo;
+                        if (nuevito.getActivo() == false) {
+                            resultado.setEstLogin(false);
+                        } else {
+                            resultado.setEstLogin(true);
+                            resultado.setMensaje(cadena5);
+                            resultado.setNick(prop.getNick());
+                            resultado.setTipo("proponente");
+                        }
+                    } else {
                         //la contraseña ingresada es incorrectafas
                         resultado.setEstLogin(false);
                         resultado.setMensaje("La contraseña ingresada es incorrecta");
@@ -732,20 +735,20 @@ if(nuevito.getActivo()==false){
 
             } else {
                 if (prop.getPass().equals(passEncriptada)) {
-       Usuario nuevo=this.traerUsuario(nick);             
+                    Usuario nuevo = this.traerUsuario(nick);
 
-Proponente nuevito=(Proponente) nuevo;
-if(nuevito.getActivo()==false){
-      resultado.setEstLogin(false);
-}else{
-    
+                    Proponente nuevito = (Proponente) nuevo;
+                    if (nuevito.getActivo() == false) {
+                        resultado.setEstLogin(false);
+                    } else {
 
-                    resultado.setEstLogin(true);
-                    resultado.setMensaje(cadena5);
-                    resultado.setTipo("proponente");
-                    resultado.setNick(prop.getNick());
+                        resultado.setEstLogin(true);
+                        resultado.setMensaje(cadena5);
+                        resultado.setTipo("proponente");
+                        resultado.setNick(prop.getNick());
 
-               } } else {
+                    }
+                } else {
                     resultado.setEstLogin(false);
                     resultado.setMensaje("La contraseña ingresada es incorrecta");
 
@@ -808,7 +811,7 @@ if(nuevito.getActivo()==false){
                 Proponente aux = (Proponente) mentry.getValue();
 
                 for (int i = 0; i < usuPP.size(); i++) {
-                    Usuario auxPP = traerUsuario(usuPP.get(i).getSeguido()) ;
+                    Usuario auxPP = traerUsuario(usuPP.get(i).getSeguido());
                     if (aux.getNick().equals(usuPP.get(i).getNick()) == true) {
                         aux.seguirUsuBD(auxPP);
                     }
@@ -914,12 +917,12 @@ if(nuevito.getActivo()==false){
         listitaC = x.getColHechas();
         for (int i = 0; i < listitaC.size(); i++) {
             // filtro aca
-            if(this.traerProponente(listitaC.get(i).getProp().getPropo()).getActivo()){
-            String name = listitaC.get(i).getProp().getTitulo();
-            nombresP.add(name);
+            if (this.traerProponente(listitaC.get(i).getProp().getPropo()).getActivo()) {
+                String name = listitaC.get(i).getProp().getTitulo();
+                nombresP.add(name);
             }
         }
-        return nombresP; 
+        return nombresP;
     }
 
     ;
@@ -1026,10 +1029,10 @@ if(nuevito.getActivo()==false){
 
     @Override
     public void configurarParametros() {
-         String tara2vos= System.getProperty("user.dir")+"\\"+"web";
+        String tara2vos = System.getProperty("user.dir") + "\\" + "web";
         File ade = new File(tara2vos);
-        if(!ade.exists()){
-        ade.getParentFile().mkdirs();
+        if (!ade.exists()) {
+            ade.getParentFile().mkdirs();
         }
         this.carpetaImagenes = tara2vos;
     }
@@ -1061,19 +1064,18 @@ if(nuevito.getActivo()==false){
         DtUsuario user = this.traerDtUsuario(nick);
         List<DtPropuesta> propuestas = new ArrayList<>();
         Proponente prop = this.traerProponente(nick);
-        if(prop.getActivo()==true){
-            
-        
-        Map<String, Propuesta> propuestasAux = prop.getPropuestas();
-        Set se = propuestasAux.entrySet();
-        Iterator it = se.iterator();
-        while (it.hasNext()) {
-            Map.Entry mentry = (Map.Entry) it.next();
-            DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
-            if (!(propuesta.getEstActual().getEstado().equals(Testado.Ingresada))) {
-                propuestas.add(propuesta);
+        if (prop.getActivo() == true) {
+
+            Map<String, Propuesta> propuestasAux = prop.getPropuestas();
+            Set se = propuestasAux.entrySet();
+            Iterator it = se.iterator();
+            while (it.hasNext()) {
+                Map.Entry mentry = (Map.Entry) it.next();
+                DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
+                if (!(propuesta.getEstActual().getEstado().equals(Testado.Ingresada))) {
+                    propuestas.add(propuesta);
+                }
             }
-        }
         }
         return propuestas;
     }
@@ -1083,19 +1085,18 @@ if(nuevito.getActivo()==false){
         DtUsuario user = this.traerDtUsuario(nick);
         List<DtPropuesta> propuestas = new ArrayList<>();
         Proponente prop = this.traerProponente(nick);
-        if(prop.getActivo()==true){
-            
-        
-        Map<String, Propuesta> propuestasAux = prop.getPropuestas();
-        Set se = propuestasAux.entrySet();
-        Iterator it = se.iterator();
-        while (it.hasNext()) {
-            Map.Entry mentry = (Map.Entry) it.next();
-            DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
-            if (propuesta.getEstActual().getEstado().equals(Testado.Ingresada)) {
-                propuestas.add(propuesta);
+        if (prop.getActivo() == true) {
+
+            Map<String, Propuesta> propuestasAux = prop.getPropuestas();
+            Set se = propuestasAux.entrySet();
+            Iterator it = se.iterator();
+            while (it.hasNext()) {
+                Map.Entry mentry = (Map.Entry) it.next();
+                DtPropuesta propuesta = new DtPropuesta((Propuesta) mentry.getValue());
+                if (propuesta.getEstActual().getEstado().equals(Testado.Ingresada)) {
+                    propuestas.add(propuesta);
+                }
             }
-        }
         }
         return propuestas;
     }
@@ -1164,198 +1165,179 @@ if(nuevito.getActivo()==false){
         }
         return null;
     }
-    
+
     @Override
-    public dataListUsuarios listaNC2(String txt)
-    {
+    public dataListUsuarios listaNC2(String txt) {
         dataListUsuarios datatype = new dataListUsuarios(listaNC(txt));
         return datatype;
     }
-    
+
     @Override
-    public dataListUsuarios traerSeguidos2(String nick)
-    {
+    public dataListUsuarios traerSeguidos2(String nick) {
         dataListUsuarios datatype = new dataListUsuarios(traerSeguidos(nick));
         return datatype;
     }
-    
+
     @Override
-    public dataListUsuarios traerSeguidores2(String nick)
-    {
+    public dataListUsuarios traerSeguidores2(String nick) {
         dataListUsuarios datatype = new dataListUsuarios(traerSeguidores(nick));
         return datatype;
     }
-    
+
     @Override
-    public dataListProponentes listarProponentes2()
-    {
+    public dataListProponentes listarProponentes2() {
         dataListProponentes datatype = new dataListProponentes(listarProponentes());
         return datatype;
     }
-    
+
     @Override
-    public dataListProponentes listarUsuario2()
-    {
-        
+    public dataListProponentes listarUsuario2() {
+
         dataListProponentes datatype = new dataListProponentes(listarUsuario());
         return datatype;
     }
-    
+
     @Override
-    public dataListColaboradores listarColaboradores2()
-    {
+    public dataListColaboradores listarColaboradores2() {
         dataListColaboradores datatype = new dataListColaboradores(listarColaboradores());
         return datatype;
     }
-    
-    @Override
-    public dataListUsuarios listarUsuarios2()
-    {
-        List<DtUsuario> listita = new ArrayList<>();
-        if(this.usuarios.isEmpty())
-        {
-            DtColaborador prueba = new DtColaborador("xD3", "xDD3", "xDDD3", "xDDDD3", "xDDDDD3");
-        listita.add(prueba);
-        }
-        else
-        {
-        Set se = this.usuarios.entrySet();
-        Iterator iterator = se.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            if (mentry.getValue() instanceof Proponente) {
 
-                Proponente aux = (Proponente) mentry.getValue();
-                if(aux.getActivo()==true){
-                    
-               
-                DtProponente lol = new DtProponente(aux.getNick(), aux.getImg() ,aux.getBiografia() ,aux.getLinkWeb(), aux.getDireccion(),aux.getNombre(),aux.getApellido(), aux.getCorreo());
-                listita.add(lol);
-            } }
-            else
-            {
-                Colaborador aux = (Colaborador) mentry.getValue();
-                DtColaborador lol = new DtColaborador(aux.getNick(), aux.getCorreo(), aux.getCont(), aux.getNombre(),aux.getApellido());
-                listita.add(lol);
+    @Override
+    public dataListUsuarios listarUsuarios2() {
+        List<DtUsuario> listita = new ArrayList<>();
+        if (this.usuarios.isEmpty()) {
+            DtColaborador prueba = new DtColaborador("xD3", "xDD3", "xDDD3", "xDDDD3", "xDDDDD3");
+            listita.add(prueba);
+        } else {
+            Set se = this.usuarios.entrySet();
+            Iterator iterator = se.iterator();
+            while (iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry) iterator.next();
+                if (mentry.getValue() instanceof Proponente) {
+
+                    Proponente aux = (Proponente) mentry.getValue();
+                    if (aux.getActivo() == true) {
+
+                        DtProponente lol = new DtProponente(aux.getNick(), aux.getImg(), aux.getBiografia(), aux.getLinkWeb(), aux.getDireccion(), aux.getNombre(), aux.getApellido(), aux.getCorreo());
+                        listita.add(lol);
+                    }
+                } else {
+                    Colaborador aux = (Colaborador) mentry.getValue();
+                    DtColaborador lol = new DtColaborador(aux.getNick(), aux.getCorreo(), aux.getCont(), aux.getNombre(), aux.getApellido());
+                    listita.add(lol);
+                }
             }
         }
-        }
         Collections.sort(listita, (c, d) -> {
-        return c.getNombre().compareTo(d.getNombre());
-            });
+            return c.getNombre().compareTo(d.getNombre());
+        });
         dataListUsuarios datatype = new dataListUsuarios(listita);
         return datatype;
     }
-    
-    public dataListColaboraciones datosCol2(Colaborador a)
-    {
+
+    public dataListColaboraciones datosCol2(Colaborador a) {
         dataListColaboraciones datatype = new dataListColaboraciones(datosCol(a));
         return datatype;
     }
-    
-    public dataListPropuestas traerPropFav2(String nick)
-    {
+
+    public dataListPropuestas traerPropFav2(String nick) {
         dataListPropuestas datatype = new dataListPropuestas(traerPropFav(nick));
         return datatype;
     }
-    
-    public dataListColaboraciones traerPropuestasColaboradas2(String nick)
-    {
+
+    public dataListColaboraciones traerPropuestasColaboradas2(String nick) {
         dataListColaboraciones datatype = new dataListColaboraciones(traerPropuestasColaboradas(nick));
         return datatype;
     }
-     public dataListColaboraciones traerPropuestasColaboradasNoPagas2(String nick)
-    {
+
+    public dataListColaboraciones traerPropuestasColaboradasNoPagas2(String nick) {
         dataListColaboraciones datatype = new dataListColaboraciones(traerPropuestasColaboradasNoPagas(nick));
         return datatype;
     }
-    public dataListStrings seleccionarColaborante2(String nick)
-    {
+
+    public dataListStrings seleccionarColaborante2(String nick) {
         dataListStrings datatype = new dataListStrings(SeleccionarColaborante(nick));
         return datatype;
     }
-    
-    public dataListPropuestas traerMisPropuestasF2(String nick)
-    {
+
+    public dataListPropuestas traerMisPropuestasF2(String nick) {
         dataListPropuestas datatype = new dataListPropuestas(TraerMisPropuestasF(nick));
         return datatype;
     }
-    
-    public dataListPropuestas TraerTodasPropuestas2(String nick)
-    {
+
+    public dataListPropuestas TraerTodasPropuestas2(String nick) {
         dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestas(nick));
         return datatype;
     }
-    
-    public dataListPropuestas TraerTodasPropuestasIng2(String nick)
-    {
+
+    public dataListPropuestas TraerTodasPropuestasIng2(String nick) {
         dataListPropuestas datatype = new dataListPropuestas(TraerTodasPropuestasIng(nick));
         return datatype;
     }
-    
-    public void desactivarProp(String nick)
-    {
+
+    public void desactivarProp(String nick) {
         Usuario nuevo = this.usuarios.get(nick);
-        if(nuevo instanceof Proponente)
-        {
+        if (nuevo instanceof Proponente) {
             Date nueva_fecha = new Date();
             Proponente prop = (Proponente) nuevo;
             prop.setActivo(false);
             prop.setFecha_des(nueva_fecha);
-             this.usu.desactivarProponente(nick, nueva_fecha);
+            this.usu.desactivarProponente(nick, nueva_fecha);
         }
-       
+
     }
-    
-    public int contarSeguidores(String nick)
-    {
+
+    public int contarSeguidores(String nick) {
         return this.traerSeguidores(nick).size();
     }
-    
-    public List<DtUsuario> rankingUser()
-    {
-        List<DtUsuario>lista = this.listarUsuarios2().getListita();
+
+    public List<DtUsuario> rankingUser() {
+        List<DtUsuario> lista = this.listarUsuarios2().getListita();
         Collections.sort(lista, (DtUsuario dt1, DtUsuario dt2) -> this.contarSeguidores(dt2.getNick()) - this.contarSeguidores(dt1.getNick()));
         return lista;
     }
-    
-    public dataListUsuarios rankingUser2()
-    {
+
+    public dataListUsuarios rankingUser2() {
         dataListUsuarios datatype = new dataListUsuarios(rankingUser());
         return datatype;
     }
-    
-    public DtProponente traerDtProponente(String nick)
-    {
+
+    public DtProponente traerDtProponente(String nick) {
         Proponente p = (Proponente) this.usuarios.get(nick);
-        DtProponente xD = new DtProponente(p.getNick(), p.getCorreo(), p.getCont(), p.getNombre(), p.getApellido(), p.getImg(),p.getLinkWeb(), p.getDireccion(), p.getBiografia(), p.getFecha());
+        DtProponente xD = new DtProponente(p.getNick(), p.getCorreo(), p.getCont(), p.getNombre(), p.getApellido(), p.getImg(), p.getLinkWeb(), p.getDireccion(), p.getBiografia(), p.getFecha());
         return xD;
     }
-    
-    
+
     @Override
-    public DtPath Path_A_DT(Path dts){
+    public DtPath Path_A_DT(Path dts) {
         DtPath lista = new DtPath(dts);
         return lista;
-    };
+    }
+
+    ;
     
     @Override
-    public DataImagen Crear_DataImagen(final byte[] stream, final String nombreArchivo, final String extensionArchivo){
+    public DataImagen Crear_DataImagen(final byte[] stream, final String nombreArchivo, final String extensionArchivo) {
         DataImagen imagen = new DataImagen(stream, nombreArchivo, extensionArchivo);
         return imagen;
-    };
+    }
+
+    ;
     
-    public boolean Existe_Proponente (String nick){ 
+    public boolean Existe_Proponente(String nick) {
         Usuario A = usuarios.get(nick);
-        if (A instanceof Proponente){
+        if (A instanceof Proponente) {
             return true;
-        }
-        else 
+        } else {
             return false;
-    }; 
+        }
+    }
+
+    ; 
     
     @Override
-    public DefaultListModel Listar_Proponentes_desactivados(){
+    public DefaultListModel Listar_Proponentes_desactivados() {
         DefaultListModel modelo = new DefaultListModel();
         Set se = usuarios.entrySet();
         Iterator iterator = se.iterator();
@@ -1363,18 +1345,20 @@ if(nuevito.getActivo()==false){
             Map.Entry mentry = (Map.Entry) iterator.next();
             if (mentry.getValue() instanceof Proponente) {
                 Proponente aux = (Proponente) mentry.getValue();
-                if (!aux.getActivo()){  
-                modelo.addElement(aux.getNombre()+"("+aux.getNick()+")");
-            }
+                if (!aux.getActivo()) {
+                    modelo.addElement(aux.getNombre() + "(" + aux.getNick() + ")");
+                }
             }
         }
         return modelo;
-    };
+    }
+
+    ;
     
     @Override
     public DefaultListModel BUSCADOR_Proponente_Descativado(String palabrita) {
         DefaultListModel modelo = new DefaultListModel();
-        List<DtProponente> col = this.listarProponentes_desactivados(); 
+        List<DtProponente> col = this.listarProponentes_desactivados();
         if (palabrita.equals("")) { // SI NO BUSCA
             if (!col.isEmpty()) {
 
@@ -1396,7 +1380,7 @@ if(nuevito.getActivo()==false){
         }
         return modelo;
     }
-    
+
     public List<DtProponente> listarProponentes_desactivados() {
         List<DtProponente> listita = new ArrayList<>();
         Set se = usuarios.entrySet();
@@ -1406,21 +1390,22 @@ if(nuevito.getActivo()==false){
             if (mentry.getValue() instanceof Proponente) {
 
                 Proponente aux = (Proponente) mentry.getValue();
-                if (!aux.getActivo()){   //agregado
-                listita.add(aux.obtenerInfo());
-            }
+                if (!aux.getActivo()) {   //agregado
+                    listita.add(aux.obtenerInfo());
+                }
             }
         }
         return listita;
         //return this.List_DtProponente_Eliminar_Desactivado(listita);
     }
-    
+
     @Override
-    public String TraerFecha_desactivado(String nick_proponente){
-    Proponente P = this.traerProponente(nick_proponente);
-    Date F = P.getFecha_des();
-    DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
-    String F_String = fecha.format(F);
-    return F_String;
-    };
+    public String TraerFecha_desactivado(String nick_proponente) {
+        Proponente P = this.traerProponente(nick_proponente);
+        Date F = P.getFecha_des();
+        DateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
+        String F_String = fecha.format(F);
+        return F_String;
+    }
+;
 }
