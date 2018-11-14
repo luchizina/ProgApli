@@ -171,6 +171,13 @@ public class publicador_Usuarios {
      {
          return xD.existeNick(nick);
      }
+     
+     @WebMethod
+     public boolean existeNick2(String nick)
+     {
+         return xD.existeNick2(nick);
+     }
+     
      @WebMethod
      public DtUsuario traerDtUsuario(String nick)
      {
